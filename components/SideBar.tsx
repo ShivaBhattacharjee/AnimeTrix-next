@@ -1,63 +1,74 @@
 "use client"
 
 import { useState } from "react"
-import { AlignJustify, Clapperboard } from "lucide-react"
+import { AlignJustify, Clapperboard,Home,TrendingUp,ScanLine ,
+  BookMarked ,User2,History,SlidersHorizontal,Tv  } from "lucide-react"
 import Link from "next/link"
 const NavItems = [
   {
     "name": "Home",
-    "routes": "/"
+    "routes": "/",
+    "icons" : Home
   },
   {
     "name": "Trending",
-    "routes": "/trending"
+    "routes": "/trending",
+    "icons" : TrendingUp
   },
   {
     "name": "Popular",
-    "routes": "/popular"
+    "routes": "/popular",
+    "icons" : Tv
   },
   {
     "name": "Movies",
-    "routes": "/movie"
+    "routes": "/movie",
+    "icons" : Clapperboard
   },
   {
     "name": "Genres",
-    "routes": "/genres"
+    "routes": "/genres",
+    "icons" : SlidersHorizontal
   }, {
     "name": "AniScan",
-    "routes": "/aniscan"
+    "routes": "/aniscan",
+    "icons" : ScanLine
   }
   , {
     "name": "Bookmark",
-    "routes": "/bookmark"
+    "routes": "/bookmark",
+    "icons" : BookMarked
   }, {
     "name": "History",
-    "routes": "/aniscan"
+    "routes": "/history",
+    "icons" : History
   }, {
     "name": "Profile",
-    "routes": "/aniscan"
+    "routes": "/profile",
+    "icons" : User2
   }
 ]
 const SideBar = () => {
   const [expandSideNav, setExpandSideNav] = useState(false)
   return (
-    <div className="hidden md:flex">
-      <div className={`${expandSideNav ? "w-72" : "w-20"} h-screen bg-purple-600 relative duration-200`}>
-        <div className="flex gap-7 p-4 overflow-hidden items-center">
-          <AlignJustify onClick={() => setExpandSideNav(!expandSideNav)} className=" cursor-pointer scale-150" />
-          {
-            expandSideNav && (
-              <h1 className="text-2xl">Animetrix</h1>
-            )
-          }
+    <div className=" hidden md:flex fixed z-10">
+      <div className={`${expandSideNav?"w-72": "w-20"} h-screen bg-black text-white relative duration-300`}>
+        <div className={`flex gap-5 p-6 text-2xl items-center ${!expandSideNav&&(
+          "justify-center"
+        )}`}>
+        <AlignJustify className=" scale-150  cursor-pointer" onClick={()=>setExpandSideNav(!expandSideNav)}/>
+        <h1 className={`${expandSideNav?" visible":"hidden"} font-bold`}>AnimeTrix</h1>
         </div>
-        <ul className="flex p-4  flex-col gap-4 text-2xl mt-5">
-          {NavItems.map((items) => (
-            <Link href={items.routes}>
-              <li className="flex gap-4 overflow-hidden pb-7"><Clapperboard /></li>
-            </Link>
+        <div className="flex flex-col gap-5 p-3 mt-4">
+          {NavItems.map((items)=>(
+            <div key={items.name} className="bg-[#3f3f46]  p-4 rounded-lg flex gap-3 text-xl items-center cursor-pointer">
+              <items.icons />
+              {expandSideNav&&(
+              <li className="font-semibold hover:translate-x-3 duration-200 transition-all">{items.name}</li>
+              )}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   )
