@@ -3,22 +3,24 @@ import Slider from '../../components/Slider'
 
 const page = () => {
   return (
-    <div className="p-4 text-2xl font-semibold flex-1 h-screen">
-      <Slider/>
-      <div>
-        <h1>Hello world</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut atque eum, doloremque maiores dolorum similique sunt enim consectetur quo suscipit earum iure qui delectus voluptate voluptatibus rem facilis necessitatibus! Assumenda!
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis, doloremque libero beatae velit officiis minus, commodi inventore praesentium non deserunt rerum distinctio ratione atque. Laboriosam sequi eligendi error similique quam!
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, minima harum. Minus perferendis vero debitis quasi a voluptates delectus est. Reprehenderit laboriosam dolorum error iste a saepe quasi, quaerat id?
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic harum, dicta, delectus voluptates provident sint non aut ipsam quis consequuntur eveniet beatae iure saepe vero rem quidem ea? Nemo, unde?
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium vitae quo rerum sunt quaerat reprehenderit minus nihil, fugiat assumenda voluptatem facere eius rem sint dolore. Cum nobis rerum vitae in.
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident expedita minima corrupti. Rem perspiciatis possimus nihil. Ipsum necessitatibus nulla illo praesentium, autem consequatur quaerat doloribus, molestias, deleniti quam minus quae?
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur mollitia quis quibusdam ex, suscipit possimus atque impedit labore quaerat soluta assumenda exercitationem voluptates minima? Sequi ipsa quisquam omnis. Ullam, cum!
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat ab esse iure cumque non tempora facilis earum commodi cum temporibus officiis numquam laboriosam rerum, sed praesentium, provident, maiores fugit? Voluptatibus!
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio dolorem minima necessitatibus quas. Quis, ipsum quos tenetur mollitia quaerat reprehenderit consequuntur repellendus facilis nam quod eos et, perspiciatis, animi voluptatum.
-        </p>
-      </div>
+    <div className="p-4 text-4xl mt-20 font-semibold flex-1 h-screen">
+      This is home page
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, earum velit dolore porro necessitatibus voluptatem autem quae laborum, delectus quia laudantium ea minus corporis aperiam assumenda. Veritatis quas soluta sint!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex dicta magnam quae quo eligendi ipsum maxime obcaecati. Molestiae odit ipsa iste eius praesentium nisi animi ullam nobis, facilis rerum laudantium.
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum accusamus pariatur ratione nobis earum hic rem, eligendi illum voluptatibus dolorem dicta dolores ullam vero ipsa molestias illo eum cumque distinctio.
+
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas optio inventore sed tempora eligendi provident? Voluptas expedita sed cupiditate fugit commodi, odit vitae exercitationem nostrum id quam repellat soluta nihil.
+      Lorem ipsum, do
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum error magni, neque distinctio itaque exercitationem odio sint est dicta quos, quasi pariatur voluptas atque mollitia illo qui assumenda ab? Necessitatibus?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit eos et iste quisquam voluptatum excepturi dolore facere velit dicta quidem ullam, recusandae eius dignissimos perferendis doloribus aperiam culpa enim eligendi?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non id commodi, natus in provident quisquam. Illo omnis ipsa distinctio perspiciatis rerum molestias veritatis perferendis inventore nesciunt quia, dignissimos est officiis.
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus ratione aperiam deleniti, possimus facere, omnis officiis minus illum corrupti obcaecati eum maxime ullam magnam atque ab, culpa dolor explicabo quasi.
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat, sapiente iure. Quibusdam culpa doloribus corrupti hic amet dolorum voluptates quod similique ipsum debitis. Ex consequuntur a voluptate maiores natus. Praesentium.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius repellendus voluptatibus nam dolorem itaque autem tenetur accusantium repellat illum distinctio perferendis fugit nemo dolorum magni ipsum maxime, necessitatibus iusto iure!
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae eveniet eligendi, consectetur, aliquam delectus quae corporis iure ut optio, impedit maxime aperiam voluptatem assumenda ab cum unde tempore sit nostrum!
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque commodi illum provident facilis? Rerum possimus quasi eum quisquam ullam consequatur, ducimus asperiores minus ipsa repellendus inventore, vel voluptates voluptatum unde.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis facere exercitationem, ex, enim eaque cumque placeat adipisci harum est ea nulla dignissimos! Quaerat suscipit quia nemo sit dolore esse perferendis?
+      lor sit amet consectetur adipisicing elit. Labore deleniti repellat sunt odio consequatur ullam itaque mollitia? Voluptatum accusamus libero recusandae ratione! Quas nesciunt, aperiam eos ut dolores aliquam esse!
     </div>
   )
 }

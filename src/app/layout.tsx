@@ -19,12 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className }>
-        <div className='flex bg-green-700 h-screen'>
+      <TopNavbar/>
         <SideBar/>
-        <div className='flex-1 flex flex-col min-w-0'>
-        <TopNavbar/>
+        <div className='flex flex-col ml-0 md:ml-20 lg:ml-72 '>
         {children}
-        </div>
         </div>
       </body>
     </html>
