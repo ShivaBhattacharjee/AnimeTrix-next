@@ -45,10 +45,6 @@ const NavItems = [
     "name": "History",
     "route": "/history",
     "icons": History
-  }, {
-    "name": "Profile",
-    "route": "/profile",
-    "icons": User2
   }
 ]
 const SideBar = () => {
@@ -56,10 +52,10 @@ const SideBar = () => {
   const pathname = usePathname()
   return (
     <div className=" hidden md:flex fixed ">
-      <div className={` w-72 max-lg:w-20 h-screen bg-black text-white sticky left-0 top-0 duration-300`}>
+      <div className={` w-72 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300`}>
         <div className={`flex gap-5 p-6 text-2xl items-center`}>
         </div>
-        <div className="flex flex-col gap-5 pr-4 mt-12">
+        <div className="flex flex-col  justify-between p-2 gap-5 mt-16 max-lg:mt-24">
           {NavItems.map((link) => {
             const isActive =
               (pathname.includes(link.route) && link.route.length > 1) ||

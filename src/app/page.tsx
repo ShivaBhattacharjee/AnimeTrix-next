@@ -3,7 +3,7 @@ import Slider from '../../components/Slider'
 
 const page = () => {
   return (
-    <div className="p-4 text-4xl mt-20 font-semibold flex-1 h-screen">
+    <div className="p-4 text-xl mt-20 font-semibold flex-1 h-screen">
       This is home page
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, earum velit dolore porro necessitatibus voluptatem autem quae laborum, delectus quia laudantium ea minus corporis aperiam assumenda. Veritatis quas soluta sint!
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex dicta magnam quae quo eligendi ipsum maxime obcaecati. Molestiae odit ipsa iste eius praesentium nisi animi ullam nobis, facilis rerum laudantium.
