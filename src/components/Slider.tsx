@@ -9,7 +9,7 @@ import 'swiper/css';
 // import 'swiper/css/navigation';
 
 import './styles.css';
-
+import {ArrowLeft,ArrowRight } from "lucide-react"
 // import required modules
 import { Autoplay } from 'swiper/modules';
 
@@ -25,9 +25,9 @@ export default function Slider() {
   };
   return (
     <>
-    <div className='flex gap-4 ml-5 '>
-      <button>Next</button>
-      <button>Previous</button>
+    <div className='flex gap-4 pb-4 items-center'>
+      <button className='bg-white text-black p-2 rounded-lg w-16 flex justify-center'><ArrowLeft /></button>
+      <button className='bg-white text-black p-2 rounded-lg w-16 flex justify-center'><ArrowRight /></button>
       </div>
       <Swiper
         spaceBetween={30}
