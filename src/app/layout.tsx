@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-black text-white max-w-[2000px] m-auto`}>
+      <body className={`${inter.className} bg-black text-white max-w-[2500px] m-auto`}>
         <TopNavbar />
         <SideBar />
         <div className='flex flex-col ml-0 md:ml-20 lg:ml-72 '>

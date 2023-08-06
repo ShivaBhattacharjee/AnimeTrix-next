@@ -1,12 +1,12 @@
 
 "use client"
-import { link } from "fs"
 import {
-  AlignJustify, Clapperboard, Home, TrendingUp, ScanLine,
-  BookMarked, User2, History, SlidersHorizontal, Tv
+  Clapperboard, Home, TrendingUp, ScanLine,
+  BookMarked, History, SlidersHorizontal, Diff, Tv
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
+import { useState } from "react"
 const NavItems = [
   {
     "name": "Home",
@@ -50,6 +50,7 @@ const NavItems = [
 const SideBar = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const [expand, setExpand] = useState(false)
   return (
     <>
       <div className=" hidden md:flex fixed ">
@@ -72,19 +73,24 @@ const SideBar = () => {
         </div>
       </div>
       {/* mobile bottom bar */}
-      <div className=" text-white bottom-0 fixed md:hidden bg-white/5 rounded-t-xl border-t-2 border-white/25 backdrop-blur-xl w-full p-4">
-        <div className="flex gap-2 justify-between items-center">
-          {NavItems.slice(0, 4).map((link) => {
+      <div className={`text-white bottom-0 fixed md:hidden bg-white/5 rounded-t-xl border-t-2 border-white/25 backdrop-blur-xl w-full p-4 duration-200 transition-all`}>
+        <div className="flex gap-2 duration-200 transition-all justify-between items-center flex-wrap w-screen">
+          {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
             const isActive =
               (pathname.includes(link.route) && link.route.length > 1) ||
               pathname === link.route;
             return (
-              <Link href={link.route} className={`flex flex-col items-center gap-3 text-sm ${isActive&& `bg-[#3f3f46]`} w-32 p-2 rounded-lg`}>
-                <link.icons key={link.name} />
+              <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && `bg-[#3f3f46]`} w-32 p-2 rounded-lg duration-200 transition-all`}>
+                <link.icons />
                 <h1>{link.name}</h1>
               </Link>
             )
           })}
+          <div className="flex flex-col cursor-pointer relative items-center gap-3 text-sm w-32 p-2 rounded-lg duration-200 transition-all">
+            <Diff onClick={() => setExpand(!expand)} />
+            <h1>{
+              expand ? "Show Less" : "Show More"}</h1>
+          </div>
         </div>
       </div>
     </>
