@@ -6,7 +6,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 const NavItems = [
   {
     "name": "Home",
@@ -51,10 +51,25 @@ const SideBar = () => {
   const router = useRouter()
   const pathname = usePathname()
   const [expand, setExpand] = useState(false)
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setExpand(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
   return (
     <>
       <div className=" hidden md:flex fixed ">
-        <div className={` w-72 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300`}>
+        <div className={` w-72 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
           <div className={`flex gap-5 p-6 text-2xl items-center`}>
           </div>
           <div className="flex flex-col  justify-between p-2 gap-5 mt-16 max-lg:mt-24">
@@ -73,7 +88,7 @@ const SideBar = () => {
         </div>
       </div>
       {/* mobile bottom bar */}
-      <div className={`text-white bottom-0 fixed md:hidden bg-white/5 rounded-t-xl border-t-2 border-white/25 backdrop-blur-xl w-full p-4 duration-200 transition-all`}>
+      <div ref={sidebarRef} className={`text-white bottom-0 fixed md:hidden bg-white/5 rounded-t-xl border-t-2 border-white/25 backdrop-blur-xl w-full p-4 duration-200 transition-all`}>
         <div className="flex items-center justify-between flex-wrap ">
           {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
             const isActive =
@@ -86,8 +101,9 @@ const SideBar = () => {
               </Link>
             )
           })}
-          <div className="flex flex-col cursor-pointer relative items-center gap-3 text-sm w-24 p-2 rounded-lg duration-200 transition-all">
-            <Diff onClick={() => setExpand(!expand)} />
+          <div className="flex flex-col cursor-pointer relative items-center
+           gap-3 text-sm w-24 p-2 rounded-lg duration-200 transition-all" onClick={() => setExpand(!expand)} >
+            <Diff/>
             <h1>{
               expand ? "Show Less" : "Show More"}</h1>
           </div>

@@ -1,6 +1,6 @@
 .swiper {
     width: 100%;
-    height: 580px;
+    height: 550px;
   }
   
   .swiper-slide {
@@ -12,13 +12,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #000;
   }
   
   .swiper-slide img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    background-repeat: no-repeat;
   }
   
   .autoplay-progress {
@@ -51,9 +53,15 @@
     transform: rotate(-90deg);
   }
   
-  @media(max-width:800px){
+  @media(max-width:1005px){
     .swiper {
         width: 100%;
         height: calc(100vh - 70vh ) ;
+      }
+  }
+  @media(max-width:600px){
+    .swiper {
+        height: calc(100vh - 75vh ) ;
+        border-radius: 8px;
       }
   }

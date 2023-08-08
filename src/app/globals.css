@@ -19,3 +19,8 @@
     border-radius: 14px;
 
 }
+
+::selection{
+    background-color: #fff;
+    color: #000;
+}
