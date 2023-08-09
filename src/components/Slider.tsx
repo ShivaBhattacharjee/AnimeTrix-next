@@ -66,7 +66,7 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
         centeredSlides={false}
         autoplay={{
           delay: 2500,
-          disableOnInteraction: true,
+          disableOnInteraction: false,
         }}
         pagination={{
           clickable: true,
