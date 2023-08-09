@@ -1,10 +1,16 @@
 import React from 'react'
 import Slider from '../components/Slider'
-import Link from 'next/link'
-const page = ({ animeList }) => {
+import Link from "next/link"
+const getPopularAnime = async () => {
+  const res = await fetch("https://animetrix-api.vercel.app/meta/anilist/trending?page=1&perPage=10")
+  const data = res.json()
+  return data
+}
+export default async function page () {
+  const posts = await getPopularAnime()
   return (
     <div className="p-4 pb-40 md:pb-10 text-xl mt-24 font-semibold flex-1 h-screen">
-      <Slider animeList={animeList}  />
+      <Slider posts = {posts} />
 
       <div className='flex flex-col mt-9'>
         <div className="flex justify-between items-center">
@@ -51,5 +57,3 @@ const page = ({ animeList }) => {
     </div>
   )
 }
-
-export default page
