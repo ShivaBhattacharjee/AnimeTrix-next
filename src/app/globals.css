@@ -10,7 +10,7 @@
     box-sizing: border-box;
 }
 ::-webkit-scrollbar{
-    width: 13px;
+    width: 10px;
     background: #000;
 
 }

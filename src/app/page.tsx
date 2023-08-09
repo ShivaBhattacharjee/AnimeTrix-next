@@ -1,11 +1,19 @@
 import React from 'react'
 import Slider from '../components/Slider'
 import Link from "next/link"
+import axios from 'axios'
 const getPopularAnime = async () => {
-  const res = await fetch("https://animetrix-api.vercel.app/meta/anilist/trending?page=1&perPage=10")
-  const data = res.json()
-  return data
-}
+  try {
+    const response = await axios.get("https://animetrix-api.vercel.app/meta/anilist/trending?page=1&perPage=8", {
+      responseType: 'json'
+    });
+
+    return response.data.results; // Assuming the API response has a "results" property
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+};
 export default async function page () {
   const posts = await getPopularAnime()
   return (

@@ -1,12 +1,22 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import './styles.css';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
-export default  function Slider({posts}:any) {
+interface AnimeData {
+  id: number;
+  title: string;
+  coverImage: string;
+}
+
+interface SliderProps {
+  posts: AnimeData[];
+}
+const Slider: React.FC<SliderProps> = ({ posts }) => {
   const progressCircle = useRef<SVGSVGElement>(null!);
   const progressContent = useRef<HTMLElement>(null!);
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
@@ -68,19 +78,20 @@ export default  function Slider({posts}:any) {
         onSwiper={saveSwiperInstance}
       >
         {
-          posts?.results.map((popular: any) => {
+          posts?.map((popular: any) => {
             return (
               <SwiperSlide key={popular.id}>
-              <img
+              <Image
                 src={popular.cover}
                 alt={popular.title.userPreferred || popular.title.romaji}
-                // width={1366}
-                // height={768}
+                width={1366}
+                height={768}
                 className='relative'
               />
               <div className='absolute text-white bg-black/50 w-full h-full'>
                 <div className='absolute text-left flex gap-3 flex-col bottom-0 lg:bottom-20 pb-4 md:text-4xl p-4'>
-                  <h1 className='z-50'>{popular?.title.userPreferred}</h1>
+                  <h1 className='z-50 truncate w-80 lg:w-full md:w-96'>{popular?.title.userPreferred}</h1>
+                  <p></p>
                 </div>
               </div>
   
@@ -91,3 +102,4 @@ export default  function Slider({posts}:any) {
     </>
   );
 }
+export default Slider

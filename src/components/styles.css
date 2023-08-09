@@ -52,8 +52,7 @@
     stroke-dasharray: 125.6;
     transform: rotate(-90deg);
   }
-  
-  @media(max-width:1005px){
+  @media(max-width:1250px){
     .swiper {
         width: 100%;
         height: calc(100vh - 70vh ) ;
@@ -61,7 +60,7 @@
   }
   @media(max-width:600px){
     .swiper {
-        height: calc(100vh - 75vh ) ;
+        height: calc(100vh - 80vh ) ;
         border-radius: 8px;
       }
   }
