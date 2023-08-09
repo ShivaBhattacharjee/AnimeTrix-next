@@ -59,7 +59,7 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
         >
           <ArrowRight />
         </button>
-        {/* <span ref={progressContent} className='text-white'></span> */}
+        <span ref={progressContent} className='text-white'></span>
       </div>
       <Swiper
         spaceBetween={30}
@@ -89,9 +89,10 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
                 className='relative'
               />
               <div className='absolute text-white bg-black/50 w-full h-full'>
-                <div className='absolute text-left flex gap-3 flex-col bottom-0 lg:bottom-20 pb-4 md:text-4xl p-4'>
-                  <h1 className='z-50 truncate w-80 lg:w-full md:w-96'>{popular?.title.userPreferred}</h1>
-                  <p></p>
+                <div className='absolute text-left flex gap-3 flex-col bottom-3  pb-4 md:text-4xl p-4 w-[900px]'>
+                  <h1 className='z-50 truncate w-52 lg:w-full md:w-96 lg:text-5xl lg:font-bold overflow-hidden'>{popular?.title.userPreferred}</h1>
+                  <p className='text-lg hidden lg:block text-clip overflow-hidden ...'>{popular.description}</p>
+                  <button className='bg-black/90 backdrop-blur-2xl lg:w-56  lg:p-5 lg:text-2xl lg:mt-8  p-3 w-32  text-sm rounded-lg'>Watch Now</button>
                 </div>
               </div>
   
