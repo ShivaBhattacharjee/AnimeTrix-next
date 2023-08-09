@@ -27,14 +27,14 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
     const handleWheel = (event: WheelEvent) => {
       // Check if the mouse is over the carousel container
       if (containerRef.current?.contains(event.target as Node)) {
-        event.preventDefault(); // Prevent page scrolling
+        event?.preventDefault(); // Prevent page scrolling
         containerRef.current!.scrollLeft += event.deltaY;
       }
     };
 
-    containerRef.current!.addEventListener('wheel', handleWheel, { passive: false });
+    containerRef?.current!?.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
-      containerRef.current!.removeEventListener('wheel', handleWheel);
+      containerRef?.current!?.removeEventListener('wheel', handleWheel);
     };
   }, []);
 
