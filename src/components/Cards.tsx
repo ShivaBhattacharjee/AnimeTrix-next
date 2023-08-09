@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 
 interface Anime {
@@ -22,6 +22,21 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [scrollStartX, setScrollStartX] = useState(0);
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      // Check if the mouse is over the carousel container
+      if (containerRef.current?.contains(event.target as Node)) {
+        event.preventDefault(); // Prevent page scrolling
+        containerRef.current!.scrollLeft += event.deltaY;
+      }
+    };
+
+    containerRef.current!.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      containerRef.current!.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
@@ -48,7 +63,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
   return (
     <div
-      className='flex gap-3 overflow-x-auto mt-9 lg:grid lg:grid-flow-col-dense'
+      className='flex gap-3 overflow-x-auto duration-200 mt-9 lg:grid lg:grid-flow-col-dense'
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -58,7 +73,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
         return (
           <div
             key={`${anime.id + 1}`}
-            className='flex flex-col gap-4 rounded-lg cursor-grab'
+            className='flex flex-col gap-4 duration-200 rounded-lg cursor-grab'
             onMouseDown={handleMouseDown}
           >
             <Image
