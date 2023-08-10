@@ -42,7 +42,7 @@ export default async function page() {
   const Recent = await getRecentAnime()
   // const AiringSchedule = await getAiringSchedule()
   return (
-    <div className="p-4 pb-40 md:pb-10 text-xl mt-24 font-semibold flex-1 h-screen">
+    <div className="p-4 pb-40 md:pb-10 text-xl font-semibold flex-1 h-screen">
       <Slider posts={Trending} />
 
       <div className='flex flex-col mt-9'>

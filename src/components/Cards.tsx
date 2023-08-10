@@ -73,12 +73,12 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
         return (
           <div
             key={`${anime.id + 1}`}
-            className='flex flex-col gap-4 duration-200 rounded-lg cursor-grab'
+            className='flex flex-col  lg:m-3 m-1  duration-200 rounded-lg cursor-grab'
             onMouseDown={handleMouseDown}
           >
             <Image
               src={anime?.image}
-              className='rounded-lg h-full duration-200 hover:scale-105'
+              className='rounded-lg h-full w-full duration-200 hover:scale-105'
               alt={`an image of ${
                 anime?.title?.userPreferred ||
                 anime?.title?.english ||
