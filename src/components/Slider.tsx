@@ -50,12 +50,14 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
         <button
           className='bg-black/80 backdrop-blur-2xl text-white p-2 lg:p-4 rounded-full flex justify-center'
           onClick={goPrev}
+          aria-label='go previous slide'
         >
           <ArrowLeft />
         </button>
         <button
           className='bg-black/80 text-white p-2 lg:p-4 rounded-full flex justify-center'
           onClick={goNext}
+          aria-label='go next slide'
         >
           <ArrowRight />
         </button>
@@ -83,7 +85,7 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
               <SwiperSlide key={popular.id}>
               <Image
                 src={popular.cover}
-                alt={popular.title.userPreferred || popular.title.romaji}
+                alt={`Slider of ${popular.title.userPreferred || popular.title.romaji}`}
                 width={1366}
                 height={768}
                 className='relative'

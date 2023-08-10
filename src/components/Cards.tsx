@@ -11,6 +11,8 @@ interface Anime {
     romaji?: string;
     native?: string;
   };
+  totalEpisodes: number;
+  status : string
 }
 
 interface CardsProps {
@@ -25,9 +27,8 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
-      // Check if the mouse is over the carousel container
       if (containerRef.current?.contains(event.target as Node)) {
-        event?.preventDefault(); // Prevent page scrolling
+        event?.preventDefault();
         containerRef.current!.scrollLeft += event.deltaY;
       }
     };
@@ -79,21 +80,32 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             <Image
               src={anime?.image}
               className='rounded-lg h-full w-full duration-200 hover:scale-105'
-              alt={`an image of ${
-                anime?.title?.userPreferred ||
+              alt={`an image of ${anime?.title?.userPreferred ||
                 anime?.title?.english ||
                 anime?.title?.romaji ||
                 anime.title?.native
-              }`}
+                }`}
               height={200}
               width={600}
             />
-            <span className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg pb-5 capitalize'>
+            <span className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize'>
               {anime?.title?.userPreferred ||
                 anime?.title?.english ||
                 anime?.title?.romaji ||
                 anime?.title?.native}
             </span>
+
+            {
+              anime?.totalEpisodes !== null && anime?.totalEpisodes !== undefined && (
+                <div className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg pb-5 capitalize flex gap-2 items-center'>
+                  {anime?.status === 	"Ongoing" &&(
+                  <div className="green w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500"></div>
+                  )}
+                    <span>   Ep: {anime?.totalEpisodes}</span>
+                </div>
+              )
+            }
+
           </div>
         );
       })}
