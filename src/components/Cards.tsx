@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { flattenDiagnosticMessageText } from 'typescript';
 
 interface Anime {
   image: string;
@@ -62,13 +63,33 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
     }
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    setDragStartX(event.touches[0].clientX);
+    setScrollStartX(containerRef.current!.scrollLeft);
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+
+    const dx = event.touches[0].clientX - dragStartX;
+    containerRef.current!.scrollLeft = scrollStartX - dx;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
     <div
-      className='flex gap-3 overflow-x-auto duration-200 mt-9 lg:grid lg:grid-flow-col-dense'
+      className='flex gap-3 overflow-x-hidden duration-200 mt-9 lg:grid lg:grid-flow-col-dense'
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {props?.map((anime) => {
         return (
@@ -87,6 +108,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                 }`}
               height={200}
               width={600}
+              draggable={false}
             />
             <span className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize'>
               {anime?.title?.userPreferred ||

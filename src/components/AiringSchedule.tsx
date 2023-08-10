@@ -3,7 +3,7 @@ import { Play } from 'lucide-react'
 const AiringSchedule = () => {
     return (
         <div className='flex flex-col mt-9'>
-            <h1 className='text-3xl lg:text-5xl font-bold'>Dont Miss Out</h1>
+            <h1 className='text-3xl lg:text-5xl font-bold'>Airing</h1>
             <div className='flex gap-2'>
                 {/* <Cards props={Trending} /> */}
                 <div className="bg-white/10 h-52 w-full p-4 rounded-lg mt-5 lg:h-96 overflow-y-auto">

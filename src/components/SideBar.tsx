@@ -79,7 +79,7 @@ const SideBar = () => {
                 pathname === link.route;
               return (
                 <Link href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} duration-200  transition-all hover:translate-x-3 p-4 rounded-lg flex gap-3 text-xl items-center cursor-pointer`}>
-                  <link.icons />
+                  <link.icons className={`${isActive && (`fill-white`)}`}  />
                   <li className="font-semibold  max-lg:hidden block">{link.name}</li>
                 </Link>
               )
@@ -95,8 +95,8 @@ const SideBar = () => {
               (pathname.includes(link.route) && link.route.length > 1) ||
               pathname === link.route;
             return (
-              <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && `bg-white/20 backdrop-blur-md fill-white`} w-24 p-2 rounded-lg duration-200 transition-all`}>
-                <link.icons />
+              <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && `bg-white/20 backdrop-blur-md `} w-24 p-2 rounded-lg duration-200 transition-all`}>
+                <link.icons className={`${isActive && (`fill-white`)}`} />
                 <h1>{link.name}</h1>
               </Link>
             )
