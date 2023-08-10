@@ -1,6 +1,9 @@
 import React from 'react'
+interface LoadingSkeletonProps {
+  title: string;
+}
 
-const loadingSkeleton = ({title} : any) => {
+const LoadingSkeleton = ({ title }: LoadingSkeletonProps)  => {
   return (
     <div className='p-4 pb-40 lg:pb-16'>
       <h1 className='text-3xl lg:text-5xl mt-6 font-bold'>{title}</h1>
@@ -22,4 +25,4 @@ const loadingSkeleton = ({title} : any) => {
   )
 }
 
-export default loadingSkeleton
+export default LoadingSkeleton

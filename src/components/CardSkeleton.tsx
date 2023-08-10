@@ -1,25 +1,8 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
-import Image from 'next/image';
 
-interface Anime {
-  image: string;
-  id: number;
-  title: {
-    userPreferred?: string;
-    english?: string;
-    romaji?: string;
-    native?: string;
-  };
-  totalEpisodes: number;
-  status : string
-}
 
-interface CardsProps {
-  props: Anime[];
-}
-
-const Cards: React.FC<CardsProps> = ({ props }) => {
+const CardSkeleton = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
@@ -91,42 +74,15 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
       onTouchEnd={handleTouchEnd}
       style={{ userSelect: isDragging ? 'none' : 'auto' }} 
     >
-      {props?.map((anime) => {
+      {[1,2,3,4,5,6,7,8,9,10]?.map((anime) => {
         return (
           <div
-            key={`${anime.id + 1}`}
-            className='flex flex-col  lg:m-3 m-1  duration-200 rounded-lg cursor-grab'
+            key={anime}
+            className='flex flex-col  lg:m-3 m-1  duration-200 rounded-lg cursor-grab '
             onMouseDown={handleMouseDown}
           >
-            <Image
-              src={anime?.image}
-              className='rounded-lg h-full w-full duration-200 hover:scale-105'
-              alt={`an image of ${anime?.title?.userPreferred ||
-                anime?.title?.english ||
-                anime?.title?.romaji ||
-                anime.title?.native
-                }`}
-              height={200}
-              width={600}
-              draggable={false}
-            />
-            <span className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize'>
-              {anime?.title?.userPreferred ||
-                anime?.title?.english ||
-                anime?.title?.romaji ||
-                anime?.title?.native}
-            </span>
-
-            {
-              anime?.totalEpisodes !== null && anime?.totalEpisodes !== undefined && (
-                <div className='truncate w-32 lg:w-44 p-2 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center'>
-                  {anime?.status === 	"Ongoing" &&(
-                  <div className="green w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500"></div>
-                  )}
-                    <span> Ep: {anime?.totalEpisodes}</span>
-                </div>
-              )
-            }
+            <div
+              className='rounded-lg  duration-200 hover:scale-105 bg-white/60 animate-pulse w-40 max-lg:h-56 lg:w-60 h-72'/>
 
           </div>
         );
@@ -135,4 +91,4 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
   );
 };
 
-export default Cards;
+export default CardSkeleton;
