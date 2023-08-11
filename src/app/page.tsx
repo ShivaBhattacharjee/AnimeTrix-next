@@ -60,14 +60,15 @@ export default async function page() {
           <Cards props={Trending} />
         </div>
       </div>
-      {/* <Suspense fallback={<AiringScheduleLoading/>}>
-        <AiringSchedule />
-      </Suspense> */}
-      
+
       <Suspense fallback={<div className='flex justify-center items-center gap-5 mt-12'>
-        <SpinLoading/>
+        <SpinLoading />
       </div>}>
         <UpcomingSeason />
+      </Suspense>
+      
+      <Suspense fallback={<AiringScheduleLoading />}>
+        <AiringSchedule />
       </Suspense>
     </div>
   )
