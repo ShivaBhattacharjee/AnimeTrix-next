@@ -48,7 +48,7 @@ const NavItems = [
   }
 ]
 const SideBar = () => {
-  console.log("Hentai onii chan why looking at my sauce")
+  console.log("Hentai onichan!! Why you looking at my source")
   useRouter()
   const pathname = usePathname()
   const [expand, setExpand] = useState(false)

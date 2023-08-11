@@ -3,7 +3,7 @@ import { Play } from 'lucide-react';
 
 const getAiringSchedule = async () => {
     try {
-        const response = await fetch("https://api.anify.tv/schedule?apikey=a3fc97843cbea6cdecd2595adc0cccbc",{
+        const response = await fetch(`https://api.anify.tv/schedule?apikey=${process.env.NEXT_PUBLIC_ANIFY_KEY}`,{
             cache : "no-cache"
         })
         return response.json()
