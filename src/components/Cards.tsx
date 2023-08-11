@@ -12,7 +12,7 @@ interface Anime {
     native?: string;
   };
   totalEpisodes: number;
-  status : string
+  status: string
 }
 
 interface CardsProps {
@@ -89,7 +89,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      style={{ userSelect: isDragging ? 'none' : 'auto' }} 
+      style={{ userSelect: isDragging ? 'none' : 'auto' }}
     >
       {props?.map((anime) => {
         return (
@@ -100,13 +100,14 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
           >
             <Image
               src={anime?.image}
-              className='rounded-lg h-full w-full duration-200 hover:scale-105'
+              className='rounded-lg  aspect-auto 
+              content-normal h-full text-sm w-full bg-cover duration-200 hover:scale-105'
               alt={`an image of ${anime?.title?.userPreferred ||
                 anime?.title?.english ||
                 anime?.title?.romaji ||
                 anime.title?.native
                 }`}
-              height={200}
+              height={300}
               width={600}
               draggable={false}
             />
@@ -120,10 +121,10 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             {
               anime?.totalEpisodes !== null && anime?.totalEpisodes !== undefined && (
                 <div className='truncate w-32 lg:w-44 p-2 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center'>
-                  {anime?.status === 	"Ongoing" &&(
-                  <div className="green w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500"></div>
+                  {anime?.status === "Ongoing" && (
+                    <div className="green w-2 lg:w-3 h-2 lg:h-3  rounded-full bg-green-500"></div>
                   )}
-                    <span> Ep: {anime?.totalEpisodes}</span>
+                  <span> Ep: {anime?.totalEpisodes}</span>
                 </div>
               )
             }

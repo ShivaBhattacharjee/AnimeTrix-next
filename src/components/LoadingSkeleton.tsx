@@ -11,9 +11,9 @@ const LoadingSkeleton = ({ title }: LoadingSkeletonProps)  => {
         className='grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 items-center lg:p-5 mt-8 overflow-hidden'
       >
         {
-          [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(() => {
+          [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((anime) => {
             return (
-              <div className='bg-white/40 mt-5 animate-pulse duration-200 rounded-lg w-42  lg:w-56 lg:h-80 h-64'>
+              <div key={anime} className='bg-white/40 mt-5 animate-pulse duration-200 rounded-lg w-42  lg:w-56 lg:h-80 h-64'>
 
               </div>
             )
