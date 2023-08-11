@@ -63,7 +63,7 @@
 
 @media(max-width:600px) {
   .swiper {
-    height: calc(100vh - 80vh);
+    height: calc(100vh - 75vh);
   }
 }
 

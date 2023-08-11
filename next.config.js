@@ -2,7 +2,7 @@
 const nextConfig = {
     images:{
         domains:["s4.anilist.co"]
-    }
+    },
     output: "standalone",
 }
 

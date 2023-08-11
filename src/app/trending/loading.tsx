@@ -1,5 +1,5 @@
 import React from 'react'
-import LoadingSkeleton from '@/components/LoadingSkeleton'
+import LoadingSkeleton from '@/loading/LoadingSkeleton'
 const loading = () => {
   return (
       <LoadingSkeleton title='Trending'/>

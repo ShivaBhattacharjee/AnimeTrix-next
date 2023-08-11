@@ -48,7 +48,8 @@ const NavItems = [
   }
 ]
 const SideBar = () => {
-  const router = useRouter()
+  console.log("Hentai onii chan why looking at my sauce")
+  useRouter()
   const pathname = usePathname()
   const [expand, setExpand] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null);

@@ -1,7 +1,6 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-
 interface Anime {
   image: string;
   id: number;
@@ -115,7 +114,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
               {anime?.title?.userPreferred ||
                 anime?.title?.english ||
                 anime?.title?.romaji ||
-                anime?.title?.native}
+                anime?.title?.native?.toLocaleLowerCase()}
             </span>
 
             {

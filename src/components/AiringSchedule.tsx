@@ -3,7 +3,9 @@ import { Play } from 'lucide-react';
 
 const getAiringSchedule = async () => {
     try {
-        const response = await fetch("https://api.anify.tv/schedule?apikey=a3fc97843cbea6cdecd2595adc0cccbc")
+        const response = await fetch("https://api.anify.tv/schedule?apikey=a3fc97843cbea6cdecd2595adc0cccbc",{
+            cache : "no-cache"
+        })
         return response.json()
     } catch (error) {
         console.error("Error getting airing list: ", error)
@@ -20,7 +22,7 @@ export default async function AiringSchedule() {
                     <div className="bg-white/10 h-52 w-full p-4 rounded-lg mt-5 lg:h-96 overflow-y-auto">
                         <div className="flex flex-col gap-3">
                             <h1>Coming Up Next!</h1>
-                            {Object.keys(Airing).slice(0,1).map((day) => (
+                            {Object.keys(Airing).map((day) => (
                                 <h1>{day.split("Schedule")}</h1>
                             ))}
                         </div>
