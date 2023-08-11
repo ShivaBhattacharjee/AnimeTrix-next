@@ -93,7 +93,7 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
                 <div className='absolute text-white bg-black/50 w-full h-full'>
                   <div className='absolute text-left flex gap-3 flex-col bottom-3  pb-4 md:text-4xl p-4 w-[900px]'>
                     <h1 className='z-50 truncate w-52 lg:w-full md:w-96 lg:text-5xl lg:font-bold overflow-hidden'>{popular?.title.userPreferred}</h1>
-                    <p className='text-lg hidden 2xl:block max-h-40 overflow-hidden truncate'
+                    <p className='text-lg hidden 2xl:block max-h-40 overflow-hidden truncate '
                       dangerouslySetInnerHTML={{ __html: popular.description }}>
                     </p>
                     <button className={`bg-white/5 shadow-sm border-2 border-[${popular.color}] backdrop-blur-2xl lg:w-44
