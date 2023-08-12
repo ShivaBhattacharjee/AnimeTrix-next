@@ -28,7 +28,7 @@ const UpcomingSeasonCard: React.FC<UpcomingSeasonCardProps> = ({ props, title })
                 {props?.map((anime) => {
                     return (
                         <div className="flex gap-5 items-center" key={anime.id + 1}>
-                            <Image src={anime?.image} alt='an image' height={200} width={400} className='w-32 rounded-lg'></Image>
+                            <Image src={anime?.image} alt='an image' height={200} width={400} className='lg:w-32 w-28 duration-200 hover:scale-105 rounded-lg'></Image>
                             <div className="flex gap-3 flex-col">
                                 <span className='text-lg'>{anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji ||
                                     anime?.title?.native}</span>

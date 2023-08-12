@@ -66,4 +66,9 @@
     height: calc(100vh - 75vh);
   }
 }
+@media(max-width:380px) {
+  .swiper {
+    height: calc(100vh - 69vh);
+  }
+}
 

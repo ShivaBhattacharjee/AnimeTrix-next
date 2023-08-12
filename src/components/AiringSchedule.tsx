@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const getAiringSchedule = async () => {
     try {
-        const response = await fetch(`https://api.consumet.org/meta/anilist/airing-schedule?notYetAired=true&perPage=80`,{
-            cache :'no-cache'
+        const response = await fetch(`https://animetrix-api.vercel.app/meta/anilist/airing-schedule?notYetAired=true&perPage=50`,{
+            cache : 'no-cache'
         });
         return response.json();
     } catch (error) {
@@ -20,7 +20,7 @@ export default async function AiringSchedule() {
     console.log(Airing)
     return (
         <div className='flex flex-col mt-9'>
-            <h1 className='text-3xl lg:text-5xl font-bold'>Airing</h1>
+            <h1 className='text-3xl lg:text-5xl font-bold'>Airing Schedule</h1>
             <AiringScheduleCard airingData={Airing}/>
         </div>
     );
