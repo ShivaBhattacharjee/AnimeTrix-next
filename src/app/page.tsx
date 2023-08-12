@@ -7,6 +7,7 @@ import AiringSchedule from '@/components/AiringSchedule';
 import AiringScheduleLoading from "@/loading/AiringScheduleLoading"
 import UpcomingSeason from '@/components/UpcomingSeason';
 import SpinLoading from '@/loading/SpinLoading';
+import { UpcomingSeasonLoading } from '@/loading/UpcomingSeasonLoading';
 const getTrendingAnime = async () => {
   try {
     const response = await axios.get("https://animetrix-api.vercel.app/meta/anilist/trending", {
@@ -35,8 +36,9 @@ const getPopularAnime = async () => {
 export default async function page() {
   const Trending = await getTrendingAnime()
   const Popular = await getPopularAnime()
+
   return (
-    <div className="p-4 pb-40 md:pb-10 text-xl font-semibold flex-1 h-screen">
+    <div className="p-4 pb-56 md:pb-28 text-xl font-semibold flex-1 h-screen">
       <Slider posts={Trending} />
 
 
@@ -60,13 +62,10 @@ export default async function page() {
           <Cards props={Trending} />
         </div>
       </div>
-
-      <Suspense fallback={<div className='flex justify-center items-center gap-5 mt-12'>
-        <SpinLoading />
-      </div>}>
+      <Suspense fallback={<UpcomingSeasonLoading/>}>
         <UpcomingSeason />
       </Suspense>
-      
+
       <Suspense fallback={<AiringScheduleLoading />}>
         <AiringSchedule />
       </Suspense>
