@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react'
-import Slider from '../components/Slider'
+import Slider from '../components/shared/Slider'
 import Link from "next/link"
-import Cards from '@/components/Cards';
-import AiringSchedule from '@/components/AiringSchedule';
-import AiringScheduleLoading from "@/loading/AiringScheduleLoading"
-import UpcomingSeason from '@/components/UpcomingSeason';
-import { RandomAnimeCard } from "@/components/RandomAnimeCard"
-import { UpcomingSeasonLoading } from '@/loading/UpcomingSeasonLoading';
-import RandomAnimeLoading from '@/loading/RandomAnimeLoading';
+import Cards from '@/components/shared/Cards';
+import AiringSchedule from '@/components/shared/AiringSchedule';
+import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading"
+import UpcomingSeason from '@/components/shared/UpcomingSeason';
+import { RandomAnimeCard } from "@/components/shared/RandomAnimeCard"
+import { UpcomingSeasonLoading } from '@/components/loading/UpcomingSeasonLoading';
+import RandomAnimeLoading from '@/components/loading/RandomAnimeLoading';
 const getTrendingAnime = async () => {
   try {
     const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/trending");
@@ -61,7 +61,7 @@ export default async function page() {
 
       <Suspense fallback={<RandomAnimeLoading />}>
         <div className='flex flex-col mt-9'>
-          <h1 className='text-3xl lg:text-5xl font-bold'>Random</h1>
+          <h1 className='text-3xl lg:text-5xl font-bold'>Random Anime</h1>
           <div className='flex gap-2'>
             <RandomAnimeCard />
           </div>

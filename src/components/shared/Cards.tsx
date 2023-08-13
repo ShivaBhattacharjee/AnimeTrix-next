@@ -2,6 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ReloadFunc from '../error/ReloadFunc';
 interface Anime {
   image: string;
   id: number;
@@ -91,26 +92,25 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
       onTouchEnd={handleTouchEnd}
       style={{ userSelect: isDragging ? 'none' : 'auto' }}
     >
-      {props?.map((anime) => {
-        return (
+      {props.length > 0 ? (
+        props.map((anime) => (
           <div
             key={`${anime.id + 1}`}
-            className='flex flex-col  lg:m-3 m-1  duration-200 rounded-lg cursor-grab'
+            className='flex flex-col lg:m-3 m-1 duration-200 rounded-lg cursor-grab'
             onMouseDown={handleMouseDown}
           >
-            <Image
-              src={anime?.image}
-              className='rounded-lg  aspect-auto 
-              content-normal h-full text-sm w-full bg-cover duration-200 hover:scale-105'
-              alt={`an image of ${anime?.title?.userPreferred ||
-                anime?.title?.english ||
-                anime?.title?.romaji ||
-                anime.title?.native
-                }`}
-              height={300}
-              width={600}
-              draggable={false}
-            />
+            <Link href={`/details/${anime.id}`} className='content-normal w-full h-full'>
+              <div className='md:w-48 md:h-64 h-52 w-40 relative'>
+                <Image
+                  src={anime?.image}
+                  alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime.title?.native}`}
+                  layout='fill'
+                  className='rounded-lg hover:scale-105 duration-200'
+                  objectFit='cover'
+                  draggable={false}
+                />
+              </div>
+            </Link>
             <span className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize'>
               {anime?.title?.userPreferred ||
                 anime?.title?.english ||
@@ -128,12 +128,14 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                 </div>
               )
             }
-
           </div>
-        );
-      })}
+        ))
+      ) : (
+        <ReloadFunc message='Opps!! Something went wrong'/>
+      )}
     </div>
   );
+
 };
 
 export default Cards;

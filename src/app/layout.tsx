@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import SideBar from '../components/SideBar'
-import TopNavbar from '../components/TopNavbar'
-import ScrollToTop from '@/components/ScrollToTop'
-import Footer from '@/components/Footer'
+import SideBar from '../components/shared/SideBar'
+import TopNavbar from '../components/shared/TopNavbar'
+import ScrollToTop from '@/components/shared/ScrollToTop'
+import Footer from '@/components/shared/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

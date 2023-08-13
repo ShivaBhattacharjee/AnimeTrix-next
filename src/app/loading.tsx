@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import CardSkeleton from '@/loading/CardSkeleton'
+import CardSkeleton from '@/components/loading/CardSkeleton'
 const loading = () => {
   
   return (

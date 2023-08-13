@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images:{
-        domains:["s4.anilist.co","artworks.thetvdb.com","media.kitsu.io",]
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "**",
+            }
+        ]
     },
     output: "standalone",
 }

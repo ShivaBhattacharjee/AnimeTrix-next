@@ -6,6 +6,7 @@ import 'swiper/css';
 import './styles.css';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import ReloadFunc from '../error/ReloadFunc';
 
 interface AnimeData {
   id: number;
@@ -61,7 +62,6 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
         >
           <ArrowRight />
         </button>
-        <span ref={progressContent} className='text-white'></span>
       </div>
       <Swiper
         spaceBetween={30}
@@ -80,8 +80,8 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
         onSwiper={saveSwiperInstance}
       >
         {
-          posts?.map((popular: any) => {
-            return (
+          posts.length > 0 ? (
+            posts.map((popular: any) => (
               <SwiperSlide key={popular.id}>
                 <Image
                   src={popular.cover}
@@ -91,21 +91,25 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
                   className='relative'
                 />
                 <div className='absolute text-white bg-black/50 w-full h-full'>
-                  <div className='absolute text-left flex gap-3 flex-col bottom-3  pb-4 md:text-4xl p-4 w-[900px]'>
+                  <div className='absolute text-left flex gap-3 flex-col bottom-3 pb-4 md:text-4xl p-4 w-[900px]'>
                     <h1 className='z-50 truncate w-52 lg:w-full md:w-96 lg:text-5xl lg:font-bold overflow-hidden'>{popular?.title.userPreferred}</h1>
                     <p className='text-lg hidden 2xl:block max-h-40 overflow-hidden truncate '
                       dangerouslySetInnerHTML={{ __html: popular.description }}>
                     </p>
                     <button className={`bg-white/5 shadow-sm border-2 border-[${popular.color}] backdrop-blur-2xl lg:w-44
-                     lg:p-3 2xl:w-52 
-                     2xl:p-4 lg:text-2xl lg:mt-8  p-3 w-32  text-sm rounded-lg`}>Watch Now</button>
+             lg:p-3 2xl:w-52 
+             2xl:p-4 lg:text-2xl lg:mt-8  p-3 w-32 text-sm rounded-lg`}>Watch Now</button>
                   </div>
                 </div>
-
               </SwiperSlide>
-            )
-          })
+            ))
+          ) : (
+            <SwiperSlide>
+              <ReloadFunc message='Error loading Slider' />
+            </SwiperSlide>
+          )
         }
+
       </Swiper>
     </>
   );

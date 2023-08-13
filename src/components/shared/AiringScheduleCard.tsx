@@ -60,13 +60,13 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                 <div className="flex flex-col gap-3">
                     <div className='p-4'>
                         <div className='flex flex-col gap-3'>
-                            {animeForCurrentDay.length === 0 ? (
+                            {animeForCurrentDay?.length === 0 ? (
                                 <div className='text-white text-center'>Oops! No schedule found for {currentDay}</div>
                             ) : (
-                                animeForCurrentDay.map((anime: Anime) => (
+                                animeForCurrentDay?.map((anime: Anime) => (
                                     <div className='flex justify-between items-center' key={anime.id}>
                                         <div className='flex items-center gap-4'>
-                                            <img
+                                            <Image
                                                 height={200}
                                                 width={400}
                                                 loading='lazy'
