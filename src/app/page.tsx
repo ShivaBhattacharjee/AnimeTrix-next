@@ -1,34 +1,30 @@
 import React, { Suspense } from 'react'
 import Slider from '../components/Slider'
 import Link from "next/link"
-import axios from 'axios'
 import Cards from '@/components/Cards';
 import AiringSchedule from '@/components/AiringSchedule';
 import AiringScheduleLoading from "@/loading/AiringScheduleLoading"
 import UpcomingSeason from '@/components/UpcomingSeason';
-import SpinLoading from '@/loading/SpinLoading';
+import { RandomAnimeCard } from "@/components/RandomAnimeCard"
 import { UpcomingSeasonLoading } from '@/loading/UpcomingSeasonLoading';
+import RandomAnimeLoading from '@/loading/RandomAnimeLoading';
 const getTrendingAnime = async () => {
   try {
-    const response = await axios.get("https://animetrix-api.vercel.app/meta/anilist/trending", {
-      responseType: 'json'
-    });
-
-    return response.data.results;
+    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/trending");
+    const data = await response.json();
+    return data.results;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching trending anime:", error);
     return [];
   }
 };
 const getPopularAnime = async () => {
   try {
-    const response = await axios.get("https://animetrix-api.vercel.app/meta/anilist/popular", {
-      responseType: 'json'
-    });
-
-    return response.data.results;
+    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/popular");
+    const data = await response.json();
+    return data.results;
   } catch (error) {
-    console.error("Error fetching recent anime:", error);
+    console.error("Error fetching popular anime:", error);
     return [];
   }
 };
@@ -62,7 +58,16 @@ export default async function page() {
           <Cards props={Trending} />
         </div>
       </div>
-      <Suspense fallback={<UpcomingSeasonLoading/>}>
+
+      <Suspense fallback={<RandomAnimeLoading />}>
+        <div className='flex flex-col mt-9'>
+          <h1 className='text-3xl lg:text-5xl font-bold'>Random</h1>
+          <div className='flex gap-2'>
+            <RandomAnimeCard />
+          </div>
+        </div>
+      </Suspense>
+      <Suspense fallback={<UpcomingSeasonLoading />}>
         <UpcomingSeason />
       </Suspense>
 

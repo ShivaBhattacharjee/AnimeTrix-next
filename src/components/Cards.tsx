@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 interface Anime {
   image: string;
   id: number;

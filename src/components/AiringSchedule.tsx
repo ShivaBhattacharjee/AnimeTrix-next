@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const getAiringSchedule = async () => {
     try {
-        const response = await fetch(`https://animetrix-api.vercel.app/meta/anilist/airing-schedule?notYetAired=true&perPage=50`,{
+        const response = await fetch(`https://api.anify.tv/schedule?apikey=4535c8a669d454fb04614d1499b934ae`,{
             cache : 'no-cache'
         });
         return response.json();

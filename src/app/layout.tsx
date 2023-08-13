@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import SideBar from '../components/SideBar'
 import TopNavbar from '../components/TopNavbar'
 import ScrollToTop from '@/components/ScrollToTop'
+import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -22,9 +23,10 @@ export default function RootLayout({
         <TopNavbar />
         <SideBar />
         <ScrollToTop/>
-        <div className='flex flex-col ml-0 md:ml-20 lg:ml-64 '>
+        <main className='flex flex-col ml-0 md:ml-20 lg:ml-64 '>
           {children}
-        </div>
+          <Footer/>
+        </main>
       </body>
     </html>
   )
