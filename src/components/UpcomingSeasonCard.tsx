@@ -38,7 +38,7 @@ const UpcomingSeasonCard: React.FC<UpcomingSeasonCardProps> = ({ props, title })
                                 </div>
                                 <div className="flex gap-2 flex-wrap">
                                     {anime?.genres?.map((genre) => (
-                                        <span className='text-sm flex gap-2 items-center' key={genre}>{genre}</span>
+                                        <span className='text-sm flex gap-2 items-center' key={genre}>{genre},</span>
                                     ))}
                                 </div>
                             </div>
