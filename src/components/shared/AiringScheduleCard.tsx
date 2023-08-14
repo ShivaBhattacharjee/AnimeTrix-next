@@ -56,7 +56,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
 
     return (
         <div className='flex gap-2'>
-            <div className="bg-white/10 h-auto max-h-[400px] lg:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
+            <div className="bg-white/10 h-auto max-h-[400px md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
                 <div className="flex flex-col gap-3">
                     <div className='p-4'>
                         <div className='flex flex-col gap-3'>
@@ -76,7 +76,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                                 className='w-24 text-sm object-cover rounded-lg'
                                             />
                                             <div className='flex flex-col'>
-                                                <span className='text-white text-sm w-24 truncate mb-3 lg:text-xl lg:w-full '>
+                                                <span className='text-white text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full '>
                                                     {anime.title?.userPreferred || anime.title?.english || anime.title?.romaji ||
                                                         anime.title?.native}
                                                 </span>

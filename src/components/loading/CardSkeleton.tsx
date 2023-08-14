@@ -1,7 +1,6 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
 
-
 const CardSkeleton = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -16,9 +15,12 @@ const CardSkeleton = () => {
       }
     };
 
-    containerRef?.current!?.addEventListener('wheel', handleWheel, { passive: false });
+    const currentContainerRef = containerRef.current; // Store a reference
+
+    currentContainerRef?.addEventListener('wheel', handleWheel, { passive: false });
+
     return () => {
-      containerRef?.current!?.removeEventListener('wheel', handleWheel);
+      currentContainerRef?.removeEventListener('wheel', handleWheel);
     };
   }, []);
 
@@ -72,21 +74,19 @@ const CardSkeleton = () => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      style={{ userSelect: isDragging ? 'none' : 'auto' }} 
+      style={{ userSelect: isDragging ? 'none' : 'auto' }}
     >
-      {[1,2,3,4,5,6,7,8,9,10]?.map((anime) => {
-        return (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]?.map((anime) => (
+        <div
+          key={anime}
+          className='flex flex-col lg:m-3 m-1 duration-200 rounded-lg cursor-grab'
+          onMouseDown={handleMouseDown}
+        >
           <div
-            key={anime}
-            className='flex flex-col  lg:m-3 m-1  duration-200 rounded-lg cursor-grab '
-            onMouseDown={handleMouseDown}
-          >
-            <div
-              className='rounded-lg  duration-200 hover:scale-105 bg-white/60 animate-pulse w-40 max-lg:h-56 lg:w-60 h-72'/>
-
-          </div>
-        );
-      })}
+            className='rounded-lg duration-200 hover:scale-105 bg-white/60 animate-pulse w-40 max-lg:h-56 lg:w-60 h-72'
+          />
+        </div>
+      ))}
     </div>
   );
 };
