@@ -52,7 +52,9 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
     const dx = event.clientX - dragStartX;
     containerRef.current!.scrollLeft = scrollStartX - dx;
+    event.preventDefault(); // Prevent default scrolling behavior
   };
+
 
   const handleMouseUp = () => {
     setIsDragging(false);
@@ -75,6 +77,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
     const dx = event.touches[0].clientX - dragStartX;
     containerRef.current!.scrollLeft = scrollStartX - dx;
+    event.preventDefault(); // Prevent default scrolling behavior
   };
 
   const handleTouchEnd = () => {
@@ -138,9 +141,9 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
           </div>
         ))
       ) : (
-        <ReloadFunc message='Opps!! Something went wrong'/>
+        <ReloadFunc message='Opps!! Something went wrong' />
       )}
-            {/* <div className=' absolute flex flex-col right-0 h-screen bg-gradient-to-r from-black '>
+      {/* <div className=' absolute flex flex-col right-0 h-screen bg-gradient-to-r from-black '>
             <ArrowBigRightDash onClick={handlePreviousClick} className=' w-28 h-28'/>
             <ArrowBigLeftDash onClick={handleNextClick} className=' w-28 h-28'/>
             </div> */}
