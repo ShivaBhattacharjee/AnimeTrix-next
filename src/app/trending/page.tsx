@@ -1,4 +1,4 @@
-import CardSkeleton from '@/loading/CardSkeleton'
+import CardSkeleton from '@/components/loading/CardSkeleton'
 import React from 'react'
 
 const page = () => {

@@ -8,7 +8,7 @@ const ScrollToTop = () => {
     }
 
     const listenToScroll = () => {
-        let hidden = 500
+        const hidden = 500
         const winScroll =
             document.body.scrollTop || document.documentElement.scrollTop;
         if (winScroll > hidden) {

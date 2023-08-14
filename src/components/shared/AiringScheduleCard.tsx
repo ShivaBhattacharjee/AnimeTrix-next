@@ -56,7 +56,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
 
     return (
         <div className='flex gap-2'>
-            <div className="bg-white/10 h-auto max-h-[400px md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
+            <div className="bg-white/10 h-auto max-h-[400px] md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
                 <div className="flex flex-col gap-3">
                     <div className='p-4'>
                         <div className='flex flex-col gap-3'>
