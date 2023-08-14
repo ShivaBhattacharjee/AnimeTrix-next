@@ -26,9 +26,9 @@ export async function RandomAnimeCard() {
     }
 
     return (
-        <div className='flex flex-col items-center mt-5'>
+        <div className='flex flex-col mt-5'>
             <Link href={`/details/${randomAnime.id}`} className='content-normal w-full h-full'>
-                <div className='md:w-48 md:h-64 h-52 w-40 relative'>
+                <div className='md:w-48 md:h-64 h-56 w-40 relative'>
                     <Image
                         src={randomAnime?.image}
                         alt={`an image of ${randomAnime?.title?.userPreferred || randomAnime?.title?.english || randomAnime?.title?.romaji || randomAnime.title?.native}`}
@@ -45,7 +45,7 @@ export async function RandomAnimeCard() {
                     randomAnime?.title?.romaji ||
                     randomAnime?.title?.native?.toLocaleLowerCase()}
             </h1>
-            <div className="flex gap-3 text-sm items-center w-32 truncate m-auto">
+            <div className="flex gap-3 text-sm  w-32 truncate m-auto">
                 <span>{randomAnime?.type}</span>
                 <span>{randomAnime?.subOrDub?.toLocaleUpperCase()}</span>
             </div>

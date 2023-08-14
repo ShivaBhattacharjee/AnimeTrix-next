@@ -96,7 +96,7 @@ const SideBar = () => {
               (pathname.includes(link.route) && link.route.length > 1) ||
               pathname === link.route;
             return (
-              <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && `bg-white/20 backdrop-blur-md `} w-24 p-2 rounded-lg duration-200 transition-all`}>
+              <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/25 border-2 backdrop-blur-md `} w-24 p-2 rounded-lg duration-200 transition-all`}>
                 <link.icons className={`${isActive && (`fill-white`)}`} />
                 <h1>{link.name}</h1>
               </Link>

@@ -15,7 +15,7 @@ const socialMediaLinks = [
 
 const Footer = () => {
   return (
-    <div className='bg-white/10 hidden md:block p-4'>
+    <div className='bg-white/10 hidden md:block p-4 '>
       <div className='flex flex-col gap-7 justify-between items-center'>
         <h1 className='text-3xl font-bold'>AnimeTrix</h1>
         <p className='text-sm text-center font-semibold m-auto max-w-4xl'>

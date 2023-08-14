@@ -1,9 +1,9 @@
 import ServerError from '@/components/error/ServerError';
 import VerticalCards from '@/components/shared/VerticalCards';
 import React from 'react'
-const getTrendingAnime = async () => {
+const getAnimeMovies = async () => {
   try {
-    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/movie?perPage=20");
+    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/MOVIE?perPage=24");
     const data = await response.json();
     return data.results;
   } catch (error) {
@@ -11,15 +11,15 @@ const getTrendingAnime = async () => {
     return [];
   }
 };
-export default async function page () {
-  const trending = await getTrendingAnime()
+export default async function page() {
+  const Movies = await getAnimeMovies()
   return (
-    <div>
-      {trending.length>0?(
-      <VerticalCards title={"Movies"} data = {trending}/>
-      ):(
-        <ServerError/>
+    <>
+      {Movies.length > 0 ? (
+        <VerticalCards title={"Movies"} data={Movies} />
+      ) : (
+        <ServerError />
       )}
-    </div>
+    </>
   )
 }
