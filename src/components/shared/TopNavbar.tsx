@@ -6,7 +6,7 @@ const TopNavbar = () => {
     <div className=' sticky top-0 w-full max-w-[2500px] text-white h-20 items-center grid z-20 p-4
      bg-white/5 backdrop-blur-lg'>
       <div className='flex justify-between items-center flex-wrap'>
-        <Link href={"/"} className='text-2xl md:text-3xl font-bold relative'>Anime <span>Trix</span></Link>
+        <Link href={"/"} className='text-3xl md:text-3xl font-bold relative'>Anime <span>Trix</span></Link>
         <div className='flex justify-between items-center gap-4'>
           <Link href={"/search"}>
             <Search className=' cursor-pointer lg:hidden' />

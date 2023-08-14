@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReloadFunc from '../error/ReloadFunc';
+import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 interface Anime {
   image: string;
   id: number;
@@ -79,7 +80,13 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
   const handleTouchEnd = () => {
     setIsDragging(false);
   };
+  // const handleNextClick = () => {
+  //   containerRef.current!.scrollLeft += 400; // Adjust the value for the desired scroll amount
+  // };
 
+  // const handlePreviousClick = () => {
+  //   containerRef.current!.scrollLeft -= 400; // Adjust the value for the desired scroll amount
+  // };
   return (
     <div
       className='flex gap-3 overflow-x-hidden duration-200 mt-9 lg:grid lg:grid-flow-col-dense'
@@ -96,7 +103,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
         props.map((anime) => (
           <div
             key={`${anime.id + 1}`}
-            className='flex flex-col lg:m-3 m-1 duration-200 rounded-lg cursor-grab'
+            className='flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab'
             onMouseDown={handleMouseDown}
           >
             <Link href={`/details/${anime.id}`} className='content-normal w-full h-full'>
@@ -133,6 +140,10 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
       ) : (
         <ReloadFunc message='Opps!! Something went wrong'/>
       )}
+            {/* <div className=' absolute flex flex-col right-0 h-screen bg-gradient-to-r from-black '>
+            <ArrowBigRightDash onClick={handlePreviousClick} className=' w-28 h-28'/>
+            <ArrowBigLeftDash onClick={handleNextClick} className=' w-28 h-28'/>
+            </div> */}
     </div>
   );
 
