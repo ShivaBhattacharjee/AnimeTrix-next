@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import ServerError from '@/components/error/ServerError';
 import React from 'react'
-import { Play, Plus } from 'lucide-react';
+import { FileX, Play, Plus } from 'lucide-react';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -25,24 +25,23 @@ export default async function page({ params }: {
   }
 
   return (
-    <section className='h-screen p-5 overflow-hidden'>
-      <div className='flex flex-col md:flex-row items-center gap-5 flex-wrap'>
-        <Image height={200} width={400} src={details.image} className=' w-52 lg:w-72 rounded-lg' alt="" />
-        <div className="flex flex-col items-center md:items-start gap-4 font-semibold">
-          <h1 className='lg:text-4xl text-2xl font-semibold text-center md:text-left'>{details?.title?.romaji || details?.title?.english || details?.title?.native}</h1>
-          <div className="flex flex-wrap gap-5">
+    <section className='flex flex-col p-4 mt-8 overflow-hidden'>
+      <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
+        <Image height={200} width={400} src={details.image} className='w-52 lg:w-72 rounded-lg' alt="an image" />
+        <div className="flex flex-col gap-5 items-center md:items-start">
+          <h1 className='md:text-4xl lg:text-5xl text-3xl font-bold text-center md:text-left'>{details.title.english}</h1>
+          <div className="flex flex-wrap gap-5 font-semibold">
             <span>{details?.duration != null ? `${details?.duration}min` : null}</span>
             <span>{details?.type}</span>
             <span>{details?.status}</span>
+            <span className='flex items-center gap-3'>{details.rating&&(`${details.rating}%`)}</span>
           </div>
-          <div className="flex justify-evenly flex-wrap items-center  gap-5">
-            <button className='p-4 flex items-center gap-3 bg-white text-black
-         rounded-lg font-semibold hover:scale-90 duration-200 ease-in-out'><Play />Watch Now</button>
-            <button className='p-4 flex items-center gap-3 text-white border-2 border-white
-         rounded-lg font-semibold hover:scale-90 duration-200 ease-in-out'><Plus />Bookmark</button>
+          <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
+            <button className='bg-white p-4 gap-3  rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
+              <Play />Watch Now</button>
+            <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
+              <Plus /> Bookmark</button>
           </div>
-
-   
         </div>
       </div>
     </section>
