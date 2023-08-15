@@ -25,13 +25,13 @@ export default async function page({ params }: {
   }
 
   return (
-    <section className='flex flex-col p-4 mt-8 overflow-hidden'>
+    <section className='flex flex-col p-4 mt-4 overflow-hidden'>
       <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
-        <Image height={200} width={400} src={details.image} className='w-52 lg:w-72 rounded-lg' alt="an image" />
+        <Image height={200} width={400} src={details.image} className=' w-48 lg:w-72 rounded-lg' alt="an image" />
         <div className="flex flex-col gap-5 items-center md:items-start">
-          <h1 className='md:text-4xl lg:text-5xl text-3xl font-bold text-center md:text-left'>{details.title.english}</h1>
+          <h1 className='md:text-4xl lg:text-5xl text-2xl font-bold text-center md:text-left'>{details.title.english}</h1>
           <div className="flex flex-wrap gap-5 font-semibold">
-            <span>{details?.duration != null ? `${details?.duration}min` : null}</span>
+            <span>{details?.startDate?.year}</span>
             <span>{details?.type}</span>
             <span>{details?.status}</span>
             <span className='flex items-center gap-3'>{details.rating&&(`${details.rating}%`)}</span>
