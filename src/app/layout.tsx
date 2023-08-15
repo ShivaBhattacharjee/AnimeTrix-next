@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-black text-white max-w-[2500px] m-auto`}>
+      <body className={`${inter.className} bg-black w-full text-white max-w-[2500px] m-auto`}>
         <TopNavbar />
         <SideBar />
         <ScrollToTop/>
