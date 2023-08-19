@@ -25,11 +25,14 @@ export default async function page({ params }: {
   }
 
   return (
-    <section className='flex flex-col p-4 mt-4 overflow-hidden'>
+    <section className='flex flex-col p-4 mt-4 overflow-hidden pb-40'>
       <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
         <Image height={200} width={400} src={details.image} className=' w-48 lg:w-72 rounded-lg' alt="an image" />
         <div className="flex flex-col gap-5 items-center md:items-start">
           <h1 className='md:text-4xl lg:text-5xl text-2xl font-bold text-center md:text-left'>{details.title.english}</h1>
+          {details.totalEpisodes !== undefined &&(
+          <span  className='font-semibold'>Episodes : {details.totalEpisodes}</span>
+          )}
           <div className="flex flex-wrap gap-5 font-semibold">
             <span>{details?.startDate?.year}</span>
             <span>{details?.type}</span>
@@ -42,8 +45,15 @@ export default async function page({ params }: {
             <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
               <Plus /> Bookmark</button>
           </div>
+
+          <div className='max-w-4xl bg-white/10 border-2 border-white/30  
+          rounded-lg font-semibold p-2 lg:max-h-36 max-h-44 overflow-scroll'>
+            <p dangerouslySetInnerHTML={{__html: details.description}}></p>
+          </div>
         </div>
       </div>
+
+      <h1>Hello world</h1>
     </section>
   );
 
