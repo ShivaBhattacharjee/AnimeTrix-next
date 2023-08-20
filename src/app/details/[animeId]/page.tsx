@@ -53,7 +53,7 @@ export default async function page({ params }: {
             details?.description && (
               <div className='max-w-4xl bg-white/10 border-2 border-white/30  
                 rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll'>
-                <p dangerouslySetInnerHTML={{ __html: details?.description }}></p>
+                <p dangerouslySetInnerHTML={{ __html: details?.description}}></p>
               </div>
             )
           }
