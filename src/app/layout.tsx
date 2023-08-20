@@ -8,8 +8,8 @@ import Footer from '@/components/shared/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'AnimeTrix',
-  description: 'An ',
+  title: 'Watch or download anime on AnimeTrix for free',
+  description: 'Will be updated later ',
 }
 
 export default function RootLayout({

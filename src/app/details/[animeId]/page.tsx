@@ -3,7 +3,7 @@ import ServerError from '@/components/error/ServerError';
 import RelationCard from '@/components/shared/RelationCard'
 import React, { Suspense } from 'react'
 import { FileX, Play, Bookmark } from 'lucide-react';
-import SpinLoading from '@/components/loading/SpinLoading';
+import { Metadata } from 'next'
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -25,7 +25,6 @@ export default async function page({ params }: {
       <ServerError />
     );
   }
-
   return (
     <section className='flex flex-col p-4 mt-4 overflow-hidden pb-40'>
       <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
@@ -33,7 +32,7 @@ export default async function page({ params }: {
         <div className="flex flex-col gap-5 items-center md:items-start">
           <h1 className='md:text-4xl lg:text-5xl text-2xl font-bold text-center md:text-left'>
             {details.title.romaji || details.title.english || details.title.native}
-            </h1>
+          </h1>
           {details.totalEpisodes !== null && (
             <span className='font-semibold text-sm md:text-xl'>Episodes : {details.totalEpisodes}</span>
           )}
@@ -44,25 +43,33 @@ export default async function page({ params }: {
             <span className='flex items-center gap-3'>{details.rating && (`${details.rating}%`)}</span>
           </div>
           <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
-            <button className='bg-white p-4 gap-3  rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
-              <Play />Watch Now</button>
+              <button className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
+                <Play />Watch Now
+              </button>
             <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
-            <Bookmark />Bookmark</button>
+              <Bookmark />Bookmark</button>
           </div>
-
-          <div className='max-w-4xl bg-white/10 border-2 border-white/30  
-          rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll'>
-            <p dangerouslySetInnerHTML={{ __html: details.description }}></p>
-          </div>
+          {
+            details?.description && (
+              <div className='max-w-4xl bg-white/10 border-2 border-white/30  
+                rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll'>
+                <p dangerouslySetInnerHTML={{ __html: details?.description }}></p>
+              </div>
+            )
+          }
         </div>
       </div>
 
       <div className='mt-7 flex flex-col gap-5'>
         <Suspense fallback={<h1>Loading Relation</h1>}>
-          <RelationCard id = {params.animeId}/>
-          </Suspense>
+          <RelationCard id={params.animeId} />
+        </Suspense>
       </div>
     </section>
   );
 
+}
+export const metadata: Metadata = {
+  title: 'This is details page',
+  description: '...',
 }
