@@ -92,7 +92,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
   // };
   return (
     <div
-      className='flex gap-3 overflow-x-hidden duration-200 mt-9 lg:grid lg:grid-flow-col-dense'
+      className='flex gap-3 overflow-x-hidden duration-200 mt-9'
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
