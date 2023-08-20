@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { FastForward, Rewind, PlayCircle } from 'lucide-react';
 import Image from 'next/image';
-
+import Link from 'next/link';
 interface Anime {
     id: string;
     coverImage: string;
@@ -86,7 +86,10 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                                 </div>
                                             </div>
                                         </div>
-                                        <PlayCircle className='cursor-pointer lg:scale-150' />
+                                        <Link href={`/details/${anime.id}`}>
+                                            <PlayCircle className='cursor-pointer lg:scale-150' />
+                                        </Link>
+
                                     </div>
                                 ))
                             )}

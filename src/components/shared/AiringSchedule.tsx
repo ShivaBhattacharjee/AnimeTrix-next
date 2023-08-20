@@ -15,8 +15,6 @@ const getAiringSchedule = async () => {
 
 export default async function AiringSchedule() {
     const Airing = await getAiringSchedule();
-
-    console.log(Airing)
     return (
         <div className='flex flex-col mt-9'>
             <h1 className='text-3xl lg:text-5xl font-bold'>Airing Schedule</h1>
