@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ReloadFunc from '../error/ReloadFunc';
 import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
+import { space } from 'postcss/lib/list';
 interface Anime {
   image: string;
   id: number;
@@ -23,73 +24,65 @@ interface CardsProps {
 
 const Cards: React.FC<CardsProps> = ({ props }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [scrollStartX, setScrollStartX] = useState(0);
+  const dragStartX = useRef(0); // Use refs for dragStartX and scrollStartX
+  const scrollStartX = useRef(0);
+  const isDragging = useRef(false); // Use ref for isDragging
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
       if (containerRef.current?.contains(event.target as Node)) {
-        event?.preventDefault();
+        event.preventDefault();
         containerRef.current!.scrollLeft += event.deltaY;
       }
     };
 
-    containerRef?.current!?.addEventListener('wheel', handleWheel, { passive: false });
+    containerRef?.current?.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
-      containerRef?.current!?.removeEventListener('wheel', handleWheel);
+      containerRef?.current?.removeEventListener('wheel', handleWheel);
     };
   }, []);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    setDragStartX(event.clientX);
-    setScrollStartX(containerRef.current!.scrollLeft);
+    isDragging.current = true;
+    dragStartX.current = event.clientX;
+    scrollStartX.current = containerRef.current!.scrollLeft;
   };
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+    if (!isDragging.current) return;
 
-    const dx = event.clientX - dragStartX;
-    containerRef.current!.scrollLeft = scrollStartX - dx;
-    event.preventDefault(); // Prevent default scrolling behavior
+    const dx = event.clientX - dragStartX.current;
+    containerRef.current!.scrollLeft = scrollStartX.current - dx;
+    event.preventDefault();
   };
 
-
   const handleMouseUp = () => {
-    setIsDragging(false);
+    isDragging.current = false;
   };
 
   const handleMouseLeave = () => {
-    if (isDragging) {
-      setIsDragging(false);
+    if (isDragging.current) {
+      isDragging.current = false;
     }
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    setDragStartX(event.touches[0].clientX);
-    setScrollStartX(containerRef.current!.scrollLeft);
+    isDragging.current = true;
+    dragStartX.current = event.touches[0].clientX;
+    scrollStartX.current = containerRef.current!.scrollLeft;
   };
 
   const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-
-    const dx = event.touches[0].clientX - dragStartX;
-    containerRef.current!.scrollLeft = scrollStartX - dx;
-    event.preventDefault(); // Prevent default scrolling behavior
+    if (!isDragging.current) return;
+  
+    const dx = (event.touches[0].clientX - dragStartX.current) * 2;
+    containerRef.current!.scrollLeft = scrollStartX.current - dx;
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
+    isDragging.current = false;
   };
-  // const handleNextClick = () => {
-  //   containerRef.current!.scrollLeft += 400; // Adjust the value for the desired scroll amount
-  // };
 
-  // const handlePreviousClick = () => {
-  //   containerRef.current!.scrollLeft -= 400; // Adjust the value for the desired scroll amount
-  // };
   return (
     <div
       className='flex gap-3 overflow-x-hidden duration-200 mt-9'
@@ -100,7 +93,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      style={{ userSelect: isDragging ? 'none' : 'auto' }}
+      style={{ userSelect: isDragging.current ? 'none' : 'auto' }}
     >
       {props.length > 0 ? (
         props.map((anime) => (
@@ -118,6 +111,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                   className='rounded-lg hover:scale-105 duration-200'
                   objectFit='cover'
                   draggable={false}
+                  loading='lazy'
                 />
               </div>
             </Link>
@@ -129,12 +123,16 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             </span>
 
             {
-              anime?.totalEpisodes !== null && anime?.totalEpisodes !== undefined && (
+              anime?.totalEpisodes !== null && anime?.totalEpisodes !== undefined ? (
                 <div className='truncate w-32 lg:w-44 p-2 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center'>
                   {anime?.status === "Ongoing" && (
                     <div className="green w-2 lg:w-3 h-2 lg:h-3  rounded-full bg-green-500"></div>
                   )}
                   <span> Ep: {anime?.totalEpisodes}</span>
+                </div>
+              ) : (
+                <div className='truncate w-32 lg:w-44 p-2 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center'>
+                  <span> Ep: 0 </span>
                 </div>
               )
             }

@@ -5,6 +5,7 @@ import React, { Suspense } from 'react'
 import { FileX, Play, Bookmark } from 'lucide-react';
 import { Metadata } from 'next'
 import SpinLoading from '@/components/loading/SpinLoading';
+import EpisodeLists from '@/components/shared/EpisodeLists';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -73,6 +74,7 @@ export default async function page({ params }: {
           <SpinLoading />
         </div>}>
            <h1 className=' text-4xl font-semibold'>Episodes</h1>
+           <EpisodeLists listData={details.episodes}/>
         </Suspense>
       </div>
     </section>
