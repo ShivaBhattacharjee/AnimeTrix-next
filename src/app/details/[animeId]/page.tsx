@@ -4,6 +4,7 @@ import RelationCard from '@/components/shared/RelationCard'
 import React, { Suspense } from 'react'
 import { FileX, Play, Bookmark } from 'lucide-react';
 import { Metadata } from 'next'
+import SpinLoading from '@/components/loading/SpinLoading';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -43,9 +44,9 @@ export default async function page({ params }: {
             <span className='flex items-center gap-3'>{details.rating && (`${details.rating}%`)}</span>
           </div>
           <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
-              <button className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
-                <Play />Watch Now
-              </button>
+            <button className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
+              <Play />Watch Now
+            </button>
             <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
               <Bookmark />Bookmark</button>
           </div>
@@ -53,23 +54,31 @@ export default async function page({ params }: {
             details?.description && (
               <div className='max-w-4xl bg-white/10 border-2 border-white/30  
                 rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll'>
-                <p dangerouslySetInnerHTML={{ __html: details?.description}}></p>
+                <p dangerouslySetInnerHTML={{ __html: details?.description }}></p>
               </div>
             )
           }
         </div>
       </div>
+      <div className='mt-7 flex flex-col gap-5'>
+        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
+          <SpinLoading />
+        </div>}>
+          <RelationCard id={params.animeId} />
+        </Suspense>
+      </div>
 
       <div className='mt-7 flex flex-col gap-5'>
-        <Suspense fallback={<h1>Loading Relation</h1>}>
-          <RelationCard id={params.animeId} />
+        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
+          <SpinLoading />
+        </div>}>
+           <h1 className=' text-4xl font-semibold'>Episodes</h1>
         </Suspense>
       </div>
     </section>
   );
-
 }
 export const metadata: Metadata = {
   title: 'This is details page',
-  description: '...',
+  description: 'idk man will decide later',
 }

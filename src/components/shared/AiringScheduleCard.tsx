@@ -65,7 +65,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                             ) : (
                                 animeForCurrentDay?.map((anime: Anime) => (
                                     <div className='flex justify-between items-center' key={anime.id}>
-                                        <div className='flex items-center gap-4'>
+                                        <Link href={`/details/${anime.id}`} className='flex items-center gap-4'>
                                             <Image
                                                 height={200}
                                                 width={400}
@@ -73,7 +73,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                                 src={anime.coverImage}
                                                 alt={`an image of ${anime.title?.userPreferred || anime.title?.english || anime.title?.romaji ||
                                                     anime.title?.native}`}
-                                                className='w-24 text-sm object-cover rounded-lg'
+                                                className='w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg'
                                             />
                                             <div className='flex flex-col'>
                                                 <span className='text-white text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full '>
@@ -85,7 +85,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                                     <span className='text-gray-300'>{formatTime(anime.airingAt)}</span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                         <Link href={`/details/${anime.id}`}>
                                             <PlayCircle className='cursor-pointer lg:scale-150' />
                                         </Link>
