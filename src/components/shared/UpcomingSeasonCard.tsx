@@ -31,25 +31,25 @@ const UpcomingSeasonCard: React.FC<UpcomingSeasonCardProps> = ({ props, title })
                     props?.map((anime) => {
                         return (
                             <Link href={`details/${anime.id}`} className="flex gap-5 items-center" key={anime.id + 1}>
-                            <Image src={anime?.image} alt='an image' height={200} width={400} className='lg:w-32 w-28 duration-200 hover:scale-105 rounded-lg'></Image>
-                            <div className="flex gap-3 flex-col">
-                                <span className='text-lg'>{anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji ||
-                                    anime?.title?.native}</span>
-                                <div className='flex gap-3 text-sm'>
-                                    <span>{anime?.countryOfOrigin}</span>
-                                    <span>{anime?.type}</span>
+                                <img src={anime?.image} loading='lazy' alt='an image' height={200} width={400} className='lg:w-32 w-28 duration-200 hover:scale-105 rounded-lg' />
+                                <div className="flex gap-3 flex-col">
+                                    <span className='text-lg'>{anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji ||
+                                        anime?.title?.native}</span>
+                                    <div className='flex gap-3 text-sm'>
+                                        <span>{anime?.countryOfOrigin}</span>
+                                        <span>{anime?.type}</span>
+                                    </div>
+                                    <div className="flex gap-2 flex-wrap">
+                                        {anime?.genres?.map((genre) => (
+                                            <span className='text-sm flex gap-2 items-center' key={genre}>{genre}</span>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="flex gap-2 flex-wrap">
-                                    {anime?.genres?.map((genre) => (
-                                        <span className='text-sm flex gap-2 items-center' key={genre}>{genre}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        </Link>
+                            </Link>
                         );
                     })
                 ) : (
-                    <ReloadFunc message='Error loading season'/>
+                    <ReloadFunc message='Error loading season' />
                 )}
             </div>
         </div>

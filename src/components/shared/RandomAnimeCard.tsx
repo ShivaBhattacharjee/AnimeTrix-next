@@ -29,12 +29,10 @@ export async function RandomAnimeCard() {
         <div className='flex flex-col mt-5'>
             <Link href={`/details/${randomAnime.id}`} className='content-normal w-full h-full'>
                 <div className='md:w-48 md:h-64 h-56 w-40 relative'>
-                    <Image
+                    <img
                         src={randomAnime?.image}
                         alt={`an image of ${randomAnime?.title?.userPreferred || randomAnime?.title?.english || randomAnime?.title?.romaji || randomAnime.title?.native}`}
-                        layout='fill'
-                        className='rounded-lg hover:scale-105 duration-200'
-                        objectFit='cover'
+                        className='rounded-lg hover:scale-105 duration-200 md:w-48 md:h-64 h-56 w-40'
                         draggable={false}
                     />
                 </div>

@@ -106,15 +106,15 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             onMouseDown={handleMouseDown}
           >
             <Link href={`/details/${anime.id}`} className='content-normal w-full h-full'>
-              <div className='md:w-48 md:h-64 h-56 w-40 relative'>
-                <Image
+              <div className='relative lg:w-48 w-40 '>
+                <img
                   src={anime?.image}
                   alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime.title?.native}`}
-                  layout='fill'
-                  className='rounded-lg hover:scale-105 duration-200'
-                  objectFit='cover'
+                  className='rounded-lg hover:scale-105 duration-200 h-52 lg:h-64 '
                   draggable={false}
                   loading='lazy'
+                  height={400}
+                  width={200}
                 />
               </div>
             </Link>

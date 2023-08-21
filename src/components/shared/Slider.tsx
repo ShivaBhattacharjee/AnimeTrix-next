@@ -84,11 +84,12 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
           posts.length > 0 ? (
             posts.map((popular: any) => (
               <SwiperSlide key={popular.id}>
-                <Image
+                <img
                   src={popular.cover}
                   alt={`Slider of ${popular.title.userPreferred || popular.title.romaji}`}
                   width={1366}
                   height={768}
+                  loading='lazy'
                   className='relative'
                 />
                 <div className='absolute text-white bg-black/50 w-full h-full'>
