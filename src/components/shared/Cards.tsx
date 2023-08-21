@@ -74,8 +74,8 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
   const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
     if (!isDragging.current) return;
-  
-    const dx = (event.touches[0].clientX - dragStartX.current) * 2;
+
+    const dx = (event.touches[0].clientX - dragStartX.current) * 1.5; // adjust the value to change the swipe speed of slider
     containerRef.current!.scrollLeft = scrollStartX.current - dx;
   };
 
