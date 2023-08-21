@@ -79,8 +79,8 @@ const SideBar = () => {
                 (pathname.includes(link.route) && link.route.length > 1) ||
                 pathname === link.route;
               return (
-                <Link href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} duration-200  transition-all hover:translate-x-3 p-4 rounded-lg flex gap-3 text-xl items-center cursor-pointer`}>
-                  <link.icons className={`${isActive && (`fill-white`)}`}  />
+                <Link href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} duration-200  transition-all hover:translate-y-3 p-4 rounded-lg flex gap-3 text-xl items-center cursor-pointer`}>
+                  <link.icons className={`${isActive && (`fill-white`)}`} />
                   <li className="font-semibold  max-lg:hidden block">{link.name}</li>
                 </Link>
               )
@@ -104,7 +104,7 @@ const SideBar = () => {
           })}
           <div className="flex flex-col cursor-pointer relative items-center
            gap-3 text-sm w-24 p-2 rounded-lg duration-200 transition-all" onClick={() => setExpand(!expand)} >
-            <Diff/>
+            <Diff />
             <h1>{
               expand ? "Show Less" : "Show More"}</h1>
           </div>

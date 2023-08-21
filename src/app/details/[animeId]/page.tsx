@@ -1,4 +1,4 @@
-import Image from 'next/image';
+
 import ServerError from '@/components/error/ServerError';
 import RelationCard from '@/components/shared/RelationCard'
 import React, { Suspense } from 'react'
@@ -30,7 +30,7 @@ export default async function page({ params }: {
   return (
     <section className='flex flex-col p-4 mt-4 overflow-hidden pb-40'>
       <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
-        <Image height={200} width={400} src={details.image} className=' w-48 lg:w-72 rounded-lg' alt={`an image of ${details.title.romaji || details.title.english || details.title.native}`} />
+        <img height={200} width={400} src={details.image} className=' w-48 lg:w-72 rounded-lg' alt={`an image of ${details.title.romaji || details.title.english || details.title.native}`} />
         <div className="flex flex-col gap-5 items-center md:items-start">
           <h1 className='md:text-4xl lg:text-5xl text-2xl font-bold text-center md:text-left'>
             {details.title.romaji || details.title.english || details.title.native}
@@ -73,8 +73,8 @@ export default async function page({ params }: {
         <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
           <SpinLoading />
         </div>}>
-           <h1 className=' text-4xl font-semibold'>Episodes</h1>
-           <EpisodeLists listData={details.episodes}/>
+          <h1 className=' text-4xl font-semibold'>Episodes</h1>
+          <EpisodeLists listData={details.episodes} />
         </Suspense>
       </div>
     </section>
