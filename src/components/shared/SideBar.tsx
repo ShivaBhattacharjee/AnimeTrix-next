@@ -73,7 +73,7 @@ const SideBar = () => {
         <div className={` w-64 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
           <div className={`flex gap-5 p-6 text-2xl items-center`}>
           </div>
-          <nav className="flex flex-col  justify-between p-2 gap-5 max-lg:mt-24">
+          <nav className="flex flex-col  justify-between p-2 gap-5 max-lg:mt-10">
             {NavItems.map((link) => {
               const isActive =
                 (pathname.includes(link.route) && link.route.length > 1) ||

@@ -110,7 +110,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                   alt={`an image of ${anime.title.userPreferred || anime.title.english || anime.title.romaji || anime.title.native
                     }`}
                   className='rounded-lg hover:scale-105 duration-200 h-52 lg:h-64 '
-                  draggable='false'
+                  draggable={false}
                   loading='lazy'
                   height={400}
                   width={200}

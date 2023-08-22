@@ -65,16 +65,15 @@ export default async function page({ params }: {
         <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
           <SpinLoading />
         </div>}>
-          <RelationCard id={params.animeId} />
+          <h1 className=' text-4xl font-semibold'>Episodes</h1>
+          <EpisodeLists listData={details.episodes} />
         </Suspense>
       </div>
-
       <div className='mt-7 flex flex-col gap-5'>
         <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
           <SpinLoading />
         </div>}>
-          <h1 className=' text-4xl font-semibold'>Episodes</h1>
-          <EpisodeLists listData={details.episodes} />
+          <RelationCard id={params.animeId} />
         </Suspense>
       </div>
     </section>
