@@ -65,7 +65,6 @@ export default async function page({ params }: {
         <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
           <SpinLoading />
         </div>}>
-          <h1 className=' text-4xl font-semibold'>Episodes</h1>
           <EpisodeLists listData={details.episodes} />
         </Suspense>
       </div>
