@@ -45,9 +45,11 @@ export default async function page({ params }: {
             <span className='flex items-center gap-3'>{details.rating && (`${details.rating}%`)}</span>
           </div>
           <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
-            <button className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
-              <Play />Watch Now
-            </button>
+            {details.episodes.length > 0 && (
+              <button className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
+                <Play />Watch Now
+              </button>
+            )}
             <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
               <Bookmark />Bookmark</button>
           </div>
