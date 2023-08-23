@@ -2,23 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
     list-style-type: none;
     -webkit-tap-highlight-color: transparent;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
     display: none;
 }
-::-webkit-scrollbar-thumb{
+
+::-webkit-scrollbar-thumb {
     background: white;
     border-radius: 14px;
 
 }
 
-::selection{
+::selection {
     background-color: #fff;
     color: #000;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
 }
