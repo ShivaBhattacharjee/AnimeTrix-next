@@ -27,11 +27,11 @@ export default async function page({ params }: {
       <ServerError />
     );
   }
-  const airingDate = new Date(details.nextAiringEpisode.airingTime * 1000);
-  const options = {
+  const airingDate = new Date(details.nextAiringEpisode.timeUntilAiring * 1000);
+  const options: Intl.DateTimeFormatOptions = {
     year: undefined,
     month: 'long',
-    day: 'numeric',
+    day: '2-digit',
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
