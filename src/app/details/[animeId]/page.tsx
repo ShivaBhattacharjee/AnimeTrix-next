@@ -27,7 +27,7 @@ export default async function page({ params }: {
       <ServerError />
     );
   }
-  const airingDate = new Date(details.nextAiringEpisode.timeUntilAiring * 1000);
+  const airingDate = new Date(details?.nextAiringEpisode?.timeUntilAiring * 1000);
   const options: Intl.DateTimeFormatOptions = {
     year: undefined,
     month: 'long',
@@ -81,7 +81,7 @@ export default async function page({ params }: {
         </div>}>
           {details.nextAiringEpisode !== undefined && (
             <h1 className='bg-white text-black lg:w-96 w-full text-xl  font-bold text-center p-3 rounded-lg'>
-              Episode {details?.nextAiringEpisode?.episode} will at {formattedAiringDate}
+              Episode {details?.nextAiringEpisode?.episode} will air in {formattedAiringDate}
             </h1>
           )}
           <EpisodeLists listData={details.episodes} />
