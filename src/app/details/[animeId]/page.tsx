@@ -27,6 +27,17 @@ export default async function page({ params }: {
       <ServerError />
     );
   }
+  const airingDate = new Date(details.nextAiringEpisode.airingTime * 1000);
+  const options = {
+    year: undefined,
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  };
+  const formattedAiringDate = airingDate.toLocaleDateString(undefined, options);
+
   return (
     <section className='flex flex-col p-4 mt-4 overflow-hidden pb-40'>
       <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
@@ -68,6 +79,11 @@ export default async function page({ params }: {
         <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
           <SpinLoading />
         </div>}>
+          {details.nextAiringEpisode !== undefined && (
+            <h1 className='bg-white text-black lg:w-96 w-full text-xl  font-bold text-center p-3 rounded-lg'>
+              Episode {details?.nextAiringEpisode?.episode} will at {formattedAiringDate}
+            </h1>
+          )}
           <EpisodeLists listData={details.episodes} />
         </Suspense>
       </div>

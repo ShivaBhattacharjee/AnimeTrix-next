@@ -43,7 +43,9 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData }) => {
   return (
     <>
       <div className="flex justify-between items-center flex-wrap gap-6">
-        <h1 className='text-4xl font-semibold'>Episodes</h1>
+        <div className="flex items-center flex-wrap gap-5">
+          <h1 className='text-4xl font-semibold'>Episodes</h1>
+        </div>
         <div className='flex items-center'>
           <input
             type="number"
