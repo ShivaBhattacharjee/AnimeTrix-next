@@ -1,11 +1,11 @@
 
 import ServerError from '@/components/error/ServerError';
-import RelationCard from '@/components/shared/RelationCard'
+import RelationCard from '@/components/shared/cards/RelationCard'
 import React, { Suspense } from 'react'
 import { FileX, Play, Bookmark } from 'lucide-react';
 import { Metadata } from 'next'
 import SpinLoading from '@/components/loading/SpinLoading';
-import EpisodeLists from '@/components/shared/EpisodeLists';
+import EpisodeLists from '@/components/shared/cards/EpisodeLists';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -53,6 +53,7 @@ export default async function page({ params }: {
             <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
               <Bookmark />Bookmark</button>
           </div>
+
           {
             details?.description && (
               <div className='max-w-4xl bg-white/10 border-2 border-white/30  

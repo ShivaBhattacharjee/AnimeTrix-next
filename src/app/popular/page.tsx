@@ -1,5 +1,5 @@
 import ServerError from '@/components/error/ServerError';
-import VerticalCards from '@/components/shared/VerticalCards';
+import VerticalCards from '@/components/shared/cards/VerticalCards';
 import React from 'react'
 const getPopularAnime = async () => {
   try {

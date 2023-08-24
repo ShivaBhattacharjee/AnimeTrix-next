@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import Slider from '../components/shared/Slider'
 import Link from "next/link"
-import Cards from '@/components/shared/Cards';
+import Cards from '@/components/shared/cards/Cards';
 import AiringSchedule from '@/components/shared/AiringSchedule';
 import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading"
 import UpcomingSeason from '@/components/shared/UpcomingSeason';

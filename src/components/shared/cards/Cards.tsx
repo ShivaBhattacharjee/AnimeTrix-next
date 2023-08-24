@@ -1,7 +1,7 @@
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
-import ReloadFunc from '../error/ReloadFunc';
+import ReloadFunc from '../../error/ReloadFunc';
 import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 
 interface Anime {
