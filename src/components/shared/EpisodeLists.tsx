@@ -1,7 +1,6 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Frown } from "lucide-react";
-
 interface Anime {
   image: string;
   number: number;
@@ -14,30 +13,63 @@ interface EpisodeListsProps {
 
 const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData }) => {
   const [filterValue, setFilterValue] = useState<string>("");
+  const [selectedRange, setSelectedRange] = useState<string>("1-100");
 
-  const filteredEpisodes = listData.filter(anime => {
+  const episodeRanges = useMemo(() => {
+    const numEpisodes = listData.length;
+    const rangeCount = Math.ceil(numEpisodes / 100);
+    const ranges = [];
+
+    for (let i = 0; i < rangeCount; i++) {
+      const start = i * 100 + 1;
+      const end = Math.min((i + 1) * 100, numEpisodes);
+      ranges.push(`${start}-${end}`);
+    }
+
+    return ranges;
+  }, [listData]);
+
+  const displayedEpisodes = listData.filter(anime => {
     if (filterValue === "") {
-      return true;
+      const [start, end] = selectedRange.split('-').map(Number);
+      return anime.number >= start && anime.number <= end;
     } else {
       return anime.number.toString().includes(filterValue);
     }
   });
 
+  const showSelect = listData.length > 100;
+
   return (
     <>
       <div className="flex justify-between items-center flex-wrap gap-6">
         <h1 className='text-4xl font-semibold'>Episodes</h1>
-        <input
-          type="number"
-          placeholder='Search Episodes'
-          className='bg-transparent border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none'
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-        />
+        <div className='flex items-center'>
+          <input
+            type="number"
+            placeholder='Search Episodes'
+            className='bg-transparent border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none'
+            value={filterValue}
+            onChange={(e) => setFilterValue(e.target.value)}
+          />
+          {showSelect && (
+            <select
+              className='p-2 bg-transparent border-2 border-white rounded-lg'
+              value={selectedRange}
+              onChange={(e) => setSelectedRange(e.target.value)}
+            >
+              {episodeRanges.map(range => (
+                <option key={range} value={range}>
+                  {range}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
       </div>
-      {filteredEpisodes.length > 0 ? (
+      {displayedEpisodes.length > 0 ? (
         <div className='grid gap-4 max-h-64 overflow-y-scroll grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6'>
-          {filteredEpisodes
+          {displayedEpisodes
             .sort((animeA, animeB) => animeA.number - animeB.number)
             .map((anime, index) => (
               <div className='bg-white/20 duration-200 border-white/20 hover:border-2 hover:scale-90 rounded-lg flex flex-col gap-3' key={index}>
