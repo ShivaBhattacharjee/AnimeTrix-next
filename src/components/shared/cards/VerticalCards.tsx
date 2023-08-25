@@ -1,19 +1,6 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-
-interface Anime {
-  image: string;
-  id: number;
-  title: {
-    userPreferred?: string;
-    english?: string;
-    romaji?: string;
-    native?: string;
-  };
-  status: string;
-  totalEpisodes: number
-}
+import Anime from '@/types/animetypes'
 
 interface VerticalCardsProps {
   title: string;

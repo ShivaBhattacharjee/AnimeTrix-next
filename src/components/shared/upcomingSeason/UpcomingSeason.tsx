@@ -1,20 +1,6 @@
 import React from 'react';
 import UpcomingSeasonCard from './UpcomingSeasonCard';
-
-interface Anime {
-    id: number;
-    image: string;
-    title: {
-        userPreferred?: string;
-        english?: string;
-        romaji?: string;
-        native?: string;
-    };
-    countryOfOrigin: string;
-    type: string;
-    genres: string[];
-}
-
+import Anime from '@/types/animetypes';
 const getCurrentYear = () => {
     return new Date().getFullYear();
 };

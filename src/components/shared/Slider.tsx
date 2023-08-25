@@ -8,15 +8,10 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import ReloadFunc from '../error/ReloadFunc';
 import Link from 'next/link';
-
-interface AnimeData {
-  id: number;
-  title: string;
-  coverImage: string;
-}
+import Anime from '@/types/animetypes';
 
 interface SliderProps {
-  posts: AnimeData[];
+  posts: Anime[];
 }
 const Slider: React.FC<SliderProps> = ({ posts }) => {
   const progressCircle = useRef<SVGSVGElement>(null!);

@@ -2,7 +2,7 @@
 import ServerError from '@/components/error/ServerError';
 import RelationCard from '@/components/shared/cards/RelationCard'
 import React, { Suspense } from 'react'
-import { FileX, Play, Bookmark } from 'lucide-react';
+import { Play, Bookmark } from 'lucide-react';
 import { Metadata } from 'next'
 import SpinLoading from '@/components/loading/SpinLoading';
 import EpisodeLists from '@/components/shared/cards/EpisodeLists';

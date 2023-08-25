@@ -1,20 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import ReloadFunc from '../../error/ReloadFunc';
-
-interface Anime {
-    id: number;
-    image: string;
-    title: {
-        userPreferred?: string;
-        english?: string;
-        romaji?: string;
-        native?: string;
-    };
-    countryOfOrigin: string;
-    type: string;
-    genres: string[];
-}
+import Anime from '@/types/animetypes';
 
 interface UpcomingSeasonCardProps {
     props: Anime[];

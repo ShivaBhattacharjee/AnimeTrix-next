@@ -2,20 +2,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import ReloadFunc from '../../error/ReloadFunc';
-import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
+import Anime from '@/types/animetypes';
 
-interface Anime {
-  image: string;
-  id: number;
-  title: {
-    userPreferred?: string;
-    english?: string;
-    romaji?: string;
-    native?: string;
-  };
-  totalEpisodes: number;
-  status: string;
-}
+
 
 interface CardsProps {
   props: Anime[];
