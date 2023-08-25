@@ -1,11 +1,7 @@
 "use client"
 import React, { useState, useMemo } from 'react';
 import { Frown } from "lucide-react";
-interface Anime {
-  image: string;
-  number: number;
-  title: string;
-}
+import Anime from '@/types/animetypes';
 
 interface EpisodeListsProps {
   listData: Anime[];

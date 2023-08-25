@@ -13,4 +13,5 @@ export default interface Anime {
     totalEpisodes: number;
     status: string;
     relationType: string;
+    number: number;
 }

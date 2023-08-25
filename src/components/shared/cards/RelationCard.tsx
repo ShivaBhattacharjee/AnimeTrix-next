@@ -2,6 +2,7 @@
 import React from 'react'
 import Link from 'next/link';
 import Anime from '@/types/animetypes';
+import AnimeApi from '@/lib/animetrixapi';
 
 interface Props {
     id: number;
@@ -9,7 +10,7 @@ interface Props {
 export default async function RelationCard({ id }: Props) {
     const getRelationDetails = async () => {
         try {
-            const response = await fetch(`https://animetrix-api.vercel.app/meta/anilist/info/${id}`);
+            const response = await fetch(`${AnimeApi}/info/${id}`);
             const data = await response.json();
             return data.relations;
         } catch (error) {

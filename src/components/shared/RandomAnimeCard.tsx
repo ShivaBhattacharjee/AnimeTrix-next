@@ -1,18 +1,18 @@
 import React from 'react';
 import ReloadFunc from '../error/ReloadFunc';
-import Image from 'next/image';
 import Link from 'next/link';
+import AnimeApi from '@/lib/animetrixapi';
 const getRandomAnime = async () => {
     try {
-        const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/random-anime", {
+        const response = await fetch(`${AnimeApi}/random-anime`, {
             cache: "no-store"
         });
 
-        const data = await response.json(); // Parse the response JSON
+        const data = await response.json();
         return data;
     } catch (error) {
         console.error("Error fetching random anime:", error);
-        return null; // Return null on error
+        return null;
     }
 };
 

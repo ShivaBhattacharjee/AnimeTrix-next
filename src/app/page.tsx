@@ -8,9 +8,10 @@ import UpcomingSeason from '@/components/shared/upcomingSeason/UpcomingSeason';
 import { RandomAnimeCard } from "@/components/shared/RandomAnimeCard"
 import { UpcomingSeasonLoading } from '@/components/loading/UpcomingSeasonLoading';
 import RandomAnimeLoading from '@/components/loading/RandomAnimeLoading';
+import AnimeApi from '@/lib/animetrixapi';
 const getTrendingAnime = async () => {
   try {
-    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/trending?perPage=20");
+    const response = await fetch(`${AnimeApi}/trending?perPage=20`);
     const data = await response.json();
     return data.results;
   } catch (error) {
@@ -20,7 +21,7 @@ const getTrendingAnime = async () => {
 };
 const getPopularAnime = async () => {
   try {
-    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/popular?perPage=20");
+    const response = await fetch(`${AnimeApi}/popular?perPage=20`);
     const data = await response.json();
     return data.results;
   } catch (error) {

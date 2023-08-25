@@ -1,9 +1,10 @@
 import ServerError from '@/components/error/ServerError';
 import VerticalCards from '@/components/shared/cards/VerticalCards';
+import AnimeApi from '@/lib/animetrixapi';
 import React from 'react'
 const getAnimeMovies = async () => {
   try {
-    const response = await fetch("https://animetrix-api.vercel.app/meta/anilist/MOVIE?perPage=24");
+    const response = await fetch(`${AnimeApi}/MOVIE?perPage=24`);
     const data = await response.json();
     return data.results;
   } catch (error) {

@@ -1,13 +1,14 @@
 import React from 'react';
 import UpcomingSeasonCard from './UpcomingSeasonCard';
 import Anime from '@/types/animetypes';
+import AnimeApi from '@/lib/animetrixapi';
 const getCurrentYear = () => {
     return new Date().getFullYear();
 };
 
 const getAnimeData = async (season: string): Promise<Anime[]> => {
     try {
-        const response = await fetch(`https://animetrix-api.vercel.app/meta/anilist/advanced-search?season=${season}&&year=${getCurrentYear()}`);
+        const response = await fetch(`${AnimeApi}/advanced-search?season=${season}&&year=${getCurrentYear()}`);
         const data = await response.json();
         return data.results;
     } catch (error) {
