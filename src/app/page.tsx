@@ -2,9 +2,9 @@ import React, { Suspense } from 'react'
 import Slider from '../components/shared/Slider'
 import Link from "next/link"
 import Cards from '@/components/shared/cards/Cards';
-import AiringSchedule from '@/components/shared/AiringSchedule';
+import AiringSchedule from '@/components/shared/airingschedule/AiringSchedule';
 import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading"
-import UpcomingSeason from '@/components/shared/UpcomingSeason';
+import UpcomingSeason from '@/components/shared/upcomingSeason/UpcomingSeason';
 import { RandomAnimeCard } from "@/components/shared/RandomAnimeCard"
 import { UpcomingSeasonLoading } from '@/components/loading/UpcomingSeasonLoading';
 import RandomAnimeLoading from '@/components/loading/RandomAnimeLoading';

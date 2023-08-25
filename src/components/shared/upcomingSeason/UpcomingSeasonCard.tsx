@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import ReloadFunc from '../error/ReloadFunc';
+import ReloadFunc from '../../error/ReloadFunc';
 
 interface Anime {
     id: number;

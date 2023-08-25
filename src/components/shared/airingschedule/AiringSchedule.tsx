@@ -3,8 +3,8 @@ import AiringScheduleCard from './AiringScheduleCard';
 
 const getAiringSchedule = async () => {
     try {
-        const response = await fetch(`https://api.anify.tv/schedule?apikey=${process.env.NEXT_PUBLIC_ANIFY_KEY}`,{
-            cache : 'no-cache'
+        const response = await fetch(`https://api.anify.tv/schedule?apikey=${process.env.NEXT_PUBLIC_ANIFY_KEY}`, {
+            cache: 'no-cache'
         });
         return response.json();
     } catch (error) {
@@ -18,7 +18,7 @@ export default async function AiringSchedule() {
     return (
         <div className='flex flex-col mt-9'>
             <h1 className='text-3xl lg:text-5xl font-bold'>Airing Schedule</h1>
-            <AiringScheduleCard airingData={Airing}/>
+            <AiringScheduleCard airingData={Airing} />
         </div>
     );
 };
