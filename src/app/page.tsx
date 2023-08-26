@@ -8,7 +8,7 @@ import UpcomingSeason from '@/components/shared/upcomingSeason/UpcomingSeason';
 import { RandomAnimeCard } from "@/components/shared/RandomAnimeCard"
 import { UpcomingSeasonLoading } from '@/components/loading/UpcomingSeasonLoading';
 import RandomAnimeLoading from '@/components/loading/RandomAnimeLoading';
-import AnimeApi from '@/lib/animetrixapi';
+import AnimeApi from '@/lib/animeapi/animetrixapi';
 const getTrendingAnime = async () => {
   try {
     const response = await fetch(`${AnimeApi}/trending?perPage=20`);

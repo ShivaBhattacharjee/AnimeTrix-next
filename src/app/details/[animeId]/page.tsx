@@ -6,6 +6,8 @@ import { Play, Bookmark } from 'lucide-react';
 import { Metadata } from 'next'
 import SpinLoading from '@/components/loading/SpinLoading';
 import EpisodeLists from '@/components/shared/cards/EpisodeLists';
+import CharacterCard from '@/components/shared/cards/characterCard';
+import { RecommendedAnime } from '@/components/shared/RecommendedAnime';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -27,16 +29,30 @@ export default async function page({ params }: {
       <ServerError />
     );
   }
-  const airingDate = new Date(details?.nextAiringEpisode?.timeUntilAiring * 1000);
+
+  const airingDate = new Date(details?.nextAiringEpisode?.airingTime * 1000);
+
+  const getAbbreviatedMonth = (month: number): string => {
+    const abbreviatedMonths = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return abbreviatedMonths[month];
+  };
+
   const options: Intl.DateTimeFormatOptions = {
     year: undefined,
-    month: 'long',
+    month: 'numeric',
     day: '2-digit',
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
   };
-  const formattedAiringDate = airingDate.toLocaleDateString(undefined, options);
+
+  const formattedAiringDate = airingDate.toLocaleString(undefined, options);
+  const monthIndex = airingDate.getMonth();
+  const day = airingDate.getDate();
+  const time = formattedAiringDate.split(', ')[1];
+
+  const finalFormat = `${getAbbreviatedMonth(monthIndex)}/${day}, ${time}`;
+
 
   return (
     <section className='flex flex-col p-4 mt-4 overflow-hidden pb-40'>
@@ -80,8 +96,8 @@ export default async function page({ params }: {
           <SpinLoading />
         </div>}>
           {details.nextAiringEpisode !== undefined && (
-            <span className='bg-white text-black md:w-1/2 w-full text-xl  font-bold text-center p-3 rounded-lg'>
-              Episode {details?.nextAiringEpisode?.episode} will air in {formattedAiringDate}
+            <span className='bg-white text-xl text-black md:w-1/2 w-full   font-bold text-center p-3 rounded-lg'>
+              Episode {details?.nextAiringEpisode?.episode} will air in {finalFormat}
             </span>
           )}
           <EpisodeLists listData={details.episodes} />
@@ -94,7 +110,24 @@ export default async function page({ params }: {
           <RelationCard id={params.animeId} />
         </Suspense>
       </div>
+
+      <div className='mt-7 flex flex-col gap-5'>
+        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
+          <SpinLoading />
+        </div>}>
+          <CharacterCard characters={details.characters} />
+        </Suspense>
+      </div>
+
+      <div className='mt-7 flex flex-col gap-5'>
+        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
+          <SpinLoading />
+        </div>}>
+          <RecommendedAnime episode={params.animeId} />
+        </Suspense>
+      </div>
     </section>
+
   );
 }
 export const metadata: Metadata = {

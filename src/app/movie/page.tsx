@@ -1,6 +1,6 @@
 import ServerError from '@/components/error/ServerError';
 import VerticalCards from '@/components/shared/cards/VerticalCards';
-import AnimeApi from '@/lib/animetrixapi';
+import AnimeApi from '@/lib/animeapi/animetrixapi';
 import React from 'react'
 const getAnimeMovies = async () => {
   try {

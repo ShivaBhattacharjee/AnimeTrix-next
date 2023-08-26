@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link';
 import Anime from '@/types/animetypes';
-import AnimeApi from '@/lib/animetrixapi';
+import AnimeApi from '@/lib/animeapi/animetrixapi';
 
 interface Props {
     id: number;

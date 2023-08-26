@@ -7,7 +7,7 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-	background-color: rgb(203 213 225);
+  background-color: rgb(203 213 225);
 
   /* Center slide text vertically */
   display: flex;
@@ -66,9 +66,9 @@
     height: calc(100vh - 75vh);
   }
 }
+
 @media(max-width:380px) {
   .swiper {
     height: calc(100vh - 69vh);
   }
 }
-

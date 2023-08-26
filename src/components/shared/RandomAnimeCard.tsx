@@ -1,7 +1,7 @@
 import React from 'react';
 import ReloadFunc from '../error/ReloadFunc';
 import Link from 'next/link';
-import AnimeApi from '@/lib/animetrixapi';
+import AnimeApi from '@/lib/animeapi/animetrixapi';
 const getRandomAnime = async () => {
     try {
         const response = await fetch(`${AnimeApi}/random-anime`, {

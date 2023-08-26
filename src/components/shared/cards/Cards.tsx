@@ -111,7 +111,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             </span>
             <div className={`truncate w-32 lg:w-44 p-2 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center ${anime.totalEpisodes !== null && anime.totalEpisodes !== undefined ? 'green' : 'red'}`}>
               {anime.status === 'Ongoing' && <div className='w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500'></div>}
-              <span>Ep: {anime.totalEpisodes || 0}</span>
+              <span>Ep: {anime?.totalEpisodes || anime?.episodes || 0}</span>
             </div>
           </div>
         ))

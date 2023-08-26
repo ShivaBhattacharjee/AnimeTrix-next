@@ -14,7 +14,7 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
       <div
         className='grid grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4  2xl:grid-cols-6 items-center lg:p-5 mt-8 overflow-hidden'
       >
-        {data.map((anime) => {
+        {data?.map((anime) => {
           return (
             <div key={anime.id} className=' border-2 border-white/30 card-img rounded-lg'> {/* Add a unique key for each mapped element */}
               <Link href={`/details/${anime.id}`} className='content-normal overflow-hidden w-full h-full'>

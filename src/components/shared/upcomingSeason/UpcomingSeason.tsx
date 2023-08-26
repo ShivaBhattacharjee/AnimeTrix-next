@@ -1,7 +1,7 @@
 import React from 'react';
 import UpcomingSeasonCard from './UpcomingSeasonCard';
 import Anime from '@/types/animetypes';
-import AnimeApi from '@/lib/animetrixapi';
+import AnimeApi from '@/lib/animeapi/animetrixapi';
 const getCurrentYear = () => {
     return new Date().getFullYear();
 };
