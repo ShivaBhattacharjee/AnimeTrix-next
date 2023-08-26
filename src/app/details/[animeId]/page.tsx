@@ -4,10 +4,13 @@ import RelationCard from '@/components/shared/cards/RelationCard'
 import React, { Suspense } from 'react'
 import { Play, Bookmark } from 'lucide-react';
 import { Metadata } from 'next'
-import SpinLoading from '@/components/loading/SpinLoading';
 import EpisodeLists from '@/components/shared/cards/EpisodeLists';
 import CharacterCard from '@/components/shared/cards/characterCard';
 import { RecommendedAnime } from '@/components/shared/RecommendedAnime';
+import EpisodeLoading from '@/components/loading/EpisodeLoading';
+import RelationLoading from '@/components/loading/RelationLoading';
+import CharactersLoading from '@/components/loading/CharactersLoading';
+import RecommendedLoading from '@/components/loading/RecommendedLoading';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -92,9 +95,8 @@ export default async function page({ params }: {
         </div>
       </div>
       <div className='mt-7 flex flex-col gap-5'>
-        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
-          <SpinLoading />
-        </div>}>
+        <Suspense fallback={
+          <EpisodeLoading />}>
           {details.nextAiringEpisode !== undefined && (
             <span className='bg-white text-xl text-black md:w-1/2 w-full   font-bold text-center p-3 rounded-lg'>
               Episode {details?.nextAiringEpisode?.episode} will air in {finalFormat}
@@ -104,25 +106,19 @@ export default async function page({ params }: {
         </Suspense>
       </div>
       <div className='mt-7 flex flex-col gap-5'>
-        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
-          <SpinLoading />
-        </div>}>
+        <Suspense fallback={<RelationLoading />}>
           <RelationCard id={params.animeId} />
         </Suspense>
       </div>
 
       <div className='mt-7 flex flex-col gap-5'>
-        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
-          <SpinLoading />
-        </div>}>
+        <Suspense fallback={<CharactersLoading />}>
           <CharacterCard characters={details.characters} />
         </Suspense>
       </div>
 
       <div className='mt-7 flex flex-col gap-5'>
-        <Suspense fallback={<div className='flex mt-5 justify-center items-center'>
-          <SpinLoading />
-        </div>}>
+        <Suspense fallback={<RecommendedLoading />}>
           <RecommendedAnime episode={params.animeId} />
         </Suspense>
       </div>

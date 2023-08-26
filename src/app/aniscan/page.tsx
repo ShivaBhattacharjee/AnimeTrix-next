@@ -2,7 +2,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>Hello world this is aniscan page written in vim</div>
+    <div className='flex items-center justify-center h-screen font-bold text-4xl'>Aniscan coming soon</div>
   )
 }
 

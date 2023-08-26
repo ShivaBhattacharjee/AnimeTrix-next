@@ -6,10 +6,10 @@ export default interface Anime {
     description: string;
     color: string;
     title: {
-        userPreferred?: string;
-        english?: string;
-        romaji?: string;
-        native?: string;
+        userPreferred: string;
+        english: string;
+        romaji: string;
+        native: string;
     };
     countryOfOrigin: string;
     type: string;
