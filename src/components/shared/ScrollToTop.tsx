@@ -21,10 +21,10 @@ const ScrollToTop = () => {
             }
         };
 
-        if (typeof window !== 'undefined') {
-            window.addEventListener('scroll', listenToScroll);
-            return () => window.removeEventListener('scroll', listenToScroll);
-        }
+        window.addEventListener('scroll', listenToScroll);
+        return () => {
+            window.removeEventListener('scroll', listenToScroll);
+        };
     }, []);
 
     return (

@@ -1,6 +1,5 @@
 import React from 'react';
 import Anime from '@/types/animetypes';
-import { Frown } from 'lucide-react';
 import ContentNotFound from '@/components/error/Contentnotfound';
 
 export default function CharacterCard({ characters }: { characters: Anime[] }) {
