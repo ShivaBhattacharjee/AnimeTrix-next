@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -12,17 +12,14 @@ import Anime from '@/types/animetypes';
 interface SliderProps {
   posts: Anime[];
 }
+interface SwiperInstance {
+  slideNext: () => void;
+  slidePrev: () => void;
+}
 const Slider: React.FC<SliderProps> = ({ posts }) => {
-  const progressCircle = useRef<SVGSVGElement>(null!);
-  const progressContent = useRef<HTMLElement>(null!);
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  ;
+  const [swiperInstance, setSwiperInstance] = useState<SwiperInstance | null>();
 
-  const onAutoplayTimeLeft = (s: any, time: any, progress: any) => {
-    progressCircle.current?.style.setProperty('--progress', String(1 - progress));
-    if (progressContent.current) {
-      progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-    }
-  };
 
   const goNext = () => {
     if (swiperInstance) {
@@ -36,7 +33,7 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
     }
   };
 
-  const saveSwiperInstance = (swiper: any) => {
+  const saveSwiperInstance = (swiper: SwiperInstance) => {
     setSwiperInstance(swiper);
   };
 
@@ -70,13 +67,12 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
         }}
         navigation={true}
         modules={[Autoplay]}
-        onAutoplayTimeLeft={onAutoplayTimeLeft}
         className='mySwiper'
         onSwiper={saveSwiperInstance}
       >
         {
           posts.length > 0 ? (
-            posts.map((popular: any) => (
+            posts.map((popular: Anime) => (
               <SwiperSlide key={popular.id}>
                 <img
                   src={popular.cover}
@@ -92,7 +88,7 @@ const Slider: React.FC<SliderProps> = ({ posts }) => {
                     <p className='text-lg hidden 2xl:block max-h-40 overflow-hidden truncate '
                       dangerouslySetInnerHTML={{ __html: popular.description }}>
                     </p>
-                    <Link href={`/details/${popular.id}`} className={`bg-white/5 text-center shadow-sm border-2 border-[${popular.color}] backdrop-blur-2xl lg:w-44
+                    <Link href={`/details/${popular.id}`} className={`bg-white/5 text-center shadow-sm border-2 border-white backdrop-blur-2xl lg:w-44
              lg:p-3 2xl:w-52 
              2xl:p-4 lg:text-2xl lg:mt-8  p-3 w-32 text-sm rounded-lg`}>Watch Now</Link>
                   </div>

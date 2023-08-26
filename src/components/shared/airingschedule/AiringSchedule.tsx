@@ -21,4 +21,4 @@ export default async function AiringSchedule() {
             <AiringScheduleCard airingData={Airing} />
         </div>
     );
-};
+}

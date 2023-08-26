@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import ReloadFunc from '../../error/ReloadFunc';
 import Anime from '@/types/animetypes';
@@ -86,7 +86,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
       style={{ userSelect: isDragging.current ? 'none' : 'auto' }}
     >
       {props.length > 0 ? (
-        props.map((anime, index) => (
+        props.map((anime) => (
           <div
             key={anime.id}
             className='flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab'
@@ -106,12 +106,12 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                 />
               </div>
             </Link>
-            <span className='truncate w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize'>
+            <span className='truncate font-semibold w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize'>
               {anime.title.userPreferred || anime.title.english || anime.title.romaji || anime.title.native?.toLowerCase()}
             </span>
             <div className={`truncate w-32 lg:w-44 p-2 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center ${anime.totalEpisodes !== null && anime.totalEpisodes !== undefined ? 'green' : 'red'}`}>
               {anime.status === 'Ongoing' && <div className='w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500'></div>}
-              <span>Ep: {anime?.totalEpisodes || anime?.episodes || 0}</span>
+              <span className=' font-semibold'>Ep: {anime?.totalEpisodes || anime?.episodes || 0}</span>
             </div>
           </div>
         ))

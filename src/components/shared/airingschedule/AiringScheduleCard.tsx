@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react';
 import { FastForward, Rewind, PlayCircle } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 interface Anime {
     id: string;
@@ -60,7 +59,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                 <div className="flex flex-col gap-3">
                     <div className='p-4'>
                         <div className='flex flex-col gap-3'>
-                            {animeForCurrentDay?.length <= 0 ? (
+                            {animeForCurrentDay?.length < 0 ? (
                                 <div className='text-white text-center'>Oops! No schedule found for {currentDay}</div>
                             ) : (
                                 animeForCurrentDay?.map((anime: Anime) => (
