@@ -17,7 +17,6 @@ interface SwiperInstance {
   slidePrev: () => void;
 }
 const Slider: React.FC<SliderProps> = ({ posts }) => {
-  ;
   const [swiperInstance, setSwiperInstance] = useState<SwiperInstance | null>();
 
 

@@ -32,7 +32,7 @@ export default function CharacterCard({ characters }: { characters: Anime[] }) {
                             </div>
                         ))}
                         {characters.map((anime: Anime) => (
-                            <div className="bg-white/10 hover:scale-75 duration-200 border-white/40 border-2 rounded-lg items-center p-4 flex justify-between">
+                            <div key={anime?.id} className="bg-white/10 hover:scale-75 duration-200 border-white/40 border-2 rounded-lg items-center p-4 flex justify-between">
                                 <div className='flex items-center gap-4'>
                                     <img src={anime.image} alt={`an image of ${anime?.name?.full}`} className=' w-20 rounded-lg' loading='lazy' />
                                     <div className=' flex gap-3 flex-col'>
