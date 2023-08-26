@@ -52,7 +52,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData }) => {
           />
           {showSelect && (
             <select
-              className='p-2 bg-transparent border-2 border-white rounded-lg'
+              className='p-2 bg-transparent border-2 focus:outline-none border-white rounded-lg'
               value={selectedRange}
               onChange={(e) => setSelectedRange(e.target.value)}
             >
