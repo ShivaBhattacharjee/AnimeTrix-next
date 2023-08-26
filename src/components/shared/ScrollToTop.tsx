@@ -21,11 +21,14 @@ const ScrollToTop = () => {
             }
         };
 
-        window.addEventListener('scroll', listenToScroll);
-        return () => {
-            window.removeEventListener('scroll', listenToScroll);
-        };
+        if (typeof globalThis !== 'undefined') {
+            globalThis.addEventListener('scroll', listenToScroll);
+            return () => {
+                globalThis.removeEventListener('scroll', listenToScroll);
+            };
+        }
     }, []);
+
 
     return (
         <>
