@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { FastForward, Rewind, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
+import ReloadFunc from '@/components/error/ReloadFunc';
 interface Anime {
     id: string;
     coverImage: string;
@@ -60,7 +61,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                     <div className='p-4'>
                         <div className='flex flex-col gap-3'>
                             {animeForCurrentDay === undefined ? (
-                                <h1 className='text-white text-center'>Oops! No schedule found for {currentDay}</h1>
+                                <ReloadFunc message={`Oops! No schedule found for ${currentDay}`} />
                             ) : (
                                 animeForCurrentDay?.map((anime: Anime) => (
                                     <div className='flex justify-between items-center' key={anime.id}>
