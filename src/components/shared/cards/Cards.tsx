@@ -43,14 +43,14 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     isDragging.current = true;
     dragStartX.current = event.touches[0].clientX;
-    scrollStartX.current = containerRef.current!.scrollLeft;
+    scrollStartX.current = (containerRef.current!.scrollLeft) * 10;
   };
 
   const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
     if (!isDragging.current) return;
 
     const touchDeltaX = event.touches[0].clientX - dragStartX.current;
-    const scrollIncrement = touchDeltaX * 2;
+    const scrollIncrement = touchDeltaX * 10;
 
     containerRef.current!.scrollLeft = scrollStartX.current - scrollIncrement;
   };
