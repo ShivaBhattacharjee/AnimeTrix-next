@@ -2,7 +2,7 @@ import { AnifyApi, AnimeApi } from "./animeapi/animetrixapi";
 // trending anime
 export const getTrendingAnime = async () => {
     try {
-        const response = await fetch(`${AnimeApi}/trending?perPage=20`);
+        const response = await fetch(`${AnimeApi}/trending?perPage=24`);
         const data = await response.json();
         return data.results;
     } catch (error) {
@@ -13,7 +13,7 @@ export const getTrendingAnime = async () => {
 // popular anime
 export const getPopularAnime = async () => {
     try {
-        const response = await fetch(`${AnimeApi}/popular?perPage=20`);
+        const response = await fetch(`${AnimeApi}/popular?perPage=24`);
         const data = await response.json();
         return data.results;
     } catch (error) {
