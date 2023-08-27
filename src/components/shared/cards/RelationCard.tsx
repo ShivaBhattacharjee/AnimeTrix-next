@@ -1,29 +1,27 @@
-
-import React from 'react'
-import Link from 'next/link';
-import Anime from '@/types/animetypes';
-import { getAnimeDetails } from '@/lib/GetAnime';
+import React from "react";
+import Link from "next/link";
+import Anime from "@/types/animetypes";
+import { getAnimeDetails } from "@/lib/AnimeFetch";
 
 interface Props {
     id: number;
 }
 export default async function RelationCard({ id }: Props) {
-    const details = await getAnimeDetails(id)
-    console.log(details)
+    const details = await getAnimeDetails(id);
+    console.log(details);
     return (
         <>
             {Object.keys(details.relations).length > 0 && (
-                <section className=' sticky bottom-0 top-0'>
-                    <h1 className='text-4xl font-semibold pl-2'>Relation</h1>
+                <section className=" sticky bottom-0 top-0">
+                    <h1 className="text-4xl font-semibold pl-2">Relation</h1>
                     <div className=" flex gap-4 overflow-x-auto duration-200 mt-9">
                         {details?.relations?.map((relation: Anime) => (
                             <div className="bg-white/10 flex items-center p-2 hover:cursor-pointer border-2 hover:scale-95 border-white/40 duration-200 rounded-lg" key={relation.id}>
                                 <Link href={`/details/${relation.id}`} className="flex w-80 lg:w-96">
-                                    <img src={relation.image} height={300} width={600} alt={`an image of ${relation.title.userPreferred || relation.title.romaji || relation.title.english || relation.title.native}`}
-                                        className=' w-28 h-40 aspect-square bg-cover rounded-lg ' />
+                                    <img src={relation.image} height={300} width={600} alt={`an image of ${relation.title.userPreferred || relation.title.romaji || relation.title.english || relation.title.native}`} className=" w-28 h-40 aspect-square bg-cover rounded-lg " />
                                     <div className="flex text-sm p-4 flex-col  gap-3 justify-center font-semibold">
                                         <span>{relation.relationType}</span>
-                                        <span className='font-normal'>{relation.title.userPreferred || relation.title.romaji || relation.title.english || relation.title.native}</span>
+                                        <span className="font-normal">{relation.title.userPreferred || relation.title.romaji || relation.title.english || relation.title.native}</span>
                                         <span>{relation.type}</span>
                                     </div>
                                 </Link>
@@ -33,7 +31,5 @@ export default async function RelationCard({ id }: Props) {
                 </section>
             )}
         </>
-    )
-
+    );
 }
-

@@ -37,7 +37,7 @@ export const getAnimeMovies = async () => {
 export const getRandomAnime = async () => {
     try {
         const response = await fetch(`${AnimeApi}/random-anime`, {
-            cache: "no-store"
+            cache: "no-store",
         });
 
         const data = await response.json();
@@ -52,14 +52,14 @@ export const getRandomAnime = async () => {
 export const getAiringSchedule = async () => {
     try {
         const response = await fetch(`${AnifyApi}/schedule?apikey=${process.env.NEXT_PUBLIC_ANIFY_KEY}`, {
-            cache: 'no-cache'
+            cache: "no-cache",
         });
         return response.json();
     } catch (error) {
         console.error("Error getting airing list: ", error);
         return [];
     }
-}
+};
 // upcoming seasons
 export const getCurrentYear = () => {
     return new Date().getFullYear();
@@ -86,4 +86,3 @@ export const getAnimeDetails = async (animeid: number) => {
         return [];
     }
 };
-

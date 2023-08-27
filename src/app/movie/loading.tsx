@@ -1,9 +1,7 @@
-import React from 'react'
-import LoadingSkeleton from '@/components/loading/LoadingSkeleton'
+import React from "react";
+import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 const loading = () => {
-  return (
-      <LoadingSkeleton title='Movies'/>
-  )
-}
+    return <LoadingSkeleton title="Movies" />;
+};
 
-export default loading
+export default loading;

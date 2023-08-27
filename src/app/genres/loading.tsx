@@ -1,10 +1,8 @@
-import LoadingSkeleton from '@/components/loading/LoadingSkeleton'
-import React from 'react'
+import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
+import React from "react";
 
 const loading = () => {
-    return (
-        <LoadingSkeleton title='Genre' />
-    )
-}
+    return <LoadingSkeleton title="Genre" />;
+};
 
-export default loading
+export default loading;
