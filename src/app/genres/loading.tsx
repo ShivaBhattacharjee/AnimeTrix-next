@@ -1,8 +1,9 @@
+import LoadingSkeleton from '@/components/loading/LoadingSkeleton'
 import React from 'react'
 
 const loading = () => {
     return (
-        <div>loading</div>
+        <LoadingSkeleton title='Genre' />
     )
 }
 

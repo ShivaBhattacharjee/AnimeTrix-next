@@ -1,5 +1,5 @@
 import React from 'react';
-import ReloadFunc from '../error/ReloadFunc';
+import ReloadFunc from '../../error/ReloadFunc';
 import Link from 'next/link';
 import { getRandomAnime } from '@/lib/GetAnime';
 getRandomAnime

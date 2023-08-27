@@ -2,12 +2,14 @@
 import React, { useState, useMemo } from 'react';
 import { Frown } from "lucide-react";
 import Anime from '@/types/animetypes';
+import Link from 'next/link';
 
 interface EpisodeListsProps {
   listData: Anime[];
+  animeId : number
 }
 
-const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData }) => {
+const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData,animeId }) => {
   const [filterValue, setFilterValue] = useState<string>("");
   const [selectedRange, setSelectedRange] = useState<string>("1-100");
 
@@ -38,7 +40,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center flex-wrap gap-6">
+      <div className="flex justify-between items-center flex-wrap gap-6" id='episodes'>
         <div className="flex items-center flex-wrap gap-5">
           <h1 className='text-4xl font-semibold'>Episodes</h1>
         </div>
@@ -70,10 +72,10 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData }) => {
           {displayedEpisodes
             .sort((animeA, animeB) => animeA.number - animeB.number)
             .map((anime, index) => (
-              <div className='bg-white/20 duration-200 border-white/20 hover:border-2 hover:scale-90 rounded-lg flex flex-col gap-3' key={index}>
+              <Link href={`/watch/${anime.id}/${animeId}`} className='bg-white/20 duration-200 border-white/20 hover:border-2 hover:scale-90 rounded-lg flex flex-col gap-3' key={index}>
                 <img src={anime.image} alt={`an image of ${anime.title}`} loading='lazy' className='rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40' height={200} width={400} />
                 <h1 className='text-center font-semibold mb-3'>Episode: {anime.number}</h1>
-              </div>
+              </Link>
             ))}
         </div>
       ) : (

@@ -12,6 +12,7 @@ import RelationLoading from '@/components/loading/RelationLoading';
 import CharactersLoading from '@/components/loading/CharactersLoading';
 import RecommendedLoading from '@/components/loading/RecommendedLoading';
 import { getAnimeDetails } from '@/lib/GetAnime';
+import Link from 'next/link';
 export default async function page({ params }: {
   params:
   { animeId: number }
@@ -67,9 +68,9 @@ export default async function page({ params }: {
           </div>
           <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
             {details.episodes.length > 0 && (
-              <button className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
+              <Link href={`#episodes`} className='bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95'>
                 <Play />Watch Now
-              </button>
+              </Link>
             )}
             <button className='flex p-4 border-2 items-center gap-3 font-semibold border-white rounded-lg duration-200 hover:scale-95'>
               <Bookmark />Bookmark</button>
@@ -93,7 +94,7 @@ export default async function page({ params }: {
               Episode {details?.nextAiringEpisode?.episode} will air in {finalFormat}
             </span>
           )}
-          <EpisodeLists listData={details.episodes} />
+          <EpisodeLists listData={details.episodes} animeId={params.animeId} />
         </Suspense>
       </div>
       <div className='mt-7 flex flex-col gap-5'>

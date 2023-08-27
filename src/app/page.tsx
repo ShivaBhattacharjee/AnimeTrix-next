@@ -5,7 +5,7 @@ import Cards from '@/components/shared/cards/Cards';
 import AiringSchedule from '@/components/shared/airingschedule/AiringSchedule';
 import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading"
 import UpcomingSeason from '@/components/shared/upcomingSeason/UpcomingSeason';
-import { RandomAnimeCard } from "@/components/shared/RandomAnimeCard"
+import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard"
 import { UpcomingSeasonLoading } from '@/components/loading/UpcomingSeasonLoading';
 import RandomAnimeLoading from '@/components/loading/RandomAnimeLoading';
 import { getTrendingAnime, getPopularAnime } from '@/lib/GetAnime';
