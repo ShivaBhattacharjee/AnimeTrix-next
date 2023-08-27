@@ -1,20 +1,8 @@
 import React from 'react';
 import ReloadFunc from '../error/ReloadFunc';
 import Link from 'next/link';
-import AnimeApi from '@/lib/animeapi/animetrixapi';
-const getRandomAnime = async () => {
-    try {
-        const response = await fetch(`${AnimeApi}/random-anime`, {
-            cache: "no-store"
-        });
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Error fetching random anime:", error);
-        return null;
-    }
-};
+import { getRandomAnime } from '@/lib/GetAnime';
+getRandomAnime
 
 export async function RandomAnimeCard() {
     const randomAnime = await getRandomAnime();

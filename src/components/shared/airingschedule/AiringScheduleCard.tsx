@@ -59,9 +59,11 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
             <div className="bg-white/10 h-auto max-h-[400px] md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
                 <div className="flex flex-col gap-3">
                     <div className='p-4'>
-                        <div className='flex flex-col gap-3'>
+                        <div className='flex flex-col gap-3 '>
                             {animeForCurrentDay === undefined ? (
-                                <ReloadFunc message={`Oops! No schedule found for ${currentDay}`} />
+                                <div className='flex justify-center items-center text-center'>
+                                    <ReloadFunc message={`Oops! No schedule found for ${currentDay}`} />
+                                </div>
                             ) : (
                                 animeForCurrentDay?.map((anime: Anime) => (
                                     <div className='flex justify-between items-center' key={anime.id}>

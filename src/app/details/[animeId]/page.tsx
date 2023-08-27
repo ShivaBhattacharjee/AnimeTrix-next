@@ -11,21 +11,12 @@ import EpisodeLoading from '@/components/loading/EpisodeLoading';
 import RelationLoading from '@/components/loading/RelationLoading';
 import CharactersLoading from '@/components/loading/CharactersLoading';
 import RecommendedLoading from '@/components/loading/RecommendedLoading';
+import { getAnimeDetails } from '@/lib/GetAnime';
 export default async function page({ params }: {
   params:
   { animeId: number }
 }) {
-  const getAnimeDetails = async () => {
-    try {
-      const response = await fetch(`https://animetrix-api.vercel.app/meta/anilist/info/${params.animeId}`);
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching details:", error);
-      return [];
-    }
-  };
-  const details = await getAnimeDetails()
+  const details = await getAnimeDetails(params.animeId)
 
   if (Object.keys(details).length === 0 || !details.title) {
     return (

@@ -1,25 +1,10 @@
 import React from 'react';
 import UpcomingSeasonCard from './UpcomingSeasonCard';
-import Anime from '@/types/animetypes';
-import AnimeApi from '@/lib/animeapi/animetrixapi';
-const getCurrentYear = () => {
-    return new Date().getFullYear();
-};
-
-const getAnimeData = async (season: string): Promise<Anime[]> => {
-    try {
-        const response = await fetch(`${AnimeApi}/advanced-search?season=${season}&&year=${getCurrentYear()}`);
-        const data = await response.json();
-        return data.results;
-    } catch (error) {
-        console.error("Error fetching recent anime:", error);
-        return [];
-    }
-};
+import { getUpcomingData, getCurrentYear } from '@/lib/GetAnime';
 
 export default async function UpcomingSeason() {
     const seasons = ['FALL', 'SUMMER', 'WINTER', 'SPRING'];
-    const animeDataPromises = seasons.map(season => getAnimeData(season));
+    const animeDataPromises = seasons.map(season => getUpcomingData(season));
     const animeDataResults = await Promise.all(animeDataPromises);
 
     return (

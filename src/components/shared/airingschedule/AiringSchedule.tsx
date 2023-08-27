@@ -1,17 +1,6 @@
 import React from 'react';
 import AiringScheduleCard from './AiringScheduleCard';
-
-const getAiringSchedule = async () => {
-    try {
-        const response = await fetch(`https://api.anify.tv/schedule?apikey=${process.env.NEXT_PUBLIC_ANIFY_KEY}`, {
-            cache: 'no-cache'
-        });
-        return response.json();
-    } catch (error) {
-        console.error("Error getting airing list: ", error);
-        return [];
-    }
-}
+import { getAiringSchedule } from '@/lib/GetAnime';
 
 export default async function AiringSchedule() {
     const Airing = await getAiringSchedule();

@@ -8,27 +8,7 @@ import UpcomingSeason from '@/components/shared/upcomingSeason/UpcomingSeason';
 import { RandomAnimeCard } from "@/components/shared/RandomAnimeCard"
 import { UpcomingSeasonLoading } from '@/components/loading/UpcomingSeasonLoading';
 import RandomAnimeLoading from '@/components/loading/RandomAnimeLoading';
-import AnimeApi from '@/lib/animeapi/animetrixapi';
-const getTrendingAnime = async () => {
-  try {
-    const response = await fetch(`${AnimeApi}/trending?perPage=20`);
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error("Error fetching trending anime:", error);
-    return [];
-  }
-};
-const getPopularAnime = async () => {
-  try {
-    const response = await fetch(`${AnimeApi}/popular?perPage=20`);
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error("Error fetching popular anime:", error);
-    return [];
-  }
-};
+import { getTrendingAnime, getPopularAnime } from '@/lib/GetAnime';
 
 export default async function page() {
   const Trending = await getTrendingAnime()
