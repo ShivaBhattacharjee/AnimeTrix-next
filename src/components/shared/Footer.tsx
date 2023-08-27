@@ -20,7 +20,7 @@ const Footer = () => {
                 <p className="text-sm text-center font-semibold m-auto max-w-4xl">AnimeTrix is not affiliated with or endorsed by any of the anime studios behind the creation of the anime presented on this site. This website is only an user interface presenting/linking various self-hosted files across the internet by other third-party providers for easy access. AnimeTrix never downloads the video from any source provider, link will be returned from the response hence it is completely not subjected to DMCA compliant.</p>
                 <div className="flex gap-6 pb-6">
                     {socialMediaLinks.map((link, index) => (
-                        <a key={index} href={link.url} target="_blank" className="duration-200 hover:scale-125">
+                        <a key={index} href={link.url} rel="noopener noreferrer" target="_blank" className="duration-200 hover:scale-125">
                             {link.icon}
                         </a>
                     ))}
