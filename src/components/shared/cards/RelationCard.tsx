@@ -2,31 +2,21 @@
 import React from 'react'
 import Link from 'next/link';
 import Anime from '@/types/animetypes';
-import AnimeApi from '@/lib/animeapi/animetrixapi';
+import { getAnimeDetails } from '@/lib/GetAnime';
 
 interface Props {
     id: number;
 }
 export default async function RelationCard({ id }: Props) {
-    const getRelationDetails = async () => {
-        try {
-            const response = await fetch(`${AnimeApi}/info/${id}`);
-            const data = await response.json();
-            return data.relations;
-        } catch (error) {
-            console.error("Error fetching details:", error);
-            return [];
-        }
-    };
-    const details = await getRelationDetails()
+    const details = await getAnimeDetails(id)
     console.log(details)
     return (
         <>
-            {Object.keys(details).length > 0 && (
+            {Object.keys(details.relations).length > 0 && (
                 <section className=' sticky bottom-0 top-0'>
                     <h1 className='text-4xl font-semibold pl-2'>Relation</h1>
                     <div className=" flex gap-4 overflow-x-auto duration-200 mt-9">
-                        {details.map((relation: Anime) => (
+                        {details?.relations?.map((relation: Anime) => (
                             <div className="bg-white/10 flex items-center p-2 hover:cursor-pointer border-2 hover:scale-95 border-white/40 duration-200 rounded-lg" key={relation.id}>
                                 <Link href={`/details/${relation.id}`} className="flex w-80 lg:w-96">
                                     <img src={relation.image} height={300} width={600} alt={`an image of ${relation.title.userPreferred || relation.title.romaji || relation.title.english || relation.title.native}`}
