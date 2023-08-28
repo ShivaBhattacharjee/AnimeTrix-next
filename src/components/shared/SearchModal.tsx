@@ -17,11 +17,12 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
             }
         };
 
-        window.addEventListener("keydown", handleKeyDown);
-
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
+        if (typeof globalThis !== "undefined") {
+            globalThis.addEventListener("keydown", handleKeyDown);
+            return () => {
+                globalThis.removeEventListener("keydown", handleKeyDown);
+            };
+        }
     }, []);
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
