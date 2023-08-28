@@ -10,7 +10,7 @@ const Page = ({
 }) => {
     return (
         <div className="flex p-4 justify-center flex-col gap-4 items-center h-screen text-xl font-bold">
-            <p className=" truncate w-[90%]">Stream ID: {params.streamid}</p>
+            <p className=" truncate w-[90%] text-center">Stream ID: {params.streamid}</p>
             <p>Anime ID: {params.animeid}</p>
         </div>
     );

@@ -5,6 +5,7 @@ import SideBar from "../components/shared/navigation/SideBar";
 import TopNavbar from "../components/shared/navigation/TopNavbar";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import Footer from "@/components/shared/Footer";
+import SearchModal from "@/components/shared/SearchModal";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <TopNavbar />
                 <SideBar />
                 <ScrollToTop />
-                <main className="flex flex-col ml-0 md:ml-20 lg:ml-64 ">
+                <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-64 ">
                     {children}
                     <Footer />
                 </main>

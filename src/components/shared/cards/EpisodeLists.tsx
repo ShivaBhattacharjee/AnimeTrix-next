@@ -45,7 +45,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId }) => {
                     <h1 className="text-4xl font-semibold">Episodes</h1>
                 </div>
                 <div className="flex items-center">
-                    <input type="number" placeholder="Search Episodes......" className="bg-transparent border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
+                    <input type="number" placeholder="Search Episode No......" className="bg-transparent border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                     {showSelect && (
                         <select className="p-2 bg-transparent border-2 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
                             {episodeRanges.map((range) => (

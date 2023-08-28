@@ -1,4 +1,4 @@
-// anime data types change or add accordingly 
+// anime data types change or add accordingly
 export default interface Anime {
     id: number;
     image: string;
@@ -20,9 +20,10 @@ export default interface Anime {
     number: number;
     name: {
         first: string;
-        last: string
-        full: string
-    }
+        last: string;
+        full: string;
+    };
     role: string;
     episodes: number;
+    length: number;
 }
