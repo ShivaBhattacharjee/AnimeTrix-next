@@ -61,7 +61,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                             Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span>+ <span className=" bg-white text-black text-sm p-2 rounded-lg">Space</span>
                         </h1>
                         <input type="text" placeholder="I am looking for ......" className="border-2 border-white/40 bg-transparent  outline-none focus:outline-none p-4 w-full rounded-lg text-white" />
-                        <h1 className=" text-2xl font-semibold">Trending</h1>
+                        <h1 className=" text-2xl font-semibold text-white">Trending</h1>
                         <Suspense fallback={<SpinLoading />}>
                             <SearchCards results={trending} modalClose={handleModalClose} />
                         </Suspense>
