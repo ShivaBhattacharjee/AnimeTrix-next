@@ -7,6 +7,7 @@ import SpinLoading from "../loading/SpinLoading";
 const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
+    const [searchValue, setSearchValue] = useState<string>("");
     const closeSearchModal = () => {
         setOpenSearch(false);
     };
@@ -51,19 +52,52 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const handleModalClose = () => {
         setOpenSearch(!openSearch);
     };
+
+    const debounce = (func: Function, delay: number) => {
+        let timeoutId: NodeJS.Timeout;
+        return (...args: any[]) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                func(...args);
+            }, delay);
+        };
+    };
+
+    const debouncedSetSearchValue = useCallback(
+        debounce((value: string) => {
+            setSearchValue(value);
+        }, 800),
+        [],
+    );
+
     return (
         <>
             <Search className="cursor-pointer" onClick={() => setOpenSearch(!openSearch)} />
             <div className={`bg-black/80 overscroll-none w-screen backdrop-blur-xl h-screen fixed p-4 left-0 top-0 bottom-0 duration-200 right-0 ${openSearch ? "scale-100" : "scale-0"}`}>
                 <div className="flex h-screen items-center right-5 top-5">
                     <div className="bg-black border-2 border-white/40 h-96 overflow-y-scroll  gap-4 flex-col rounded-lg p-4 max-w-3xl m-auto w-screen text-black flex" ref={modalRef}>
-                        <h1 className="font-bold text-white text-lg flex gap-3 items-center">
+                        <h1 className="font-bold text-white text-lg flex gap-3 items-center ">
                             Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span>+ <span className=" bg-white text-black text-sm p-2 rounded-lg">Space</span>
                         </h1>
-                        <input type="text" placeholder="I am looking for ......" className="border-2 border-white/40 bg-transparent  outline-none focus:outline-none p-4 w-full rounded-lg text-white" />
-                        <h1 className=" text-2xl font-semibold text-white">Trending</h1>
-                        <Suspense fallback={<SpinLoading />}>
-                            <SearchCards results={trending} modalClose={handleModalClose} />
+                        <input type="search" placeholder="I am looking for ......" className="border-2 border-white/40 bg-black duration-200 sticky top-0 outline-none focus:outline-none p-4 w-full rounded-lg text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
+                        <Suspense
+                            fallback={
+                                <div className="flex justify-center items-center">
+                                    <SpinLoading />
+                                </div>
+                            }
+                        >
+                            {searchValue !== "" ? (
+                                <div>
+                                    <h1 className="text-white font-semibold text-lg">Search Results for {searchValue}</h1>
+                                </div>
+                            ) : (
+                                <>
+                                    {" "}
+                                    <h1 className=" text-2xl font-semibold text-white">Trending</h1>
+                                    <SearchCards Trendingresults={trending} modalClose={handleModalClose} />
+                                </>
+                            )}
                         </Suspense>
                     </div>
                 </div>

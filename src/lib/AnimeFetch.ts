@@ -75,6 +75,17 @@ export const getUpcomingData = async (season: string) => {
         return [];
     }
 };
+// get search results
+export const getSearchResults = async (query: string) => {
+    try {
+        const response = await fetch(`${AnimeApi}/${{ query }}`);
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.log("Error fetching anime details", error);
+        return [];
+    }
+};
 // get anime details
 export const getAnimeDetails = async (animeid: number) => {
     try {

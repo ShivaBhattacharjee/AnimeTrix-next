@@ -12,7 +12,7 @@ export default async function TopNavbar() {
                     Anime <span>Trix</span>
                 </Link>
                 <div className="flex justify-between items-center gap-4">
-                    {trendingPromise && <SearchModal trending={trendingPromise} />}
+                    <SearchModal trending={trendingPromise} />
                     <Link href={"/login"} className="bg-white text-black hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32">
                         Login
                     </Link>
