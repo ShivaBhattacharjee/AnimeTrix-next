@@ -76,7 +76,7 @@ export const getUpcomingData = async (season: string) => {
     }
 };
 // get search results
-export const getSearchResults = async (query: string) => {
+export const getSearchResults = async (query: any) => {
     try {
         const response = await fetch(`${AnimeApi}/${{ query }}`);
         const data = await response.json();

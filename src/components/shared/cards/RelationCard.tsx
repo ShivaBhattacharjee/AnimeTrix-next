@@ -14,7 +14,7 @@ export default async function RelationCard({ id }: Props) {
             {Object.keys(details.relations).length > 0 && (
                 <section className=" sticky bottom-0 top-0">
                     <h1 className="text-4xl font-semibold pl-2">Relation</h1>
-                    <div className=" flex gap-4 overflow-x-auto duration-200 mt-9">
+                    <div className=" flex gap-4 hiddenscroll overflow-x-auto duration-200 mt-9">
                         {details?.relations?.map((relation: Anime) => (
                             <div className="bg-white/10 flex items-center p-2 hover:cursor-pointer border-2 hover:scale-95 border-white/40 duration-200 rounded-lg" key={relation.id}>
                                 <Link href={`/details/${relation.id}`} className="flex w-80 lg:w-96">

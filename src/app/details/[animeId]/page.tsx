@@ -71,7 +71,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     {details?.description && (
                         <div
                             className="max-w-4xl bg-white/10 border-2 border-white/30  
-                rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll"
+                rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll hiddenscroll"
                         >
                             <p dangerouslySetInnerHTML={{ __html: details?.description }}></p>
                         </div>

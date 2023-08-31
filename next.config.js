@@ -5,10 +5,10 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "**",
-            }
-        ]
+            },
+        ],
     },
     output: "standalone",
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

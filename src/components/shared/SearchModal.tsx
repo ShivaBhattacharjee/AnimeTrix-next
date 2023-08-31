@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import Anime from "@/types/animetypes";
 import SearchCards from "./cards/SearchCards";
 import SpinLoading from "../loading/SpinLoading";
+import { SearchResults } from "./SearchResults";
 const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -53,9 +54,9 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
         setOpenSearch(!openSearch);
     };
 
-    const debounce = (func: Function, delay: number) => {
+    const debounce = <T extends any[]>(func: (...args: T) => void, delay: number) => {
         let timeoutId: NodeJS.Timeout;
-        return (...args: any[]) => {
+        return (...args: T) => {
             clearTimeout(timeoutId);
             timeoutId = setTimeout(() => {
                 func(...args);
@@ -79,23 +80,24 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                         <h1 className="font-bold text-white text-lg flex gap-3 items-center ">
                             Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span>+ <span className=" bg-white text-black text-sm p-2 rounded-lg">Space</span>
                         </h1>
-                        <input type="search" placeholder="I am looking for ......" className="border-2 border-white/40 bg-black duration-200 sticky top-0 outline-none focus:outline-none p-4 w-full rounded-lg text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
+                        <input type="search" placeholder="I am looking for ......" className="border-2 z-50 border-white/40 bg-black duration-200 sticky top-0 outline-none focus:outline-none p-4 w-full rounded-lg text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
                         <Suspense
                             fallback={
-                                <div className="flex justify-center items-center">
+                                <div className="flex justify-center h-screen items-center">
                                     <SpinLoading />
                                 </div>
                             }
                         >
                             {searchValue !== "" ? (
                                 <div>
-                                    <h1 className="text-white font-semibold text-lg">Search Results for {searchValue}</h1>
+                                    <h1 className="text-white bg-black sticky top-0 font-semibold text-lg mb-4">Search Results for {searchValue}</h1>
+                                    <SearchResults modalClose={handleModalClose} searchValue={searchValue} />
                                 </div>
                             ) : (
                                 <>
                                     {" "}
                                     <h1 className=" text-2xl font-semibold text-white">Trending</h1>
-                                    <SearchCards Trendingresults={trending} modalClose={handleModalClose} />
+                                    <SearchCards results={trending} modalClose={handleModalClose} />
                                 </>
                             )}
                         </Suspense>

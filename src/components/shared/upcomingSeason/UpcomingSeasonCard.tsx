@@ -13,7 +13,7 @@ const UpcomingSeasonCard: React.FC<UpcomingSeasonCardProps> = ({ props, title })
         <div className="bg-white/10 p-5 h-[700px] overflow-y-scroll w-full rounded-lg">
             <div className="flex flex-col gap-6">
                 <h1 className="text-3xl font-bold capitalize">{title}</h1>
-                {props.length > 0 ? (
+                {props?.length > 0 || props === undefined ? (
                     props?.map((anime) => {
                         return (
                             <Link href={`details/${anime.id}`} className="flex gap-5 items-center" key={anime.id + 1}>

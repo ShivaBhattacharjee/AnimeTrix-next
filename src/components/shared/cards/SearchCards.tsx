@@ -5,12 +5,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ReloadFunc from "@/components/error/ReloadFunc";
 type ModalCloseFunction = () => void;
-const SearchCards = ({ Trendingresults, modalClose }: { Trendingresults: Anime[]; modalClose: ModalCloseFunction }) => {
+const SearchCards = ({ results, modalClose }: { results: Anime[]; modalClose: ModalCloseFunction }) => {
     return (
         <>
-            {Trendingresults?.length > 0 ? (
+            {results?.length > 0 ? (
                 <div className="flex  text-white flex-col gap-6">
-                    {Trendingresults.slice(0, 12)?.map((anime, index) => (
+                    {results?.map((anime, index) => (
                         <div key={index}>
                             <Link href={`/details/${anime?.id}`} className="flex overflow-hidden gap-3 items-center" onClick={modalClose}>
                                 <img src={anime.image} alt="" className=" w-28 rounded-lg duration-200 hover:scale-90" />
@@ -31,10 +31,10 @@ const SearchCards = ({ Trendingresults, modalClose }: { Trendingresults: Anime[]
                             </Link>
                         </div>
                     ))}
-                    <Link onClick={modalClose} href={"/trending"} className="text-lg gap-3 font-semibold flex items-center">
+                    {/* <Link onClick={modalClose} href={"/trending"} className="text-lg gap-3 font-semibold flex items-center">
                         View More
                         <ArrowRight />
-                    </Link>
+                    </Link> */}
                 </div>
             ) : (
                 <div className="text-white">

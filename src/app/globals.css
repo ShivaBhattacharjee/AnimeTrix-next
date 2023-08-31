@@ -15,6 +15,10 @@ html {
 }
 
 ::-webkit-scrollbar {
+    width: 5px;
+}
+
+.hiddenscroll::-webkit-scrollbar {
     display: none;
 }
 

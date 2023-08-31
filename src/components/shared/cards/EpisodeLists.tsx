@@ -58,7 +58,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId }) => {
                 </div>
             </div>
             {displayedEpisodes.length > 0 ? (
-                <div className="grid gap-4 max-h-64 overflow-y-scroll grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
+                <div className="grid gap-4 max-h-64 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
                     {displayedEpisodes
                         .sort((animeA, animeB) => animeA.number - animeB.number)
                         .map((anime, index) => (
