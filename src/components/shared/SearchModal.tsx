@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useCallback, useState, Suspense } from "react";
-import { Search } from "lucide-react";
+import { Search, XCircle } from "lucide-react";
 import Anime from "@/types/animetypes";
 import SearchCards from "./cards/SearchCards";
 import SpinLoading from "../loading/SpinLoading";
@@ -54,7 +54,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
         setOpenSearch(!openSearch);
     };
 
-    const debounce = <T extends any[]>(func: (...args: T) => void, delay: number) => {
+    const debounce = <T extends string[]>(func: (...args: T) => void, delay: number) => {
         let timeoutId: NodeJS.Timeout;
         return (...args: T) => {
             clearTimeout(timeoutId);
@@ -80,7 +80,10 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                         <h1 className="font-bold text-white text-lg flex gap-3 items-center ">
                             Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span>+ <span className=" bg-white text-black text-sm p-2 rounded-lg">/</span>
                         </h1>
-                        <input type="search" placeholder="I am looking for ......" className="border-2 z-50 border-white/40 bg-black duration-200 sticky top-0 outline-none focus:outline-none p-4 w-full rounded-lg text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
+                        <div className="flex p-4 items-center border-2 z-50 border-white/40 bg-black w-full rounded-lg">
+                            <input type="text" placeholder="I am looking for ......" className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
+                            {/* {searchValue != "" && <XCircle size={20} className=" text-white cursor-pointer" onClick={() => setSearchValue("")} />} */}
+                        </div>
                         <Suspense
                             fallback={
                                 <div className="flex justify-center h-screen items-center">
@@ -97,7 +100,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                                 <>
                                     {" "}
                                     <h1 className=" text-2xl font-semibold text-white">Trending</h1>
-                                    <SearchCards results={trending} modalClose={handleModalClose} />
+                                    <SearchCards isTrending={true} results={trending} modalClose={handleModalClose} />
                                 </>
                             )}
                         </Suspense>

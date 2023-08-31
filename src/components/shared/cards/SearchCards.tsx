@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ReloadFunc from "@/components/error/ReloadFunc";
 type ModalCloseFunction = () => void;
-const SearchCards = ({ results, modalClose }: { results: Anime[]; modalClose: ModalCloseFunction }) => {
+const SearchCards = ({ results, modalClose, isTrending }: { results: Anime[]; modalClose: ModalCloseFunction; isTrending: boolean }) => {
     return (
         <>
             {results?.length > 0 ? (
@@ -31,10 +31,12 @@ const SearchCards = ({ results, modalClose }: { results: Anime[]; modalClose: Mo
                             </Link>
                         </div>
                     ))}
-                    {/* <Link onClick={modalClose} href={"/trending"} className="text-lg gap-3 font-semibold flex items-center">
-                        View More
-                        <ArrowRight />
-                    </Link> */}
+                    {isTrending && (
+                        <Link onClick={modalClose} href={"/trending"} className="text-lg gap-3 font-semibold flex items-center">
+                            View More
+                            <ArrowRight />
+                        </Link>
+                    )}
                 </div>
             ) : (
                 <div className="text-white">
