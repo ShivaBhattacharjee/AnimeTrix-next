@@ -80,7 +80,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                         <h1 className="font-bold text-white text-lg flex gap-3 items-center ">
                             Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span>+ <span className=" bg-white text-black text-sm p-2 rounded-lg">/</span>
                         </h1>
-                        <div className="flex p-4 items-center border-2 z-50 border-white/40 bg-black w-full rounded-lg">
+                        <div className="flex p-4 items-center border-2 z-50 border-white/40 sticky top-0 bg-black w-full rounded-lg">
                             <input type="text" placeholder="I am looking for ......" className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
                             {/* {searchValue != "" && <XCircle size={20} className=" text-white cursor-pointer" onClick={() => setSearchValue("")} />} */}
                         </div>
@@ -93,7 +93,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                         >
                             {searchValue !== "" ? (
                                 <div>
-                                    <h1 className="text-white bg-black sticky top-0 font-semibold text-lg mb-4">Search Results for {searchValue}</h1>
+                                    <h1 className="text-white bg-black font-semibold text-lg mb-4">Search Results for {searchValue}</h1>
                                     <SearchResults modalClose={handleModalClose} searchValue={searchValue} />
                                 </div>
                             ) : (
