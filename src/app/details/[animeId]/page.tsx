@@ -24,21 +24,29 @@ export default async function page({ params }: { params: { animeId: number } }) 
         return abbreviatedMonths[month];
     };
 
+    const airingDate = new Date(details.nextAiringEpisode?.airingTime * 1000);
+
+    const day = airingDate.getDate();
+    const month = getAbbreviatedMonth(airingDate.getMonth());
+    const year = airingDate.getFullYear();
+    const currentYear = new Date().getFullYear();
+
     const options: Intl.DateTimeFormatOptions = {
-        year: undefined,
-        month: "numeric",
-        day: "2-digit",
         hour: "numeric",
         minute: "numeric",
         hour12: true,
     };
-    const airingDate = new Date(details.nextAiringEpisode?.airingTime * 1000);
-    const formattedAiringDate = airingDate.toLocaleString(undefined, options);
-    const monthIndex = airingDate.getMonth();
-    const day = airingDate.getDate();
-    const time = formattedAiringDate.split(", ")[1];
 
-    const finalFormat = `${getAbbreviatedMonth(monthIndex)}/${day}, ${time}`;
+    const timeString = airingDate.toLocaleString(undefined, options);
+
+    let formattedAiringDate;
+
+    if (year === currentYear) {
+        formattedAiringDate = `${day} ${month} at ${timeString}`;
+    } else {
+        formattedAiringDate = `${day} ${month} ${year} at ${timeString}`;
+    }
+
     const title = details.title.romaji || details.title.english || details.title.native;
     const modifiedTitle = title.replace(/-/g, " ");
 
@@ -79,8 +87,12 @@ export default async function page({ params }: { params: { animeId: number } }) 
                 </div>
             </div>
             <div className=" mt-8 flex flex-col gap-5">
+                {details.nextAiringEpisode !== undefined && (
+                    <span className="bg-white text-md md:text-xl lg:w-2/6 text-black md:w-1/2 w-full  font-bold text-center p-3 rounded-lg">
+                        Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
+                    </span>
+                )}
                 <Suspense fallback={<EpisodeLoading />}>
-                    {details.nextAiringEpisode !== undefined && <span className="bg-white text-xl text-black md:w-1/2 w-full   font-bold text-center p-3 rounded-lg">Episode {details?.nextAiringEpisode?.episode} will air in undefined</span>}
                     <EpisodeLists listData={details.episodes} animeId={params.animeId} />
                 </Suspense>
             </div>
