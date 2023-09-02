@@ -42,7 +42,16 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
     return (
         <div className="p-4 pb-40 lg:pb-16 md:m-auto">
             <h1 className="text-3xl lg:text-5xl font-bold">{title}</h1>
-            <InfiniteScroll className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-6 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 items-center lg:p-5 mt-8 " dataLength={animeData?.length} next={loadMoreData} hasMore={hasMore} endMessage={<span className="text-lg text-white gap-3 m-auto w-full text-center flex items-center justify-center pt-12 font-semibold">You&rsquo;ve hit the void, nothing left, scroll up for giggles!</span>} loader={<SpinLoading />}>
+            <InfiniteScroll
+                className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-6 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 items-center lg:p-5 mt-8 "
+                dataLength={animeData?.length}
+                next={loadMoreData}
+                hasMore={hasMore}
+                endMessage={<span className="text-lg text-white gap-3 m-auto w-full text-center flex items-center justify-center pt-12 font-semibold">You&rsquo;ve hit the void, nothing left, scroll up for giggles!</span>}
+                loader={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
+                    <SpinLoading key={index} />
+                ))}
+            >
                 {animeData.map((anime) => {
                     return (
                         //  math random to remove same keys error better solution is appreciated

@@ -80,11 +80,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
             </div>
             <div className=" mt-8 flex flex-col gap-5">
                 <Suspense fallback={<EpisodeLoading />}>
-                    {details.nextAiringEpisode !== undefined && (
-                        <span className="bg-white text-xl text-black md:w-1/2 w-full   font-bold text-center p-3 rounded-lg">
-                            Episode {details?.nextAiringEpisode?.episode} will air in {finalFormat}
-                        </span>
-                    )}
+                    {details.nextAiringEpisode !== undefined && <span className="bg-white text-xl text-black md:w-1/2 w-full   font-bold text-center p-3 rounded-lg">Episode {details?.nextAiringEpisode?.episode} will air in undefined</span>}
                     <EpisodeLists listData={details.episodes} animeId={params.animeId} />
                 </Suspense>
             </div>
