@@ -18,7 +18,7 @@ export async function RandomAnimeCard() {
                     <img src={randomAnime?.image} alt={`an image of ${randomAnime?.title?.userPreferred || randomAnime?.title?.english || randomAnime?.title?.romaji || randomAnime.title?.native}`} className="rounded-lg hover:scale-105 duration-200 md:w-48 md:h-64 h-56 w-40" draggable={false} />
                 </div>
             </Link>
-            <h1 className=" truncate w-40 mb-2 justify-start">{randomAnime?.title?.userPreferred || randomAnime?.title?.english || randomAnime?.title?.romaji || randomAnime?.title?.native?.toLocaleLowerCase()}</h1>
+            <h1 className=" truncate w-40 mb-2 text-sm md:text-lg justify-start">{randomAnime?.title?.userPreferred || randomAnime?.title?.english || randomAnime?.title?.romaji || randomAnime?.title?.native?.toLocaleLowerCase()}</h1>
             <div className="flex gap-3 text-sm truncate">
                 <span>{randomAnime?.type}</span>
                 <span>{randomAnime?.subOrDub?.toLocaleUpperCase()}</span>
