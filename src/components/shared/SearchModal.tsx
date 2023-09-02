@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useCallback, useState, Suspense } from "react";
-import { Search, XCircle } from "lucide-react";
+import { Search } from "lucide-react";
 import Anime from "@/types/animetypes";
 import SearchCards from "./cards/SearchCards";
 import SpinLoading from "../loading/SpinLoading";

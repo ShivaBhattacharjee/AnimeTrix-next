@@ -10,6 +10,7 @@ export const getTrendingAnime = async () => {
         return [];
     }
 };
+
 // popular anime
 export const getPopularAnime = async () => {
     try {
