@@ -49,7 +49,7 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
                 hasMore={hasMore}
                 endMessage={<span className="text-lg text-white gap-3 m-auto w-full text-center flex items-center justify-center pt-12 font-semibold">You&rsquo;ve hit the void, nothing left, scroll up for giggles!</span>}
                 loader={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
-                    <SpinLoading key={index} />
+                    <div className="rounded-lg duration-200 hover:scale-105 bg-white/60 animate-pulse w-40 max-lg:h-56 lg:w-48 h-72" key={index} />
                 ))}
             >
                 {animeData.map((anime) => {

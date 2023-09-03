@@ -16,7 +16,7 @@ export default async function page() {
 
     return (
         <div className="p-4 pb-56 md:pb-28 text-xl font-semibold flex-1 h-screen">
-            <Slider posts={Trending} />
+            <Slider Trending={Trending} />
 
             <div className="flex flex-col mt-9">
                 <div className="flex justify-between items-center">

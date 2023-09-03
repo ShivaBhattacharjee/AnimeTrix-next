@@ -25,7 +25,7 @@ const loading = () => {
 
                     <div
                         className=" w-72 md:w-96 bg-white/40 border-2 border-white/30  
-                rounded-lg font-semibold p-2 h-20 animate-pulse duration-200  overflow-scroll"
+                rounded-lg font-semibold p-2 h-20 hiddenscroll animate-pulse duration-200 overflow-hidden"
                     ></div>
                 </div>
             </div>

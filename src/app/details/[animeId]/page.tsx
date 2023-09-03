@@ -12,6 +12,21 @@ import CharactersLoading from "@/components/loading/CharactersLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
 import Link from "next/link";
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+
+type Props = {
+    params: { animeId: number };
+};
+// function to generate metadata for details page
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const id = params.animeId;
+    const product = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
+    return {
+        title: `${product.title.romaji || product.title.english || product.title.native || "Opps!! No Title Found"} on AnimeTrix watch or download for free`,
+        description: product?.description || "Opps!! No Description FounResolvingMetadatad",
+    };
+}
+
 export default async function page({ params }: { params: { animeId: number } }) {
     const details = await getAnimeDetails(params.animeId);
 
@@ -55,7 +70,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
             <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
                 <img height={200} width={400} src={details.image} className=" w-48 lg:w-72 rounded-lg" alt={`an image of ${details.title.romaji || details.title.english || details.title.native}`} />
                 <div className="flex flex-col gap-5 items-center md:items-start">
-                    <h1 className="md:text-4xl lg:text-5xl text-2xl font-bold text-center md:text-left">{modifiedTitle}</h1>
+                    <h1 className="md:text-4xl lg:text-4xl text-2xl font-bold text-center md:text-left">{modifiedTitle}</h1>
                     {details.totalEpisodes !== null && <span className="font-semibold text-sm md:text-xl">Episodes : {details.totalEpisodes}</span>}
                     <div className="flex flex-wrap gap-5 font-semibold">
                         <span>{details?.startDate?.year}</span>
@@ -116,7 +131,3 @@ export default async function page({ params }: { params: { animeId: number } }) 
         </section>
     );
 }
-export const metadata: Metadata = {
-    title: "This is details page",
-    description: "idk man will decide later",
-};
