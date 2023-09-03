@@ -17,15 +17,21 @@ import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 type Props = {
     params: { animeId: number };
 };
-// function to generate metadata for details page
+// function to generate metadata for details page dynamic og image is in todo
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const id = params.animeId;
-    const product = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
+    const anime = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
+    const title = anime.title.romaji || anime.title.english || anime.title.native;
+    const words = title.toLowerCase().split(" ");
+    const formattedTitle = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
+    const description = anime?.description;
+    const formattedDescription = description.replace(/<\/?[^>]+(>|$)/g, "");
     return {
-        title: `${product.title.romaji || product.title.english || product.title.native || "Opps!! No Title Found"} on AnimeTrix watch or download for free`,
-        description: product?.description || "Opps!! No Description Found",
+        title: `${formattedTitle || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
+        description: formattedDescription || "Opps!! No Description Found",
         openGraph: {
-            images: product.cover || product.image || "",
+            images: anime.cover || anime.image || "",
         },
     };
 }
