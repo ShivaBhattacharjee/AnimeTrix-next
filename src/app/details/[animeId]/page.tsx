@@ -23,7 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const product = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
     return {
         title: `${product.title.romaji || product.title.english || product.title.native || "Opps!! No Title Found"} on AnimeTrix watch or download for free`,
-        description: product?.description || "Opps!! No Description FounResolvingMetadatad",
+        description: product?.description || "Opps!! No Description Found",
+        openGraph: {
+            images: product.cover || product.image || "",
+        },
     };
 }
 

@@ -5,7 +5,6 @@ import SideBar from "../components/shared/navigation/SideBar";
 import TopNavbar from "../components/shared/navigation/TopNavbar";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import Footer from "@/components/shared/Footer";
-import SearchModal from "@/components/shared/SearchModal";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
