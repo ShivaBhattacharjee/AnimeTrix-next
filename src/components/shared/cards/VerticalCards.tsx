@@ -4,12 +4,13 @@ import Link from "next/link";
 import Anime from "@/types/animetypes";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
-import SpinLoading from "@/components/loading/SpinLoading";
 interface VerticalCardsProps {
     title: string;
     data: Anime[];
+    isGenre?: boolean;
+    GenreName?: string;
 }
-const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
+const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data, isGenre, GenreName }) => {
     const [hasMore, setHasMore] = useState(true);
     const [currentPage, setCurrentPage] = useState(2);
     const [animeData, setAnimeData] = useState<Anime[]>(data);
@@ -29,8 +30,15 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
     };
     const fetchNextPage = async (page: number) => {
         try {
-            const formattedTitle = title === "Movie" ? "MOVIE" : title.toLowerCase();
-            const response = await fetch(`${AnimeApi}/${formattedTitle}?perPage=12&page=${page}`);
+            let apiUrl;
+            if (isGenre) {
+                apiUrl = `${AnimeApi}/advanced-search?genres=["${GenreName}"]&&page=${page}`;
+            } else {
+                const formattedTitle = title === "Movie" ? "MOVIE" : title.toLowerCase();
+                apiUrl = `${AnimeApi}/${formattedTitle}?perPage=12&page=${page}`;
+            }
+
+            const response = await fetch(apiUrl);
             const nextPageData = await response.json();
             return nextPageData.results;
         } catch (error) {
@@ -39,9 +47,10 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
         }
     };
 
+    const formattedTitle = title.replaceAll("%20", " ");
     return (
         <div className="p-4 pb-40 lg:pb-16 md:m-auto">
-            <h1 className="text-3xl lg:text-5xl font-bold">{title}</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold  text-white">{formattedTitle}</h1>
             <InfiniteScroll
                 className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-6 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 items-center lg:p-5 mt-8 "
                 dataLength={animeData?.length}
@@ -52,7 +61,7 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data }) => {
                     <div className="rounded-lg duration-200 hover:scale-105 bg-white/60 animate-pulse w-40  max-lg:h-56 lg:w-48 h-72" key={index} />
                 ))}
             >
-                {animeData.map((anime) => {
+                {animeData?.map((anime) => {
                     return (
                         //  math random to remove same keys error better solution is appreciated
                         <div key={Math.random()} className="border-2 border-white/30 card-img rounded-lg">

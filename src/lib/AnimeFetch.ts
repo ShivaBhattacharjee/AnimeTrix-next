@@ -76,6 +76,18 @@ export const getUpcomingData = async (season: string) => {
         return [];
     }
 };
+
+// get anim genre
+export const getGenre = async (genre: string) => {
+    try {
+        const response = await fetch(`${AnimeApi}/advanced-search?genres=["${genre}"]`);
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.log("Error fetching anime genre", error);
+        return [];
+    }
+};
 // search anime
 export const getSearchResults = async (searchValue: string) => {
     try {
