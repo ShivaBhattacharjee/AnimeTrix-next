@@ -5,6 +5,7 @@ import Anime from "@/types/animetypes";
 import SearchCards from "./cards/SearchCards";
 import SpinLoading from "../loading/SpinLoading";
 import { SearchResults } from "./SearchResults";
+
 const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -28,6 +29,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
             };
         }
     }, []);
+
     const handleClickOutside = useCallback(
         (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -51,6 +53,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [openSearch, handleClickOutside]);
+
     const handleModalClose = () => {
         setOpenSearch(!openSearch);
     };
@@ -77,13 +80,16 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
             <Search className="cursor-pointer" onClick={() => setOpenSearch(!openSearch)} />
             <div className={`bg-black/80 overscroll-none w-screen backdrop-blur-xl h-screen fixed p-4 left-0 top-0 bottom-0 duration-150 right-0 ${openSearch ? "scale-100" : "scale-0"}`}>
                 <div className="flex h-screen items-center right-5 top-5">
-                    <div className="bg-black border-2 border-white/40 h-96 overflow-y-scroll  gap-4 flex-col rounded-lg p-4 max-w-3xl m-auto w-screen text-black flex" ref={modalRef}>
+                    <div
+                        className={`bg-black border-2 border-white/40 h-96 overflow-y-scroll  gap-4 flex-col rounded-lg p-4 max-w-3xl m-auto w-screen text-black flex
+                        }`}
+                        ref={modalRef}
+                    >
                         <h1 className="font-bold md:flex hidden text-white text-lg  gap-3 items-center ">
-                            Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span>+ <span className=" bg-white text-black text-sm p-2 rounded-lg">K</span>
+                            Open/Close : <span className=" bg-white text-black p-2 rounded-lg text-sm">Ctrl</span> + <span className=" bg-white text-black text-sm p-2 rounded-lg">K</span>
                         </h1>
                         <div className="flex p-4 items-center border-2 z-50 border-white/40 sticky top-0 bg-black w-full rounded-lg">
-                            <input type="text" placeholder="I am looking for ......" className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
-                            {/* {searchValue != "" && <XCircle size={20} className=" text-white cursor-pointer" onClick={() => setSearchValue("")} />} */}
+                            <input type="text" placeholder="I am looking for ....." className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
                         </div>
                         <Suspense
                             fallback={

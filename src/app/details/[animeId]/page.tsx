@@ -17,6 +17,7 @@ import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 type Props = {
     params: { animeId: number };
 };
+
 // function to generate metadata for details page dynamic og image is in todo
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const id = params.animeId;
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `${formattedTitle || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
         description: formattedDescription || "Opps!! No Description Found",
         openGraph: {
-            images: anime.cover || anime.image || "",
+            images: anime?.cover || anime?.image || "",
         },
     };
 }
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function page({ params }: { params: { animeId: number } }) {
     const details = await getAnimeDetails(params.animeId);
 
-    if (Object.keys(details).length === 0 || !details.title) {
+    if (Object.keys(details)?.length <= 0 || !details.title) {
         return <ServerError />;
     }
 
