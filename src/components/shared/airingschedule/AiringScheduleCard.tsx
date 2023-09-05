@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FastForward, Rewind, PlayCircle } from "lucide-react";
+import { ArrowRightToLine, ArrowLeftToLine, PlayCircle } from "lucide-react";
 import Link from "next/link";
 import ReloadFunc from "@/components/error/ReloadFunc";
 interface Anime {
@@ -88,11 +88,11 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                 <div className="sticky bottom-0 bg-white/5 bg-gradient-to-r from-black to-black/30 backdrop-blur-xl overflow-hidden p-3 ">
                     <div className="flex justify-between items-center  md:max-w-[400px] m-auto">
                         <button onClick={handlePreviousDay}>
-                            <Rewind className="scale-125" />
+                            <ArrowLeftToLine className="scale-125" />
                         </button>
                         <span className="text-2xl">{currentDay}</span>
                         <button onClick={handleNextDay}>
-                            <FastForward className=" scale-125" />
+                            <ArrowRightToLine className=" scale-125" />
                         </button>
                     </div>
                 </div>
