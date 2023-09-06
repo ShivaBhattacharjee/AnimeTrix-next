@@ -8,8 +8,11 @@ import Footer from "@/components/shared/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Watch or download anime on AnimeTrix for free",
-    description: "Will be updated later ",
+    title: "Animetrix - Your Premier Source for Free Anime Downloads and Streaming",
+    description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
+    openGraph: {
+        images: "https://media.discordapp.net/attachments/1079039236302446705/1148974653155594302/IMG_20230906_190222_412.jpg?width=1080&height=567",
+    },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
