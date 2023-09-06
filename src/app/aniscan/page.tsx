@@ -29,7 +29,7 @@ function AnimeImageSearch() {
         };
     }, [preview]);
 
-    const handleChange = async (e: File) => {
+    const handleChange = (e: File) => {
         const objectUrl = URL.createObjectURL(e);
         setPreview(objectUrl);
         setFile(e);
@@ -73,19 +73,19 @@ function AnimeImageSearch() {
         }
     };
 
-    const handleRemoveImage = async () => {
+    const handleRemoveImage = () => {
         setFile(null);
         setPreview(null);
     };
 
     return (
-        <div className="flex h-screen justify-center items-center flex-col">
+        <div className={`flex h-screen justify-center items-center flex-col ${preview && " mb-24"}`}>
             {!toggle && <h1>Hello world</h1>}
 
             {toggle ? (
                 <>
                     <div className="flex flex-col gap-3 justify-center items-center p-3">
-                        <h1 className=" text-3xl font-semibold">Search Anime by Scene</h1>
+                        <h1 className=" text-3xl md:text-5xl font-semibold">Search Anime by Scene</h1>
                         <p className=" text-sm font-base max-w-4xl text-center p-3">Disclaimer: This feature may not be 100% accurate and only works with in-scene anime episodes, not anime wallpapers</p>
                     </div>
                     {preview ? (
@@ -99,13 +99,13 @@ function AnimeImageSearch() {
                                             Delete
                                         </button>
                                     </div>
-                                    <div className="flex flex-col justify-center items-center gap-4">
+                                    <div className="flex flex-col justify-center items-center gap-8">
                                         <label className=" text-center font-semibold text-lg">Wrong image? </label>
                                         <div className="lg:scale-150">
                                             <FileUploader handleChange={(e: File) => handleChange(e)} name="file" types={fileTypes} multiple={false} maxSize={25} />
                                         </div>
                                     </div>
-                                    <button className="bg-white flex justify-center items-center gap-3 p-3 text-black rounded-lg font-semibold text-xl w-40 mt-2" onClick={() => file && handleSubmit(file)}>
+                                    <button className="bg-white mt-5 flex justify-center items-center gap-3 p-3 text-black rounded-lg font-semibold text-xl w-40" onClick={() => file && handleSubmit(file)}>
                                         <Search />
                                         Search
                                     </button>
@@ -125,7 +125,7 @@ function AnimeImageSearch() {
                                     </div>
                                     <div className="flex flex-col justify-center items-center gap-3">
                                         <span className=" font-semibold mt-5 text-xl">OR</span>
-                                        <input type="text" required className="bg-transparent w-[80vw] md:w-[50vw] 2xl:w-[30vw] p-4 rounded-lg  border-2 border-white/30 duration-200 sticky top-0 outline-none focus:outline-none text-white" placeholder="Enter Image Url" value={text} onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)} />
+                                        <input type="text" required className="bg-transparent w-[80vw] md:w-[50vw] 2xl:w-[500px] p-4 rounded-lg  border-2 border-white/30 duration-200 sticky top-0 outline-none focus:outline-none text-white" placeholder="Enter Image Url" value={text} onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)} />
                                         <button className="flex items-center gap-3 justify-center bg-white p-3 text-black rounded-lg font-semibold text-xl w-40 mt-5" onClick={() => handleSubmit(text)} aria-label="URL search button">
                                             <Search />
                                             Search
