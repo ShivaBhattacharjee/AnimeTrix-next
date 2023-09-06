@@ -2,7 +2,7 @@ import { getGenre } from "@/lib/AnimeFetch";
 import React from "react";
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
-export async function generateMetadata({ params }: { params: { genreid: string } }) {
+export function generateMetadata({ params }: { params: { genreid: string } }) {
     return {
         title: `${params.genreid} Anime - Unleash Your Adrenaline with Thrilling Adventures`,
         description: `Prepare for heart-pounding excitement with our ${params.genreid} Anime collection. Immerse yourself in a world of relentless battles, heroic quests, and epic showdowns. From pulse-pounding fights to jaw-dropping stunts, we've curated the best ${params.genreid}-packed anime series and movies`,

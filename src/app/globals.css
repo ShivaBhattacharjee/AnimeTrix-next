@@ -43,10 +43,12 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.guZdik {
+.guZdik,
+.dtlKip {
     border: dashed 2px white !important;
 }
 
-.guZdik svg {
+.guZdik svg,
+.dtlKip svg {
     display: none;
 }
