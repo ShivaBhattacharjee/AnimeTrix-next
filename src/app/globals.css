@@ -42,3 +42,11 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.guZdik {
+    border: dashed 2px white !important;
+}
+
+.guZdik svg {
+    display: none;
+}
