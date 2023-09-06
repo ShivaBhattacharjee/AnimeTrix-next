@@ -12,7 +12,6 @@ interface SearchResult {
 }
 
 const fileTypes = ["JPG", "PNG", "JPEG"];
-
 function AnimeImageSearch() {
     const [file, setFile] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
@@ -58,8 +57,6 @@ function AnimeImageSearch() {
                 });
                 setText("");
                 setSearchResult(response.data);
-                const idk = response.data;
-                console.log(idk);
             }
             setLoading(false);
             setToggle(false);

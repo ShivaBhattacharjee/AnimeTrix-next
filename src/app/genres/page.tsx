@@ -74,7 +74,15 @@ const genres = [
         image: "https://s4.anilist.co/file/anilistcdn/media/anime/banner/108632-yeLbrgPN4Oni.jpg",
     },
 ];
-
+export function generateMetadata() {
+    return {
+        title: "Anime by Genre - Find Your Perfect Story on AnimeTrix",
+        description: "Discover anime tailored to your tastes with our Anime by Genre section. Whether you're into action, romance, fantasy, or any other genre, we've got you covered. Explore a world of anime that speaks to your preferences and passions. With our genre-based categorization, you can easily find the perfect story that resonates with you. ",
+        openGraph: {
+            images: "https://media.discordapp.net/attachments/1079039236302446705/1148974653155594302/IMG_20230906_190222_412.jpg?width=1080&height=567",
+        },
+    };
+}
 const page = () => {
     return (
         <div className="p-4 pb-40 m-auto">
