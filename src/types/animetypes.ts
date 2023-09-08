@@ -1,4 +1,7 @@
 // anime data types change or add accordingly
+interface AnilistInfo {
+    id: number;
+}
 export default interface Anime {
     id: number;
     image: string;
@@ -30,6 +33,9 @@ export default interface Anime {
     episode: number;
     from: number;
     similarity: number;
+    rating: number;
+    anilist: AnilistInfo;
+    video: string;
 }
 // required for aniscan
 export interface ApiResponse {
