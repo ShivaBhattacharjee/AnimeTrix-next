@@ -76,8 +76,8 @@ function AnimeImageSearch() {
     return (
         <>
             {/* Removed the comment inside the JSX */}
-            <AniScanSearchLayout searchResult={searchResult} setToggle={setToggle} />
-            <div className={`${searchResult != null ? "" : "flex h-screen justify-center items-center flex-col" + (preview ? " mb-24" : "")}`}>
+            {searchResult != null && <AniScanSearchLayout searchResult={searchResult} setToggle={setToggle} />}
+            <div className={`${searchResult != null ? "" : "flex min-h-[80vh] justify-center items-center flex-col" + (preview ? " mb-24" : "")}`}>
                 {toggle ? (
                     <>
                         <div className="flex flex-col gap-3 justify-center items-center p-3">

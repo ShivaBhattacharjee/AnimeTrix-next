@@ -19,7 +19,7 @@ const AniScanSearchLayout: React.FC<{ searchResult: ApiResponse | null; setToggl
                         <div className=" p-4  flex flex-col">
                             <h1 className=" w-[98%] truncate">{anime.filename}</h1>
                             <span>Episode: {anime.episode}</span>
-                            <span>Popularity : {Math.round(anime.similarity * 100)}% </span>
+                            <span>Similarity : {Math.round(anime.similarity * 100)}% </span>
                         </div>
                     </div>
                 ))}
