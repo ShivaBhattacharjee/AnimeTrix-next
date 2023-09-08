@@ -26,4 +26,14 @@ export default interface Anime {
     role: string;
     episodes: number;
     length: number;
+    filename: string;
+    episode: number;
+    from: number;
+    similarity: number;
+}
+// required for aniscan
+export interface ApiResponse {
+    frameCount: number;
+    error: string;
+    result: Anime[];
 }

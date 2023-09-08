@@ -5,19 +5,7 @@ import axios, { AxiosResponse } from "axios";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { Search, Trash2 } from "lucide-react";
 import AniScanSearchLayout from "@/components/AniScanSearchLayout";
-
-interface Anime {
-    filename: string;
-    episode: number;
-    from: number;
-    image: string;
-}
-
-interface ApiResponse {
-    frameCount: number;
-    error: string;
-    result: Anime[];
-}
+import { ApiResponse } from "@/types/animetypes";
 
 const fileTypes = ["JPG", "PNG", "JPEG"];
 function AnimeImageSearch() {
