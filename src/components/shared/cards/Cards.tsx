@@ -78,7 +78,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                     <div key={anime.id} className="flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab" onMouseDown={handleMouseDown}>
                         <Link href={`/details/${anime.id}`} className="content-normal w-full h-full">
                             <div className="relative lg:w-48 w-40 ">
-                                <img src={anime.image} alt={`an image of ${anime.title.userPreferred || anime.title.english || anime.title.romaji || anime.title.native}`} className="rounded-lg hover:scale-105 duration-200 h-52 lg:h-64 " draggable={false} loading="lazy" height={400} width={200} />
+                                <img src={anime?.image} alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime?.title?.native}`} className="rounded-lg hover:scale-105 duration-200 h-52 lg:h-64 " draggable={false} loading="lazy" height={400} width={200} />
                             </div>
                         </Link>
                         <span className="truncate font-semibold w-32 lg:w-44 p-2 text-sm md:text-xl lg:text-lg capitalize">{anime.title.userPreferred || anime.title.english || anime.title.romaji || anime.title.native?.toLowerCase()}</span>
