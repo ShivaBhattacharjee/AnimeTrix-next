@@ -3,7 +3,7 @@ import React from "react";
 
 const loading = () => {
     return (
-        <div className=" flex h-screen justify-center items-center">
+        <div className=" flex min-h-[80vh] h-auto justify-center items-center">
             <SpinLoading />
         </div>
     );
