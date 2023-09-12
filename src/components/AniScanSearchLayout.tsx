@@ -3,6 +3,8 @@ import Anime, { ApiResponse } from "@/types/animetypes";
 import ServerError from "./error/ServerError";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Frown } from "lucide-react";
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 
 interface AniScanSearchLayoutProps {
     searchResult: ApiResponse | null;
@@ -19,7 +21,7 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult,
         setLoading(true);
         try {
             if (searchResult && prevAnilist.current !== searchResult.result[number].anilist.id) {
-                const url = await fetch(`https://animetrix-api.vercel.app/meta/anilist/info/${searchResult.result[number].anilist.id}`);
+                const url = await fetch(`${AnimeApi}/info/${searchResult.result[number].anilist.id}`);
                 const response = await url.json();
                 const responseArray: Anime[] = [response];
                 setView(responseArray);
@@ -66,8 +68,14 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult,
             )}
             <div className="text-white grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 m-auto gap-5 p-4">
                 {searchResult?.result.map((anime, index) => (
-                    <div key={index} className="flex flex-col rounded-lg justify-center  bg-white/25">
-                        <img src={anime.image} alt={anime.filename} className=" h-auto bg-contain w-auto duration-200 hover:scale- rounded-t-lg " />
+                    <div
+                        key={index}
+                        onClick={() => {
+                            setSelect(index);
+                        }}
+                        className={` ${select === index && ""}`}
+                    >
+                        <img src={anime.image} alt={anime.filename} className="h-auto bg-fill w-auto duration-200 hover:scale- rounded-t-lg " />
                         <div className=" p-4  flex flex-col font-semibold">
                             <h1 className=" w-[98%] truncate">{anime.filename}</h1>
                             <span>Episode: {anime.episode || "Unknown"}</span>
@@ -78,7 +86,14 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult,
             </div>
             <div className=" p-4  pb-32 md:pb-10">
                 <h1 className=" pb-5 text-3xl lg:text-5xl font-bold">Expected Scene</h1>
-                <video src={searchResult.result[select].video} autoPlay muted controls playsInline loop className="rounded-lg  w-60 md:w-96" />
+                {searchResult.result[select].video != undefined || null ? (
+                    <video src={searchResult.result[select].video} autoPlay muted controls playsInline loop className="rounded-lg  w-60 md:w-96" />
+                ) : (
+                    <div className="flex capitalize items-center justify-center text-3xl font-semibold  gap-3">
+                        <Frown />
+                        <h1>No Expected Scene Found</h1>
+                    </div>
+                )}
             </div>
         </>
     );
