@@ -72,7 +72,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
         formattedAiringDate = `${day} ${month} ${year} at ${timeString}`;
     }
 
-    const title = details.title.romaji || details.title.english || details.title.native;
+    const title = details?.title?.romaji || details?.title?.english || details?.title?.native || "Unknown";
     const modifiedTitle = title.replace(/-/g, " ");
 
     return (
@@ -90,7 +90,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     </div>
                     <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
                         {details.episodes.length > 0 && (
-                            <Link href={`#episodes`} className="bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95">
+                            <Link href={"#episodes"} className="bg-white p-4 gap-3 rounded-lg text-black font-semibold flex items-center duration-200 hover:scale-95">
                                 <Play />
                                 Watch Now
                             </Link>
