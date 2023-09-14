@@ -1,7 +1,18 @@
 import ServerError from "@/components/error/ServerError";
 import { getAnimeDetails, getSteamingLink } from "@/lib/AnimeFetch";
 import React from "react";
-
+export function generateMetadata({
+    params,
+}: {
+    params: {
+        streamid: string;
+        animeid: number;
+    };
+}) {
+    return {
+        title: `Watching ${params.streamid} on AnimeTrix`,
+    };
+}
 const Page = async ({
     params,
 }: {
