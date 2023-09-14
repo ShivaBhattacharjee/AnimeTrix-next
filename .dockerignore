@@ -1,0 +1,5 @@
+.vscode
+.next
+.github
+node_modules
+bin
