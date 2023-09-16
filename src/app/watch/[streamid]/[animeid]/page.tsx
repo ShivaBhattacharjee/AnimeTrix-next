@@ -1,5 +1,7 @@
 import ServerError from "@/components/error/ServerError";
+import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import { getAnimeDetails, getSteamingLink } from "@/lib/AnimeFetch";
+import Anime from "@/types/animetypes";
 import React from "react";
 export function generateMetadata({
     params,
@@ -25,15 +27,22 @@ const Page = async ({
     const stream = await getSteamingLink(params.streamid);
     return (
         <>
-            {Object.keys(details).length > 0 ? (
-                <div className="flex p-4 justify-center flex-col gap-4 items-center h-screen text-xl font-bold">
-                    <p className="truncate w-[90%] text-center">Stream ID: {params.streamid}</p>
-                    <p>Anime ID: {params.animeid}</p>
-                    <h1>Episode Length : {Object.keys(details).length}</h1>
-                    <h1>Stream Length: {Object.keys(stream).length}</h1>
-                    <a href={stream.download} target="_blank" className=" p-4 bg-white text-black font-semibold rounded-lg">
-                        Download
-                    </a>
+            {Object.keys(details || stream).length > 0 ? (
+                <div className="flex flex-col lg:flex-row gap-5 justify-between p-4">
+                    <div className="text-center h-52 rounded-lg border-2 border-white w-full lg:w-[50%]">
+                        <h1>Streaming will be availabe soon</h1>
+                    </div>
+                    <div className="flex flex-col gap-5">
+                        <h1 className=" text-3xl font-semibold text-white">Up next</h1>
+                        {details.episodes
+                            .slice()
+                            .reverse()
+                            .map((anime: Anime, index: number) => (
+                                <div className="flex md:w-96 text-center flex-col gap-3 rounded-lg bg-white/40 p-4" key={index}>
+                                    Episode {anime.number}
+                                </div>
+                            ))}
+                    </div>
                 </div>
             ) : (
                 <ServerError />

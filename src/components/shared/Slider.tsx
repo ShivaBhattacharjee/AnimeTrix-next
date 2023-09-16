@@ -63,7 +63,7 @@ const Slider: React.FC<SliderProps> = ({ Trending }) => {
                             <div className="absolute text-white bg-black/50 w-full h-full">
                                 <div className="absolute text-left flex gap-3 flex-col bottom-3 pb-4 md:text-4xl p-4 w-[90%]">
                                     <h1 className="z-50 truncate 2xl:w-full w-[90%] lg:text-5xl lg:font-bold overflow-hidden">{popular?.title.userPreferred || popular?.title?.romaji}</h1>
-                                    <p className="text-lg hidden 2xl:block max-h-36 h-auto overflow-y-hidden text-clip overflow-hidden  ... " dangerouslySetInnerHTML={{ __html: popular.description }}></p>
+                                    <p className="text-lg hidden xl:block max-h-36 h-auto overflow-y-hidden text-clip overflow-hidden  ... " dangerouslySetInnerHTML={{ __html: popular.description }}></p>
                                     <Link href={`/details/${popular.id}`} className="bg-white text-center shadow-lg font-semibold text-black lg:w-44 lg:p-3 2xl:w-52 2xl:p-4 lg:text-2xl lg:mt-8  p-3 w-32 text-sm rounded-lg">
                                         Watch Now
                                     </Link>
