@@ -114,7 +114,7 @@ export const getAnimeDetails = async (animeid: number) => {
 
 export const getSteamingLink = async (streamid: string) => {
     try {
-        const response = await fetch(`https://api.consumet.org/meta/anilist/watch/${streamid}`);
+        const response = await fetch(`https://api.amvstr.me/api/v2/stream/${streamid}`);
         const data = await response.json();
         return data;
     } catch (error) {
