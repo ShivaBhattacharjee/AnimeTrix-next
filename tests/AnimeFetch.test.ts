@@ -1,4 +1,4 @@
-import { getTrendingAnime, getPopularAnime, getAnimeMovies, getRandomAnime, getAiringSchedule, getCurrentYear, getUpcomingData, getGenre, getSearchResults, getAnimeDetails, getSteamingLink } from "../lib/AnimeFetch";
+import { getTrendingAnime, getPopularAnime, getAnimeMovies, getRandomAnime, getAiringSchedule, getCurrentYear, getUpcomingData, getGenre, getSearchResults, getAnimeDetails, getSteamingLink } from "../src/lib/AnimeFetch";
 
 describe("AnimeFetch", () => {
     describe("getTrendingAnime", () => {
