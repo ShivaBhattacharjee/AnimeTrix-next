@@ -43,10 +43,10 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
         <>
             <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
                 <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
-                <div className="flex items-center">
+                <div className="flex">
                     <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                     {showSelect && (
-                        <select className="p-2 bg-black border-2 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
+                        <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
                             {episodeRanges.map((range) => (
                                 <option key={range} value={range}>
                                     {range}
@@ -57,7 +57,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
                 </div>
             </div>
             {displayedEpisodes.length > 0 ? (
-                <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-6"} `}>
+                <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-5"} `}>
                     {displayedEpisodes
                         .sort((animeA, animeB) => animeA.number - animeB.number)
                         .map((anime, index) => (

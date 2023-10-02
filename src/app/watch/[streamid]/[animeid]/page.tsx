@@ -1,3 +1,4 @@
+import Share from "@/components/buttons/Share";
 import ServerError from "@/components/error/ServerError";
 import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
@@ -5,7 +6,7 @@ import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import CharacterCard from "@/components/shared/cards/characterCard";
-import { getAnimeDetails, getSteamingLink } from "@/lib/AnimeFetch";
+import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import Anime from "@/types/animetypes";
 import { Bookmark, Download, Flag, Share2 } from "lucide-react";
@@ -40,6 +41,7 @@ const Page = async ({
 }) => {
     const details = await getAnimeDetails(params.animeid);
     const stream = await getSteamingLink(params.streamid);
+    const download = await getDownloadLink(params.streamid);
     return (
         <>
             {Object.keys(details || stream).length > 0 ? (
@@ -60,8 +62,8 @@ const Page = async ({
                                 </div>
 
                                 <div className="flex gap-3 mt-6 flex-wrap items-center">
-                                    <button className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3"><Download />Download</button>
-                                    <button className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3"><Share2 />Share</button>
+                                    <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3"><Download />Download</a>
+                                    <Share title={params.streamid} text={details.description} />
                                     <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
                                 </div>
 

@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <TopNavbar />
                 <SideBar />
                 <ScrollToTop />
-                <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-64 ">
+                <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
                     {children}
                     <Footer />
                 </main>

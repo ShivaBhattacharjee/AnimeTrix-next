@@ -127,3 +127,14 @@ export const getSteamingLink = async (streamid: string) => {
         return [];
     }
 };
+
+export const getDownloadLink = async (streamid: string) => {
+    try {
+        const response = await fetch(`https://api.consumet.org/meta/anilist/watch/${streamid}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log("Error getting download links", error);
+        return [];
+    }
+};

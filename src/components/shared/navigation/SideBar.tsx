@@ -68,12 +68,12 @@ const SideBar = () => {
     return (
         <>
             <div className=" hidden md:flex fixed ">
-                <div className={` w-64 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
-                    <nav className="flex flex-col overflow-scroll h-screen mt-9  p-2 gap-5 max-lg:mt-10">
+                <div className={` w-52 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
+                    <nav className="flex flex-col overflow-scroll h-screen mt-3 p-2 max-lg:mt-10">
                         {NavItems.map((link) => {
                             const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
                             return (
-                                <Link href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200   transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-xl items-center cursor-pointer`}>
+                                <Link href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer`}>
                                     <link.icons className={`${isActive && `fill-white`}`} />
                                     <li className="font-semibold  max-lg:hidden block">{link.name}</li>
                                 </Link>
