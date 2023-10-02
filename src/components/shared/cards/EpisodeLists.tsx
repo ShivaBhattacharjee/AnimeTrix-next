@@ -7,9 +7,10 @@ import Link from "next/link";
 interface EpisodeListsProps {
     listData: Anime[];
     animeId: number;
+    isStream?: boolean;
 }
 
-const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId }) => {
+const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream }) => {
     const [filterValue, setFilterValue] = useState<string>("");
     const [selectedRange, setSelectedRange] = useState<string>("1-100");
 
@@ -58,7 +59,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId }) => {
                 </div>
             </div>
             {displayedEpisodes.length > 0 ? (
-                <div className="grid gap-4 max-h-64 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
+                <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-6"} `}>
                     {displayedEpisodes
                         .sort((animeA, animeB) => animeA.number - animeB.number)
                         .map((anime, index) => (
