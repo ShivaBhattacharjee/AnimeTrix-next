@@ -47,7 +47,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId }) => {
                 <div className="flex items-center">
                     <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                     {showSelect && (
-                        <select className="p-2 bg-transparent border-2 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
+                        <select className="p-2 bg-black border-2 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
                             {episodeRanges.map((range) => (
                                 <option key={range} value={range}>
                                     {range}
