@@ -1,4 +1,4 @@
-import { AnifyApi, AnimeApi } from "./animeapi/animetrixapi";
+import { AnifyApi, AnimeApi, StreamApi } from "./animeapi/animetrixapi";
 // trending anime
 export const getTrendingAnime = async () => {
     try {
@@ -77,7 +77,7 @@ export const getUpcomingData = async (season: string) => {
     }
 };
 
-// get anim genre
+// get anime genre
 export const getGenre = async (genre: string) => {
     try {
         const response = await fetch(`${AnimeApi}/advanced-search?genres=["${genre}"]`);
@@ -114,7 +114,7 @@ export const getAnimeDetails = async (animeid: number) => {
 
 export const getSteamingLink = async (streamid: string) => {
     try {
-        const response = await fetch(`https://api.amvstr.me/api/v2/stream/${streamid}`);
+        const response = await fetch(`${StreamApi}/stream/${streamid}`);
         const data = await response.json();
         return data;
     } catch (error) {

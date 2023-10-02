@@ -1,8 +1,12 @@
 import ServerError from "@/components/error/ServerError";
+import CharactersLoading from "@/components/loading/CharactersLoading";
+import EpisodeLoading from "@/components/loading/EpisodeLoading";
+import RecommendedLoading from "@/components/loading/RecommendedLoading";
+import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
+import CharacterCard from "@/components/shared/cards/characterCard";
 import { getAnimeDetails, getSteamingLink } from "@/lib/AnimeFetch";
-import Anime from "@/types/animetypes";
-import React from "react";
+import React, { Suspense } from "react";
 export function generateMetadata({
     params,
 }: {
@@ -28,13 +32,34 @@ const Page = async ({
     return (
         <>
             {Object.keys(details || stream).length > 0 ? (
-                <iframe src={stream.plyr.main}
-                    scrolling="no"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    title={params.streamid}
-                    allow="picture-in-picture"
-                    className=" lg:h-[40vh] lg:w-[40vw] h-[30vh] lg:mt-7 p-3 rounded-lg"></iframe>
+                <section className="p-2 min-h-screen pb-40 lg:pb-0">
+                    <div className=" w-full">
+                        <div className="flex justify-between lg:flex-row flex-col">
+                            <iframe src={stream?.plyr?.main || stream?.plyr?.backup}
+                                scrolling="no"
+                                frameBorder="0"
+                                allowFullScreen={true}
+                                title={params.streamid}
+                                allow="picture-in-picture"
+                                className="w-full rounded-lg h-[30vh] lg:h-[50vh] lg:w-[50%]"></iframe>
+                            <h1>Episode selection section</h1>
+                        </div>
+                        <div className="mt-2">
+                            <span className="text-lg lg:text-2xl text-white/70">Episode :  {stream?.info?.episode}</span>
+                            <h1 className="font-semibold text-xl lg:text-3xl">{stream?.info?.title || "unknown"}</h1>
+                        </div>
+                    </div>
+                    <div className="mt-6">
+                        <Suspense fallback={<CharactersLoading />}>
+                            <CharacterCard characters={details.characters} />
+                        </Suspense>
+                    </div>
+                    <div className="mt-12">
+                        <Suspense fallback={<RecommendedLoading />}>
+                            <RecommendedAnime episode={params.animeid} />
+                        </Suspense>
+                    </div>
+                </section>
             ) : (
                 <ServerError />
             )}
