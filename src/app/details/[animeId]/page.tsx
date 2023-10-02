@@ -37,44 +37,60 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
+/**
+ * Renders the details page for a specific anime.
+ * @param params - The parameters for the anime ID.
+ * @returns The JSX element for the anime details page.
+ */
 export default async function page({ params }: { params: { animeId: number } }) {
+    // Fetch the anime details using the provided ID.
     const details = await getAnimeDetails(params.animeId);
 
+    // If the details are empty or the title is missing, render a server error component.
     if (Object.keys(details)?.length <= 0 || !details.title) {
         return <ServerError />;
     }
 
+    /**
+     * Returns the abbreviated month name for a given month number.
+     * @param month - The month number (0-11).
+     * @returns The abbreviated month name.
+     */
     const getAbbreviatedMonth = (month: number): string => {
         const abbreviatedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         return abbreviatedMonths[month];
     };
 
+    // Get the next airing date for the anime.
     const airingDate = new Date(details.nextAiringEpisode?.airingTime * 1000);
 
+    // Extract the day, month, and year from the airing date.
     const day = airingDate.getDate();
     const month = getAbbreviatedMonth(airingDate.getMonth());
     const year = airingDate.getFullYear();
     const currentYear = new Date().getFullYear();
 
+    // Format the time string using the 12-hour clock format.
     const options: Intl.DateTimeFormatOptions = {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
     };
-
     const timeString = airingDate.toLocaleString(undefined, options);
 
+    // Format the airing date string based on the year.
     let formattedAiringDate;
-
     if (year === currentYear) {
         formattedAiringDate = `${day} ${month} at ${timeString}`;
     } else {
         formattedAiringDate = `${day} ${month} ${year} at ${timeString}`;
     }
 
+    // Get the title of the anime and replace any hyphens with spaces.
     const title = details?.title?.romaji || details?.title?.english || details?.title?.native || "Unknown";
     const modifiedTitle = title.replace(/-/g, " ");
 
+    // Render the anime details page.
     return (
         <section className="flex flex-col p-4 mt-4 overflow-hidden pb-40">
             <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">

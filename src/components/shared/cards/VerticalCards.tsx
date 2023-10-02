@@ -28,6 +28,11 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data, isGenre, Gen
             console.error("Error fetching more data:", error);
         }
     };
+    /**
+     * Fetches the next page of data from the Anime API based on the given page number.
+     * @param page - The page number to fetch data for.
+     * @returns An array of results for the next page.
+     */
     const fetchNextPage = async (page: number) => {
         try {
             let apiUrl;

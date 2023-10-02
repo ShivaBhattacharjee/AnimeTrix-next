@@ -3,3 +3,4 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/shivabhattacharjee/animetrix-next)
 ![NextJs](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 # Under Development 
+<img src="./public/assets/Screenshot (1009).jpg">

@@ -66,6 +66,11 @@ export const getCurrentYear = () => {
     return new Date().getFullYear();
 };
 
+/**
+ * Fetches upcoming anime data based on the specified season and current year.
+ * @param {string} season - The season to search for upcoming anime (e.g. "summer", "fall").
+ * @returns {Promise<Array>} - A promise that resolves to an array of upcoming anime data.
+ */
 export const getUpcomingData = async (season: string) => {
     try {
         const response = await fetch(`${AnimeApi}/advanced-search?season=${season}&&year=${getCurrentYear()}`);
