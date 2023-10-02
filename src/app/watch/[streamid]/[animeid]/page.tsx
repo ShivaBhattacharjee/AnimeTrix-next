@@ -6,17 +6,26 @@ import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import CharacterCard from "@/components/shared/cards/characterCard";
 import { getAnimeDetails, getSteamingLink } from "@/lib/AnimeFetch";
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import { Metadata } from "next";
 import React, { Suspense } from "react";
-export function generateMetadata({
-    params,
-}: {
+type Props = {
     params: {
         streamid: string;
         animeid: number;
     };
-}) {
+};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const id = params.animeid;
+    const anime = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
+    const description = anime?.description;
+    const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
     return {
         title: `Watching ${params.streamid} on AnimeTrix`,
+        description: formattedDescription || "Opps!! No Description Found",
+        openGraph: {
+            images: anime?.cover || anime?.image || "",
+        },
     };
 }
 const Page = async ({

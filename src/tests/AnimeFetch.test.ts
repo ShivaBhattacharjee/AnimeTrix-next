@@ -65,15 +65,15 @@ describe("AnimeFetch", () => {
     });
 
     describe("getAnimeDetails", () => {
-        it("should return the details of the anime with the given id", async () => {
-            const result = await getAnimeDetails(1);
+        it("should return the details of one piece", async () => {
+            const result = await getAnimeDetails(21);
             expect(result).toBeDefined();
         });
     });
 
     describe("getSteamingLink", () => {
-        it("should return the streaming link for the given stream id", async () => {
-            const result = await getSteamingLink("123");
+        it("should return the streaming link for one piece", async () => {
+            const result = await getSteamingLink("one-piece-episode-1");
             expect(result).toBeDefined();
         });
     });
