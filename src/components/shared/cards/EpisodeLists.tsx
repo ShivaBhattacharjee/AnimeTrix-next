@@ -42,9 +42,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
     return (
         <>
             <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
-                <div className="flex items-center flex-wrap gap-5">
-                    <h1 className="text-4xl font-semibold">Episodes</h1>
-                </div>
+                <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
                 <div className="flex items-center">
                     <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                     {showSelect && (

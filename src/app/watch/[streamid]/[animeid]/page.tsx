@@ -7,6 +7,8 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import CharacterCard from "@/components/shared/cards/characterCard";
 import { getAnimeDetails, getSteamingLink } from "@/lib/AnimeFetch";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import Anime from "@/types/animetypes";
+import { Bookmark, Download, Flag, Share2 } from "lucide-react";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 type Props = {
@@ -54,7 +56,35 @@ const Page = async ({
                                     className="w-full rounded-lg h-[30vh] lg:h-[50vh] md:h-[30vh]"></iframe>
                                 <div className="mt-2">
                                     <h1 className="font-semibold text-2xl lg:text-4xl">{stream?.info?.title || "unknown"}</h1>
-                                    <span className="text-lg lg:text-2xl font-semibold text-white/70">Episode :  {stream?.info?.episode || "unknown"}</span>
+                                    <span className="text-lg mt-4 lg:text-2xl font-semibold text-white/70">Episode :  {stream?.info?.episode || "unknown"}</span>
+                                </div>
+
+                                <div className="flex gap-3 mt-6 flex-wrap items-center">
+                                    <button className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3"><Download />Download</button>
+                                    <button className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3"><Share2 />Share</button>
+                                    <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
+                                </div>
+
+                                <div className="flex gap-3 mt-7 w-full">
+                                    <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-32 lg:w-44 rounded-lg" />
+                                    <div className="flex flex-wrap w-full gap-3 text-lg flex-col font-semibold">
+                                        <h1><span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}</h1>
+                                        <h1><span className=" text-white/70 ">Audio</span> : {details?.subOrDub || "Unknown"}</h1>
+                                        <h1><span className=" text-white/70 ">Type</span> : {details?.type || "Unknown"}</h1>
+                                        <h1 ><span className=" text-white/70">Country</span> : {details?.countryOfOrigin || "Earth"}</h1>
+                                    </div>
+                                    <div className=" flex justify-end w-full">
+                                        <Bookmark size={40} className=" hover:fill-white duration-200 cursor-pointer" />
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-4 mt-5 font-semibold text-lg">
+                                    {Object?.keys(details?.genres).length > 0 && (
+                                        details.genres.map((genre: string, index: number) => (
+                                            <button className="border-2 text-sm lg:text-xl border-white rounded-lg p-2" key={index}>{genre}</button>
+                                        ))
+                                    )}
+
                                 </div>
                             </div>
 
@@ -76,7 +106,7 @@ const Page = async ({
                             <RecommendedAnime episode={params.animeid} />
                         </Suspense>
                     </div>
-                </section>
+                </section >
             ) : (
                 <ServerError />
             )}
