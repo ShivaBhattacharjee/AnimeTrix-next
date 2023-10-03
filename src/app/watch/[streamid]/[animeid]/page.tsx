@@ -67,7 +67,7 @@ const Page = async ({
                                 </div>
 
                                 <div className="flex gap-3 mt-7 w-full">
-                                    <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-32 lg:w-44 rounded-lg" />
+                                    <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-24 lg:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-lg flex-col font-semibold">
                                         <h1><span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}</h1>
                                         <h1 ><span className=" text-white/70">Season</span> : {details?.season || "Unknown"}</h1>
