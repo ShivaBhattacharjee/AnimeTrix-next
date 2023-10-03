@@ -1,80 +1,70 @@
-import { getTrendingAnime, getPopularAnime, getAnimeMovies, getRandomAnime, getAiringSchedule, getCurrentYear, getUpcomingData, getGenre, getSearchResults, getAnimeDetails, getSteamingLink } from "../src/lib/AnimeFetch";
+import { getTrendingAnime, getPopularAnime, getAnimeMovies, getRandomAnime, getAiringSchedule, getUpcomingData, getGenre, getSearchResults, getAnimeDetails, getSteamingLink, getDownloadLink } from "../src/lib/AnimeFetch";
 
-describe("AnimeFetch", () => {
-    describe("getTrendingAnime", () => {
-        it("should return an array of trending anime", async () => {
-            const result = await getTrendingAnime();
-            expect(Array.isArray(result)).toBe(true);
-        });
+describe("AnimeFetch functions", () => {
+    test("getTrendingAnime should return an array of anime", async () => {
+        const anime = await getTrendingAnime();
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getPopularAnime", () => {
-        it("should return an array of popular anime", async () => {
-            const result = await getPopularAnime();
-            expect(Array.isArray(result)).toBe(true);
-        });
+    test("getPopularAnime should return an array of anime", async () => {
+        const anime = await getPopularAnime();
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getAnimeMovies", () => {
-        it("should return an array of anime movies", async () => {
-            const result = await getAnimeMovies();
-            expect(Array.isArray(result)).toBe(true);
-        });
+    test("getAnimeMovies should return an array of anime movies", async () => {
+        const anime = await getAnimeMovies();
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getRandomAnime", () => {
-        it("should return a random anime", async () => {
-            const result = await getRandomAnime();
-            expect(result).toBeDefined();
-        });
+    test("getRandomAnime should return an object with anime details", async () => {
+        const anime = await getRandomAnime();
+        expect(typeof anime).toBe("object");
+        expect(anime).toHaveProperty("id");
+        expect(anime).toHaveProperty("title");
+        expect(anime).toHaveProperty("description");
     });
 
-    describe("getAiringSchedule", () => {
-        it("should return an array of airing schedules", async () => {
-            const result = await getAiringSchedule();
-            expect(Array.isArray(result)).toBe(true);
-        });
+    test("getAiringSchedule should return an array of anime airing schedule", async () => {
+        const anime = await getAiringSchedule();
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getCurrentYear", () => {
-        it("should return the current year", () => {
-            const result = getCurrentYear();
-            expect(result).toBe(new Date().getFullYear());
-        });
+    test("getUpcomingData should return an array of upcoming anime data", async () => {
+        const anime = await getUpcomingData("summer");
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getUpcomingData", () => {
-        it("should return an array of upcoming anime for the given season", async () => {
-            const result = await getUpcomingData("summer");
-            expect(Array.isArray(result)).toBe(true);
-        });
+    test("getGenre should return an array of anime with the specified genre", async () => {
+        const anime = await getGenre("action");
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getGenre", () => {
-        it("should return an array of anime for the given genre", async () => {
-            const result = await getGenre("action");
-            expect(Array.isArray(result)).toBe(true);
-        });
+    test("getSearchResults should return an array of anime search results", async () => {
+        const anime = await getSearchResults("naruto");
+        expect(Array.isArray(anime)).toBe(true);
     });
 
-    describe("getSearchResults", () => {
-        it("should return an array of anime search results for the given search value", async () => {
-            const result = await getSearchResults("naruto");
-            expect(Array.isArray(result)).toBe(true);
-        });
+    test("getAnimeDetails should return an object with anime details", async () => {
+        const anime = await getAnimeDetails(21);
+        expect(typeof anime).toBe("object");
+        expect(anime).toHaveProperty("id");
+        expect(anime).toHaveProperty("title");
+        expect(anime).toHaveProperty("description");
     });
 
-    describe("getAnimeDetails", () => {
-        it("should return the details of one piece", async () => {
-            const result = await getAnimeDetails(21);
-            expect(result).toBeDefined();
-        });
+    test("getSteamingLink should return an object with streaming links", async () => {
+        const stream = await getSteamingLink("one-piece-episode-1");
+        expect(typeof stream).toBe("object");
+        expect(stream).toHaveProperty("id");
+        expect(stream).toHaveProperty("title");
+        expect(stream).toHaveProperty("links");
     });
 
-    describe("getSteamingLink", () => {
-        it("should return the streaming link for one piece", async () => {
-            const result = await getSteamingLink("one-piece-episode-1");
-            expect(result).toBeDefined();
-        });
+    test("getDownloadLink should return an object with download links", async () => {
+        const download = await getDownloadLink("one-piece-episode-1");
+        expect(typeof download).toBe("object");
+        expect(download).toHaveProperty("id");
+        expect(download).toHaveProperty("title");
+        expect(download).toHaveProperty("links");
     });
 });

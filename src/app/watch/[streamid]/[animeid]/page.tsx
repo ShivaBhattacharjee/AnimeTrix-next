@@ -62,7 +62,7 @@ const Page = async ({
                                 </div>
 
                                 <div className="flex gap-3 mt-6 flex-wrap items-center">
-                                    <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3"><Download />Download</a>
+                                    <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3" rel="noopener noreferrer"><Download />Download</a>
                                     <Share title={params.streamid} text={details.description} />
                                     <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
                                 </div>
@@ -80,10 +80,10 @@ const Page = async ({
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap gap-4 mt-5 font-semibold text-lg">
+                                <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
                                     {Object?.keys(details?.genres).length > 0 && (
                                         details.genres.map((genre: string, index: number) => (
-                                            <button className="border-2 text-sm lg:text-xl border-white rounded-lg p-2" key={index}>{genre}</button>
+                                            <button className="border-2 text-sm lg:text-lg border-white border-dotted rounded-lg p-2" key={index}>{genre}</button>
                                         ))
                                     )}
 
