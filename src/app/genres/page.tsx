@@ -87,7 +87,7 @@ const page = () => {
     return (
         <div className="p-4 pb-40 m-auto">
             <h1 className="md:text-5xl text-4xl mb-6 font-semibold">Genres</h1>
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 mt-4">
                 {genres.map((genre, index) => (
                     <Link href={`/genres/${genre.title}`} key={index} className=" relative duration-200 cursor-pointer hover:scale-105">
                         <img src={genre.image} alt={genre.title} className=" h-24 bg-cover md:h-44 md:w-96 rounded-lg z-20 duration-200 cursor-pointer hover:scale-105" />

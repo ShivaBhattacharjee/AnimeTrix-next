@@ -71,6 +71,7 @@ const Page = async ({
                                     <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-32 lg:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-lg flex-col font-semibold">
                                         <h1><span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}</h1>
+                                        <h1 ><span className=" text-white/70">Season</span> : {details?.season || "Unknown"}</h1>
                                         <h1><span className=" text-white/70 ">Audio</span> : {details?.subOrDub || "Unknown"}</h1>
                                         <h1><span className=" text-white/70 ">Type</span> : {details?.type || "Unknown"}</h1>
                                         <h1 ><span className=" text-white/70">Country</span> : {details?.countryOfOrigin || "Earth"}</h1>
