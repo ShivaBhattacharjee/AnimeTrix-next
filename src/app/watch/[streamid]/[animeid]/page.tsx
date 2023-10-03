@@ -8,8 +8,7 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import CharacterCard from "@/components/shared/cards/characterCard";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
-import Anime from "@/types/animetypes";
-import { Bookmark, Download, Flag, Share2 } from "lucide-react";
+import { Bookmark, Download, Flag } from "lucide-react";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 type Props = {

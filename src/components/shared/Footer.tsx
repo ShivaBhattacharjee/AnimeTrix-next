@@ -14,10 +14,10 @@ const socialMediaLinks = [
 
 const Footer = () => {
     return (
-        <div className="bg-white/10 hidden md:block p-4 border-t border-white/20 ">
+        <div className="bg-white/10 mb-20 md:mb-0  p-4 border-t border-white/20 ">
             <div className="flex flex-col gap-7 justify-between items-center">
                 <h1 className="text-3xl font-bold">AnimeTrix</h1>
-                <p className="text-sm text-center font-semibold m-auto max-w-4xl">AnimeTrix is not affiliated with or endorsed by any of the anime studios behind the creation of the anime presented on this site. This website is only an user interface presenting/linking various self-hosted files across the internet by other third-party providers for easy access. AnimeTrix never downloads the video from any source provider, link will be returned from the response hence it is completely not subjected to DMCA compliant.</p>
+                <p className="text-[9px] md:text-sm text-center font-semibold m-auto max-w-4xl">AnimeTrix is not affiliated with or endorsed by any of the anime studios behind the creation of the anime presented on this site. This website is only an user interface presenting/linking various self-hosted files across the internet by other third-party providers for easy access. AnimeTrix never downloads the video from any source provider, link will be returned from the response hence it is completely not subjected to DMCA compliant.</p>
                 <div className="flex gap-6 pb-6">
                     {socialMediaLinks.map((link, index) => (
                         <a key={index} href={link.url} rel="noopener noreferrer" target="_blank" className="duration-200 hover:scale-125">

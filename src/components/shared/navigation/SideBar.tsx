@@ -85,14 +85,14 @@ const SideBar = () => {
             {/* mobile bottom bar */}
             <div
                 ref={sidebarRef}
-                className={`text-white fixed bottom-0 md:hidden z-20 bg-white/5
-       rounded-t-xl border-t-2 border-white/25 backdrop-blur-xl w-full p-2 duration-200 transition-all`}
+                className={`text-white fixed bottom-0 md:hidden z-20 bg-black/50
+       rounded-t-xl border-t-2 border-white/25 backdrop-blur-md w-full p-2 duration-200 transition-all`}
             >
                 <div className="flex items-center justify-between flex-wrap ">
                     {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
                         const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
                         return (
-                            <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/25 border-2 backdrop-blur-md `} w-24 p-2 rounded-lg duration-200 transition-all`}>
+                            <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/50 border-2 backdrop-blur-md `} w-24 p-2 rounded-lg duration-200 transition-all`}>
                                 <link.icons className={`${isActive && `fill-white`}`} />
                                 <h1>{link.name}</h1>
                             </Link>

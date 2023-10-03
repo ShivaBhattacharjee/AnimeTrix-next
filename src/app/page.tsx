@@ -15,7 +15,7 @@ export default async function page() {
     const Popular = await getPopularAnime();
 
     return (
-        <div className="p-4 pb-56 md:pb-28 text-xl font-semibold flex-1 h-screen">
+        <div className="p-4  md:pb-28 text-xl font-semibold flex-1 h-screen">
             <Slider Trending={Trending} />
 
             <div className="flex flex-col mt-9">

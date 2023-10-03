@@ -90,7 +90,7 @@ const page = () => {
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 mt-4">
                 {genres.map((genre, index) => (
                     <Link href={`/genres/${genre.title}`} key={index} className=" relative duration-200 cursor-pointer hover:scale-105">
-                        <img src={genre.image} alt={genre.title} className=" h-24 bg-cover md:h-44 md:w-96 rounded-lg z-20 duration-200 cursor-pointer hover:scale-105" />
+                        <img src={genre.image} alt={genre.title} className=" w-full bg-fill h-32  md:w-96 rounded-lg z-20 duration-200 cursor-pointer hover:scale-105" />
                         <div className="absolute text-white top-0 bg-black/50 w-full h-full">
                             <p className="text-center w-full h-full translate-y-[40%] font-semibold text-xl lg:text-3xl">{genre.title}</p>
                         </div>

@@ -72,7 +72,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
     }, []);
 
     return (
-        <div className="flex gap-3 overflow-x-hidden duration-200 mt-9" ref={containerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} style={{ userSelect: isDragging.current ? "none" : "auto" }}>
+        <div className="flex gap-3 overflow-x-scroll hiddenscroll duration-200 mt-9" ref={containerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} style={{ userSelect: isDragging.current ? "none" : "auto" }}>
             {props.length > 0 ? (
                 props.map((anime) => (
                     <div key={anime.id} className="flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab" onMouseDown={handleMouseDown}>
