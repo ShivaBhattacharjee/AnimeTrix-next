@@ -17,11 +17,11 @@ const loading = () => {
                             <h1 className="font-semibold text-2xl lg:text-4xl bg-white/25 mt-5 h-7 w-1/2 animate-pulse"></h1>
                         </div>
                         <div className="flex gap-3 mt-6 flex-wrap items-center">
-                            <a href={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3" rel="noopener noreferrer"><Download />Download</a>
-                            <button className="bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3">
+                            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3" rel="noopener noreferrer"><Download />Download</a>
+                            <a href='https://www.youtube.com/watch?v=273eSvOwpKk' target='_blank' className="bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3">
                                 <Share2 />
                                 Share
-                            </button>
+                            </a>
                             <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
                         </div>
 

@@ -28,12 +28,12 @@ const Share = ({ title, text }: { title: string, text: string }): JSX.Element =>
             if (navigator.share) {
                 await navigator.share(shareData);
             } else if (window.androidShare) {
-                window.androidShare(shareData.title, shareData.text, shareData.url);
+                window.androidShare(shareData.title, shareData.url, shareData.text);
             } else {
                 alert('Sharing is not supported on this device.');
             }
         } catch (error) {
-            alert('Error sharing: ' + error);
+            console.log(error);
         }
     };
 
