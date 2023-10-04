@@ -17,9 +17,10 @@ import React from 'react';
  */
 const Share = ({ title, text }: { title: string, text: string }): JSX.Element => {
     const handleShareClick = async () => {
+        const formattedTest = text?.replace(/<\/?[^>]+(>|$)/g, "")
         const shareData = {
             title: title,
-            text: text,
+            text: formattedTest,
             url: window.location.href,
         };
 
