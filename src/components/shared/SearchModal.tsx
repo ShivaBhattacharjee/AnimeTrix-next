@@ -5,6 +5,7 @@ import Anime from "@/types/animetypes";
 import SearchCards from "./cards/SearchCards";
 import SpinLoading from "../loading/SpinLoading";
 import { SearchResults } from "./SearchResults";
+import useDebounce from "@/hooks/debounce";
 
 const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
@@ -58,23 +59,9 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
         setOpenSearch(!openSearch);
     };
 
-    const debounce = <T extends string[]>(func: (...args: T) => void, delay: number) => {
-        let timeoutId: NodeJS.Timeout;
-        return (...args: T) => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                func(...args);
-            }, delay);
-        };
-    };
-
-    const debouncedSetSearchValue = useCallback(
-        debounce((value: string) => {
-            setSearchValue(value);
-        }, 800),
-        [],
-    );
-
+    const debouncedSetSearchValue = useDebounce((value: string) => {
+        setSearchValue(value);
+    }, 800);
     return (
         <>
             <Search className="cursor-pointer" onClick={() => setOpenSearch(!openSearch)} />
