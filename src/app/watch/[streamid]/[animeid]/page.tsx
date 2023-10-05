@@ -41,6 +41,34 @@ const Page = async ({
     const details = await getAnimeDetails(params.animeid);
     const stream = await getSteamingLink(params.streamid);
     const download = await getDownloadLink(params.streamid);
+    const getAbbreviatedMonth = (month: number): string => {
+        const abbreviatedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return abbreviatedMonths[month];
+    };
+    // Get the next airing date for the anime.
+    const airingDate = new Date(details.nextAiringEpisode?.airingTime * 1000);
+
+    // Extract the day, month, and year from the airing date.
+    const day = airingDate.getDate();
+    const month = getAbbreviatedMonth(airingDate.getMonth());
+    const year = airingDate.getFullYear();
+    const currentYear = new Date().getFullYear();
+
+    // Format the time string using the 12-hour clock format.
+    const options: Intl.DateTimeFormatOptions = {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+    };
+    const timeString = airingDate.toLocaleString(undefined, options);
+
+    // Format the airing date string based on the year.
+    let formattedAiringDate;
+    if (year === currentYear) {
+        formattedAiringDate = `${day} ${month} at ${timeString}`;
+    } else {
+        formattedAiringDate = `${day} ${month} ${year} at ${timeString}`;
+    }
     return (
         <>
             {Object.keys(details || stream).length > 0 ? (
@@ -65,7 +93,11 @@ const Page = async ({
                                     <Share title={params.streamid} text={details.description} />
                                     <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
                                 </div>
-
+                                {details.nextAiringEpisode !== undefined && (
+                                    <span className="bg-white text-md mt-4  text-black md:w-1/2 w-full  font-bold text-center p-3 rounded-lg">
+                                        Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
+                                    </span>
+                                )}
                                 <div className="flex gap-3 mt-7 w-full">
                                     <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-24 lg:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-lg flex-col font-semibold">

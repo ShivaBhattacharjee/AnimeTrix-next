@@ -130,7 +130,7 @@ export const getSteamingLink = async (streamid: string) => {
 
 export const getDownloadLink = async (streamid: string) => {
     try {
-        const response = await fetch(`https://api.consumet.org/meta/anilist/watch/${streamid}`);
+        const response = await fetch(`${AnimeApi}/watch/${streamid}`);
         const data = await response.json();
         return data;
     } catch (error) {
