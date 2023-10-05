@@ -1,9 +1,8 @@
 "use client"
 import { Eye, EyeOff } from 'lucide-react';
-import React from 'react'
-
-const page = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
+import React, { useState } from 'react'
+const Page = () => {
+    const [showPassword, setShowPassword] = useState(false);
     return (
         <section className='flex min-h-[70vh] justify-center items-center'>
             <div className=' bg-white/20 w-full md:w-1/2 m-4 md:m-auto p-4 rounded-lg'>
@@ -37,4 +36,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
