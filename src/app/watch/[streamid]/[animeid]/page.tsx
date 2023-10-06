@@ -115,7 +115,7 @@ const Page = async ({
                                 <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
                                     {Object?.keys(details?.genres).length > 0 && (
                                         details.genres.map((genre: string, index: number) => (
-                                            <button className="border-2 text-sm lg:text-lg border-white border-dotted rounded-lg p-2" key={index}>{genre}</button>
+                                            <button className="border-2 text-sm lg:text-lg border-white border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>{genre}</button>
                                         ))
                                     )}
 

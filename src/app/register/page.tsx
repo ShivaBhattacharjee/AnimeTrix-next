@@ -9,7 +9,7 @@ const Page = () => {
     const [email, setEmail] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMismatch, setPasswordMismatch] = useState<boolean>(false);
 
@@ -62,7 +62,7 @@ const Page = () => {
                         {showConfirmPassword ? <EyeOff onClick={() => setShowConfirmPassword(!showConfirmPassword)} /> : <Eye onClick={() => setShowConfirmPassword(!showConfirmPassword)} />}
                     </div>
                     {passwordMismatch && <span className='text-red-500 font-semibold'>Password Didn&apos;t Match</span>}
-                    <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-white cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 hover:bg-white hover:text-black`} disabled={userName && email && password && confirmPassword != "" && password ? false : true}>Register</button>
+                    <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-black cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && "hover:bg-white"} hover:text-black`} disabled={userName && email && password && confirmPassword != "" && password ? false : true}>Register</button>
                     <span className=' text-center mt-2'>Already have an account? <Link href={"/login"} className=' text-blue-500 '>Login</Link></span>
                 </form>
             </div>
