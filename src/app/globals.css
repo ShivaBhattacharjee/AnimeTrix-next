@@ -43,6 +43,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+/* required for aniscan color changes */
 .guZdik,
 .dtlKip {
     border: dashed 2px white !important;
