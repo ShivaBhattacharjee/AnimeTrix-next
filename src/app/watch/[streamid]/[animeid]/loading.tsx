@@ -44,7 +44,7 @@ const loading = () => {
                         </div>
                     </div>
 
-                    <div className="mt-3 2xl:w-[80vw]">
+                    <div className="mt-3 xl:w-[80vw]">
                         <EpisodeLoading />
                     </div>
 

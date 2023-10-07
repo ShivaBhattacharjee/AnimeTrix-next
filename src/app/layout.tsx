@@ -5,6 +5,7 @@ import SideBar from "../components/shared/navigation/SideBar";
 import TopNavbar from "../components/shared/navigation/TopNavbar";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import Footer from "@/components/shared/Footer";
+import { LoginAndRegisterProvider } from '@/context/LoginAndRegisterContext'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <SideBar />
                 <ScrollToTop />
                 <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
-                    {children}
+                    <LoginAndRegisterProvider>
+                        {children}
+                    </LoginAndRegisterProvider>
                     <Footer />
                 </main>
             </body>

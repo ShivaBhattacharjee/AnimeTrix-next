@@ -15,12 +15,11 @@ import React from 'react';
  * @param {string} props.text - The text to be shared.
  * @returns {JSX.Element} - The rendered Share button.
  */
-const Share = ({ title, text }: { title: string, text: string }): JSX.Element => {
+const Share = ({ title }: { title: string }): JSX.Element => {
     const handleShareClick = async () => {
-        const formattedTest = text?.replace(/<\/?[^>]+(>|$)/g, "")
         const shareData = {
             title: title,
-            text: formattedTest,
+            text: `Hey, I'm Watching ${title} on AnimeTrix, you would like it too! Watch it for FREE on AnimeTrix now!`,
             url: window.location.href,
         };
 
@@ -28,7 +27,7 @@ const Share = ({ title, text }: { title: string, text: string }): JSX.Element =>
             if (navigator.share) {
                 await navigator.share(shareData);
             } else if (window.androidShare) {
-                window.androidShare(shareData.title, shareData.url, shareData.text);
+                window.androidShare(shareData.title, shareData.text, shareData.url);
             } else {
                 alert('Sharing is not supported on this device.');
             }

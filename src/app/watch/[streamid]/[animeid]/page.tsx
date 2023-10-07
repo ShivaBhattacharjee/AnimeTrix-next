@@ -90,7 +90,7 @@ const Page = async ({
 
                                 <div className="flex gap-3 mt-6 flex-wrap items-center">
                                     <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3" rel="noopener noreferrer"><Download />Download</a>
-                                    <Share title={params.streamid} text={details.description} />
+                                    <Share title={params.streamid} />
                                     <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
                                 </div>
                                 {details.nextAiringEpisode !== undefined && (

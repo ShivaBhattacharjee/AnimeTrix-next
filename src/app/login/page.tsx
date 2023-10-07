@@ -1,20 +1,36 @@
 "use client"
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useContext, useState } from 'react'
+import axios from 'axios';
+import { ClockLoader } from 'react-spinners';
+import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
 const Page = () => {
+    const router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
-
-    const [loginUser, setLoginUser] = useState<object>({
-        email: email,
-        password: password
-    })
-
-    const handleLogin = (e: React.FormEvent<HTMLFormElement>): void => {
+    const [loading, setLoading] = useState<boolean>(false)
+    const { Loginuser, responseData } = useContext(LoginAndRegisterContext)
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        alert("Login Under Development")
+        try {
+            setLoading(true);
+            const loginData = {
+                email: email,
+                password: password,
+            }
+            await Loginuser(loginData)
+            console.log(responseData.data.message)
+            alert(responseData.data.message)
+        } catch (error: any) {
+            alert(error.response.data.error)
+            setLoading(false);
+
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -36,13 +52,23 @@ const Page = () => {
                             )
                         }
                     </div>
+                    {
+                        password.length < 0 && <span className=' text-red-500'>Password should have alteast 8 characters</span>
+                    }
                     <div className="flex justify-between items-center mt-3">
                         <div className=' gap-2 flex items-center'>
-                            <input type="checkbox" className=' focus:ring-white' checked={true} />Remember Me
+                            <input type="checkbox" className=' focus:ring-white' />Remember Me
                         </div>
                         <Link href={"/forgot-password"} className=' text-blue-500'>Forgot Password?</Link>
                     </div>
-                    <button className={`p-3  rounded-lg mt-3 font-semibold duration-200 ${email && password != "" ? "cursor-not-allowed bg-white/30 text-black" : "hover:bg-white bg-blue-500 hover:text-black"} `} disabled={email && password != "" ? false : true}>Login</button>
+                    {
+                        loading ? <button className=' font-semibold flex gap-3 p-3  bg-white text-black rounded-lg items-center justify-center' disabled={true}>
+                            <ClockLoader size={30} />
+                            <span>Loggin...</span>
+                        </button> : (
+                            <button className={` p-3 ${email && password != "" ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-black cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${email && password != "" && "hover:bg-white"} hover:text-black`} disabled={email && password != "" ? false : true}>Login</button>
+                        )
+                    }
                     <span className=' text-center mt-2'>Dont have an account? <Link href={"/register"} className=' text-blue-500 '>Signup</Link></span>
                 </form>
             </div>
