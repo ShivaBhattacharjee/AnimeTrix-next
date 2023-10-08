@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import Toast from '@/utils/toast';
-const page = () => {
+const Page = () => {
     const [userName, setUserName] = useState("")
     const router = useRouter();
     const logout = async () => {
@@ -39,4 +39,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
