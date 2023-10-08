@@ -24,6 +24,7 @@ const Page = () => {
             const response = await Loginuser(loginData)
             Toast.SuccessshowToast(response.message || "Login Successfull with some server side error")
             router.push("/");
+            router.refresh();
         } catch (error: any) {
             Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
             console.log(error)
