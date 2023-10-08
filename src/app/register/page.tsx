@@ -17,7 +17,7 @@ const Page = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMismatch, setPasswordMismatch] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const { RegisterUser, responseData } = useContext(LoginAndRegisterContext)
+    const { RegisterUser } = useContext(LoginAndRegisterContext)
 
     /**
      * Handles the change event of the password input field and sets the password state.
@@ -53,8 +53,8 @@ const Page = () => {
                 email: email,
                 password: password,
             }
-            await RegisterUser(UserData);
-            Toast.SuccessshowToast(responseData.message || "Registered Successfully")
+            const response = await RegisterUser(UserData);
+            Toast.SuccessshowToast(response.message || "Registered Successfully")
             router.push("/login")
         } catch (error: any) {
             Toast.ErrorShowToast(error.response.data.error || "Something went wrong")

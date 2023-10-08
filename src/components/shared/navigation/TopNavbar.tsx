@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import SearchModal from "../SearchModal";
 import { getTrendingAnime } from "@/lib/AnimeFetch";
-
+import Logout from "@/components/buttons/Logout";
 export default async function TopNavbar() {
     const trendingPromise = await getTrendingAnime();
     return (
@@ -13,9 +13,8 @@ export default async function TopNavbar() {
                 </Link>
                 <div className="flex justify-between items-center gap-4">
                     <SearchModal trending={trendingPromise} />
-                    <Link href={"/login"} className="bg-white text-black hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32">
-                        Login
-                    </Link>
+
+                    <Logout />
                 </div>
             </div>
         </div>

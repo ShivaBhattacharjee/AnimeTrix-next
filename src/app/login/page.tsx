@@ -12,7 +12,7 @@ const Page = () => {
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
-    const { Loginuser, responseData } = useContext(LoginAndRegisterContext)
+    const { Loginuser } = useContext(LoginAndRegisterContext)
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
@@ -21,8 +21,8 @@ const Page = () => {
                 email: email,
                 password: password,
             }
-            await Loginuser(loginData)
-            Toast.SuccessshowToast(responseData?.data?.message || "Logged in Successfully")
+            const response = await Loginuser(loginData)
+            Toast.SuccessshowToast(response.message || "Login Successfull with some server side error")
             router.push("/");
         } catch (error: any) {
             Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
@@ -40,7 +40,7 @@ const Page = () => {
                 <h1 className='font-semibold text-2xl text-center mb-5'>Welcome Back</h1>
                 <form autoComplete='false' className="flex flex-col gap-2" onSubmit={handleLogin}>
                     <label htmlFor="Email">Email</label>
-                    <input type="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} className=' bg-transparent border-2 border-white/20 p-2 focus:outline-none  rounded-lg text-white' />
+                    <input type="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} className=' bg-transparent border-2 border-white/20 p-2 focus:outline-none  rounded-lg text-white' autoComplete='off' />
                     <label htmlFor="Password">Password</label>
                     <div className="flex justify-between items-center border-2 rounded-lg border-white/20 p-2 ">
                         <input type={`${showPassword ? "text" : "password"}`} placeholder='Password' className=' w-[90%] bg-transparent focus:outline-none' onChange={(e) => setPassword(e.target.value)} />
@@ -65,7 +65,7 @@ const Page = () => {
                     {
                         loading ? <button className=' font-semibold flex gap-3 p-3  bg-white text-black rounded-lg items-center justify-center' disabled={true}>
                             <ClockLoader size={30} />
-                            <span>Loggin...</span>
+                            <span>Onboarding...</span>
                         </button> : (
                             <button className={` p-3 ${email && password != "" ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-black cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${email && password != "" && "hover:bg-white"} hover:text-black`} disabled={email && password != "" ? false : true}>Login</button>
                         )

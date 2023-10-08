@@ -1,33 +1,44 @@
-"use client";
+"use client"
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 
-type LoginAndRegisterContextType = {
-    loggedIn: boolean;
-    RegisterUser: (userData: object) => void;
-    responseData: any;
-    Loginuser: (loginData: object) => void;
+type UserData = {
+    username: string;
+    email: string;
+    password: string;
 };
 
-// Create your context with the specified type
+type LoginData = {
+    email: string;
+    password: string;
+};
+
+type LoginAndRegisterContextType = {
+    RegisterUser: (userData: UserData) => Promise<any>;
+    Loginuser: (loginData: LoginData) => Promise<any>;
+};
+
+type LoginAndRegisterProviderProps = {
+    children: ReactNode;
+};
+
 export const LoginAndRegisterContext = createContext<LoginAndRegisterContextType>({
-    loggedIn: false,
-    RegisterUser: () => { },
-    responseData: null,
-    Loginuser: () => { }
+    RegisterUser: async () => { },
+    Loginuser: async () => { }
 });
 
-export const LoginAndRegisterProvider = ({ children }: { children: React.ReactNode }) => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [responseData, setResponseData] = useState<any>();
-    const RegisterUser = async (userData: object) => {
+export const LoginAndRegisterProvider = ({ children }: LoginAndRegisterProviderProps) => {
+    const [loggedIn] = useState<boolean>(false);
+
+    const RegisterUser = async (userData: UserData): Promise<any> => {
         const response = await axios.post("/api/register", userData);
-        setResponseData(response.data);
-    };
-    const Loginuser = async (loginData: object) => {
-        const response = await axios.post("/api/login", loginData);
-        setResponseData(response);
+        return response.data;
     };
 
-    return <LoginAndRegisterContext.Provider value={{ loggedIn, RegisterUser, responseData, Loginuser }}>{children}</LoginAndRegisterContext.Provider>;
+    const Loginuser = async (loginData: LoginData): Promise<any> => {
+        const response = await axios.post("/api/login", loginData);
+        return response.data;
+    };
+
+    return <LoginAndRegisterContext.Provider value={{ RegisterUser, Loginuser }}>{children}</LoginAndRegisterContext.Provider>;
 };
