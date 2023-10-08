@@ -12,16 +12,6 @@ const Logout = () => {
 
     const token = getCookie("token");
 
-    const logout = async () => {
-        try {
-            await axios.get('/api/logout')
-            Toast.SuccessshowToast("Logout Successfull")
-            router.refresh();
-        } catch (error: any) {
-            Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
-        }
-    }
-
     const [tokenExistOrNot, settokenExistOrNot] = useState(false)
 
     async function checkIfTokenExistOrNot() {
@@ -39,9 +29,9 @@ const Logout = () => {
     return (
         <>
             {tokenExistOrNot ? (
-                <button className="bg-white text-black hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32" onClick={logout}>
-                    Logout
-                </button>
+                <Link href={"/profile"} className="bg-white text-black hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32">
+                    Profile
+                </Link>
             ) : (
                 <Link href="/login" className='bg-white text-black hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32'>Login</Link>
             )}
