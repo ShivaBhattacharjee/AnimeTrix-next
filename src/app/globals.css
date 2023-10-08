@@ -29,8 +29,8 @@ html {
 }
 
 ::selection {
-    background-color: #fff;
-    color: #000;
+    background-color: rgb(126 34 206);
+    color: #fff;
 }
 
 input::-webkit-outer-spin-button,

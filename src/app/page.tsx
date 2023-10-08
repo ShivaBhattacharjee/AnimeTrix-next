@@ -54,9 +54,9 @@ export default async function page() {
                 <UpcomingSeason />
             </Suspense>
 
-            {/* <Suspense fallback={<AiringScheduleLoading />}>
+            <Suspense fallback={<AiringScheduleLoading />}>
                 <AiringSchedule />
-            </Suspense> */}
+            </Suspense>
         </div>
     );
 }
