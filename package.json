@@ -30,6 +30,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-drag-drop-files": "^2.3.10",
+    "react-hot-toast": "^2.4.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-spinners": "^0.13.8",
     "swiper": "^10.1.0",

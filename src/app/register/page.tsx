@@ -6,6 +6,7 @@ import useDebounce from '@/hooks/debounce';
 import { useRouter } from 'next/navigation';
 import { ClockLoader } from "react-spinners"
 import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
+import Toast from '@/utils/toast';
 const Page = () => {
     const router = useRouter()
     const [userName, setUserName] = useState<string>('');
@@ -53,10 +54,10 @@ const Page = () => {
                 password: password,
             }
             await RegisterUser(UserData);
-            alert(responseData.message)
+            Toast.SuccessshowToast(responseData.message || "Registered Successfully")
             router.push("/login")
         } catch (error: any) {
-            alert(error)
+            Toast.ErrorShowToast(error.response.data.error || "Something went wrong")
             setLoading(false)
         } finally {
             setLoading(false)

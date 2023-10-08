@@ -3,9 +3,9 @@ import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react'
-import axios from 'axios';
 import { ClockLoader } from 'react-spinners';
 import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
+import Toast from '@/utils/toast';
 const Page = () => {
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
@@ -22,10 +22,11 @@ const Page = () => {
                 password: password,
             }
             await Loginuser(loginData)
-            console.log(responseData.data.message)
-            alert(responseData.data.message)
+            Toast.SuccessshowToast(responseData?.data?.message || "Logged in Successfully")
+            router.push("/");
         } catch (error: any) {
-            alert(error.response.data.error)
+            Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
+            console.log(error)
             setLoading(false);
 
         } finally {

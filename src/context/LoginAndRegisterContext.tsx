@@ -26,10 +26,7 @@ export const LoginAndRegisterProvider = ({ children }: { children: React.ReactNo
     };
     const Loginuser = async (loginData: object) => {
         const response = await axios.post("/api/login", loginData);
-        if (response.data === "Login successful") {
-            setLoggedIn(true);
-            setResponseData(response.data);
-        }
+        setResponseData(response);
     };
 
     return <LoginAndRegisterContext.Provider value={{ loggedIn, RegisterUser, responseData, Loginuser }}>{children}</LoginAndRegisterContext.Provider>;
