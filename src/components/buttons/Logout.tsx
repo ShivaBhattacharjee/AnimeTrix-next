@@ -36,8 +36,6 @@ const Logout = () => {
     }, [token])
 
 
-    console.log("Token is " + token)
-
     return (
         <>
             {tokenExistOrNot ? (

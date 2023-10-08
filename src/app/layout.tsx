@@ -7,8 +7,6 @@ import ScrollToTop from "@/components/shared/ScrollToTop";
 import Footer from "@/components/shared/Footer";
 import { LoginAndRegisterProvider } from '@/context/LoginAndRegisterContext'
 import { Toaster } from "react-hot-toast";
-import { ClientCookiesProvider } from "@/components/cookies/cookiesprovider";
-import { cookies } from "next/headers"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,9 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <ScrollToTop />
                 <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
                     <LoginAndRegisterProvider>
-                        <ClientCookiesProvider value={cookies().getAll()}>
-                            {children}
-                        </ClientCookiesProvider>
+                        {children}
                     </LoginAndRegisterProvider>
                     <Footer />
                 </main>
