@@ -1,10 +1,8 @@
 "use client"
 import Toast from '@/utils/toast'
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { getCookie } from "cookies-next"
-import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
 const Logout = () => {
 
 
@@ -19,27 +17,26 @@ const Logout = () => {
             settokenExistOrNot(true);
         }
     }
-
-    useEffect(() => {
-        checkIfTokenExistOrNot();
-    }, [token]);
-
     const getUserData = async () => {
         try {
             const userResponse = await fetch('/api/get-users');
-            if (!userResponse.ok) {
-                alert("Network response was not ok");
+            if (token) {
+                if (!userResponse.ok) {
+                    alert("Network response was not ok");
+                }
             }
             const user = await userResponse.json();
             setUserName(user?.userData?.username?.charAt(0).toUpperCase());
-            console.log(user?.userData?.username);
         } catch (error: any) {
             Toast.ErrorShowToast(error.message || "Something went wrong");
         }
     };
+
     useEffect(() => {
-        getUserData()
-    }, [])
+        checkIfTokenExistOrNot();
+        if (token) getUserData();
+    }, [token]);
+
 
     return (
         <>

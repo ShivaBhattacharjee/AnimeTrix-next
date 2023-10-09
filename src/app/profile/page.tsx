@@ -1,14 +1,15 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation';
 import Toast from '@/utils/toast';
 import SpinLoading from '@/components/loading/SpinLoading';
-import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
+import { getCookie } from 'cookies-next';
 const Page = () => {
     const [userName, setUserName] = useState("")
     const [loading, setLoading] = useState(true)
     const router = useRouter();
+    const token = getCookie("token")
     const logout = async () => {
         try {
             await axios.get('/api/logout')
@@ -22,13 +23,10 @@ const Page = () => {
     const getUserData = async () => {
         try {
             const userResponse = await fetch('/api/get-users');
-            if (!userResponse.ok) {
-                alert("Network response was not ok");
-            }
             const user = await userResponse.json();
             setUserName(user?.userData?.username);
-            console.log(user?.userData?.username);
             setLoading(false)
+            console.log(user?.userData?.username);
         } catch (error: any) {
             setLoading(false)
             Toast.ErrorShowToast(error.message || "Something went wrong");
@@ -36,7 +34,8 @@ const Page = () => {
     };
     useEffect(() => {
         getUserData()
-    }, [])
+    }, [token])
+
     return (
         <>
             {
