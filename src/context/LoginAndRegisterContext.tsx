@@ -13,6 +13,7 @@ type LoginData = {
     password: string;
 };
 
+
 type LoginAndRegisterContextType = {
     RegisterUser: (userData: UserData) => Promise<any>;
     Loginuser: (loginData: LoginData) => Promise<any>;
@@ -22,14 +23,13 @@ type LoginAndRegisterProviderProps = {
     children: ReactNode;
 };
 
+
 export const LoginAndRegisterContext = createContext<LoginAndRegisterContextType>({
     RegisterUser: async () => { },
-    Loginuser: async () => { }
+    Loginuser: async () => { },
 });
 
 export const LoginAndRegisterProvider = ({ children }: LoginAndRegisterProviderProps) => {
-    const [loggedIn] = useState<boolean>(false);
-
     const RegisterUser = async (userData: UserData): Promise<any> => {
         const response = await axios.post("/api/register", userData);
         return response.data;
@@ -39,6 +39,6 @@ export const LoginAndRegisterProvider = ({ children }: LoginAndRegisterProviderP
         const response = await axios.post("/api/login", loginData);
         return response.data;
     };
-
     return <LoginAndRegisterContext.Provider value={{ RegisterUser, Loginuser }}>{children}</LoginAndRegisterContext.Provider>;
+
 };
