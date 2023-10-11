@@ -2,7 +2,7 @@ import { connect } from "@/database/db";
 import User from "@/model/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import { AxiosError } from "axios";
+import { sendEmail } from "@/helper/Email";
 
 connect();
 
@@ -34,7 +34,11 @@ export async function POST(request: NextRequest) {
         console.log(savedUser);
 
         //send verification email
-
+        await sendEmail({
+            email,
+            emailType: "VERIFY_USER",
+            userId: savedUser._id,
+        });
         return NextResponse.json({
             message: "Registration successful",
             success: true,

@@ -17,6 +17,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "User does not exist", success: false }, { status: 400 });
         }
 
+        if (!user.isVerified) {
+            return NextResponse.json({ error: "User is not verified", success: false }, { status: 400 });
+            console.log("user verification status: " + user.isVerified);
+        }
+
         // check if password is correct
 
         const validPassword = await bcryptjs.compare(password, user.password);
@@ -30,7 +35,7 @@ export async function POST(request: NextRequest) {
             email: user.email,
         };
 
-        const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_JWT_TOKEN!, { expiresIn: "1d" });
+        const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_JWT_TOKEN!, { expiresIn: "2y" });
 
         const response = NextResponse.json({
             message: "Login successful",

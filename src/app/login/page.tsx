@@ -57,10 +57,7 @@ const Page = () => {
                     {
                         password.length < 0 && <span className=' text-red-500'>Password should have alteast 8 characters</span>
                     }
-                    <div className="flex justify-between items-center mt-3">
-                        <div className=' gap-2 flex items-center'>
-                            <input type="checkbox" className=' focus:ring-white' />Remember Me
-                        </div>
+                    <div className="flex justify-start mt-3">
                         <Link href={"/forgot-password"} className=' text-blue-500'>Forgot Password?</Link>
                     </div>
                     {
