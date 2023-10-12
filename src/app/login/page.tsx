@@ -23,6 +23,7 @@ const Page = () => {
             }
             const response = await Loginuser(loginData)
             Toast.SuccessshowToast(response.message || "Login Successfull with some server side error")
+            console.log(response)
             router.push("/");
             router.refresh();
         } catch (error: any) {

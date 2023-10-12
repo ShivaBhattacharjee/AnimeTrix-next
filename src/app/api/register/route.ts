@@ -40,9 +40,8 @@ export async function POST(request: NextRequest) {
             userId: savedUser._id,
         });
         return NextResponse.json({
-            message: "Registration successful",
+            message: "Email sent. Please verify your registration.",
             success: true,
-            savedUser,
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

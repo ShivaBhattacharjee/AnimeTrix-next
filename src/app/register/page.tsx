@@ -53,8 +53,8 @@ const Page = () => {
                 email: email,
                 password: password,
             }
-            const response = await RegisterUser(UserData);
-            Toast.SuccessshowToast(response.message || "Registered Successfully")
+            await RegisterUser(UserData);
+            Toast.SuccessshowToast(`Email sent to ${email} please verify` || "")
             router.push("/login")
         } catch (error: any) {
             Toast.ErrorShowToast(error.response.data.error || "Something went wrong")

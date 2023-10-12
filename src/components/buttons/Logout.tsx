@@ -22,7 +22,7 @@ const Logout = () => {
             const userResponse = await fetch('/api/get-users');
             if (token) {
                 if (!userResponse.ok) {
-                    alert("Network response was not ok");
+                    Toast.ErrorShowToast("There seems to be an issue with network response.");
                 }
             }
             const user = await userResponse.json();

@@ -6,21 +6,22 @@ type EmailProps = {
     emailType: string;
     userId: string;
 };
-export const sendEmail = async ({ email, emailType, userId }: any) => {
+export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
     try {
         const hashedToken = await bcryptjs.hash(userId.toString(), 10);
-
+        const cleanedHashedToken = hashedToken.replace(/\$|\.|\//g, ""); //to remove special characters
         if (emailType == "VERIFY_USER") {
-            await User.findByIdAndUpdate(userId, { verifyToken: hashedToken, verifyTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry is 3 hours
+            await User.findByIdAndUpdate(userId, { verifyToken: cleanedHashedToken, verifyTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry is 3 hours
         } else if (emailType == "RESET_PASSWORD_USER") {
-            await User.findByIdAndUpdate(userId, { forgotPasswordToken: hashedToken, forgotPasswordTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry in 3 hours
+            await User.findByIdAndUpdate(userId, { forgotPasswordToken: cleanedHashedToken, forgotPasswordTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry in 3 hours
         }
 
         const transport = nodemailer.createTransport({
-            service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+            host: "smtp.ethereal.email",
+            port: 587,
             auth: {
-                user: process.env.NEXT_PUBLIC_USER,
-                pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
+                user: "christine18@ethereal.email",
+                pass: "3Fe5Kkuz6pd7pY9FgZ",
             },
         });
 
@@ -32,8 +33,12 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
             <h1>Welcome to animeTrix</h1>
             Click Here to verify your account</p>
             <br/>
-            <a href = "http://localhost:3000/${emailType == "VERIFY_USER" ? "verifyToken" : "resetPassword"}?token=${hashedToken}" >
-            <button>${emailType === "VERIFY_USER" ? "Verify" : " Reset"}</button>
+            <h1>Alternatively you can also paste this link in browser</h1>
+            </br>
+            https://localhost:300/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}
+            <br/>
+            <a href = "http://localhost:3000/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}" target="_blank" >
+            <button style={}>${emailType === "VERIFY_USER" ? "Verify" : " Reset"}</button>
             </a>`,
         };
         const mailresponse = await transport.sendMail(mailOptions);
