@@ -13,15 +13,15 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         if (emailType == "VERIFY_USER") {
             await User.findByIdAndUpdate(userId, { verifyToken: cleanedHashedToken, verifyTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry is 3 hours
         } else if (emailType == "RESET_PASSWORD_USER") {
-            await User.findByIdAndUpdate(userId, { forgotPasswordToken: cleanedHashedToken, forgotPasswordTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry in 3 hours
+            await User.findByIdAndUpdate(userId, { forgotPasswordToken: cleanedHashedToken }); //token expiry in 3 hours
         }
 
         const transport = nodemailer.createTransport({
             host: "smtp.ethereal.email",
             port: 587,
             auth: {
-                user: "christine18@ethereal.email",
-                pass: "3Fe5Kkuz6pd7pY9FgZ",
+                user: "gust84@ethereal.email",
+                pass: "VEv7WYgbDEbDHmcQQd",
             },
         });
 
@@ -35,9 +35,9 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
             <br/>
             <h1>Alternatively you can also paste this link in browser</h1>
             </br>
-            https://localhost:300/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}
+            ${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}
             <br/>
-            <a href = "http://localhost:3000/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}" target="_blank" >
+            <a href = "${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}" target="_blank" >
             <button style={}>${emailType === "VERIFY_USER" ? "Verify" : " Reset"}</button>
             </a>`,
         };

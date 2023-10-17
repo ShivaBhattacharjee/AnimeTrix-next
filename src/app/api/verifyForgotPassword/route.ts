@@ -7,21 +7,22 @@ connect();
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { forgotPasswordtoken, newPassword } = reqBody;
-        const user = await User.findOne({ forgotPasswordToken: forgotPasswordtoken });
-
+        const { token } = reqBody;
+        const user = await User.findOne({ forgotPasswordToken: token });
         if (!user) {
-            return NextResponse.json({ error: "No user found" }, { status: 400 });
+            return NextResponse.json({ error: "Invalid token" }, { status: 400 });
+        } else if (user.isVerified == false) {
+            return NextResponse.json(
+                {
+                    error: "User is not verified",
+                },
+                {
+                    status: 400,
+                },
+            );
         }
-
-        if (Date.now() > user.verifyTokenExpiry) {
-            return NextResponse.json({ error: "Token expired" }, { status: 400 });
-        }
-
-        const salt = await bcryptjs.genSalt(10);
-        const hashedPassword = await bcryptjs.hash(newPassword, salt);
-
-        user.password = hashedPassword;
+        user.passsword = token;
+        user.forgotPasswordToken = undefined;
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

@@ -62,7 +62,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
                         .sort((animeA, animeB) => animeA.number - animeB.number)
                         .map((anime, index) => (
                             <Link href={`/watch/${anime.id}/${animeId}`} className="duration-200 border-white/60 border-2 hover:scale-90 rounded-lg flex flex-col gap-3" key={index}>
-                                <img src={anime.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
+                                <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
                                 <h1 className=" p-2 font-semibold mb-3">Episode: {anime.number}</h1>
                             </Link>
                         ))}

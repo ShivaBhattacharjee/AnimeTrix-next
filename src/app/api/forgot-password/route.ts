@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
             emailType: "RESET_PASSWORD_USER",
             userId: user._id,
         });
-        return NextResponse.json({ message: "Email sent. Please verify your registration.", success: true });
+        return NextResponse.json({ message: "Reset Password Email Sent.", success: true });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

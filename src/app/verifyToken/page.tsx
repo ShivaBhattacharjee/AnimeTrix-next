@@ -14,6 +14,7 @@ export default function VerifyEmailPage() {
         try {
             const response = await axios.post('/api/verifyEmail', { token })
             setVerified(true)
+            setLoading(false);
             setMessage(response.data.message)
             console.log(response)
         } catch (error: any) {
@@ -29,7 +30,6 @@ export default function VerifyEmailPage() {
     useEffect(() => {
         if (token.length > 0) {
             verifyUserEmail()
-            setLoading(false)
         }
     }, [token])
 
@@ -37,7 +37,7 @@ export default function VerifyEmailPage() {
         <div className="flex justify-center items-center  flex-col min-h-[70vh] p-3 gap-5">
             {
                 loading ?
-                    <div className="flex min-h-[70vh] flex-col">
+                    <div className="flex min-h-[70vh] flex-col justify-center items-center">
                         <SpinLoading />
                     </div> : (
                         <>
