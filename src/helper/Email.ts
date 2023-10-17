@@ -13,7 +13,7 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         if (emailType == "VERIFY_USER") {
             await User.findByIdAndUpdate(userId, { verifyToken: cleanedHashedToken, verifyTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry is 3 hours
         } else if (emailType == "RESET_PASSWORD_USER") {
-            await User.findByIdAndUpdate(userId, { forgotPasswordToken: cleanedHashedToken }); //token expiry in 3 hours
+            await User.findByIdAndUpdate(userId, { forgotPasswordToken: cleanedHashedToken, forgotPasswordTokenExpiry: Date.now() + 3 * 60 * 60 * 1000 }); //token expiry in 3 hours
         }
 
         const transport = nodemailer.createTransport({
