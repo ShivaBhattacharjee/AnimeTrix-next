@@ -17,7 +17,7 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         }
 
         const transport = nodemailer.createTransport({
-            host: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
+            service: process.env.NEXT_PUBLIC_EMAIL_SERVICE,
             auth: {
                 user: process.env.NEXT_PUBLIC_EMAIL,
                 pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
