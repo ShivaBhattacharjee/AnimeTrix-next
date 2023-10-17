@@ -99,8 +99,8 @@ const Page = async ({
                                     </span>
                                 )}
                                 <div className="flex gap-3 mt-7 w-full">
-                                    <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-24 lg:w-44 rounded-lg" />
-                                    <div className="flex flex-wrap w-full gap-3 text-lg flex-col font-semibold">
+                                    <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-40 md:w-44 rounded-lg" />
+                                    <div className="flex flex-wrap w-full gap-3 text-md md:text-lg flex-col font-semibold">
                                         <h1><span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}</h1>
                                         <h1 ><span className=" text-white/70">Season</span> : {details?.season || "Unknown"}</h1>
                                         <h1><span className=" text-white/70 ">Audio</span> : {details?.subOrDub || "Unknown"}</h1>
