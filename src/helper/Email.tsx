@@ -1,6 +1,8 @@
 import nodemailer from "nodemailer";
 import User from "@/model/user.model";
 import bcryptjs from "bcryptjs";
+import { render } from "@react-email/render";
+import RegisterEmail from "../utils/EmailTemplate/RegisterEmail";
 type EmailProps = {
     email: string;
     emailType: string;
@@ -23,23 +25,14 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
                 pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
             },
         });
-
+        const registerEmail = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
             from: "animetrixverify@gmail.com",
             to: email,
-            subject: emailType === "VERIFY_USER" ? "Verify your email" : "Use a password manager lol dont use forget password every now and then",
-            html: `<p> Hey ${email} <br/>
-            <h1>Welcome to animeTrix</h1>
-            Click Here to verify your account</p>
-            <br/>
-            <h1>Alternatively you can also paste this link in browser</h1>
-            </br>
-            ${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}
-            <br/>
-            <a href = "${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}" target="_blank" >
-            <button style={}>${emailType === "VERIFY_USER" ? "Verify" : " Reset"}</button>
-            </a>`,
+            subject: emailType === "VERIFY_USER" ? "Verify your email" : "Reset Your Password and Keep it a Secret! 🤐",
+            html: registerEmail,
         };
+
         const mailresponse = await transport.sendMail(mailOptions);
         return mailresponse;
     } catch (error: any) {
