@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowRightToLine, ArrowLeftToLine, PlayCircle } from "lucide-react";
 import Link from "next/link";
-import ReloadFunc from "@/components/error/ReloadFunc";
+
+type DayOfWeek = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
+
 interface Anime {
     id: string;
     coverImage: string;
@@ -18,31 +20,30 @@ interface Anime {
 
 interface AiringScheduleCardProps {
     airingData: {
-        sundaySchedule: Anime[];
-        mondaySchedule: Anime[];
-        tuesdaySchedule: Anime[];
-        wednesdaySchedule: Anime[];
-        thursdaySchedule: Anime[];
-        fridaySchedule: Anime[];
-        saturdaySchedule: Anime[];
+        [key in DayOfWeek]: Anime[];
     };
 }
 
 const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) => {
-    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const [currentDayIndex, setCurrentDayIndex] = useState(new Date().getDay());
+    const daysOfWeek: DayOfWeek[] = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const [currentDay, setCurrentDay] = useState<DayOfWeek>(daysOfWeek[new Date().getDay()]);
+    const [animeForCurrentDay, setAnimeForCurrentDay] = useState<Anime[] | undefined>(undefined);
+
+    useEffect(() => {
+        setAnimeForCurrentDay(airingData[currentDay]);
+    }, [airingData, currentDay]);
 
     const handlePreviousDay = () => {
-        setCurrentDayIndex((prevIndex) => (prevIndex === 0 ? 6 : prevIndex - 1));
+        const currentIndex = daysOfWeek.indexOf(currentDay);
+        const previousIndex = (currentIndex + 6) % 7;
+        setCurrentDay(daysOfWeek[previousIndex]);
     };
 
     const handleNextDay = () => {
-        setCurrentDayIndex((prevIndex) => (prevIndex === 6 ? 0 : prevIndex + 1));
+        const currentIndex = daysOfWeek.indexOf(currentDay);
+        const nextIndex = (currentIndex + 1) % 7;
+        setCurrentDay(daysOfWeek[nextIndex]);
     };
-
-    const currentDay = daysOfWeek[currentDayIndex];
-
-    const animeForCurrentDay = airingData[`${currentDay.toLowerCase()}Schedule` as keyof typeof airingData];
 
     const formatTime = (timestamp: number) => {
         const date = new Date(timestamp);
@@ -59,32 +60,37 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                 <div className="flex flex-col gap-3">
                     <div className="p-4">
                         <div className="flex flex-col gap-3 ">
-                            {animeForCurrentDay?.length <= 0 || animeForCurrentDay === undefined ? (
+                            {animeForCurrentDay?.length === 0 || animeForCurrentDay === undefined ? (
                                 <div className="flex justify-center items-center text-center">
                                     <h1>Oops! No schedule found for {currentDay}</h1>
                                 </div>
                             ) : (
-                                animeForCurrentDay.length > 0 ? (
-                                    animeForCurrentDay?.map((anime: Anime) => (
-                                        <div className="flex justify-between items-center" key={anime.id}>
-                                            <Link href={`/details/${anime.id}`} className="flex items-center gap-4">
-                                                <img height={200} width={400} loading="lazy" src={anime.coverImage} alt={`an image of ${anime.title?.userPreferred || anime.title?.english || anime.title?.romaji || anime.title?.native}`} className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg" />
-                                                <div className="flex flex-col">
-                                                    <span className="text-white text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">{anime.title?.userPreferred || anime.title?.english || anime.title?.romaji || anime.title?.native}</span>
-                                                    <div className="flex gap-2 items-center flex-wrap text-sm lg:text-xl">
-                                                        <span>Ep: {anime.airingEpisode} -</span>
-                                                        <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
-                                                    </div>
+                                animeForCurrentDay?.map((anime: Anime) => (
+                                    <div className="flex justify-between items-center" key={anime.id}>
+                                        <Link href={`/details/${anime.id}`} className="flex items-center gap-4">
+                                            <img
+                                                height={200}
+                                                width={400}
+                                                loading="lazy"
+                                                src={anime.coverImage}
+                                                alt={`an image of ${anime?.title?.romaji || anime?.title?.english || anime.title?.native}`}
+                                                className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg"
+                                            />
+                                            <div className="flex flex-col">
+                                                <span className="text-white text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">
+                                                    {anime?.title?.romaji || anime?.title?.english || anime.title?.native}
+                                                </span>
+                                                <div className="flex gap-2 items-center flex-wrap text-sm lg:text-xl">
+                                                    <span>Ep: {anime.airingEpisode} -</span>
+                                                    <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
                                                 </div>
-                                            </Link>
-                                            <Link href={`/details/${anime.id}`}>
-                                                <PlayCircle className="cursor-pointer lg:scale-150" />
-                                            </Link>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <h1>Error loading airing schedule</h1>
-                                )
+                                            </div>
+                                        </Link>
+                                        <Link href={`/details/${anime.id}`}>
+                                            <PlayCircle className="cursor-pointer lg:scale-150" />
+                                        </Link>
+                                    </div>
+                                ))
                             )}
                         </div>
                     </div>
@@ -94,7 +100,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                         <button onClick={handlePreviousDay}>
                             <ArrowLeftToLine className="scale-125" />
                         </button>
-                        <span className="text-2xl">{currentDay}</span>
+                        <span className="text-2xl capitalize">{currentDay}</span>
                         <button onClick={handleNextDay}>
                             <ArrowRightToLine className=" scale-125" />
                         </button>
