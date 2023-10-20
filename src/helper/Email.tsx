@@ -27,7 +27,7 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         });
         const registerEmail = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
-            from: "animetrixverify@gmail.com",
+            from: "animetrixservices@gmail.com",
             to: email,
             subject: emailType === "VERIFY_USER" ? "Verify your email" : "Reset Your Password and Keep it a Secret! 🤐",
             html: registerEmail,

@@ -108,7 +108,7 @@ export const getSearchResults = async (searchValue: string) => {
 // get anime details
 export const getAnimeDetails = async (animeid: number) => {
     try {
-        const response = await fetch(`${AnimeApi}/info/${animeid}`);
+        const response = await fetch(`${AnimeApi}/info/${animeid}`, { cache: "no-cache" });
         const data = await response.json();
         return data;
     } catch (error) {
