@@ -3,6 +3,7 @@ import Toast from '@/utils/toast'
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import { getCookie } from "cookies-next"
+import { Error } from '@/types/ErrorTypes';
 const Logout = () => {
 
 
@@ -10,7 +11,7 @@ const Logout = () => {
     const [profilePicture, setProfilePicture] = useState("")
     const [tokenExistOrNot, settokenExistOrNot] = useState(false)
     const [username, setUserName] = useState("")
-    async function checkIfTokenExistOrNot() {
+    function checkIfTokenExistOrNot() {
         if (token === undefined || token === null || token.length === 0) {
             settokenExistOrNot(false);
         } else {
@@ -27,8 +28,9 @@ const Logout = () => {
             }
             const user = await userResponse.json();
             setUserName(user?.userData?.username?.charAt(0).toUpperCase());
-        } catch (error: any) {
-            Toast.ErrorShowToast(error.message || "Something went wrong");
+        } catch (error: unknown) {
+            const Error = error as Error
+            Toast.ErrorShowToast(Error.message || "Something went wrong");
         }
     };
 

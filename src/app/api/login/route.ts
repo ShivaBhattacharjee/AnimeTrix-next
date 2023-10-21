@@ -3,6 +3,7 @@ import User from "@/model/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { Error } from "@/types/ErrorTypes";
 
 connect();
 
@@ -41,7 +42,8 @@ export async function POST(request: NextRequest) {
         });
         response.cookies.set("token", token);
         return response;
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error: unknown) {
+        const Error = error as Error;
+        return NextResponse.json({ error: Error.message }, { status: 500 });
     }
 }

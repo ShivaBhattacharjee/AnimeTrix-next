@@ -6,7 +6,7 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { ClockLoader } from 'react-spinners'
-
+import { Error } from "@/types/ErrorTypes"
 const Page = () => {
     const router = useRouter()
     const [token, setToken] = useState("")
@@ -33,9 +33,10 @@ const Page = () => {
             const response = await axios.post("/api/verifyForgotPassword", userData)
             Toast.SuccessshowToast(response.data.message || "Reset Successfull")
             router.push("/login")
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.log(error)
-            Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
+            const Error = error as Error
+            Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong")
             setLoading(false)
         } finally {
             setLoading(false)

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { Error } from "@/types/ErrorTypes";
 
-export async function GET() {
+export function GET() {
     const cookieStore = cookies();
 
     try {
@@ -30,7 +31,8 @@ export async function GET() {
         }
 
         // return response;
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message });
+    } catch (error: unknown) {
+        const Error = error as Error;
+        return NextResponse.json({ error: Error.message });
     }
 }

@@ -2,7 +2,7 @@ import { connect } from "@/database/db";
 import { getDataFromJwt } from "@/helper/jwtData";
 import User from "@/model/user.model";
 import { NextRequest, NextResponse } from "next/server";
-
+import { Error } from "@/types/ErrorTypes";
 connect();
 
 export async function GET(request: NextRequest) {
@@ -13,10 +13,11 @@ export async function GET(request: NextRequest) {
             message: "User found",
             userData: user,
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const Error = error as Error;
         return NextResponse.json(
             {
-                error: error.message,
+                error: Error.message,
             },
             {
                 status: 400,

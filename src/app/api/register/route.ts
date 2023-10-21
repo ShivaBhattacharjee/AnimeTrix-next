@@ -3,7 +3,7 @@ import User from "@/model/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { sendEmail } from "@/helper/Email";
-
+import { Error } from "@/types/ErrorTypes";
 connect();
 
 export async function POST(request: NextRequest) {
@@ -43,7 +43,8 @@ export async function POST(request: NextRequest) {
             message: "Email sent. Please verify your registration.",
             success: true,
         });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+    } catch (error: unknown) {
+        const Error = error as Error;
+        return NextResponse.json({ error: Error.message }, { status: 500 });
     }
 }

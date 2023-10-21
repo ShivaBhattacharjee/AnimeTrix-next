@@ -1,4 +1,5 @@
 "use client"
+import { Error } from '@/types/ErrorTypes'
 import Toast from '@/utils/toast'
 import axios from 'axios'
 import Link from 'next/link'
@@ -19,8 +20,9 @@ const Page = () => {
             const response = await axios.post("/api/forgot-password", userData);
             console.log(response)
             Toast.SuccessshowToast(response.data.message || "Email to reset password sent");
-        } catch (error: any) {
-            Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong");
+        } catch (error: unknown) {
+            const Error = error as Error
+            Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong");
         } finally {
             setLoading(false);
         }

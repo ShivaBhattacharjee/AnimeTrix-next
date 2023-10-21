@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Toast from '@/utils/toast';
 import SpinLoading from '@/components/loading/SpinLoading';
 import { getCookie } from 'cookies-next';
+import { Error } from '@/types/ErrorTypes';
 const Page = () => {
     const [userName, setUserName] = useState("")
     const [loading, setLoading] = useState(true)
@@ -27,9 +28,10 @@ const Page = () => {
             setUserName(user?.userData?.username);
             setLoading(false)
             console.log(user?.userData?.username);
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const Error = error as Error
             setLoading(false)
-            Toast.ErrorShowToast(error.message || "Something went wrong");
+            Toast.ErrorShowToast(Error.message || "Something went wrong");
         }
     };
     useEffect(() => {
