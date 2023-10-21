@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ClockLoader } from "react-spinners"
 import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
 import Toast from '@/utils/toast';
+import { Error } from "@/types/ErrorTypes"
 const Page = () => {
     const router = useRouter()
     const [userName, setUserName] = useState<string>('');
@@ -56,8 +57,9 @@ const Page = () => {
             await RegisterUser(UserData);
             Toast.SuccessshowToast(`Email sent to ${email} please verify` || "")
             router.push("/login")
-        } catch (error: any) {
-            Toast.ErrorShowToast(error.response.data.error || "Something went wrong")
+        } catch (error: unknown) {
+            const Error = error as Error
+            Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong")
             setLoading(false)
         } finally {
             setLoading(false)

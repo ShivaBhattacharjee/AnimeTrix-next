@@ -3,6 +3,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import SpinLoading from "@/components/loading/SpinLoading"
+import { Error } from "@/types/ErrorTypes"
 export default function VerifyEmailPage() {
     const [token, setToken] = useState("")
     const [verified, setVerified] = useState(false)
@@ -17,8 +18,9 @@ export default function VerifyEmailPage() {
             setLoading(false);
             setMessage(response.data.message)
             console.log(response)
-        } catch (error: any) {
-            setError(error.response.data.error)
+        } catch (error: unknown) {
+            const Error = error as Error
+            setError(Error?.response?.data?.error || "Error verifying mail")
             console.log(error)
         }
     }

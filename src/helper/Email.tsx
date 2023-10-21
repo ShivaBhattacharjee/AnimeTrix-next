@@ -2,7 +2,8 @@ import nodemailer from "nodemailer";
 import User from "@/model/user.model";
 import bcryptjs from "bcryptjs";
 import { render } from "@react-email/render";
-import RegisterEmail from "../utils/EmailTemplate/RegisterEmail";
+import RegisterEmail from '@/utils/EmailTemplate/RegisterEmail';
+import { Error } from "@/types/ErrorTypes"
 type EmailProps = {
     email: string;
     emailType: string;
@@ -35,7 +36,8 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
 
         const mailresponse = await transport.sendMail(mailOptions);
         return mailresponse;
-    } catch (error: any) {
-        throw new Error(error.message);
+    } catch (error: unknown) {
+        const ErrorMsg = error as Error;
+        throw new Error(ErrorMsg.message);
     }
 };

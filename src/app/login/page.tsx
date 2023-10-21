@@ -6,6 +6,8 @@ import React, { useContext, useState } from 'react'
 import { ClockLoader } from 'react-spinners';
 import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
 import Toast from '@/utils/toast';
+import { Error } from '@/types/ErrorTypes'
+
 const Page = () => {
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,7 @@ const Page = () => {
     const [email, setEmail] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
     const { Loginuser } = useContext(LoginAndRegisterContext)
+
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
@@ -26,8 +29,9 @@ const Page = () => {
             console.log(response)
             router.push("/");
             router.refresh();
-        } catch (error: any) {
-            Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
+        } catch (error: unknown) {
+            const Error = error as Error;
+            Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong");
             console.log(error)
             setLoading(false);
 
