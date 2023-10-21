@@ -53,8 +53,12 @@ const Page = () => {
                 email: email,
                 password: password,
             }
-            await axios.post("/api/register", UserData);
-            Toast.SuccessshowToast(`Email sent to ${email} please verify` || "Something went wrong")
+            const res = await axios.post("/api/register", UserData);
+            if (res) {
+                Toast.SuccessshowToast(`Email sent to ${email} please verify` || "Something went wrong")
+            } else {
+                Toast.ErrorShowToast("Something went wrong")
+            }
             router.push("/login")
         } catch (error: unknown) {
             const Error = error as Error

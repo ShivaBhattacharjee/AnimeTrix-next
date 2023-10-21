@@ -59,7 +59,7 @@ export default function RegisterEmail(props: props) {
                             <Button
                                 pX={20}
                                 pY={12}
-                                className="bg-white rounded  text-black text-[12px] font-semibold no-underline text-center"
+                                className=" bg-blue-600 rounded  text-white text-[12px] font-semibold no-underline text-center"
                                 href={VerifyLink}
                             >
                                 {type == "VERIFY_USER" ? "Verify Email" : "Reset Password"}
@@ -69,7 +69,7 @@ export default function RegisterEmail(props: props) {
                             or copy and paste this URL into your browser:{' '}
                             <Link
                                 href={VerifyLink}
-                                className="text-blue-600 no-underline"
+                                className="text-purple-600 no-underline"
                             >
                                 {VerifyLink}
                             </Link>
