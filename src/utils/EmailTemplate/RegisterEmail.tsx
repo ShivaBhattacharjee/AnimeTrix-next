@@ -25,7 +25,7 @@ export default function RegisterEmail(props: props) {
     return (
         <Html>
             <Head />
-            <Preview>{type == "VERIFY_USER" ? "Welcome to AnimeTrix" : "Lets recover your lost password"}</Preview>
+            <Preview>{type == "VERIFY_USER" ? "Welcome to AnimeTrix " : "Lets recover your lost password"}</Preview>
             <Tailwind>
                 <Body className="bg-black text-white my-auto mx-auto font-sans">
                     <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
@@ -39,7 +39,7 @@ export default function RegisterEmail(props: props) {
                             />
                         </Section>
                         <Heading className="text-white text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-                            {type == "VERIFY_USER" ? `Welcome to AnimeTrix}` : "Password Recovery"}
+                            {type == "VERIFY_USER" ? `Welcome to AnimeTrix` : "Password Recovery"}
                         </Heading>
                         <Text className="text-white text-[14px] leading-[24px]">
                             Hello <strong>{username}</strong>,
