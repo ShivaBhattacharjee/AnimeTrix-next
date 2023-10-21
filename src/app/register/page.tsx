@@ -5,9 +5,9 @@ import Link from 'next/link';
 import useDebounce from '@/hooks/debounce';
 import { useRouter } from 'next/navigation';
 import { ClockLoader } from "react-spinners"
-import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
 import Toast from '@/utils/toast';
 import { Error } from "@/types/ErrorTypes"
+import axios from 'axios';
 const Page = () => {
     const router = useRouter()
     const [userName, setUserName] = useState<string>('');
@@ -18,7 +18,6 @@ const Page = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [passwordMismatch, setPasswordMismatch] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const { RegisterUser } = useContext(LoginAndRegisterContext)
 
     /**
      * Handles the change event of the password input field and sets the password state.
@@ -54,8 +53,8 @@ const Page = () => {
                 email: email,
                 password: password,
             }
-            await RegisterUser(UserData);
-            Toast.SuccessshowToast(`Email sent to ${email} please verify` || "")
+            await axios.post("/api/register", UserData);
+            Toast.SuccessshowToast(`Email sent to ${email} please verify` || "Something went wrong")
             router.push("/login")
         } catch (error: unknown) {
             const Error = error as Error
