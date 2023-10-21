@@ -1,12 +1,16 @@
 import { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
 
-export const getDataFromJwt = (request: NextRequest) => {
+type DecodedToken = {
+    id: number;
+};
+
+export const getDataFromJwt = (request: NextRequest): number => {
     try {
         const token = request.cookies.get("token")?.value || "";
-        const decodedToken: any = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_TOKEN!);
+        const decodedToken: DecodedToken = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_TOKEN!) as DecodedToken;
         return decodedToken.id;
-    } catch (error: unknown) {
-        throw new Error("Error decrypting jwt" + error);
+    } catch (error) {
+        throw new Error("Error decrypting jwt: " + error);
     }
 };

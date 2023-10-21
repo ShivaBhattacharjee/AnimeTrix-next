@@ -17,8 +17,9 @@ const Page = () => {
             Toast.SuccessshowToast("Logout Successfull")
             router.refresh();
             router.push("/")
-        } catch (error: any) {
-            Toast.ErrorShowToast(error?.response?.data?.error || "Something went wrong")
+        } catch (error: unknown) {
+            const Error = error as Error
+            Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong")
         }
     }
     const getUserData = async () => {

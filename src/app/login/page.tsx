@@ -2,11 +2,11 @@
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { ClockLoader } from 'react-spinners';
-import { LoginAndRegisterContext } from '@/context/LoginAndRegisterContext';
 import Toast from '@/utils/toast';
 import { Error } from '@/types/ErrorTypes'
+import axios from 'axios';
 
 const Page = () => {
     const router = useRouter()
@@ -14,7 +14,7 @@ const Page = () => {
     const [password, setPassword] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(false)
-    const { Loginuser } = useContext(LoginAndRegisterContext)
+
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -24,8 +24,8 @@ const Page = () => {
                 email: email,
                 password: password,
             }
-            const response = await Loginuser(loginData)
-            Toast.SuccessshowToast(response.message || "Login Successfull with some server side error")
+            const response = await axios.post(`/api/login`, loginData);
+            Toast.SuccessshowToast(response?.data?.message || "Login Successfull with some server side error")
             console.log(response)
             router.push("/");
             router.refresh();
