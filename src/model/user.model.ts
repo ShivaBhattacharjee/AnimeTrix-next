@@ -1,5 +1,28 @@
 import mongoose from "mongoose";
 
+const historySchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true,
+    },
+    streamId: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true,
+    },
+    coverImage: {
+        type: String,
+        required: true,
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -35,6 +58,7 @@ const userSchema = new mongoose.Schema({
     forgotPasswordTokenExpiry: String,
     verifyToken: String,
     verifyTokenExpiry: Date,
+    watchHistory: [historySchema],
 });
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);
