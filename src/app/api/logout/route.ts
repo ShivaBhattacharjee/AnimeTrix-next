@@ -23,7 +23,7 @@ export function GET() {
         } else {
             cookies().delete("token");
             return NextResponse.json(
-                { error: "Logout Successful", success: true },
+                { message: "Logout Successful", success: true },
                 {
                     status: 200,
                 },

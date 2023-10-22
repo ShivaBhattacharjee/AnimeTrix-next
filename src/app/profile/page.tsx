@@ -64,8 +64,8 @@ const Page = () => {
                                 </div>
                             </div>
                             <div className="flex gap-3">
-                                <Link href={"/edit-profile"} className=' bg-white p-3 text-black rounded-full font-semibold'>Manage Account</Link>
-                                <button onClick={logout} className='bg-white/80 text-black p-3 rounded-lg'><LogOut /></button>
+                                <Link href={"/edit-profile"} className=' bg-white p-3 text-black rounded-full font-semibold hover:bg-transparent hover:border-2 hover:border-white duration-200 hover:text-white'>Manage Account</Link>
+                                <button onClick={logout} className='bg-white/80 text-black p-3 rounded-lg hover:bg-transparent duration-200 hover:text-white hover:scale-110'><LogOut /></button>
                             </div>
                         </div>
                         <h1 className=' h-1 bg-white/20 w-full'></h1>
