@@ -6,8 +6,11 @@ import Toast from '@/utils/toast';
 import SpinLoading from '@/components/loading/SpinLoading';
 import { getCookie } from 'cookies-next';
 import { Error } from '@/types/ErrorTypes';
+import { LogOut } from 'lucide-react';
+import Link from 'next/link';
 const Page = () => {
     const [userName, setUserName] = useState("")
+    const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(true)
     const router = useRouter();
     const token = getCookie("token")
@@ -27,6 +30,8 @@ const Page = () => {
             const userResponse = await fetch('/api/get-users');
             const user = await userResponse.json();
             setUserName(user?.userData?.username);
+            setEmail(user?.userData?.email);
+            console.log(user)
             setLoading(false)
             console.log(user?.userData?.username);
         } catch (error: unknown) {
@@ -43,14 +48,27 @@ const Page = () => {
         <>
             {
                 loading ? (
-                    <div className="flex justify-center items-center min-h-screen">
+                    <div className="flex justify-center items-center min-h-[60vh]">
                         <SpinLoading />
                     </div>
                 ) : (
-                    <div className=' flex justify-center items-center flex-col min-h-[50dvh] text-white'>
-                        <h1>This is profile page</h1>
-                        <h2>username : {userName} </h2>
-                        <button className=' bg-white p-2 font-semibold w-32 mt-5 rounded-lg text-black duration-200 hover:bg-transparent border-white hover:border-2 hover:text-white' onClick={logout}>Logout</button>
+                    <div className='min-h-[60vh]'>
+                        <div className=' p-4 flex flex-col lg:flex-row gap-3 items-center justify-between'>
+                            <div className='flex flex-col lg:flex-row items-center gap-5'>
+                                <div className=' h-24 w-24 lg:h-32 lg:w-32 rounded-full bg-white text-black flex justify-center items-center '>
+                                    <h1 className=' font-bold text-4xl'>{userName.charAt(0).toUpperCase()}</h1>
+                                </div>
+                                <div className="flex flex-col items-center lg:items-start">
+                                    <h1 className='text-3xl font-semibold'>{userName}</h1>
+                                    <span className=' opacity-70 tracking-wide'>{email || "Unknown"}</span>
+                                </div>
+                            </div>
+                            <div className="flex gap-3">
+                                <Link href={"/edit-profile"} className=' bg-white p-3 text-black rounded-full font-semibold'>Manage Account</Link>
+                                <button onClick={logout} className='bg-white/80 text-black p-3 rounded-lg'><LogOut /></button>
+                            </div>
+                        </div>
+                        <h1 className=' h-1 bg-white/20 w-full'></h1>
                     </div>
                 )
             }

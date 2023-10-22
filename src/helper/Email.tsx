@@ -38,6 +38,6 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         return mailresponse;
     } catch (error: unknown) {
         const ErrorMsg = error as Error;
-        throw new Error(ErrorMsg.message);
+        return ErrorMsg.message;
     }
 };

@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    userDescription: {
+        type: String,
+        default: "",
+    },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: String,
     verifyToken: String,
