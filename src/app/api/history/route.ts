@@ -91,3 +91,49 @@ export async function POST(request: NextRequest) {
         });
     }
 }
+export async function DELETE(request: NextRequest) {
+    try {
+        const reqBody = await request.json();
+        const { streamId } = reqBody;
+        const userId = getDataFromJwt(request);
+        const user = await User.findOne({ _id: userId });
+        if (!user) {
+            return NextResponse.json({
+                message: "User not found",
+            });
+        }
+        const historyIndex = user.watchHistory.findIndex((history: history) => history.streamId === streamId);
+        if (historyIndex === -1) {
+            return NextResponse.json(
+                {
+                    error: "video not found",
+                },
+                {
+                    status: 404,
+                },
+            );
+        }
+
+        user.watchHistory.splice(historyIndex, 1);
+        await user.save();
+
+        return NextResponse.json(
+            {
+                message: "video removed",
+            },
+            {
+                status: 201,
+            },
+        );
+    } catch (error: unknown) {
+        const Error = error as Error;
+        return NextResponse.json(
+            {
+                error: Error,
+            },
+            {
+                status: 401,
+            },
+        );
+    }
+}

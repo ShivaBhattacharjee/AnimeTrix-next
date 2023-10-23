@@ -8,7 +8,6 @@ import { getCookie } from 'cookies-next';
 import { Error } from '@/types/ErrorTypes';
 import { LogOut } from 'lucide-react';
 import Link from 'next/link';
-import { Jwt } from 'jsonwebtoken';
 const Page = () => {
     const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
@@ -32,9 +31,7 @@ const Page = () => {
             const user = await userResponse.json();
             setUserName(user?.userData?.username);
             setEmail(user?.userData?.email);
-            console.log(user)
             setLoading(false)
-            console.log(user?.userData?.username);
         } catch (error: unknown) {
             const Error = error as Error
             setLoading(false)

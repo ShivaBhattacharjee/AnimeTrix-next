@@ -72,7 +72,7 @@ const VerticalCards: React.FC<VerticalCardsProps> = ({ title, data, isGenre, Gen
                         <div key={Math.random()} className="border-2 border-white/30 card-img rounded-lg">
                             <Link href={`/details/${anime.id}`} className="content-normal overflow-hidden w-full h-full">
                                 <div className="md:w-48 h-60 w-50 relative overflow-hidden">
-                                    <img src={anime?.image} alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime.title?.native}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
+                                    <img src={anime?.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime.title?.native}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
                                 </div>
                                 <div className="flex flex-col gap-3 p-2">
                                     <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize">{anime.title.english || anime.title.romaji || anime.title.native}</span>
