@@ -8,6 +8,7 @@ import { getCookie } from 'cookies-next';
 import { Error } from '@/types/ErrorTypes';
 import { LogOut } from 'lucide-react';
 import Link from 'next/link';
+import { Jwt } from 'jsonwebtoken';
 const Page = () => {
     const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
@@ -43,7 +44,6 @@ const Page = () => {
     useEffect(() => {
         getUserData()
     }, [token])
-
     return (
         <>
             {

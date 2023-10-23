@@ -1,15 +1,93 @@
 import { connect } from "@/database/db";
+import { getDataFromJwt } from "@/helper/jwtData";
 import User from "@/model/user.model";
+import { Error } from "@/types/ErrorTypes";
 import { NextRequest, NextResponse } from "next/server";
 connect();
-
+type history = {
+    streamId: string;
+};
 export async function GET(request: NextRequest) {
-    return NextResponse.json({
-        message: "This is GET request for history",
-    });
+    try {
+        const userId = getDataFromJwt(request);
+        const { searchParams } = new URL(request.url);
+        const Page = parseInt(searchParams.get("page") ?? "1", 10);
+        const limit = 12;
+        const user = await User.findOne({ _id: userId }).select("-password");
+        if (!user) {
+            return NextResponse.json(
+                {
+                    error: "User not found",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+        if (Page <= 0) {
+            return NextResponse.json(
+                {
+                    error: "Invalid page number",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+        const startIndex = (Page - 1) * limit;
+        const endIndex = Page * limit;
+
+        const history = user.watchHistory.slice(startIndex, endIndex);
+        const paginatedResult = {
+            nextPage: user.watchHistory.length > endIndex ? true : false,
+            history,
+        };
+        return NextResponse.json({
+            userHistory: paginatedResult,
+            page: Page,
+        });
+    } catch (error: unknown) {
+        const Error = error as Error;
+        return NextResponse.json(
+            {
+                error: Error.message,
+            },
+            {
+                status: 400,
+            },
+        );
+    }
 }
 export async function POST(request: NextRequest) {
-    return NextResponse.json({
-        message: "This is post request for history",
-    });
+    try {
+        const reqBody = await request.json();
+        const { streamId, coverImage, image, episode, title } = reqBody;
+        const userId = getDataFromJwt(request);
+        const user = await User.findOne({ _id: userId }).select("-password");
+        if (!user) {
+            return NextResponse.json({
+                error: "User not found",
+            });
+        }
+        const existingHistoryIndex = user.watchHistory.findIndex((history: history) => history.streamId === streamId);
+        if (existingHistoryIndex !== -1) {
+            user.watchHistory.splice(existingHistoryIndex, 1);
+        }
+        user.watchHistory.unshift({ streamId, coverImage, image, episode, title });
+        await user.save();
+        return NextResponse.json(
+            {
+                message: "added to history",
+                success: true,
+            },
+            {
+                status: 200,
+            },
+        );
+    } catch (error: unknown) {
+        const Error = error as Error;
+        return NextResponse.json({
+            error: Error.message,
+        });
+    }
 }
