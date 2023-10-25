@@ -7,7 +7,7 @@ export function generateMetadata() {
         title: "Trending Anime - Discover the Hottest Shows on AnimeTrix",
         description: "Explore the hottest trending anime series and movies right here at Trending Anime! Stay up-to-date with the latest and most popular titles in the world of anime. Dive into a world of excitement, adventure, and stunning animation with our carefully curated selection.",
         openGraph: {
-            images: "https://media.discordapp.net/attachments/1079039236302446705/1148974653155594302/IMG_20230906_190222_412.jpg?width=1080&height=567",
+            images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
         },
     };
 }

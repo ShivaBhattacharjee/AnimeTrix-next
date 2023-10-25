@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `Watching ${params.streamid} on AnimeTrix`,
         description: formattedDescription || "Opps!! No Description Found",
         openGraph: {
-            images: anime?.cover || anime?.image || "",
+            images: anime?.cover || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
         },
     };
 }

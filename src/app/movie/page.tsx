@@ -7,7 +7,7 @@ export function generateMetadata() {
         title: "Anime Movies - Cinematic Adventures Await on AnimeTrix",
         description: " Embark on cinematic adventures with our Anime Movies section. Explore a captivating world of animated films that will transport you to fantastical realms and stir your emotions. From epic sagas to heartwarming tales, our collection features a diverse range of anime movies for every taste.",
         openGraph: {
-            images: "https://media.discordapp.net/attachments/1079039236302446705/1148974653155594302/IMG_20230906_190222_412.jpg?width=1080&height=567",
+            images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
         },
     };
 }
