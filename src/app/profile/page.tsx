@@ -66,6 +66,30 @@ const Page = () => {
                             </div>
                         </div>
                         <h1 className=' h-1 bg-white/20 w-full'></h1>
+
+                        <div className="flex flex-col p-5">
+                            <div className="flex justify-between items-center">
+                                <h1 className="text-3xl lg:text-5xl font-bold">History</h1>
+                                <Link href={"/history"} className="text-sm lg:text-lg">
+                                    Load more
+                                </Link>
+                            </div>
+                            <div className="flex gap-2">
+                                {/* <Cards props={Popular} /> */}
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col p-4">
+                            <div className="flex justify-between items-center">
+                                <h1 className="text-3xl lg:text-5xl font-bold">Bookmark</h1>
+                                <Link href={"/bookmark"} className="text-sm lg:text-lg">
+                                    Load more
+                                </Link>
+                            </div>
+                            <div className="flex gap-2">
+                                {/* <Cards props={Popular} /> */}
+                            </div>
+                        </div>
                     </div>
                 )
             }

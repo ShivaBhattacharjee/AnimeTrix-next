@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import SpinLoading from "@/components/loading/SpinLoading"
 import { Error } from "@/types/ErrorTypes"
+import Confetti from 'react-confetti'
 export default function VerifyEmailPage() {
     const [token, setToken] = useState("")
     const [verified, setVerified] = useState(false)
@@ -22,6 +23,7 @@ export default function VerifyEmailPage() {
             const Error = error as Error
             setError(Error?.response?.data?.error || "Error verifying mail")
             console.log(error)
+            setLoading(false)
         }
     }
     useEffect(() => {
@@ -46,13 +48,14 @@ export default function VerifyEmailPage() {
                             <h1 className=" text-3xl font-semibold">Verify Email</h1>
                             <h2 className=" text-2xl font-semibold text-red-500">{token ? "" : "No token Found"}</h2>
                             {
-                                verified ? (
+                                !verified ? (
                                     <>
+                                        <Confetti width={window.innerWidth > 600 ? 800 : window.innerWidth} className=" lg:m-auto" />
                                         <h2 className=" text-2xl font-semibold text-green-500">{message}</h2>
                                         <Link href={"/login"} className=" bg-white p-3 rounded-lg text-black font-semibold w-52 text-center">Login</Link>
                                     </>
                                 ) : (
-                                    <h2 className=" text-2xl font-semibold text-red-500">{error}</h2>
+                                    <h2 className=" text-2xl font-semibold text-red-500 animate-pulse">{error}</h2>
                                 )
                             }</>
                     )
