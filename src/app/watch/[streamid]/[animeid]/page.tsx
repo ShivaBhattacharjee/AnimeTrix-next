@@ -87,28 +87,28 @@ const Page = async ({
                                     allow="picture-in-picture"
                                     className="w-full rounded-lg h-[30vh] lg:h-[50vh] md:h-[30vh]"></iframe>
                                 <div className="mt-2">
-                                    <h1 className="font-semibold text-2xl lg:text-4xl">{stream?.info?.title || "unknown"}</h1>
-                                    <span className="text-lg mt-4 lg:text-2xl font-semibold text-white/70">Episode :  {stream?.info?.episode || "unknown"}</span>
+                                    <h1 className="font-semibold text-2xl lg:text-4xl text-black dark:text-white">{stream?.info?.title || "unknown"}</h1>
+                                    <span className="text-lg mt-4 lg:text-2xl font-semibold text-black/70 dark:text-white/70">Episode :  {stream?.info?.episode || "unknown"}</span>
                                 </div>
 
                                 <div className="flex gap-3 mt-6 flex-wrap items-center">
-                                    <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3" rel="noopener noreferrer"><Download />Download</a>
+                                    <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" dark:bg-white bg-black p-2 rounded-lg font-semibold dark:text-black text-white flex items-center gap-3" rel="noopener noreferrer"><Download />Download</a>
                                     <Share title={params.streamid} />
-                                    <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
+                                    <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" dark:bg-white bg-black p-2 rounded-lg font-semibold dark:text-black text-white flex gap-3 items-center"><Flag />Report</a>
                                 </div>
                                 {details.nextAiringEpisode !== undefined && (
-                                    <span className="bg-white text-md mt-4  text-black md:w-96 w-full  font-bold text-center p-3 rounded-lg">
+                                    <span className="dark:bg-white bg-black text-md mt-4 text-white  dark:text-black md:w-96 w-full  font-bold text-center p-3 rounded-lg">
                                         Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
                                     </span>
                                 )}
                                 <div className="flex gap-3 mt-7 w-full">
                                     <img src={details?.image} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-md md:text-lg flex-col font-semibold">
-                                        <h1><span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}</h1>
-                                        <h1 ><span className=" text-white/70">Season</span> : {details?.season || "Unknown"}</h1>
-                                        <h1><span className=" text-white/70 ">Audio</span> : {details?.subOrDub || "Unknown"}</h1>
-                                        <h1><span className=" text-white/70 ">Type</span> : {details?.type || "Unknown"}</h1>
-                                        <h1 ><span className=" text-white/70">Country</span> : {details?.countryOfOrigin || "Earth"}</h1>
+                                        <h1><span className="dark:text-white/70 text-black/70 ">Status</span> : {details?.status || "Undefined"}</h1>
+                                        <h1 ><span className=" dark:text-white/70 text-black/70">Season</span> : {details?.season || "Unknown"}</h1>
+                                        <h1><span className=" dark:text-white/70 text-black/70 ">Audio</span> : {details?.subOrDub || "Unknown"}</h1>
+                                        <h1><span className=" dark:text-white/70 text-black/70 ">Type</span> : {details?.type || "Unknown"}</h1>
+                                        <h1 ><span className=" dark:text-white/70 text-black/70">Country</span> : {details?.countryOfOrigin || "Earth"}</h1>
                                     </div>
                                     <div className=" flex justify-end w-full">
                                         <Bookmark size={40} className=" hover:fill-white duration-200 cursor-pointer" />
@@ -118,7 +118,7 @@ const Page = async ({
                                 <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
                                     {Object?.keys(details?.genres).length > 0 && (
                                         details.genres.map((genre: string, index: number) => (
-                                            <button className="border-2 text-sm lg:text-lg border-white border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>{genre}</button>
+                                            <button className="border-2 text-sm lg:text-lg dark:border-white border-black border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>{genre}</button>
                                         ))
                                     )}
 

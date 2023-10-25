@@ -37,7 +37,7 @@ const Share = ({ title }: { title: string }): JSX.Element => {
     };
 
     return (
-        <button onClick={handleShareClick} className="bg-white p-2 rounded-lg font-semibold text-black flex items-center gap-3">
+        <button onClick={handleShareClick} className="dark:bg-white bg-black p-2 rounded-lg font-semibold dark:text-black text-white flex items-center gap-3">
             <Share2 />
             Share
         </button>

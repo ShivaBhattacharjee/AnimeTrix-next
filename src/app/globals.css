@@ -44,7 +44,7 @@ input[type=number] {
 }
 
 /* required for aniscan color changes */
-.guZdik,
+/* .guZdik,
 .dtlKip {
     border: dashed 2px white !important;
 }
@@ -52,4 +52,4 @@ input[type=number] {
 .guZdik svg,
 .dtlKip svg {
     display: none;
-}
+} */

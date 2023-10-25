@@ -44,9 +44,9 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
             <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
                 <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
                 <div className="flex">
-                    <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-full md:w-56 2xl:w-72 border-white p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
+                    <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-full md:w-56 2xl:w-72 dark:border-white border-black p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                     {showSelect && (
-                        <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
+                        <select className="p-2 dark:bg-black bg-white border-2 h-11 focus:outline-none dark:border-white border-black rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
                             {episodeRanges.map((range) => (
                                 <option key={range} value={range}>
                                     {range}
@@ -61,7 +61,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
                     {displayedEpisodes
                         .sort((animeA, animeB) => animeA.number - animeB.number)
                         .map((anime, index) => (
-                            <Link href={`/watch/${anime.id}/${animeId}`} className="duration-200 border-white/60 border-2 hover:scale-90 rounded-lg flex flex-col gap-3" key={index}>
+                            <Link href={`/watch/${anime.id}/${animeId}`} className="duration-200 border-black/60 dark:border-white/60 border-2 hover:scale-90 rounded-lg flex flex-col gap-3" key={index}>
                                 <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
                                 <h1 className=" p-2 font-semibold mb-3">Episode: {anime.number}</h1>
                             </Link>

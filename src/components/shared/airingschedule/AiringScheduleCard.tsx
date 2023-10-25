@@ -56,7 +56,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
 
     return (
         <div className="flex gap-2">
-            <div className=" border-2 border-white/20 h-auto max-h-[400px] md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
+            <div className=" border-2 border-black/20 dark:border-white/20 h-auto max-h-[400px] md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
                 <div className="flex flex-col gap-3">
                     <div className="p-4">
                         <div className="flex flex-col gap-3 ">
@@ -66,7 +66,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                 </div>
                             ) : (
                                 animeForCurrentDay?.map((anime: Anime) => (
-                                    <div className="flex border-b-2 border-white/20  justify-between items-center" key={anime.id}>
+                                    <div className="flex border-b-2 border-black/20 dark:border-white/20  justify-between items-center" key={anime.id}>
                                         <Link href={`/details/${anime.id}`} className="flex items-center gap-4 mb-2">
                                             <img
                                                 height={200}
@@ -77,12 +77,12 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                                 className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg"
                                             />
                                             <div className="flex flex-col">
-                                                <span className="text-white text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">
+                                                <span className="dark:text-white text-black text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">
                                                     {anime?.title?.romaji || anime?.title?.english || anime.title?.native}
                                                 </span>
                                                 <div className="flex gap-2 items-center flex-wrap text-sm lg:text-xl">
                                                     <span>Ep: {anime.airingEpisode} -</span>
-                                                    <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
+                                                    <span className=" text-gray-700 dark:text-gray-300">{formatTime(anime.airingAt)}</span>
                                                 </div>
                                             </div>
                                         </Link>
@@ -95,7 +95,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                         </div>
                     </div>
                 </div>
-                <div className="sticky bottom-0 bg-white/5 bg-gradient-to-r from-black to-black/30 backdrop-blur-xl overflow-hidden p-3 ">
+                <div className="sticky bottom-0 dark:bg-white/5 dark:bg-gradient-to-r from-black to-black/30 backdrop-blur-xl overflow-hidden p-3 ">
                     <div className="flex justify-between items-center  md:max-w-[400px] m-auto">
                         <button onClick={handlePreviousDay}>
                             <ArrowLeftToLine className="scale-125" />

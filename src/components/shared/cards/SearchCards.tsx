@@ -9,7 +9,7 @@ const SearchCards = ({ results, modalClose, isTrending }: { results: Anime[]; mo
     return (
         <>
             {results?.length > 0 ? (
-                <div className="flex  text-white flex-col gap-6">
+                <div className="flex   flex-col gap-6 text-black dark:text-white">
                     {results?.map((anime, index) => (
                         <div key={index}>
                             <Link href={`/details/${anime?.id}`} className="flex overflow-hidden gap-3 items-center" onClick={modalClose}>
@@ -32,7 +32,7 @@ const SearchCards = ({ results, modalClose, isTrending }: { results: Anime[]; mo
                         </div>
                     ))}
                     {isTrending && (
-                        <Link onClick={modalClose} href={"/trending"} className="text-lg gap-3 font-semibold flex items-center">
+                        <Link onClick={modalClose} href={"/trending"} className="text-lg gap-3 font-semibold flex items-center dark:text-white text-black">
                             View More
                             <ArrowRight />
                         </Link>
