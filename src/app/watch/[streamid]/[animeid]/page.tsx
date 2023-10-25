@@ -11,6 +11,7 @@ import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import { Bookmark, Download, Flag } from "lucide-react";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
+import AddToHistory from "@/lib/addToHistory";
 type Props = {
     params: {
         streamid: string;
@@ -38,6 +39,7 @@ const Page = async ({
         animeid: number;
     };
 }) => {
+
     const details = await getAnimeDetails(params.animeid);
     const stream = await getSteamingLink(params.streamid);
     const download = await getDownloadLink(params.streamid);
@@ -73,6 +75,7 @@ const Page = async ({
         <>
             {Object.keys(details || stream).length > 0 ? (
                 <section className="p-2 min-h-screen pb-40 lg:pb-0">
+                    <AddToHistory streamId={params.streamid} title={stream?.info?.title || "unknown"} episode={stream?.info?.episode || "unknown"} coverImage={details?.cover || "unknown"} image={details?.image || "Unknown"} />
                     <div className=" w-full">
                         <div className=" flex justify-between lg:flex-row flex-col gap-5">
                             <div className="flex flex-col w-full 2xl:w-[70vw]">
@@ -94,12 +97,12 @@ const Page = async ({
                                     <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white p-2 rounded-lg font-semibold text-black flex gap-3 items-center"><Flag />Report</a>
                                 </div>
                                 {details.nextAiringEpisode !== undefined && (
-                                    <span className="bg-white text-md mt-4  text-black md:w-1/2 w-full  font-bold text-center p-3 rounded-lg">
+                                    <span className="bg-white text-md mt-4  text-black md:w-96 w-full  font-bold text-center p-3 rounded-lg">
                                         Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
                                     </span>
                                 )}
                                 <div className="flex gap-3 mt-7 w-full">
-                                    <img src={details.image} alt={`an image of ${params.streamid}`} className=" w-40 md:w-44 rounded-lg" />
+                                    <img src={details?.image} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-md md:text-lg flex-col font-semibold">
                                         <h1><span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}</h1>
                                         <h1 ><span className=" text-white/70">Season</span> : {details?.season || "Unknown"}</h1>

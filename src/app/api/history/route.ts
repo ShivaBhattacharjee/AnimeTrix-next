@@ -86,9 +86,14 @@ export async function POST(request: NextRequest) {
         );
     } catch (error: unknown) {
         const Error = error as Error;
-        return NextResponse.json({
-            error: Error.message,
-        });
+        return NextResponse.json(
+            {
+                error: Error.message,
+            },
+            {
+                status: 401,
+            },
+        );
     }
 }
 export async function DELETE(request: NextRequest) {

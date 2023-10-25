@@ -45,11 +45,11 @@ const Page = () => {
         <>
             {
                 loading ? (
-                    <div className="flex justify-center items-center min-h-[60vh]">
+                    <div className="flex justify-center items-center min-h-[100dvh]">
                         <SpinLoading />
                     </div>
                 ) : (
-                    <div className='min-h-[60vh]'>
+                    <div className='min-h-[100dvh]'>
                         <div className=' p-4 flex flex-col lg:flex-row gap-3 items-center justify-between'>
                             <div className='flex flex-col lg:flex-row items-center gap-5'>
                                 <div className=' h-24 w-24 lg:h-32 lg:w-32 rounded-full bg-white text-black flex justify-center items-center '>
