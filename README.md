@@ -1,6 +1,6 @@
 <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next">
 <p align="center">
-    <img src="https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/3984ffef-a0ad-4314-b017-5ffb6213ed9c" width="200px"  alt="animetrix logo" align="center">
+    <img src="https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/3984ffef-a0ad-4314-b017-5ffb6213ed9c" width="160px"  alt="animetrix logo" align="center">
   </a>
 <br/>
   <h3 align="center">AnimeTrix</h3>
