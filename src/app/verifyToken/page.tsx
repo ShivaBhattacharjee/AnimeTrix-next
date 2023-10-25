@@ -48,7 +48,7 @@ export default function VerifyEmailPage() {
                             <h1 className=" text-3xl font-semibold">Verify Email</h1>
                             <h2 className=" text-2xl font-semibold text-red-500">{token ? "" : "No token Found"}</h2>
                             {
-                                !verified ? (
+                                verified ? (
                                     <>
                                         <Confetti width={window.innerWidth > 600 ? 800 : window.innerWidth} className=" lg:m-auto" />
                                         <h2 className=" text-2xl font-semibold text-green-500">{message}</h2>
