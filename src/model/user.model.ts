@@ -7,19 +7,15 @@ const historySchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true,
     },
     coverImage: {
         type: String,
-        required: true,
     },
-    // episode: {
-    //     type: String,
-    //     required: true,
-    // },
+    episode: {
+        type: String,
+    },
     title: {
         type: String,
-        required: true,
     },
 });
 

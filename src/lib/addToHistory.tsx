@@ -2,7 +2,7 @@
 import { Error } from "@/types/ErrorTypes";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 type HistoryProps = {
     streamId: string;
     coverImage: string;
@@ -21,11 +21,10 @@ const AddToHistory = ({ streamId, coverImage, image, episode, title }: HistoryPr
     };
     const addHistory = async () => {
         try {
-            const res = await axios.post("/api/history", historyData);
-            console.log(res);
+            await axios.post("/api/history", historyData);
         } catch (error: unknown) {
             const Error = error as Error;
-            console.log(error);
+            console.log(Error?.response?.data?.error || "Something went wrong");
         }
     };
 
