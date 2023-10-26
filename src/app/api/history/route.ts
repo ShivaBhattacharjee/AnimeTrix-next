@@ -61,7 +61,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { streamId, coverImage, image, episode, title } = reqBody;
+        const { streamId, animeId, coverImage, image, episode, title } = reqBody;
         const userId = getDataFromJwt(request);
         const user = await User.findOne({ _id: userId }).select("-password");
         if (!user) {
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
         if (existingHistoryIndex !== -1) {
             user.watchHistory.splice(existingHistoryIndex, 1);
         }
-        user.watchHistory.unshift({ streamId, coverImage, image, episode, title });
+        user.watchHistory.unshift({ streamId, animeId, coverImage, image, episode, title });
         await user.save();
         return NextResponse.json(
             {

@@ -5,6 +5,10 @@ const historySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    animeId: {
+        type: String,
+        required: true,
+    },
     image: {
         type: String,
     },

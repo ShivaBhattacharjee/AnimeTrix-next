@@ -5,15 +5,17 @@ import { getCookie } from "cookies-next";
 import React, { useEffect } from "react";
 type HistoryProps = {
     streamId: string;
+    animeId: number;
     coverImage: string;
     image: string;
     episode: string;
     title: string;
 };
-const AddToHistory = ({ streamId, coverImage, image, episode, title }: HistoryProps) => {
+const AddToHistory = ({ streamId, animeId, coverImage, image, episode, title }: HistoryProps) => {
     const token = getCookie("token");
     const historyData = {
         streamId: streamId,
+        animeId: animeId,
         coverImage: coverImage,
         image: image,
         episode: episode,
