@@ -61,7 +61,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
 
     const debouncedSetSearchValue = useDebounce((value: string) => {
         setSearchValue(value);
-    }, 800);
+    }, 900);
     return (
         <>
             <Search className="cursor-pointer text-black dark:text-white" onClick={() => setOpenSearch(!openSearch)} />
@@ -76,7 +76,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                             Open/Close : <span className=" dark:bg-white bg-black dark:text-black text-white p-2 rounded-lg text-sm">Ctrl</span> + <span className=" bg-white text-black text-sm p-2 rounded-lg">K</span>
                         </h1>
                         <div className="flex p-4 items-center border-2 z-50 dark:border-white/40 border-black/40 bg-white sticky top-0 dark:bg-black w-full rounded-lg">
-                            <input type="text" placeholder="I am looking for ....." className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
+                            <input type="text" placeholder="I am looking for ....." className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none dark:text-white text-black" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
                         </div>
                         <Suspense
                             fallback={
@@ -87,7 +87,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                         >
                             {searchValue !== "" ? (
                                 <>
-                                    <h1 className="text-white bg-black font-semibold text-lg mb-4">Search Results for {searchValue}</h1>
+                                    <h1 className="dark:text-white text-black font-semibold text-lg mb-4">Search Results for {searchValue}</h1>
                                     <SearchResults modalClose={handleModalClose} searchValue={searchValue} />
                                 </>
                             ) : (

@@ -56,9 +56,10 @@
 @media(max-width:1250px) {
   .swiper {
     width: 100%;
-    height: calc(100vh - 70vh);
+    height: calc(100vh - 50vh);
   }
 }
+
 
 @media(max-width:600px) {
   .swiper {

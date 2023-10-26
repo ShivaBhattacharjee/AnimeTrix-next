@@ -96,7 +96,9 @@ export const getGenre = async (genre: string) => {
 // search anime
 export const getSearchResults = async (searchValue: string) => {
     try {
-        const response = await fetch(`${AnimeApi}/${searchValue}`);
+        const response = await fetch(`${AnimeApi}/${searchValue}`, {
+            cache: "force-cache",
+        });
         const data = await response.json();
         return data.results;
     } catch (error) {
