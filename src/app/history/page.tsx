@@ -1,11 +1,10 @@
 "use client"
-import SpinLoading from "@/components/loading/SpinLoading";
 import { AlertTriangle } from "lucide-react";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Anime from "@/types/animetypes";
 import InfiniteScroll from "react-infinite-scroll-component";
+import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 
 type HistoryItem = {
     streamId: string;
@@ -95,7 +94,7 @@ const Page = () => {
             {tokenExistOrNot ? (
                 <>
                     {loading ? (
-                        <div className="flex justify-center items-center min-h-screen"><SpinLoading /></div>
+                        <LoadingSkeleton title="History" />
                     ) : (
                         <div className="p-4 pb-40 lg:pb-16 md:m-auto">
                             <h1 className="text-3xl lg:text-5xl font-bold text-black dark:text-white">History</h1>
