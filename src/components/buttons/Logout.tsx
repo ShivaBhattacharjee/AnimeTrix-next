@@ -6,8 +6,6 @@ import { getCookie } from "cookies-next"
 import { Error } from '@/types/ErrorTypes';
 import { ClipLoader } from 'react-spinners';
 const Logout = () => {
-
-
     const token = getCookie("token");
     const [profilePicture, setProfilePicture] = useState("")
     const [tokenExistOrNot, settokenExistOrNot] = useState(false)
@@ -30,6 +28,7 @@ const Logout = () => {
             }
             const user = await userResponse.json();
             setUserName(user?.userData?.username?.charAt(0).toUpperCase());
+            setProfilePicture(user?.userData?.profilePicture)
             setLoading(false)
         } catch (error: unknown) {
             const Error = error as Error

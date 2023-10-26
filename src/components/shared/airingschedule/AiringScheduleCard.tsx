@@ -66,7 +66,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                 </div>
                             ) : (
                                 animeForCurrentDay?.map((anime: Anime) => (
-                                    <div className="flex border-b-2 border-black/20 dark:border-white/20  justify-between items-center" key={anime.id}>
+                                    <div className="flex border-b-2 border-black/20 dark:border-white/20  justify-between items-center" key={anime?.id}>
                                         <Link href={`/details/${anime.id}`} className="flex items-center gap-4 mb-2">
                                             <img
                                                 height={200}

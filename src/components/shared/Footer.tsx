@@ -1,3 +1,5 @@
+"use client"
+import Toast from "@/utils/toast";
 import { Github, Instagram, Monitor, Moon, Sun } from "lucide-react";
 import React from "react";
 
@@ -11,7 +13,9 @@ const socialMediaLinks = [
         url: "https://www.instagram.com/animetrix.200/",
     },
 ];
-
+const changeTheme = () => {
+    Toast.ErrorShowToast("Theme is based on your system settings for the time being")
+}
 const Footer = () => {
     return (
         <div className="mb-20 md:mb-0  p-4 mt-12 md:mt-0 border-t border-black/20 dark:border-white/20 ">
@@ -30,11 +34,11 @@ const Footer = () => {
                     </div>
 
                     <div className="flex gap-4 items-center">
-                        <Sun className=" cursor-pointer" />
-                        <div className="bg-white/10 p-2 rounded-full">
-                            <Moon className=" cursor-pointer" />
+                        <Sun onClick={changeTheme} className=" cursor-pointer" />
+                        <Moon onClick={changeTheme} className=" cursor-pointer" />
+                        <div className="dark:bg-white/10 bg-black/10 p-2 rounded-full">
+                            <Monitor className=" cursor-pointer" />
                         </div>
-                        <Monitor className=" cursor-pointer" />
                     </div>
                 </div>
             </div>

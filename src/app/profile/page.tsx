@@ -52,7 +52,7 @@ const Page = () => {
                     <div className='min-h-[100dvh]'>
                         <div className=' p-4 flex flex-col lg:flex-row gap-3 items-center justify-between'>
                             <div className='flex flex-col lg:flex-row items-center gap-5'>
-                                <div className=' h-24 w-24 lg:h-32 lg:w-32 rounded-full bg-white text-black flex justify-center items-center '>
+                                <div className=' h-24 w-24 lg:h-32 lg:w-32 rounded-full dark:bg-white bg-black dark:text-black text-white flex justify-center items-center '>
                                     <h1 className=' font-bold text-4xl'>{userName?.charAt(0).toUpperCase()}</h1>
                                 </div>
                                 <div className="flex flex-col items-center lg:items-start">
@@ -61,11 +61,11 @@ const Page = () => {
                                 </div>
                             </div>
                             <div className="flex gap-3">
-                                <Link href={"/edit-profile"} className=' bg-white p-3 text-black rounded-full font-semibold hover:bg-transparent hover:border-2 hover:border-white duration-200 hover:text-white'>Manage Account</Link>
-                                <button onClick={logout} className='bg-white/80 text-black p-3 rounded-lg hover:bg-transparent duration-200 hover:text-white hover:scale-110'><LogOut /></button>
+                                <Link href={"/edit-profile"} className=' dark:bg-white bg-black p-3 dark:text-black text-white rounded-full font-semibold dark:hover:bg-transparent hover:border-2 dark:hover:border-white duration-200 dark:hover:text-white'>Manage Account</Link>
+                                <button onClick={logout} className='dark:bg-white/80 bg-black/80 dark:text-black text-white p-3 rounded-lg dark:hover:bg-transparent duration-200 dark:hover:text-white hover:scale-110'><LogOut /></button>
                             </div>
                         </div>
-                        <h1 className=' h-1 bg-white/20 w-full'></h1>
+                        <h1 className=' h-1 dark:bg-white/20 bg-black/20 w-full'></h1>
 
                         <div className="flex flex-col p-5">
                             <div className="flex justify-between items-center">
