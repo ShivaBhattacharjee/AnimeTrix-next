@@ -6,7 +6,7 @@ import { getCookie } from "cookies-next";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
     const [tokenExistOrNot, settokenExistOrNot] = useState(false)
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
@@ -28,8 +28,8 @@ const page = () => {
                 }
             }
             const history = await Response.json();
-            setData(history?.userHistory?.history || [])
-            console.log(history)
+            setData(history.userHistory.history)
+            console.log(data)
             setLoading(false)
         } catch (error: unknown) {
             const Error = error as Error
@@ -76,4 +76,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
