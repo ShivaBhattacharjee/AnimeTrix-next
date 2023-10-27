@@ -69,10 +69,9 @@ const SideBar = () => {
     return (
         <>
             <div className=" hidden md:flex fixed ">
-                <div className={` w-52 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-black/25 dark:border-white/25`}>
+                <div className={`w-52 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-black/25 dark:border-white/25`}>
                     <nav className="flex flex-col overflow-scroll h-screen mt-3 p-2 max-lg:mt-10">
                         {NavItems.map((link) => {
-                            // Check if the link is either "History" or "Bookmark" and token is not present
                             const shouldRender = !(link.name === "History" || link.name === "Bookmark") || token;
                             if (!shouldRender) return null;
 
