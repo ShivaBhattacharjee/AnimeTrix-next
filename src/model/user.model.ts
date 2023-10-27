@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 const historySchema = new mongoose.Schema({
     streamId: {
         type: String,
-        required: true,
     },
     animeId: {
         type: String,
-        required: true,
     },
     image: {
         type: String,
