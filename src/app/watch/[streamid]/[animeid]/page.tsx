@@ -76,7 +76,9 @@ const Page = async ({
         <>
             {Object.keys(details || stream).length > 0 ? (
                 <section className="p-2 min-h-screen pb-40 lg:pb-0">
-                    <AddToHistory streamId={params.streamid} animeId={params.animeid} title={stream?.info?.title || "unknown"} episode={stream?.info?.episode || "unknown"} coverImage={details?.cover || "unknown"} image={details?.image || "Unknown"} />
+                    <Suspense fallback={<></>}>
+                        <AddToHistory streamId={params.streamid} animeId={params.animeid} title={stream?.info?.title || "unknown"} episode={stream?.info?.episode || "unknown"} coverImage={details?.cover || "unknown"} image={details?.image || "Unknown"} />
+                    </Suspense>
                     <div className=" w-full">
                         <div className=" flex justify-between lg:flex-row flex-col gap-5">
                             <div className="flex flex-col w-full 2xl:w-[70vw]">

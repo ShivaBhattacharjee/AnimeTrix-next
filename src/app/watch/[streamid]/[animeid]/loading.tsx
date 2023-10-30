@@ -47,12 +47,13 @@ const loading = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-7 flex flex-col gap-5">
+
+                    <div className="mt-3 xl:w-[80vw]">
                         <EpisodeLoading />
                     </div>
                 </div>
             </div>
-            <div className="mt-7 flex flex-col gap-5">
+            <div className="mt-2">
                 <RelationLoading />
             </div>
             <div className="mt-6">
