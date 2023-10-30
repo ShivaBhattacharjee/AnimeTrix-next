@@ -12,6 +12,8 @@ import { Bookmark, Download, Flag } from "lucide-react";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 import AddToHistory from "@/lib/addToHistory";
+import RelationCard from "@/components/shared/cards/RelationCard";
+import RelationLoading from "@/components/loading/RelationLoading";
 type Props = {
     params: {
         streamid: string;
@@ -140,6 +142,12 @@ const Page = async ({
                                 </Suspense>
                             </div>
                         </div>
+                    </div>
+
+                    <div className="mt-7 flex flex-col gap-5">
+                        <Suspense fallback={<RelationLoading />}>
+                            <RelationCard id={params.animeid} />
+                        </Suspense>
                     </div>
                     <div className="mt-6">
                         <Suspense fallback={<CharactersLoading />}>
