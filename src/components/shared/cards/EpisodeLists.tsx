@@ -3,14 +3,16 @@ import React, { useState, useMemo } from "react";
 import { Frown } from "lucide-react";
 import Anime from "@/types/animetypes";
 import Link from "next/link";
+import { SyncLoader } from "react-spinners";
 
 interface EpisodeListsProps {
     listData: Anime[];
     animeId: number;
     isStream?: boolean;
+    currentlyPlaying?: number;
 }
 
-const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream }) => {
+const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream, currentlyPlaying }) => {
     const [filterValue, setFilterValue] = useState<string>("");
     const [selectedRange, setSelectedRange] = useState<string>("1-100");
 
@@ -63,7 +65,10 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
                         .map((anime, index) => (
                             <Link href={`/watch/${anime.id}/${animeId}`} className="duration-200 border-black/60 dark:border-white/60 border-2 hover:scale-90 rounded-lg flex flex-col gap-3" key={index}>
                                 <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
-                                <h1 className=" p-2 font-semibold mb-3">Episode: {anime.number}</h1>
+                                <div className="flex gap-2 items-center p-2">
+                                    {currentlyPlaying == anime.number && <SyncLoader color="#fff" size={4} />}
+                                    <h1 className=" p-2 font-semibold">Episode: {anime.number}</h1>
+                                </div>
                             </Link>
                         ))}
                 </div>
