@@ -14,6 +14,12 @@ html {
     scroll-behavior: smooth;
 }
 
+input[type="password"]::-ms-reveal,
+input[type="text"]::-ms-reveal,
+input[type="email"]::-ms-reveal {
+    background-color: transparent;
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }

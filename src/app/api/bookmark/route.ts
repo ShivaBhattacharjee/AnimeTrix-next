@@ -5,7 +5,7 @@ import { getDataFromJwt } from "@/helper/jwtData";
 import { NextRequest, NextResponse } from "next/server";
 
 connect();
-export async function GET(request: NextRequest) {
+export function GET(request: NextRequest) {
     getDataFromJwt(request);
     return NextResponse.json({ message: "Hello World from bookmark route" });
 }

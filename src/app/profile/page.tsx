@@ -6,7 +6,7 @@ import Toast from "@/utils/toast";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { getCookie } from "cookies-next";
 import { Error } from "@/types/ErrorTypes";
-import { LogOut } from "lucide-react";
+import { AlertTriangle, LogOut } from "lucide-react";
 import Link from "next/link";
 type HistoryItem = {
     streamId: string;
@@ -120,29 +120,38 @@ const Page = () => {
                                     <SpinLoading />
                                 </div>
                             ) : (
-                                <div className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-3 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 items-center  mt-8">
-                                    {history?.map((item) => (
-                                        <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
-                                            <Link href={`/watch/${item.streamId}/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
-                                                <div className="md:w-48 h-60  relative overflow-hidden">
-                                                    <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
-                                                </div>
-                                                <div className="flex flex-col gap-3 p-2">
-                                                    <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize">{item.title || "Unknown Title"}</span>
-                                                    {item?.episode !== null && item?.episode !== undefined ? (
-                                                        <div className="truncate w-32 lg:w-44 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center">
-                                                            <span className=" font-semibold"> Ep: {item?.episode}</span>
+                                <>
+                                    {history.length > 0 ? (
+                                        <div className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-3 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 items-center  mt-8">
+                                            {history?.map((item) => (
+                                                <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
+                                                    <Link href={`/watch/${item.streamId}/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
+                                                        <div className="md:w-48 h-60  relative overflow-hidden">
+                                                            <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
                                                         </div>
-                                                    ) : (
-                                                        <div className="truncate w-32 lg:w-44 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center">
-                                                            <span> Ep: Unknown</span>
+                                                        <div className="flex flex-col gap-3 p-2">
+                                                            <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize">{item.title || "Unknown Title"}</span>
+                                                            {item?.episode !== null && item?.episode !== undefined ? (
+                                                                <div className="truncate w-32 lg:w-44 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center">
+                                                                    <span className=" font-semibold"> Ep: {item?.episode}</span>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="truncate w-32 lg:w-44 text-sm lg:text-xl pb-5 capitalize flex gap-2 items-center">
+                                                                    <span> Ep: Unknown</span>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    )}
+                                                    </Link>
                                                 </div>
-                                            </Link>
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
+                                    ) : (
+                                        <div className="flex justify-center items-center w-full mt-5 gap-3">
+                                            <AlertTriangle size={40} />
+                                            <h1 className="text-3xl font-semibold">No videos found</h1>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>
@@ -154,7 +163,12 @@ const Page = () => {
                                 Load more
                             </Link>
                         </div>
-                        <div className="flex gap-2">{/* <Cards props={Popular} /> */}</div>
+                        <div className="flex gap-2">
+                            <div className="flex justify-center items-center w-full mt-5 gap-3">
+                                <AlertTriangle size={40} />
+                                <h1 className="text-3xl font-semibold">Under development</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
