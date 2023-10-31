@@ -6,7 +6,7 @@ import Toast from "@/utils/toast";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { getCookie } from "cookies-next";
 import { Error } from "@/types/ErrorTypes";
-import { AlertTriangle, LogOut } from "lucide-react";
+import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 type HistoryItem = {
     streamId: string;
@@ -110,8 +110,9 @@ const Page = () => {
                     <div className="flex flex-col p-5">
                         <div className="flex justify-between items-center">
                             <h1 className="text-3xl font-bold">History</h1>
-                            <Link href={"/history"} className="text-sm lg:text-lg">
+                            <Link href={"/history"} className="text-sm flex gap-2 items-center font-extrabold lg:text-lg">
                                 Load more
+                                <ChevronRight size={30} />
                             </Link>
                         </div>
                         <div className="flex gap-2">
@@ -159,8 +160,9 @@ const Page = () => {
                     <div className="flex flex-col p-4">
                         <div className="flex justify-between items-center">
                             <h1 className="text-3xl lg:text-5xl font-bold">Bookmark</h1>
-                            <Link href={"/bookmark"} className="text-sm lg:text-lg">
+                            <Link href={"/bookmark"} className=" flex items-center gap-2 text-sm lg:text-lg font-extrabold">
                                 Load more
+                                <ChevronRight size={30} />
                             </Link>
                         </div>
                         <div className="flex gap-2">

@@ -9,6 +9,7 @@ import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
 import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
 import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
 import { getTrendingAnime, getPopularAnime } from "@/lib/AnimeFetch";
+import { ChevronRight } from "lucide-react";
 
 export default async function page() {
     const Trending = await getTrendingAnime();
@@ -21,8 +22,9 @@ export default async function page() {
             <div className="flex flex-col mt-9">
                 <div className="flex justify-between items-center">
                     <h1 className="text-3xl lg:text-5xl font-bold">Popular</h1>
-                    <Link href={"/popular"} className="text-sm lg:text-lg">
+                    <Link href={"/popular"} className=" flex items-center gap-2 font-extrabold text-sm md:text-xl">
                         Load more
+                        <ChevronRight size={30} />
                     </Link>
                 </div>
                 <div className="flex gap-2">
@@ -33,8 +35,9 @@ export default async function page() {
             <div className="flex flex-col mt-9">
                 <div className="flex justify-between items-center">
                     <h1 className="text-3xl lg:text-5xl font-bold">Trending</h1>
-                    <Link href={"/trending"} className="text-sm lg:text-lg">
+                    <Link href={"/trending"} className=" flex gap-2 items-center font-extrabold text-sm md:text-xl">
                         Load more
+                        <ChevronRight size={30} />
                     </Link>
                 </div>
                 <div className="flex gap-2">
