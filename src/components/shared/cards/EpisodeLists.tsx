@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, memo } from "react";
 import { Frown } from "lucide-react";
 import Anime from "@/types/animetypes";
 import Link from "next/link";
@@ -82,4 +82,4 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
     );
 };
 
-export default EpisodeLists;
+export default memo(EpisodeLists);

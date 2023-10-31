@@ -20,7 +20,17 @@ const historySchema = new mongoose.Schema({
         type: String,
     },
 });
-
+const bookmarkSchema = new mongoose.Schema({
+    animeId: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
+    title: {
+        type: String,
+    },
+});
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -58,6 +68,10 @@ const userSchema = new mongoose.Schema({
     verifyTokenExpiry: Date,
     watchHistory: {
         type: [historySchema],
+        default: [],
+    },
+    bookmarks: {
+        type: [bookmarkSchema],
         default: [],
     },
 });
