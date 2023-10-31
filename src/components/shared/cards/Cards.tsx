@@ -70,7 +70,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
     const handleMoveLeft = () => {
         if (containerRef.current) {
-            const newPosition = Math.max(0, scrollPosition - 200); // Adjust the scroll speed as needed
+            const newPosition = Math.max(0, scrollPosition - 150 * 10);
             containerRef.current.scrollTo({
                 left: newPosition,
                 behavior: "smooth",
@@ -81,7 +81,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
 
     const handleMoveRight = () => {
         if (containerRef.current) {
-            const newPosition = Math.min(maxScroll, scrollPosition + 200); // Adjust the scroll speed as needed
+            const newPosition = Math.min(maxScroll, scrollPosition + 150 * 10);
             containerRef.current.scrollTo({
                 left: newPosition,
                 behavior: "smooth",
