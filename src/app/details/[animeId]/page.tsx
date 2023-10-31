@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const formattedTitle = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 
     const description = anime?.description;
-    const formattedDescription = description.replace(/<\/?[^>]+(>|$)/g, "");
+    const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
     return {
         title: `${formattedTitle || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
         description: formattedDescription || "Opps!! No Description Found",

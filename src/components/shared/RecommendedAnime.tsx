@@ -12,7 +12,10 @@ export async function RecommendedAnime({ episode }: { episode: number }) {
                     <Cards props={details.recommendations} />
                 </>
             ) : (
-                <ContentNotFound message="recommendations" />
+                <>
+                    <h1 className=" text-4xl font-semibold">Recommended</h1>
+                    <ContentNotFound message="recommendations" />
+                </>
             )}
         </>
     );

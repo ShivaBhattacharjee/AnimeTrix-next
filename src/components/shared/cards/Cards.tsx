@@ -127,10 +127,12 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                 )}
             </div>
 
-            <div className=" justify-end gap-4 hidden md:flex">
-                <MoveLeft size={35} onClick={handleMoveLeft} className=" cursor-pointer" style={{ opacity: scrollPosition === 0 ? 0.5 : 1 }} />
-                <MoveRight size={35} onClick={handleMoveRight} className=" cursor-pointer" style={{ opacity: scrollPosition >= maxScroll ? 0.5 : 1 }} />
-            </div>
+            {props.length > 12 && (
+                <div className=" justify-end gap-4 hidden md:flex">
+                    <MoveLeft size={35} onClick={handleMoveLeft} className=" cursor-pointer" style={{ opacity: scrollPosition === 0 ? 0.5 : 1 }} />
+                    <MoveRight size={35} onClick={handleMoveRight} className=" cursor-pointer" style={{ opacity: scrollPosition >= maxScroll ? 0.5 : 1 }} />
+                </div>
+            )}
         </section>
     );
 };
