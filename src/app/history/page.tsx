@@ -74,12 +74,16 @@ const Page = () => {
     };
     const loadMoreData = async () => {
         try {
-            const nextPageData = await fetchNextPage(currentPage + 1);
-            if (nextPageData.length === 0) {
-                setHasMore(false);
+            if (history.length >= 10) {
+                const nextPageData = await fetchNextPage(currentPage + 1);
+                if (nextPageData.length === 0) {
+                    setHasMore(false);
+                } else {
+                    setCurrentPage(currentPage + 1);
+                    setHistory([...history, ...nextPageData]);
+                }
             } else {
-                setCurrentPage(currentPage + 1);
-                setHistory([...history, ...nextPageData]);
+                setHasMore(false);
             }
         } catch (error) {
             console.error("Error fetching more data:", error);

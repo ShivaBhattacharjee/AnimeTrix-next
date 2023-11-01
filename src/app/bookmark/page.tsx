@@ -71,12 +71,16 @@ const Page = () => {
     };
     const loadMoreData = async () => {
         try {
-            const nextPageData = await fetchNextPage(currentPage + 1);
-            if (nextPageData.length === 0) {
-                setHasMore(false);
+            if (bookmark.length >= 10) {
+                const nextPageData = await fetchNextPage(currentPage + 1);
+                if (nextPageData.length === 0) {
+                    setHasMore(false);
+                } else {
+                    setCurrentPage(currentPage + 1);
+                    setBookmark([...bookmark, ...nextPageData]);
+                }
             } else {
-                setCurrentPage(currentPage + 1);
-                setBookmark([...bookmark, ...nextPageData]);
+                setHasMore(false);
             }
         } catch (error) {
             console.error("Error fetching more data:", error);
@@ -152,7 +156,7 @@ const Page = () => {
                 </>
             ) : (
                 <div className="flex flex-col  font-semibold gap-4 justify-center items-center min-h-[80vh]">
-                    <p className="text-2xl">Login to access history</p>
+                    <p className="text-2xl">Login to access bookmark</p>
                     <Link href="/login" className="p-4 bg-white font-bold w-48 text-center text-black rounded-lg">
                         Login
                     </Link>
