@@ -17,6 +17,12 @@ type HistoryItem = {
     title: string;
     _id: string;
 };
+type BookmarkItem = {
+    animeId: number;
+    image: string;
+    title: string;
+    _id: string;
+};
 
 type UserHistoryResponse = {
     nextPage: boolean;
@@ -25,12 +31,23 @@ type UserHistoryResponse = {
         history: HistoryItem[];
     };
 };
+
+type UserBookmarkResponse = {
+    nextPage: boolean;
+    bookmarks: BookmarkItem[];
+    userBookmarks: {
+        bookmarks: BookmarkItem[];
+    };
+};
+
 const Page = () => {
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(true);
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [historyLoading, setHistoryLoading] = useState(true);
+    const [bookmarkLoading, setBookmarkLoading] = useState(true);
+    const [bookmark, setBookmark] = useState<BookmarkItem[]>([]);
     const router = useRouter();
     const token = getCookie("token");
     const logout = async () => {
@@ -74,9 +91,29 @@ const Page = () => {
             setHistoryLoading(false);
         }
     };
+    const getUserBookmark = async () => {
+        try {
+            const response = await fetch("/api/bookmark");
+            if (token) {
+                if (!response.ok) {
+                    throw new Error("Network response error");
+                }
+            }
+            const data: UserBookmarkResponse = await response.json();
+            setBookmark(data?.userBookmarks?.bookmarks || []);
+            setBookmarkLoading(false);
+            console.dir(data);
+        } catch (error: unknown) {
+            console.error(error);
+            setBookmarkLoading(false);
+        }
+    };
     useEffect(() => {
         getUserData();
-        if (token) getUserHistory();
+        if (token) {
+            getUserHistory();
+            getUserBookmark();
+        }
     }, [token]);
     return (
         <>
@@ -166,10 +203,35 @@ const Page = () => {
                             </Link>
                         </div>
                         <div className="flex gap-2">
-                            <div className="flex justify-center items-center w-full mt-5 gap-3">
-                                <AlertTriangle size={40} />
-                                <h1 className="text-3xl font-semibold">Under development</h1>
-                            </div>
+                            {bookmarkLoading ? (
+                                <div className="flex w-full justify-center items-center">
+                                    <SpinLoading />
+                                </div>
+                            ) : (
+                                <>
+                                    {bookmark.length > 0 ? (
+                                        <div className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-3 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 items-center  mt-8">
+                                            {bookmark?.map((item) => (
+                                                <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
+                                                    <Link href={`/details/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
+                                                        <div className="md:w-48 h-60  relative overflow-hidden">
+                                                            <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
+                                                        </div>
+                                                        <div className="flex flex-col gap-3 p-2 mb-5">
+                                                            <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize">{item.title || "Unknown Title"}</span>
+                                                        </div>
+                                                    </Link>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="flex justify-center items-center w-full mt-5 gap-3">
+                                            <AlertTriangle size={40} />
+                                            <h1 className="text-3xl font-semibold">No videos found</h1>
+                                        </div>
+                                    )}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

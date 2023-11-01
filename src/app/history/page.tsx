@@ -33,7 +33,6 @@ const Page = () => {
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [hasMore, setHasMore] = useState(true);
     const [currentPage, setCurrentPage] = useState(2);
-    const [streamId, setStreamId] = useState<string>("");
 
     const token = getCookie("token");
 
