@@ -10,13 +10,42 @@ type Bookmark = {
     bookmark: string;
     animeId: number;
 };
-export function GET() {
-    return NextResponse.json(
-        { message: "Hello World from bookmark route" },
-        {
-            status: 200,
-        },
-    );
+export async function GET(request: NextRequest) {
+    const { searchParams } = new URL(request.url);
+    const Page = parseInt(searchParams.get("page") ?? "1", 10);
+    const limit = 12;
+    try {
+        const userId = getDataFromJwt(request);
+        const user = await User.findOne({ _id: userId }).select("-password");
+        if (!user) {
+            return NextResponse.json(
+                {
+                    error: "User not found",
+                },
+                {
+                    status: 401,
+                },
+            );
+        }
+
+        const startIndex = (Page - 1) * limit;
+        const endIndex = Page * limit;
+
+        const bookmarks = user.bookmarks.slice(startIndex, endIndex);
+
+        const paginatedResult = {
+            nextPage: user.bookmarks.length > endIndex ? true : false,
+            bookmarks,
+        };
+        return NextResponse.json({
+            userBookmarks: paginatedResult,
+            page: Page,
+        });
+    } catch (error: unknown) {
+        return NextResponse.json({
+            error: "Error saving bookmark",
+        });
+    }
 }
 export async function POST(request: NextRequest) {
     try {

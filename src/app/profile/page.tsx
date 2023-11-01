@@ -89,10 +89,10 @@ const Page = () => {
                     <div className=" p-4 flex flex-col lg:flex-row gap-3 items-center justify-between">
                         <div className="flex flex-col lg:flex-row items-center gap-5">
                             <div className=" h-24 w-24 lg:h-32 lg:w-32 rounded-full dark:bg-white bg-black dark:text-black text-white flex justify-center items-center ">
-                                <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase()}</h1>
+                                <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>
                             </div>
                             <div className="flex flex-col items-center lg:items-start">
-                                <h1 className="text-3xl font-semibold">{userName}</h1>
+                                <h1 className="text-3xl font-semibold">{userName || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>
                             </div>
                         </div>
