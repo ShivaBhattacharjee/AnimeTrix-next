@@ -194,6 +194,8 @@ const Page = () => {
                         </div>
                     </div>
 
+                    <h1 className=" h-1 dark:bg-white/20 bg-black/20 w-full"></h1>
+
                     <div className="flex flex-col p-4">
                         <div className="flex justify-between items-center">
                             <h1 className="text-3xl lg:text-5xl font-bold">Bookmark</h1>
