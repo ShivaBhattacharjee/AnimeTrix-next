@@ -42,8 +42,9 @@ export async function GET(request: NextRequest) {
             page: Page,
         });
     } catch (error: unknown) {
+        const Error = error as Error;
         return NextResponse.json({
-            error: "Error saving bookmark",
+            error: Error.message || "Error fetching bookmark",
         });
     }
 }
@@ -92,7 +93,7 @@ export async function POST(request: NextRequest) {
         const Error = error as Error;
         return NextResponse.json(
             {
-                error: Error.message,
+                error: Error.message || "Error saving bookmark",
             },
             {
                 status: 401,
@@ -141,7 +142,7 @@ export async function DELETE(request: NextRequest) {
         const Error = error as Error;
         return NextResponse.json(
             {
-                error: Error.message,
+                error: Error.message || "Error deleting bookmark",
             },
             {
                 status: 400,
