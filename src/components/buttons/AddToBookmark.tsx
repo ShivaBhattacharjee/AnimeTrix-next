@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 
 type BookmarkProps = {
-    animeId: string;
+    animeId: Number;
     image: string;
     title: string;
 };
@@ -61,10 +61,12 @@ const AddToBookmark = ({ animeId, image, title }: BookmarkProps) => {
             Toast.ErrorShowToast("Please Login First");
         }
     };
-    const deleteBookmark = async (animeId: string) => {
+    const deleteBookmark = async (animeId: Number) => {
+        console.log("Deleting bookmark for animeId:", animeId);
+        const parsedAnimeId = parseInt(animeId.toString());
         try {
             const data = {
-                animeId: animeId,
+                animeId: parsedAnimeId,
             };
             const res = await axios.delete("/api/bookmark", { data });
             Toast.SuccessshowToast(res?.data?.message || "Deleted successfully");
@@ -75,6 +77,7 @@ const AddToBookmark = ({ animeId, image, title }: BookmarkProps) => {
             console.log(error);
         }
     };
+
     return (
         <>
             {bookmarkCheckLoading ? (

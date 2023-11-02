@@ -104,8 +104,8 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
     try {
-        const userId = getDataFromJwt(request);
-        const user = await User.findOne({ _id: userId }).select("-password");
+        // const userId = getDataFromJwt(request);
+        const user = await User.findOne({ username: "Shiva" }).select("-password");
         if (!user) {
             return NextResponse.json(
                 {
