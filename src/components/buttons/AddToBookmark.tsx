@@ -25,7 +25,7 @@ const AddToBookmark = ({ animeId, image, title }: BookmarkProps) => {
                 const response = await axios.get("/api/bookmark");
                 const { userBookmarks } = response.data;
                 console.log("User bookmarks:", userBookmarks);
-                const isAnimeBookmarked = userBookmarks.bookmarks.some((bookmark: any) => bookmark.animeId == animeId);
+                const isAnimeBookmarked = userBookmarks.bookmarks.some((bookmark: BookmarkProps) => bookmark.animeId == animeId);
                 console.log("Is anime bookmarked?", isAnimeBookmarked);
                 setIsBookmarked(isAnimeBookmarked);
             } catch (error) {
