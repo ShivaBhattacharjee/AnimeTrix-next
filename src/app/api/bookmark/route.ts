@@ -50,7 +50,6 @@ export async function GET(request: NextRequest) {
 }
 export async function POST(request: NextRequest) {
     try {
-        // const userId = getDataFromJwt(request);
         const reqBody = await request.json();
         const { animeId, image, title } = reqBody;
         const user = await User.findOne({ username: "Shiva" }).select("-password");
@@ -64,8 +63,8 @@ export async function POST(request: NextRequest) {
                 },
             );
         }
-        const existingBookmarkIndex = user.bookmarks.findIndex((bookmark: Bookmark) => bookmark.animeId === animeId);
-        if (existingBookmarkIndex !== -1) {
+        const existingBookmark = user.bookmarks.find((bookmark: Bookmark) => bookmark.animeId == animeId);
+        if (existingBookmark) {
             return NextResponse.json(
                 {
                     error: "Anime already bookmarked",
@@ -101,6 +100,7 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+
 export async function DELETE(request: NextRequest) {
     try {
         const userId = getDataFromJwt(request);

@@ -13,6 +13,7 @@ import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
 import Link from "next/link";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import AddToBookmark from "@/components/buttons/AddToBookmark";
 
 type Props = {
     params: { animeId: number };
@@ -111,10 +112,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                                 Watch Now
                             </Link>
                         )}
-                        <button className="flex p-4 border-2 items-center gap-3 font-semibold dark:border-white border-black rounded-lg duration-200 hover:scale-95">
-                            <Bookmark />
-                            Bookmark
-                        </button>
+                        <AddToBookmark animeId={params.animeId} image={details.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} title={modifiedTitle} />
                     </div>
 
                     {details?.description && (

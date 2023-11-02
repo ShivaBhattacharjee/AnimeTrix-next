@@ -22,13 +22,15 @@ const historySchema = new mongoose.Schema({
 });
 const bookmarkSchema = new mongoose.Schema({
     animeId: {
-        type: String,
+        type: Number,
+        unique: true,
     },
     image: {
         type: String,
     },
     title: {
         type: String,
+        unique: true,
     },
 });
 const userSchema = new mongoose.Schema({
