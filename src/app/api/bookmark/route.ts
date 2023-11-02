@@ -51,8 +51,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
+        const userId = getDataFromJwt(request);
         const { animeId, image, title } = reqBody;
-        const user = await User.findOne({ username: "Shiva" }).select("-password");
+        const user = await User.findOne({ _id: userId }).select("-password");
         if (!user) {
             return NextResponse.json(
                 {
