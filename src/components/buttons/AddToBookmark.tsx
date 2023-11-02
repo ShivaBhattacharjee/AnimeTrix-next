@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 
 type BookmarkProps = {
-    animeId: Number;
+    animeId: number;
     image: string;
     title: string;
 };
@@ -61,7 +61,7 @@ const AddToBookmark = ({ animeId, image, title }: BookmarkProps) => {
             Toast.ErrorShowToast("Please Login First");
         }
     };
-    const deleteBookmark = async (animeId: Number) => {
+    const deleteBookmark = async (animeId: number) => {
         console.log("Deleting bookmark for animeId:", animeId);
         const parsedAnimeId = parseInt(animeId.toString());
         try {
