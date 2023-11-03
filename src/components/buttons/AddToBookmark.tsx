@@ -11,8 +11,9 @@ type BookmarkProps = {
     animeId: number;
     image: string;
     title: string;
+    isStream?: boolean;
 };
-const AddToBookmark = ({ animeId, image, title }: BookmarkProps) => {
+const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
     const token = getCookie("token");
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [bookmarkCheckLoading, setBookmarkCheckLoading] = useState(true);
@@ -80,15 +81,23 @@ const AddToBookmark = ({ animeId, image, title }: BookmarkProps) => {
 
     return (
         <>
-            {bookmarkCheckLoading ? (
-                <button className="flex p-4 border-2 items-center gap-3 font-semibold dark:border-white border-black rounded-lg duration-200 hover:scale-95">
-                    <BarLoader aria-setsize={20} color="#2563EB" />
+            {isStream ? (
+                <button onClick={() => (isBookmarked ? deleteBookmark(animeId) : addBookmark())} className="flex justify-end w-full">
+                    {isBookmarked ? <Bookmark size={40} className="fill-white duration-200 cursor-pointer" /> : <Bookmark size={40} className=" hover:fill-white duration-200 cursor-pointer" />}
                 </button>
             ) : (
-                <button onClick={() => (isBookmarked ? deleteBookmark(animeId) : addBookmark())} className={`flex p-4 border-2 items-center gap-3 font-semibold ${isBookmarked ? "border-green-500" : "dark:border-white border-black"} rounded-lg duration-200 hover:scale-95 ${isBookmarked ? "text-green-500" : ""}`}>
-                    {isBookmarked ? <BookMarked /> : <Bookmark />}
-                    {isBookmarked ? "Bookmarked" : "Bookmark"}
-                </button>
+                <>
+                    {bookmarkCheckLoading ? (
+                        <button className="flex p-4 border-2 items-center gap-3 font-semibold dark:border-white border-black rounded-lg duration-200 hover:scale-95">
+                            <BarLoader aria-setsize={20} color="#2563EB" />
+                        </button>
+                    ) : (
+                        <button onClick={() => (isBookmarked ? deleteBookmark(animeId) : addBookmark())} className={`flex p-4 border-2 items-center gap-3 font-semibold ${isBookmarked ? "border-green-500" : "dark:border-white border-black"} rounded-lg duration-200 hover:scale-95 ${isBookmarked ? "text-green-500" : ""}`}>
+                            {isBookmarked ? <BookMarked /> : <Bookmark />}
+                            {isBookmarked ? "Bookmarked" : "Bookmark"}
+                        </button>
+                    )}
+                </>
             )}
         </>
     );

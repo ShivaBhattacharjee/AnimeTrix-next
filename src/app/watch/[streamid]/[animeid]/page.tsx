@@ -8,12 +8,13 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import CharacterCard from "@/components/shared/cards/characterCard";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
-import { Bookmark, Download, Flag } from "lucide-react";
+import { Download, Flag } from "lucide-react";
 import { Metadata } from "next";
 import React, { Suspense } from "react";
 import AddToHistory from "@/lib/addToHistory";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import RelationLoading from "@/components/loading/RelationLoading";
+import AddToBookmark from "@/components/buttons/AddToBookmark";
 type Props = {
     params: {
         streamid: string;
@@ -123,9 +124,7 @@ const Page = async ({
                                             <span className=" dark:text-white/70 text-black/70">Country</span> : {details?.countryOfOrigin || "Earth"}
                                         </h1>
                                     </div>
-                                    <div className=" flex justify-end w-full">
-                                        <Bookmark size={40} className=" hover:fill-white duration-200 cursor-pointer" />
-                                    </div>
+                                    <AddToBookmark image={details?.image} animeId={params.animeid} title={stream?.info?.title || "unknown"} isStream={true} />
                                 </div>
 
                                 <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
