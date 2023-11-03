@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent,useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import axios, { AxiosResponse } from "axios";
 import { Search, Trash2 } from "lucide-react";
@@ -77,7 +77,7 @@ function AnimeImageSearch() {
     return (
         <>
             {/* Removed the comment inside the JSX */}
-            {searchResult != null && <AniScanSearchLayout searchResult={searchResult} setToggle={setToggle} />}
+            {searchResult != null && <AniScanSearchLayout searchResult={searchResult} />}
             <div className={`${searchResult != null ? "" : "flex min-h-[80vh] justify-center items-center flex-col" + (preview ? " mb-24" : "")}`}>
                 {toggle ? (
                     <>
@@ -90,7 +90,7 @@ function AnimeImageSearch() {
                                 {!loading ? (
                                     <div className="flex justify-center items-center flex-col gap-5">
                                         <div className="flex justify-center flex-col items-center ">
-                                            <img className=" w-80 md:w-1/2 rounded-lg relative" src={preview || ""} alt="preview image" />
+                                            <img className=" w-80 md:w-1/2 rounded-lg relative" src={preview || ""} alt="preview image" /> {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <button onClick={handleRemoveImage} className=" dark:bg-white bg-black flex items-center gap-3 dark:text-black text-white p-2 text-lg mt-5 rounded-lg font-semibold">
                                                 <Trash2 />
                                                 Delete
