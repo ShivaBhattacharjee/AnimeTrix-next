@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
-import Toast from "@/utils/toast";
+
 import { Error } from "@/types/ErrorTypes";
+import Toast from "@/utils/toast";
 
 const Logout = () => {
     const token = getCookie("token");
