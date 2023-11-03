@@ -49,6 +49,7 @@ const Page = () => {
     const [historyLoading, setHistoryLoading] = useState(true);
     const [bookmarkLoading, setBookmarkLoading] = useState(true);
     const [bookmark, setBookmark] = useState<BookmarkItem[]>([]);
+    const [profilePicture, setProfilePicture] = useState("");
     const router = useRouter();
     const token = getCookie("token");
     const logout = async () => {
@@ -68,6 +69,7 @@ const Page = () => {
             const user = await userResponse.json();
             setUserName(user?.userData?.username);
             setEmail(user?.userData?.email);
+            setProfilePicture(user?.userData?.profilePicture || "");
             setLoading(false);
         } catch (error: unknown) {
             const Error = error as Error;
@@ -102,6 +104,7 @@ const Page = () => {
             }
             const data: UserBookmarkResponse = await response.json();
             setBookmark(data?.userBookmarks?.bookmarks || []);
+
             setBookmarkLoading(false);
             console.dir(data);
         } catch (error: unknown) {
@@ -126,9 +129,7 @@ const Page = () => {
                 <div className="min-h-[100dvh]">
                     <div className=" p-4 flex flex-col lg:flex-row gap-3 items-center justify-between">
                         <div className="flex flex-col lg:flex-row items-center gap-5">
-                            <div className=" h-24 w-24 lg:h-32 lg:w-32 rounded-full dark:bg-white bg-black dark:text-black text-white flex justify-center items-center ">
-                                <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>
-                            </div>
+                            <div className=" h-24 w-24 lg:h-32 lg:w-32 rounded-full dark:bg-white bg-black dark:text-black text-white flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${userName}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>}</div>
                             <div className="flex flex-col items-center lg:items-start">
                                 <h1 className="text-3xl font-semibold">{userName || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>

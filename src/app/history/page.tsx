@@ -100,8 +100,8 @@ const Page = () => {
             Toast.SuccessshowToast(res?.data?.message || "Deleted successfully");
             getUserHistory();
         } catch (error: unknown) {
-            const Error = error as Error;
-            Toast.ErrorShowToast(Error?.message || "Something went wrong");
+            const ErrorMsg = error as Error;
+            Toast.ErrorShowToast(ErrorMsg?.message || "Something went wrong");
             console.log(error);
         }
     };
