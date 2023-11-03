@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useMemo, memo } from "react";
-import { Frown } from "lucide-react";
-import Anime from "@/types/animetypes";
-import Link from "next/link";
+import React, { memo,useMemo, useState } from "react";
 import { SyncLoader } from "react-spinners";
+import { Frown } from "lucide-react";
+import Link from "next/link";
+
+import Anime from "@/types/animetypes";
 
 interface EpisodeListsProps {
     listData: Anime[];

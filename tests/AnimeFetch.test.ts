@@ -1,4 +1,4 @@
-import { getTrendingAnime, getPopularAnime, getAnimeMovies, getRandomAnime, getAiringSchedule, getUpcomingData, getGenre, getSearchResults, getAnimeDetails, getSteamingLink, getDownloadLink } from "../src/lib/AnimeFetch";
+import { getAiringSchedule, getAnimeDetails, getAnimeMovies, getDownloadLink,getGenre, getPopularAnime, getRandomAnime, getSearchResults, getSteamingLink, getTrendingAnime, getUpcomingData } from "../src/lib/AnimeFetch";
 
 describe("AnimeFetch functions", () => {
     test("getTrendingAnime should return an array of anime", async () => {

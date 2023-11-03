@@ -1,13 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import Toast from "@/utils/toast";
-import SpinLoading from "@/components/loading/SpinLoading";
 import { getCookie } from "cookies-next";
-import { Error } from "@/types/ErrorTypes";
 import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import SpinLoading from "@/components/loading/SpinLoading";
+import { Error } from "@/types/ErrorTypes";
+import Toast from "@/utils/toast";
 type HistoryItem = {
     streamId: string;
     animeId: number;

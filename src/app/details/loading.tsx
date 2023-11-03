@@ -1,8 +1,9 @@
+import React from "react";
+
 import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
-import React from "react";
 const loading = () => {
     return (
         <section className="flex flex-col p-4 mt-4 overflow-hidden pb-40">

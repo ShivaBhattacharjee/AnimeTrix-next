@@ -1,12 +1,16 @@
 "use client";
 import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import "./SliderStyles.css";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import ReloadFunc from "../error/ReloadFunc";
 import Link from "next/link";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+
+import ReloadFunc from "../error/ReloadFunc";
+
+import "./SliderStyles.css";
+
 import Anime from "@/types/animetypes";
 
 interface SliderProps {

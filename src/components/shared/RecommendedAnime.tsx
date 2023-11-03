@@ -1,6 +1,9 @@
 import React from "react";
-import Cards from "./cards/Cards";
+
 import ContentNotFound from "../error/Contentnotfound";
+
+import Cards from "./cards/Cards";
+
 import { getAnimeDetails } from "@/lib/AnimeFetch";
 export async function RecommendedAnime({ episode }: { episode: number }) {
     const details = await getAnimeDetails(episode);

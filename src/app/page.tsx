@@ -1,15 +1,17 @@
 import React, { Suspense } from "react";
-import Slider from "../components/shared/Slider";
-import Link from "next/link";
-import Cards from "@/components/shared/cards/Cards";
-import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
-import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
-import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
-import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
-import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
-import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
-import { getTrendingAnime, getPopularAnime } from "@/lib/AnimeFetch";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+
+import Slider from "../components/shared/Slider";
+
+import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
+import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
+import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
+import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
+import Cards from "@/components/shared/cards/Cards";
+import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
+import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
+import { getPopularAnime,getTrendingAnime } from "@/lib/AnimeFetch";
 
 export default async function page() {
     const Trending = await getTrendingAnime();

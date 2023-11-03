@@ -1,11 +1,12 @@
 "use client";
-import { AlertTriangle, BookmarkMinus } from "lucide-react";
-import { getCookie } from "cookies-next";
-import Link from "next/link";
 import React, { Suspense, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 import axios from "axios";
+import { getCookie } from "cookies-next";
+import { AlertTriangle, BookmarkMinus } from "lucide-react";
+import Link from "next/link";
+
+import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 

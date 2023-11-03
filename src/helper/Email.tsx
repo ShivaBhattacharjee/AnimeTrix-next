@@ -1,9 +1,10 @@
-import nodemailer from "nodemailer";
-import User from "@/model/user.model";
-import bcryptjs from "bcryptjs";
 import { render } from "@react-email/render";
-import RegisterEmail from '@/utils/EmailTemplate/RegisterEmail';
+import bcryptjs from "bcryptjs";
+import nodemailer from "nodemailer";
+
+import User from "@/model/user.model";
 import { Error } from "@/types/ErrorTypes"
+import RegisterEmail from '@/utils/EmailTemplate/RegisterEmail';
 type EmailProps = {
     email: string;
     emailType: string;

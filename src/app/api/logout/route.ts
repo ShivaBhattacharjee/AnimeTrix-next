@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+
 import { Error } from "@/types/ErrorTypes";
 
 export function GET() {

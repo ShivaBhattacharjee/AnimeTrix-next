@@ -1,5 +1,7 @@
 import React from "react";
+
 import AiringScheduleCard from "./AiringScheduleCard";
+
 import { getAiringSchedule } from "@/lib/AnimeFetch";
 
 export default async function AiringSchedule() {

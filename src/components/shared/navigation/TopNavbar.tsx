@@ -1,8 +1,10 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
 import SearchModal from "../SearchModal";
-import { getTrendingAnime } from "@/lib/AnimeFetch";
+
 import Logout from "@/components/buttons/Logout";
+import { getTrendingAnime } from "@/lib/AnimeFetch";
 export default async function TopNavbar() {
     const trendingPromise = await getTrendingAnime();
     return (

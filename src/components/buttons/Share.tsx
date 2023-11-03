@@ -5,8 +5,8 @@ declare global {
     }
 }
 
-import { Share2 } from 'lucide-react';
 import React from 'react';
+import { Share2 } from 'lucide-react';
 
 /**
  * Renders a share button that allows the user to share the current page using the Web Share API or Android Share API.

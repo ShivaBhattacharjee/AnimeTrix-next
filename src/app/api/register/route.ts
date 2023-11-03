@@ -1,8 +1,9 @@
-import { connect } from "@/database/db";
-import User from "@/model/user.model";
-import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
+import { NextRequest, NextResponse } from "next/server";
+
+import { connect } from "@/database/db";
 import { sendEmail } from "@/helper/Email";
+import User from "@/model/user.model";
 import { Error } from "@/types/ErrorTypes";
 connect();
 

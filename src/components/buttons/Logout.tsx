@@ -1,10 +1,11 @@
 "use client"
-import Toast from '@/utils/toast'
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link';
-import { getCookie } from "cookies-next"
-import { Error } from '@/types/ErrorTypes';
 import { ClipLoader } from 'react-spinners';
+import { getCookie } from "cookies-next"
+import Link from 'next/link';
+
+import { Error } from '@/types/ErrorTypes';
+import Toast from '@/utils/toast'
 const Logout = () => {
     const token = getCookie("token");
     const [profilePicture, setProfilePicture] = useState("")

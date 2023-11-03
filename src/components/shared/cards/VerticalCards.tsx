@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
-import Anime from "@/types/animetypes";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Link from "next/link";
+
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import Anime from "@/types/animetypes";
 interface VerticalCardsProps {
     title: string;
     data: Anime[];

@@ -1,20 +1,21 @@
+import React, { Suspense } from "react";
+import { Download, Flag } from "lucide-react";
+import { Metadata } from "next";
+
+import AddToBookmark from "@/components/buttons/AddToBookmark";
 import Share from "@/components/buttons/Share";
 import ServerError from "@/components/error/ServerError";
 import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
-import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
-import EpisodeLists from "@/components/shared/cards/EpisodeLists";
-import CharacterCard from "@/components/shared/cards/characterCard";
-import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
-import { AnimeApi } from "@/lib/animeapi/animetrixapi";
-import { Download, Flag } from "lucide-react";
-import { Metadata } from "next";
-import React, { Suspense } from "react";
-import AddToHistory from "@/lib/addToHistory";
-import RelationCard from "@/components/shared/cards/RelationCard";
 import RelationLoading from "@/components/loading/RelationLoading";
-import AddToBookmark from "@/components/buttons/AddToBookmark";
+import CharacterCard from "@/components/shared/cards/characterCard";
+import EpisodeLists from "@/components/shared/cards/EpisodeLists";
+import RelationCard from "@/components/shared/cards/RelationCard";
+import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
+import AddToHistory from "@/lib/addToHistory";
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
 type Props = {
     params: {
         streamid: string;

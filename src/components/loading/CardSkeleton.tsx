@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect,useRef, useState } from "react";
 
 const CardSkeleton = () => {
     const containerRef = useRef<HTMLDivElement>(null);

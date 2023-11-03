@@ -1,7 +1,8 @@
+import { NextRequest, NextResponse } from "next/server";
+
 import { connect } from "@/database/db";
 import { getDataFromJwt } from "@/helper/jwtData";
 import User from "@/model/user.model";
-import { NextRequest, NextResponse } from "next/server";
 import { Error } from "@/types/ErrorTypes";
 connect();
 

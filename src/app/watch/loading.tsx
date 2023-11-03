@@ -1,9 +1,10 @@
+import React from "react";
+import { Download, Flag, Share2 } from "lucide-react";
+
 import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
-import { Download, Flag, Share2 } from "lucide-react";
-import React from "react";
 
 const loading = () => {
     return (

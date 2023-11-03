@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import Anime from "@/types/animetypes";
+
 import { getAnimeDetails } from "@/lib/AnimeFetch";
+import Anime from "@/types/animetypes";
 
 interface Props {
     id: number;

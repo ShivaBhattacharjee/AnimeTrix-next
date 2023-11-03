@@ -1,17 +1,18 @@
 "use client";
-import Anime, { ApiResponse } from "@/types/animetypes";
-import ServerError from "./error/ServerError";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Frown } from "lucide-react";
+import Link from "next/link";
+
+import ServerError from "./error/ServerError";
+
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import Anime, { ApiResponse } from "@/types/animetypes";
 
 interface AniScanSearchLayoutProps {
     searchResult: ApiResponse | null;
-    setToggle: (value: boolean) => void;
 }
 
-const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult, setToggle }) => {
+const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [view, setView] = useState<Anime[]>([]);
     const [select, setSelect] = useState<number>(0);

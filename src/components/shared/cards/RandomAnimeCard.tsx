@@ -1,6 +1,8 @@
 import React from "react";
-import ReloadFunc from "../../error/ReloadFunc";
 import Link from "next/link";
+
+import ReloadFunc from "../../error/ReloadFunc";
+
 import { getRandomAnime } from "@/lib/AnimeFetch";
 getRandomAnime;
 

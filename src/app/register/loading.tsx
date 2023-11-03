@@ -1,5 +1,6 @@
-import SpinLoading from '@/components/loading/SpinLoading'
 import React from 'react'
+
+import SpinLoading from '@/components/loading/SpinLoading'
 
 const loading = () => {
     return (

@@ -1,6 +1,7 @@
+import React from "react";
+
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
-import React from "react";
 import { getAnimeMovies } from "@/lib/AnimeFetch";
 export function generateMetadata() {
     return {

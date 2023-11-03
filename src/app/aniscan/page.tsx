@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { ChangeEvent,useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import axios, { AxiosResponse } from "axios";
-import SpinLoading from "@/components/loading/SpinLoading";
 import { Search, Trash2 } from "lucide-react";
+
 import AniScanSearchLayout from "@/components/AniScanSearchLayout";
+import SpinLoading from "@/components/loading/SpinLoading";
 import { ApiResponse } from "@/types/animetypes";
 
 const fileTypes = ["JPG", "PNG", "JPEG"];

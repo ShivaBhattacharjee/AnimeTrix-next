@@ -50,7 +50,9 @@
     "@types/bcryptjs": "^2.4.4",
     "@types/jest": "^29.5.5",
     "@types/nodemailer": "^6.4.11",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "3.0.2"
   }
 }
