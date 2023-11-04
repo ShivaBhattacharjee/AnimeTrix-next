@@ -54,7 +54,7 @@ Anime Trix is an anime streaming / downloading site that offers a vast collectio
 
 AnimeTrix is built using ReactJs and vanilla Css
 
-* [NextJS](https://nextjs.org) 
+* [NextJS](https://nextjs.org)
 * [TailwindCss](https://tailwindcss.com/)
 * [Mongo DB](https://www.mongodb.com/)
 
@@ -84,7 +84,7 @@ cd AnimeTrix-next
 npm install
 ```
 ```
-npm run dev 
+npm run dev
 ```
 Server will start at http://localhost:3000/
 
@@ -92,7 +92,7 @@ Server will start at http://localhost:3000/
 
 <i>Docker image will be available soon </i>
 
-## Host your own 
+## Host your own
 * ## Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FShivaBhattacharjee%2FAnimeTrix-next)

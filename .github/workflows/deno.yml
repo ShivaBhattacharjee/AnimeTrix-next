@@ -38,5 +38,5 @@ jobs:
       - name: Run linter
         run: deno lint
 
-     
+
 
