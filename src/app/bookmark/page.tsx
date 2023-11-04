@@ -128,24 +128,21 @@ const Page = () => {
                                             <div className="rounded-lg duration-200 hover:scale-105 bg-white/60 animate-pulse w-40  max-lg:h-56 lg:w-48 h-72" key={index} />
                                         ))}
                                     >
-                                        {bookmark
-                                            .slice()
-                                            .reverse()
-                                            ?.map((item) => (
-                                                <div key={item._id} className="border-2 border-white/30 card-img rounded-lg">
-                                                    <div className="content-normal relative overflow-hidden w-full h-full">
-                                                        <Link href={`/details/${item.animeId}`} className="md:w-48 h-60  relative overflow-hidden">
-                                                            <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
-                                                        </Link>
-                                                        <div className="flex flex-col gap-3 p-2">
-                                                            <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize mb-4">{item.title || "Unknown Title"}</span>
-                                                        </div>
-                                                        <h1 className=" bg-black rounded-full absolute right-3 top-2 p-2 cursor-pointer">
-                                                            <BookmarkMinus onClick={() => deleteBookmark(item.animeId || "Unknown")} />
-                                                        </h1>
+                                        {bookmark?.map((item) => (
+                                            <div key={item._id} className="border-2 border-white/30 card-img rounded-lg">
+                                                <div className="content-normal relative overflow-hidden w-full h-full">
+                                                    <Link href={`/details/${item.animeId}`} className="md:w-48 h-60  relative overflow-hidden">
+                                                        <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
+                                                    </Link>
+                                                    <div className="flex flex-col gap-3 p-2">
+                                                        <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize mb-4">{item.title || "Unknown Title"}</span>
                                                     </div>
+                                                    <h1 className=" bg-black rounded-full absolute right-3 top-2 p-2 cursor-pointer">
+                                                        <BookmarkMinus onClick={() => deleteBookmark(item.animeId || "Unknown")} />
+                                                    </h1>
                                                 </div>
-                                            ))}
+                                            </div>
+                                        ))}
                                     </InfiniteScroll>
                                 ) : (
                                     <div className="flex justify-center items-center min-h-[70vh]  flex-col gap-3">

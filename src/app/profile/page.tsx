@@ -131,7 +131,7 @@ const Page = () => {
                 <div className="min-h-[100dvh]">
                     <div className=" p-4 flex flex-col lg:flex-row gap-3 items-center justify-between">
                         <div className="flex flex-col lg:flex-row items-center gap-5">
-                            <div className=" h-24 w-24 lg:h-32 lg:w-32 rounded-full bg-white text-black flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${userName}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>}</div>
+                            <div className=" h-24 w-24 lg:h-32 relative lg:w-32 rounded-full bg-white text-black flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${userName}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>}</div>
                             <div className="flex flex-col items-center lg:items-start">
                                 <h1 className="text-3xl font-semibold">{userName || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>

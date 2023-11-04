@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
         await user.save();
         return NextResponse.json(
             {
-                message: "added to history",
+                message: "Added to history",
                 success: true,
             },
             {

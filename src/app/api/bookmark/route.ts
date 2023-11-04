@@ -76,26 +76,16 @@ export async function POST(request: NextRequest) {
                 },
             );
         }
-        const existingBookmark = user.bookmarks.find((bookmark: Bookmark) => bookmark.animeId == animeId);
-        if (existingBookmark) {
-            return NextResponse.json(
-                {
-                    error: "Anime already bookmarked",
-                },
-                {
-                    status: 400,
-                },
-            );
+        const existingBookmarkIndex = user.bookmarks.findIndex((bookmark: Bookmark) => bookmark.animeId == animeId);
+        if (existingBookmarkIndex !== -1) {
+            user.bookmarks.splice(existingBookmarkIndex, 1);
         }
-        user.bookmarks.push({
-            animeId,
-            image,
-            title,
-        });
+        user.bookmarks.unshift({ animeId, image, title });
         await user.save();
         return NextResponse.json(
             {
                 message: "Added to bookmark",
+                success: true,
             },
             {
                 status: 200,
