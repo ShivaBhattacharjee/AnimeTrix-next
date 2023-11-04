@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect,useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CardSkeleton = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -68,7 +68,7 @@ const CardSkeleton = () => {
         <div className="flex gap-3 overflow-x-hidden duration-200 mt-9 lg:grid lg:grid-flow-col-dense" ref={containerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} style={{ userSelect: isDragging ? "none" : "auto" }}>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]?.map((anime) => (
                 <div key={anime} className="flex flex-col lg:m-3 m-1 duration-200 rounded-lg cursor-grab" onMouseDown={handleMouseDown}>
-                    <div className="rounded-lg duration-200 hover:scale-105 bg-black/30 dark:bg-white/60 animate-pulse w-40 max-lg:h-56 lg:w-60 h-72" />
+                    <div className="rounded-lg duration-200 hover:scale-105  bg-white/60 animate-pulse w-40 max-lg:h-56 lg:w-60 h-72" />
                 </div>
             ))}
         </div>

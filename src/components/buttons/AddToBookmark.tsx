@@ -89,11 +89,11 @@ const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
             ) : (
                 <>
                     {bookmarkCheckLoading ? (
-                        <button className="flex p-4 border-2 items-center gap-3 font-semibold dark:border-white border-black rounded-lg duration-200 hover:scale-95">
+                        <button className="flex p-4 border-2 items-center gap-3 font-semibold border-white  rounded-lg duration-200 hover:scale-95">
                             <BarLoader aria-setsize={20} color="#2563EB" />
                         </button>
                     ) : (
-                        <button onClick={() => (isBookmarked ? deleteBookmark(animeId) : addBookmark())} className={`flex p-4 border-2 items-center gap-3 font-semibold ${isBookmarked ? "border-green-500" : "dark:border-white border-black"} rounded-lg duration-200 hover:scale-95 ${isBookmarked ? "text-green-500" : ""}`}>
+                        <button onClick={() => (isBookmarked ? deleteBookmark(animeId) : addBookmark())} className={`flex p-4 border-2 items-center gap-3 font-semibold ${isBookmarked ? "border-green-500" : "border-white"} rounded-lg duration-200 hover:scale-95 ${isBookmarked ? "text-green-500" : ""}`}>
                             {isBookmarked ? <BookMarked /> : <Bookmark />}
                             {isBookmarked ? "Bookmarked" : "Bookmark"}
                         </button>

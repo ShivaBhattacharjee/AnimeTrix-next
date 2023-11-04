@@ -90,8 +90,8 @@ function AnimeImageSearch() {
                                 {!loading ? (
                                     <div className="flex justify-center items-center flex-col gap-5">
                                         <div className="flex justify-center flex-col items-center ">
-                                            <img className=" w-80 md:w-1/2 rounded-lg relative" src={preview || ""} alt="preview image" /> {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <button onClick={handleRemoveImage} className=" dark:bg-white bg-black flex items-center gap-3 dark:text-black text-white p-2 text-lg mt-5 rounded-lg font-semibold">
+                                            <img className=" w-80 md:w-1/2 rounded-lg relative" src={preview || ""} alt="preview image" />
+                                            <button onClick={handleRemoveImage} className=" bg-white  flex items-center gap-3 text-black  p-2 text-lg mt-5 rounded-lg font-semibold">
                                                 <Trash2 />
                                                 Delete
                                             </button>
@@ -102,7 +102,7 @@ function AnimeImageSearch() {
                                                 <FileUploader handleChange={(e: File) => handleChange(e)} name="file" types={fileTypes} multiple={false} maxSize={25} />
                                             </div>
                                         </div>
-                                        <button className="dark:bg-white bg-black mt-5 flex justify-center items-center gap-3 p-3 text-white dark:text-black rounded-lg font-semibold text-xl w-40" onClick={() => file && handleSubmit(file)}>
+                                        <button className="bg-white  mt-5 flex justify-center items-center gap-3 p-3 text-black rounded-lg font-semibold text-xl w-40" onClick={() => file && handleSubmit(file)}>
                                             <Search />
                                             Search
                                         </button>
@@ -122,8 +122,8 @@ function AnimeImageSearch() {
                                         </div>
                                         <div className="flex flex-col justify-center items-center gap-3">
                                             <span className=" font-semibold mt-5 text-xl">OR</span>
-                                            <input type="text" required className="bg-transparent w-[80vw] md:w-[50vw] 2xl:w-[500px] p-4 rounded-lg  border-2 border-black/30 dark:border-white/30 duration-200 sticky top-0 outline-none focus:outline-none text-black dark:text-white" placeholder="Enter Image Url" value={text} onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)} />
-                                            <button className="flex items-center gap-3 justify-center dark:bg-white bg-black p-3 text-white dark:text-black rounded-lg font-semibold text-xl w-40 mt-5" onClick={() => handleSubmit(text)} aria-label="URL search button">
+                                            <input type="text" required className="bg-transparent w-[80vw] md:w-[50vw] 2xl:w-[500px] p-4 rounded-lg  border-2 border-white/30 duration-200 sticky top-0 outline-none focus:outline-none text-white" placeholder="Enter Image Url" value={text} onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)} />
+                                            <button className="flex items-center gap-3 justify-center bg-white  p-3  text-black rounded-lg font-semibold text-xl w-40 mt-5" onClick={() => handleSubmit(text)} aria-label="URL search button">
                                                 <Search />
                                                 Search
                                             </button>

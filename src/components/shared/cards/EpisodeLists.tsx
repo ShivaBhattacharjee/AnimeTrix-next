@@ -1,5 +1,5 @@
 "use client";
-import React, { memo,useMemo, useState } from "react";
+import React, { memo, useMemo, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Frown } from "lucide-react";
 import Link from "next/link";
@@ -47,9 +47,9 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
             <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
                 <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
                 <div className="flex">
-                    <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 dark:border-white border-black p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
+                    <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                     {showSelect && (
-                        <select className="p-2 dark:bg-black bg-white border-2 h-11 focus:outline-none dark:border-white border-black rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
+                        <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
                             {episodeRanges.map((range) => (
                                 <option key={range} value={range}>
                                     {range}
@@ -64,7 +64,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
                     {displayedEpisodes
                         .sort((animeA, animeB) => animeA.number - animeB.number)
                         .map((anime, index) => (
-                            <Link href={`/watch/${anime.id}/${animeId}`} className={`duration-200  border-2 hover:scale-90 ${currentlyPlaying == anime.number ? "scale-90 border-2 border-red-600 bg-white/10 " : "border-black/60 dark:border-white/60 "} rounded-lg flex flex-col gap-3`} key={index}>
+                            <Link href={`/watch/${anime.id}/${animeId}`} className={`duration-200  border-2 hover:scale-90 ${currentlyPlaying == anime.number ? "scale-90 border-2 border-red-600 bg-white/10 " : "border-white/60 "} rounded-lg flex flex-col gap-3`} key={index}>
                                 <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
                                 <div className="flex gap-2 items-center p-2">
                                     {currentlyPlaying == anime.number && <SyncLoader color="red" size={4} />}

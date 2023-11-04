@@ -129,22 +129,22 @@ const Page = () => {
                 <div className="min-h-[100dvh]">
                     <div className=" p-4 flex flex-col lg:flex-row gap-3 items-center justify-between">
                         <div className="flex flex-col lg:flex-row items-center gap-5">
-                            <div className=" h-24 w-24 lg:h-32 lg:w-32 rounded-full dark:bg-white bg-black dark:text-black text-white flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${userName}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>}</div>
+                            <div className=" h-24 w-24 lg:h-32 lg:w-32 rounded-full bg-white text-black flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${userName}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>}</div>
                             <div className="flex flex-col items-center lg:items-start">
                                 <h1 className="text-3xl font-semibold">{userName || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>
                             </div>
                         </div>
                         <div className="flex gap-3">
-                            <Link href={"/edit-profile"} className=" dark:bg-white bg-black p-3 dark:text-black text-white rounded-full font-semibold dark:hover:bg-transparent hover:border-2 dark:hover:border-white duration-200 dark:hover:text-white">
+                            <Link href={"/edit-profile"} className=" bg-white  p-3 text-black  rounded-full font-semibold hover:bg-transparent hover:border-2 hover:border-white duration-200 hover:text-white">
                                 Manage Account
                             </Link>
-                            <button onClick={logout} className="dark:bg-white/80 bg-black/80 dark:text-black text-white p-3 rounded-lg dark:hover:bg-transparent duration-200 dark:hover:text-white hover:scale-110">
+                            <button onClick={logout} className="bg-white/80 text-black  p-3 rounded-lg hover:bg-transparent duration-200 hover:text-white hover:scale-110">
                                 <LogOut />
                             </button>
                         </div>
                     </div>
-                    <h1 className=" h-1 dark:bg-white/20 bg-black/20 w-full"></h1>
+                    <h1 className=" h-[1px] bg-white/20  w-full"></h1>
 
                     <div className="flex flex-col p-5">
                         <div className="flex justify-between items-center">
@@ -164,7 +164,7 @@ const Page = () => {
                                     {history.length > 0 ? (
                                         <div className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-3 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 items-center  mt-8">
                                             {history.slice(0, 8)?.map((item) => (
-                                                <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
+                                                <div key={item._id} className="border-2  border-white/30 card-img rounded-lg">
                                                     <Link href={`/watch/${item.streamId}/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
                                                         <div className="md:w-48 h-60  relative overflow-hidden">
                                                             <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
@@ -196,7 +196,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <h1 className=" h-1 dark:bg-white/20 bg-black/20 w-full"></h1>
+                    <h1 className=" h-[1px] bg-white/20 w-full"></h1>
 
                     <div className="flex flex-col p-4">
                         <div className="flex justify-between items-center">

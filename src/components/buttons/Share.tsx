@@ -1,12 +1,12 @@
-"use client"
+"use client";
 declare global {
     interface Window {
         androidShare?: (title: string, text: string, url: string) => void;
     }
 }
 
-import React from 'react';
-import { Share2 } from 'lucide-react';
+import React from "react";
+import { Share2 } from "lucide-react";
 
 /**
  * Renders a share button that allows the user to share the current page using the Web Share API or Android Share API.
@@ -29,7 +29,7 @@ const Share = ({ title }: { title: string }): JSX.Element => {
             } else if (window.androidShare) {
                 window.androidShare(shareData.title, shareData.text, shareData.url);
             } else {
-                alert('Sharing is not supported on this device.');
+                alert("Sharing is not supported on this device.");
             }
         } catch (error) {
             console.log(error);
@@ -37,7 +37,7 @@ const Share = ({ title }: { title: string }): JSX.Element => {
     };
 
     return (
-        <button onClick={handleShareClick} className="dark:bg-white bg-black p-2 rounded-lg font-semibold dark:text-black text-white flex items-center gap-3">
+        <button onClick={handleShareClick} className="bg-white  p-2 rounded-lg font-semibold text-black flex items-center gap-3">
             <Share2 />
             Share
         </button>

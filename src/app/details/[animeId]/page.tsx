@@ -94,7 +94,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
 
     // Render the anime details page.
     return (
-        <section className="flex flex-col p-4 mt-4 overflow-hidden pb-40">
+        <section className="flex flex-col p-4 mt-4 overflow-hidden">
             <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
                 <img height={200} width={400} src={details.image} className=" w-48 lg:w-72 rounded-lg" alt={`an image of ${details.title.romaji || details.title.english || details.title.native}`} />
                 <div className="flex flex-col gap-5 items-center md:items-start">
@@ -108,7 +108,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     </div>
                     <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
                         {details.episodes.length > 0 && (
-                            <Link href={"#episodes"} className="dark:bg-white bg-black p-4 gap-3 rounded-lg text-white dark:text-black font-semibold flex items-center duration-200 hover:scale-95">
+                            <Link href={"#episodes"} className="bg-white  p-4 gap-3 rounded-lg  text-black font-semibold flex items-center duration-200 hover:scale-95">
                                 <Play />
                                 Watch Now
                             </Link>
@@ -118,7 +118,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
 
                     {details?.description && (
                         <div
-                            className="max-w-4xl dark:bg-white/10 bg-black/10 border-2 dark:border-white/30 border-white/30  
+                            className="max-w-4xl bg-white/10  border-2 border-white/30   
                 rounded-lg font-semibold p-2 lg:text-xl lg:max-h-48 max-h-40  overflow-scroll hiddenscroll"
                         >
                             <p dangerouslySetInnerHTML={{ __html: details?.description }}></p>
@@ -128,7 +128,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
             </div>
             <div className=" mt-8 flex flex-col gap-5">
                 {details.nextAiringEpisode !== undefined && (
-                    <span className="dark:bg-white bg-black text-md md:text-xl lg:w-2/6 dark:text-black text-white md:w-1/2 w-full  font-bold text-center p-3 rounded-lg">
+                    <span className="bg-white text-md md:text-xl lg:w-2/6 text-black md:w-1/2 w-full  font-bold text-center p-3 rounded-lg">
                         Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
                     </span>
                 )}

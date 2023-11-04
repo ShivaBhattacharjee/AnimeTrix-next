@@ -53,13 +53,13 @@ const Logout = () => {
                     {loading ? (
                         <ClipLoader color="#fff" size={30} />
                     ) : (
-                        <Link href={"/profile"} className="dark:bg-white bg-black text-white rounded-full dark:text-black font-bold w-10 h-10 text-center flex items-center justify-center">
+                        <Link href={"/profile"} className="bg-white rounded-full text-black font-bold w-10 h-10 text-center flex items-center justify-center">
                             {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2">{username}</p>}
                         </Link>
                     )}
                 </>
             ) : (
-                <Link href="/login" className="dark:bg-white dark:text-black bg-black text-white dark:hover:text-white dark:hover:bg-transparent duration-150 border-white dark:hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32">
+                <Link href="/login" className="bg-white text-black   hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32">
                     Login
                 </Link>
             )}
