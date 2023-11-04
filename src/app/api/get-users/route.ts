@@ -43,9 +43,15 @@ export async function PUT(request: NextRequest) {
                 },
             );
         }
-        user.username = username;
-        user.profilePicture = profilePicture;
-        user.userDescription = userDescription;
+        if (username) {
+            user.username = username;
+        }
+        if (profilePicture) {
+            user.profilePicture = profilePicture;
+        }
+        if (userDescription) {
+            user.userDescription = userDescription;
+        }
         await user.save();
         return NextResponse.json(
             {
