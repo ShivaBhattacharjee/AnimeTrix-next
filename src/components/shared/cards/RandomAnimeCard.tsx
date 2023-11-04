@@ -1,9 +1,8 @@
-import React from "react";
 import Link from "next/link";
-
+import React from "react";
 import ReloadFunc from "../../error/ReloadFunc";
-
 import { getRandomAnime } from "@/lib/AnimeFetch";
+
 getRandomAnime;
 
 export async function RandomAnimeCard() {

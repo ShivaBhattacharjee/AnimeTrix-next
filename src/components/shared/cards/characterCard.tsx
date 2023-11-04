@@ -1,7 +1,6 @@
-import React from "react";
-
-import ContentNotFound from "@/components/error/Contentnotfound";
 import Anime from "@/types/animetypes";
+import ContentNotFound from "@/components/error/Contentnotfound";
+import React from "react";
 
 export default function CharacterCard({ characters }: { characters: Anime[] }) {
     return (

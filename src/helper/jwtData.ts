@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import { NextRequest } from "next/server";
+import jwt from "jsonwebtoken";
 
 type DecodedToken = {
     id: number;

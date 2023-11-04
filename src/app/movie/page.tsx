@@ -1,8 +1,8 @@
 import React from "react";
-
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
 import { getAnimeMovies } from "@/lib/AnimeFetch";
+
 export function generateMetadata() {
     return {
         title: "Anime Movies - Cinematic Adventures Await on AnimeTrix",

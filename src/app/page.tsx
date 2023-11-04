@@ -1,17 +1,16 @@
 import React, { Suspense } from "react";
+import { getPopularAnime, getTrendingAnime } from "@/lib/AnimeFetch";
+
+import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
+import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
+import Cards from "@/components/shared/cards/Cards";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-
-import Slider from "../components/shared/Slider";
-
-import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
-import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
-import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
-import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
-import Cards from "@/components/shared/cards/Cards";
 import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
+import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
+import Slider from "../components/shared/Slider";
 import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
-import { getPopularAnime,getTrendingAnime } from "@/lib/AnimeFetch";
+import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
 
 export default async function page() {
     const Trending = await getTrendingAnime();

@@ -5,35 +5,35 @@
   ],
   "plugins" : [
     "simple-import-sort" , "@typescript-eslint"
-  ],
-  "rules" :{
-    "simple-import-sort/imports" : "error"
-  },
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {
-        "simple-import-sort/imports": [
-          "error",
-          {
-            "groups" : [
-              ["^react","^@?\\w"],
-              ["^(@|components)(./*$)"],
-              ["^\\u0000"],
-              ["^\\.\\.(?!/?$)","^\\.\\./?$"],
-              ["^\\./(?=.*/)(?!/?$)","^\\.(?!/?$)","^\\./?$"],
-              ["^.+\\.s?css$"]
-            ]
-          }
-        ]
-      }
-    },{
-      "files": ["*.ts", "*.tsx"],
-      "rules" : {
-        "@typescript-eslint/no-unused-vars" : "error",
-        "react/display-name" : "off",
-        "@next/next/no-img-element": "off"
-      }
-    }
   ]
+  // "rules" :{
+  //   "simple-import-sort/imports" : "error"
+  // },
+  // "overrides": [
+  //   {
+  //     "files": ["*.ts", "*.tsx"],
+  //     "rules": {
+  //       "simple-import-sort/imports": [
+  //         "error",
+  //         {
+  //           "groups" : [
+  //             ["^react","^@?\\w"],
+  //             ["^(@|components)(./*$)"],
+  //             ["^\\u0000"],
+  //             ["^\\.\\.(?!/?$)","^\\.\\./?$"],
+  //             ["^\\./(?=.*/)(?!/?$)","^\\.(?!/?$)","^\\./?$"],
+  //             ["^.+\\.s?css$"]
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   },{
+  //     "files": ["*.ts", "*.tsx"],
+  //     "rules" : {
+  //       "@typescript-eslint/no-unused-vars" : "error",
+  //       "react/display-name" : "off",
+  //       "@next/next/no-img-element": "off"
+  //     }
+  //   }
+  // ]
 }

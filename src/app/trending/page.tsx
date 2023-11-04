@@ -1,8 +1,8 @@
 import React from "react";
-
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
 import { getTrendingAnime } from "@/lib/AnimeFetch";
+
 export function generateMetadata() {
     return {
         title: "Trending Anime - Discover the Hottest Shows on AnimeTrix",

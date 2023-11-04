@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { MoveLeft, MoveRight } from "lucide-react";
-import Link from "next/link";
 
-import ReloadFunc from "../../error/ReloadFunc";
+import { MoveLeft, MoveRight } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Anime from "@/types/animetypes";
+import Link from "next/link";
+import ReloadFunc from "../../error/ReloadFunc";
 
 interface CardsProps {
     props: Anime[];

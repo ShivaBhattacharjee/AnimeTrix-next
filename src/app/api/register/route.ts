@@ -1,10 +1,11 @@
-import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
+import { Error } from "@/types/ErrorTypes";
+import User from "@/model/user.model";
+import bcryptjs from "bcryptjs";
 import { connect } from "@/database/db";
 import { sendEmail } from "@/helper/Email";
-import User from "@/model/user.model";
-import { Error } from "@/types/ErrorTypes";
+
 connect();
 
 export async function POST(request: NextRequest) {

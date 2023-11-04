@@ -1,12 +1,13 @@
 "use client";
+
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
-import axios, { AxiosResponse } from "axios";
 import { Search, Trash2 } from "lucide-react";
+import axios, { AxiosResponse } from "axios";
 
 import AniScanSearchLayout from "@/components/AniScanSearchLayout";
-import SpinLoading from "@/components/loading/SpinLoading";
 import { ApiResponse } from "@/types/animetypes";
+import { FileUploader } from "react-drag-drop-files";
+import SpinLoading from "@/components/loading/SpinLoading";
 
 const fileTypes = ["JPG", "PNG", "JPEG"];
 function AnimeImageSearch() {

@@ -1,14 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import { ClockLoader } from "react-spinners";
-import axios from "axios";
+
 import { Eye, EyeOff } from "lucide-react";
+import React, { useState } from "react";
+
+import { ClockLoader } from "react-spinners";
+import { Error } from "@/types/ErrorTypes";
 import Link from "next/link";
+import Toast from "@/utils/toast";
+import axios from "axios";
+import useDebounce from "@/hooks/debounce";
 import { useRouter } from "next/navigation";
 
-import useDebounce from "@/hooks/debounce";
-import { Error } from "@/types/ErrorTypes";
-import Toast from "@/utils/toast";
 const Page = () => {
     const router = useRouter();
     const [userName, setUserName] = useState<string>("");

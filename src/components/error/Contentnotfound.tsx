@@ -1,5 +1,5 @@
-import React from "react";
 import { Frown } from "lucide-react";
+import React from "react";
 
 interface ContentNotFoundProps {
     message: string;

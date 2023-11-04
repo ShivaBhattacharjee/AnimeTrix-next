@@ -1,7 +1,6 @@
-import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
-
 import { Error } from "@/types/ErrorTypes";
+import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export function GET() {
     const cookieStore = cookies();

@@ -1,8 +1,8 @@
 import React from "react";
-
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
 import { getPopularAnime } from "@/lib/AnimeFetch";
+
 export function generateMetadata() {
     return {
         title: "Popular Anime - Dive into the Best Anime Series on AnimeTrix",

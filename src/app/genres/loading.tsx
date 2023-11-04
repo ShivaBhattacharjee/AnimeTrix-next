@@ -1,6 +1,5 @@
-import React from "react";
-
 import GenreLoading from "@/components/loading/GenreLoading";
+import React from "react";
 
 const loading = () => {
     return <GenreLoading />;

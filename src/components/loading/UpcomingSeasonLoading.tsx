@@ -1,5 +1,4 @@
 import React from "react";
-
 import SpinLoading from "./SpinLoading";
 
 export const UpcomingSeasonLoading = () => {

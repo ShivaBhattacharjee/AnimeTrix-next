@@ -1,10 +1,11 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
+
+import { Check } from "lucide-react";
 import SpinLoading from "@/components/loading/SpinLoading";
 import Toast from "@/utils/toast";
 import { getCookie } from "cookies-next";
-import { Check } from "lucide-react";
-import React, { useEffect, useState } from "react";
 
 const Page = () => {
     const token = getCookie("token");
@@ -30,7 +31,7 @@ const Page = () => {
     };
     useEffect(() => {
         if (token) getUserData();
-    }, []);
+    }, [token]);
 
     // const UpdateProfile = async () => {
     //     const userData = {

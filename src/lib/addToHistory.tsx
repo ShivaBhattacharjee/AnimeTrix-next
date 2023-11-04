@@ -1,9 +1,11 @@
 "use client";
+
 import React, { useEffect } from "react";
+
+import { Error } from "@/types/ErrorTypes";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-import { Error } from "@/types/ErrorTypes";
 type HistoryProps = {
     streamId: string;
     animeId: number;

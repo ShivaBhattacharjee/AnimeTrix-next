@@ -1,4 +1,5 @@
 "use client";
+
 import React, { FC } from "react";
 
 const ReloadFunc: FC<{ message: string }> = ({ message }) => {

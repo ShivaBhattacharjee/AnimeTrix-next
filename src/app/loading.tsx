@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "next/link";
-
 import CardSkeleton from "@/components/loading/CardSkeleton";
+import Link from "next/link";
+import React from "react";
+
 const loading = () => {
     return (
         <div className="p-4 flex flex-col pb-40 lg:pb-16">

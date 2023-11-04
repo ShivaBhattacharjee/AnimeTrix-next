@@ -1,8 +1,7 @@
 import React from "react";
-
 import SearchCards from "./cards/SearchCards";
-
 import { getSearchResults } from "@/lib/AnimeFetch";
+
 type ModalCloseFunction = () => void;
 export const SearchResults = async ({ modalClose, searchValue }: { modalClose: ModalCloseFunction; searchValue: string }) => {
     const search = await getSearchResults(searchValue);

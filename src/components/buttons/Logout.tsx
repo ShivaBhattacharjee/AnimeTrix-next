@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners";
-import { getCookie } from "cookies-next";
-import Link from "next/link";
 
+import React, { useEffect, useState } from "react";
+
+import { ClipLoader } from "react-spinners";
 import { Error } from "@/types/ErrorTypes";
+import Link from "next/link";
 import Toast from "@/utils/toast";
+import { getCookie } from "cookies-next";
 
 const Logout = () => {
     const token = getCookie("token");

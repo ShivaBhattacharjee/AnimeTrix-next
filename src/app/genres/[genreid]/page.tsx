@@ -1,8 +1,8 @@
 import React from "react";
-
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
 import { getGenre } from "@/lib/AnimeFetch";
+
 export function generateMetadata({ params }: { params: { genreid: string } }) {
     return {
         title: `${params.genreid} Anime - Unleash Your Adrenaline with Thrilling Adventures`,

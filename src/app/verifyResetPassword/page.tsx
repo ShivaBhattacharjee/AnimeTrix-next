@@ -1,13 +1,15 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { ClockLoader } from 'react-spinners'
-import axios from 'axios'
-import { Eye, EyeOff } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 
-import useDebounce from '@/hooks/debounce'
+import { Eye, EyeOff } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+
+import { ClockLoader } from 'react-spinners'
 import { Error } from "@/types/ErrorTypes"
 import Toast from '@/utils/toast'
+import axios from 'axios'
+import useDebounce from '@/hooks/debounce'
+import { useRouter } from 'next/navigation'
+
 const Page = () => {
     const router = useRouter()
     const [token, setToken] = useState("")
