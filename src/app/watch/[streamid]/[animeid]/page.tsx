@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import { Download, Flag } from "lucide-react";
 import { Metadata } from "next";
+import Link from "next/link";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
 import Share from "@/components/buttons/Share";
@@ -132,9 +133,9 @@ const Page = async ({
                                 <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
                                     {Object?.keys(details?.genres).length > 0 &&
                                         details.genres.map((genre: string, index: number) => (
-                                            <button className="border-2 text-sm lg:text-lg border-white  border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>
+                                            <Link href={`/genres/${genre}`} className="border-2 text-sm lg:text-lg border-white  border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>
                                                 {genre}
-                                            </button>
+                                            </Link>
                                         ))}
                                 </div>
                             </div>

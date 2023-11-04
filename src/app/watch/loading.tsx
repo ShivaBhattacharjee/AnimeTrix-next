@@ -8,7 +8,7 @@ import RelationLoading from "@/components/loading/RelationLoading";
 
 const loading = () => {
     return (
-        <section className="p-2 min-h-screen pb-40 lg:pb-0">
+        <section className="p-2 min-h-screen">
             <div className=" w-full">
                 <div className=" flex justify-between lg:flex-row flex-col gap-5">
                     <div className="flex flex-col w-full 2xl:w-[70vw]">

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { Bookmark,BookMarked } from "lucide-react";
+import { Bookmark, BookMarked } from "lucide-react";
 
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
@@ -18,11 +18,12 @@ type BookmarkProps = {
 const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
     const token = getCookie("token");
     const [isBookmarked, setIsBookmarked] = useState(false);
-    const [bookmarkCheckLoading, setBookmarkCheckLoading] = useState(true);
+    const [bookmarkCheckLoading, setBookmarkCheckLoading] = useState(false);
 
     const checkBookmarkStatus = async () => {
         console.log("Checking bookmark status for animeId:", animeId);
         if (token) {
+            setBookmarkCheckLoading(true);
             try {
                 setBookmarkCheckLoading(false);
                 const response = await axios.get("/api/bookmark");
