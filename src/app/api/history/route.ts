@@ -25,15 +25,14 @@ export async function GET(request: NextRequest) {
                 },
             );
         }
-        if (Page <= 0) {
-            return NextResponse.json(
-                {
-                    error: "Invalid page number",
+
+        if (isNaN(Page) || Page <= 0) {
+            return NextResponse.json({
+                userHistory: {
+                    nextPage: false,
+                    history: user.watchHistory,
                 },
-                {
-                    status: 400,
-                },
-            );
+            });
         }
         const startIndex = (Page - 1) * limit;
         const endIndex = Page * limit;

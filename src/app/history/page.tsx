@@ -33,7 +33,7 @@ const Page = () => {
     const [loading, setLoading] = useState(true);
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [hasMore, setHasMore] = useState(true);
-    const [currentPage, setCurrentPage] = useState(2);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const token = getCookie("token");
 
@@ -47,7 +47,7 @@ const Page = () => {
 
     const getUserHistory = async () => {
         try {
-            const response = await fetch("/api/history");
+            const response = await fetch(`/api/history?page=${currentPage}`);
             if (token) {
                 if (!response.ok) {
                     throw new Error("Network response error");
@@ -75,22 +75,18 @@ const Page = () => {
     };
     const loadMoreData = async () => {
         try {
-            if (history.length >= 10) {
-                const nextPageData = await fetchNextPage(currentPage + 1);
-                if (nextPageData.length === 0) {
-                    setHasMore(false);
-                } else {
-                    setCurrentPage(currentPage + 1);
-                    setHistory([...history, ...nextPageData]);
-                }
-            } else {
+            const nextPage = currentPage + 1;
+            const nextPageData = await fetchNextPage(nextPage);
+            if (nextPageData.length === 0) {
                 setHasMore(false);
+            } else {
+                setCurrentPage(nextPage);
+                setHistory([...history, ...nextPageData]);
             }
         } catch (error) {
             console.error("Error fetching more data:", error);
         }
     };
-
     const deleteHistory = async (streamId: string) => {
         try {
             const data = {

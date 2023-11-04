@@ -4,6 +4,7 @@ import { connect } from "@/database/db";
 import { getDataFromJwt } from "@/helper/jwtData";
 import User from "@/model/user.model";
 import { Error } from "@/types/ErrorTypes";
+
 connect();
 
 export async function GET(request: NextRequest) {
@@ -30,7 +31,7 @@ export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json();
         const userId = getDataFromJwt(request);
-        const { name, profilePicture, userDescription } = reqBody;
+        const { username, profilePicture, userDescription } = reqBody;
         const user = await User.findOne({ _id: userId }).select("-password -watchHistory -bookmarks -isAdmin");
         if (!user) {
             return NextResponse.json(
@@ -42,7 +43,7 @@ export async function PUT(request: NextRequest) {
                 },
             );
         }
-        user.name = name;
+        user.username = username;
         user.profilePicture = profilePicture;
         user.userDescription = userDescription;
         await user.save();

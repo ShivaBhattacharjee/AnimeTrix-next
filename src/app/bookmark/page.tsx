@@ -30,7 +30,7 @@ const Page = () => {
     const [loading, setLoading] = useState(true);
     const [bookmark, setBookmark] = useState<BookmarkItem[]>([]);
     const [hasMore, setHasMore] = useState(true);
-    const [currentPage, setCurrentPage] = useState(2);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const token = getCookie("token");
 
@@ -44,7 +44,7 @@ const Page = () => {
 
     const getUserBookmark = async () => {
         try {
-            const response = await fetch("/api/bookmark");
+            const response = await fetch(`/api/bookmark?page=${currentPage}`);
             if (token) {
                 if (!response.ok) {
                     throw new Error("Network response error");
@@ -70,18 +70,16 @@ const Page = () => {
             return [];
         }
     };
+
     const loadMoreData = async () => {
         try {
-            if (bookmark.length >= 10) {
-                const nextPageData = await fetchNextPage(currentPage + 1);
-                if (nextPageData.length === 0) {
-                    setHasMore(false);
-                } else {
-                    setCurrentPage(currentPage + 1);
-                    setBookmark([...bookmark, ...nextPageData]);
-                }
-            } else {
+            const nextPage = currentPage + 1;
+            const nextPageData = await fetchNextPage(nextPage);
+            if (nextPageData.length === 0) {
                 setHasMore(false);
+            } else {
+                setCurrentPage(nextPage);
+                setBookmark([...bookmark, ...nextPageData]);
             }
         } catch (error) {
             console.error("Error fetching more data:", error);

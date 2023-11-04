@@ -163,7 +163,7 @@ const Page = () => {
                                 <>
                                     {history.length > 0 ? (
                                         <div className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-3 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 items-center  mt-8">
-                                            {history?.map((item) => (
+                                            {history.slice(0, 8)?.map((item) => (
                                                 <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
                                                     <Link href={`/watch/${item.streamId}/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
                                                         <div className="md:w-48 h-60  relative overflow-hidden">
@@ -215,18 +215,21 @@ const Page = () => {
                                 <>
                                     {bookmark.length > 0 ? (
                                         <div className="hiddenscroll overflow-y-hidden m-auto  w-full grid grid-cols-2 gap-3 place-items-center md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 items-center  mt-8">
-                                            {bookmark?.map((item) => (
-                                                <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
-                                                    <Link href={`/details/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
-                                                        <div className="md:w-48 h-60  relative overflow-hidden">
-                                                            <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
-                                                        </div>
-                                                        <div className="flex flex-col gap-3 p-2 mb-5">
-                                                            <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize">{item.title || "Unknown Title"}</span>
-                                                        </div>
-                                                    </Link>
-                                                </div>
-                                            ))}
+                                            {bookmark
+                                                .slice(-8)
+                                                .reverse()
+                                                ?.map((item) => (
+                                                    <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
+                                                        <Link href={`/details/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
+                                                            <div className="md:w-48 h-60  relative overflow-hidden">
+                                                                <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
+                                                            </div>
+                                                            <div className="flex flex-col gap-3 p-2 mb-5">
+                                                                <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize">{item.title || "Unknown Title"}</span>
+                                                            </div>
+                                                        </Link>
+                                                    </div>
+                                                ))}
                                         </div>
                                     ) : (
                                         <div className="flex justify-center items-center w-full mt-5 gap-3">

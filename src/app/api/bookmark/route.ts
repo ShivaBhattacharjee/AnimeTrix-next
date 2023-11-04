@@ -13,8 +13,9 @@ type Bookmark = {
 };
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
-    const Page = parseInt(searchParams.get("page") ?? "1", 10);
+    const Page = parseInt(searchParams.get("page") ?? "", 10);
     const limit = 12;
+
     try {
         const userId = getDataFromJwt(request);
         const user = await User.findOne({ _id: userId }).select("-password");
@@ -27,6 +28,15 @@ export async function GET(request: NextRequest) {
                     status: 401,
                 },
             );
+        }
+
+        if (isNaN(Page) || Page <= 0) {
+            return NextResponse.json({
+                userBookmarks: {
+                    nextPage: false,
+                    bookmarks: user.bookmarks,
+                },
+            });
         }
 
         const startIndex = (Page - 1) * limit;
@@ -49,6 +59,7 @@ export async function GET(request: NextRequest) {
         });
     }
 }
+
 export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
