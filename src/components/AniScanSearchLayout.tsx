@@ -1,12 +1,13 @@
 "use client";
 
-import Anime, { ApiResponse } from "@/types/animetypes";
 import { useEffect, useRef, useState } from "react";
-
-import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import { Frown } from "lucide-react";
 import Link from "next/link";
+
 import ServerError from "./error/ServerError";
+
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import Anime, { ApiResponse } from "@/types/animetypes";
 
 interface AniScanSearchLayoutProps {
     searchResult: ApiResponse | null;

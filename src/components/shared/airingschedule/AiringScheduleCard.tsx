@@ -1,8 +1,7 @@
 "use client";
 
-import { ArrowLeftToLine, ArrowRightToLine, PlayCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
-
+import { ArrowLeftToLine, ArrowRightToLine, PlayCircle } from "lucide-react";
 import Link from "next/link";
 
 type DayOfWeek = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";

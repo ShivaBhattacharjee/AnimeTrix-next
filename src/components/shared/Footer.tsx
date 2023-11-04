@@ -1,8 +1,7 @@
 "use client";
 
-import { Github, Instagram } from "lucide-react";
-
 import React from "react";
+import { Github, Instagram } from "lucide-react";
 
 const socialMediaLinks = [
     {

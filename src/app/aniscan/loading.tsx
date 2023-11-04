@@ -1,4 +1,5 @@
 import React from "react";
+
 import SpinLoading from "@/components/loading/SpinLoading";
 
 const loading = () => {

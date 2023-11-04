@@ -1,7 +1,9 @@
-import Link from "next/link";
-import Logout from "@/components/buttons/Logout";
 import React from "react";
+import Link from "next/link";
+
 import SearchModal from "../SearchModal";
+
+import Logout from "@/components/buttons/Logout";
 import { getTrendingAnime } from "@/lib/AnimeFetch";
 
 export default async function TopNavbar() {

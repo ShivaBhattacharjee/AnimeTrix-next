@@ -1,16 +1,18 @@
 "use client";
 
-import "swiper/css";
-import "./SliderStyles.css";
-
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import Anime from "@/types/animetypes";
-import { Autoplay } from "swiper/modules";
-import Link from "next/link";
+import "swiper/css";
+
 import ReloadFunc from "../error/ReloadFunc";
+
+import "./SliderStyles.css";
+
+import Anime from "@/types/animetypes";
 
 interface SliderProps {
     Trending: Anime[];

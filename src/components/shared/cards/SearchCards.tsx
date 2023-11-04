@@ -1,10 +1,11 @@
 "use client";
 
-import Anime from "@/types/animetypes";
+import React from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+
 import ReloadFunc from "@/components/error/ReloadFunc";
+import Anime from "@/types/animetypes";
 
 type ModalCloseFunction = () => void;
 const SearchCards = ({ results, modalClose, isTrending }: { results: Anime[]; modalClose: ModalCloseFunction; isTrending: boolean }) => {

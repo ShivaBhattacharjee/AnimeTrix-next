@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-
 import { ClockLoader } from "react-spinners";
+import axios from "axios";
+
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
-import axios from "axios";
 
 const Page = () => {
     const [email, setEmail] = useState<string>("");

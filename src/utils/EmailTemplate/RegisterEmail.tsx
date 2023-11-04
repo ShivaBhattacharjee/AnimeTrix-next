@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Body, Button, Container, Head, Heading, Html, Img, Link, Preview, Section, Tailwind, Text } from "@react-email/components";
 
 type props = {

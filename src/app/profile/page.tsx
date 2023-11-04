@@ -1,15 +1,15 @@
 "use client";
 
-import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
 import React, { useEffect, useState } from "react";
-
-import { Error } from "@/types/ErrorTypes";
-import Link from "next/link";
-import SpinLoading from "@/components/loading/SpinLoading";
-import Toast from "@/utils/toast";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+import SpinLoading from "@/components/loading/SpinLoading";
+import { Error } from "@/types/ErrorTypes";
+import Toast from "@/utils/toast";
 
 type HistoryItem = {
     streamId: string;

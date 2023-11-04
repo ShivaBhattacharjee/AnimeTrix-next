@@ -1,13 +1,13 @@
 "use client";
 
-import { BookMarked, Bookmark } from "lucide-react";
 import React, { useEffect, useState } from "react";
-
 import { BarLoader } from "react-spinners";
-import { Error } from "@/types/ErrorTypes";
-import Toast from "@/utils/toast";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { Bookmark,BookMarked } from "lucide-react";
+
+import { Error } from "@/types/ErrorTypes";
+import Toast from "@/utils/toast";
 
 type BookmarkProps = {
     animeId: number;

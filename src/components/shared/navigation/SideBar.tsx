@@ -1,11 +1,10 @@
 "use client";
 
-import { BookMarked, Clapperboard, Diff, History, Home, ScanLine, SlidersHorizontal, TrendingUp, Tv } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-
-import Link from "next/link";
 import { getCookie } from "cookies-next";
+import { BookMarked, Clapperboard, Diff, History, Home, ScanLine, SlidersHorizontal, TrendingUp, Tv } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 const NavItems = [
     {
         name: "Home",

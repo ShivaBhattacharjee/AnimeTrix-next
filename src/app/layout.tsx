@@ -1,12 +1,14 @@
+import { Toaster } from "react-hot-toast";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+import SideBar from "../components/shared/navigation/SideBar";
+import TopNavbar from "../components/shared/navigation/TopNavbar";
+
 import "./globals.css";
 
 import Footer from "@/components/shared/Footer";
-import { Inter } from "next/font/google";
-import type { Metadata } from "next";
 import ScrollToTop from "@/components/shared/ScrollToTop";
-import SideBar from "../components/shared/navigation/SideBar";
-import { Toaster } from "react-hot-toast";
-import TopNavbar from "../components/shared/navigation/TopNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 

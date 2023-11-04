@@ -1,12 +1,12 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-
 import Confetti from 'react-confetti'
-import { Error } from "@/types/ErrorTypes"
-import Link from "next/link"
-import SpinLoading from "@/components/loading/SpinLoading"
 import axios from "axios"
+import Link from "next/link"
+
+import SpinLoading from "@/components/loading/SpinLoading"
+import { Error } from "@/types/ErrorTypes"
 
 export default function VerifyEmailPage() {
     const [token, setToken] = useState("")

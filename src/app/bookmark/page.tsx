@@ -1,15 +1,15 @@
 "use client";
 
-import { AlertTriangle, BookmarkMinus } from "lucide-react";
 import React, { Suspense, useEffect, useState } from "react";
-
-import { Error } from "@/types/ErrorTypes";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Link from "next/link";
-import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
-import Toast from "@/utils/toast";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { AlertTriangle, BookmarkMinus } from "lucide-react";
+import Link from "next/link";
+
+import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
+import { Error } from "@/types/ErrorTypes";
+import Toast from "@/utils/toast";
 
 type BookmarkItem = {
     animeId: string;

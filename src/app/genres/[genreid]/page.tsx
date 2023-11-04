@@ -1,4 +1,5 @@
 import React from "react";
+
 import ServerError from "@/components/error/ServerError";
 import VerticalCards from "@/components/shared/cards/VerticalCards";
 import { getGenre } from "@/lib/AnimeFetch";

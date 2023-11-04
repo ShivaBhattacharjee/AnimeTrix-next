@@ -1,13 +1,15 @@
 "use client";
 
 import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
-
-import Anime from "@/types/animetypes";
 import { Search } from "lucide-react";
+
+import SpinLoading from "../loading/SpinLoading";
+
 import SearchCards from "./cards/SearchCards";
 import { SearchResults } from "./SearchResults";
-import SpinLoading from "../loading/SpinLoading";
+
 import useDebounce from "@/hooks/debounce";
+import Anime from "@/types/animetypes";
 
 const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
