@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowLeft } from "lucide-react";
+
 import { ProfiePicture } from "@/utils/ProfilePicture";
 
 interface AvatarModalProps {

@@ -6,13 +6,11 @@ import { getCookie } from "cookies-next";
 import { Camera, Check } from "lucide-react";
 
 import SpinLoading from "@/components/loading/SpinLoading";
+import AvatarModal from "@/components/shared/AvatarModal";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
-import AvatarModal from "@/components/shared/AvatarModal";
-import { useRouter } from "next/navigation";
 
 const Page = () => {
-    const router = useRouter();
     const token = getCookie("token");
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
