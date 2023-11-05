@@ -36,12 +36,16 @@ export async function POST(request: NextRequest) {
         };
 
         const token = jwt.sign(tokenData, process.env.NEXT_PUBLIC_JWT_TOKEN!, { expiresIn: "2y" });
+        const oneYear = 365 * 24 * 60 * 60 * 1000;
+        const twoYears = 2 * oneYear;
 
         const response = NextResponse.json({
             message: "Login successful",
             success: true,
         });
-        response.cookies.set("token", token);
+        response.cookies.set("token", token, {
+            expires: Date.now() - twoYears,
+        });
         return response;
     } catch (error: unknown) {
         const Error = error as Error;
