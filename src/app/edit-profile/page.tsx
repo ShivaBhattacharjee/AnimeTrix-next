@@ -8,8 +8,11 @@ import { Camera, Check } from "lucide-react";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
+import AvatarModal from "@/components/shared/AvatarModal";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+    const router = useRouter();
     const token = getCookie("token");
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -17,6 +20,7 @@ const Page = () => {
     const [loading, setLoading] = useState(true);
     const [userDescription, setUserDescription] = useState("");
     const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+    const [openAvatarModal, setOpenAvatarModal] = useState(false);
     const getUserData = async () => {
         try {
             const userResponse = await fetch("/api/get-users");
@@ -49,6 +53,7 @@ const Page = () => {
             if (isProfileUpdated) {
                 const res = await axios.put("/api/get-users", userData);
                 setIsProfileUpdated(false);
+                window.location.reload();
                 if (res) {
                     Toast.SuccessshowToast("Profile Updated");
                 } else {
@@ -63,6 +68,10 @@ const Page = () => {
             console.log(error);
         }
     };
+    const handleSelectProfilePicture = (url: string) => {
+        setProfilePicture(url);
+        setIsProfileUpdated(true);
+    };
     return (
         <>
             {loading ? (
@@ -70,16 +79,19 @@ const Page = () => {
                     <SpinLoading />
                 </div>
             ) : (
-                <form onSubmit={UpdateProfile} className="flex flex-col gap-4 p-4 min-h-screen">
+                <form onSubmit={UpdateProfile} className="flex flex-col gap-4 p-4 overflow-y-hidden min-h-screen">
                     <h1 className="text-3xl font-bold">Profile</h1>
                     <span className=" w-full h-[1px] bg-white/20"></span>
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5">
-                        <div onClick={() => Toast.ErrorShowToast("Avatar update is under development")} className="h-24 w-24 relative lg:h-32 lg:w-32 rounded-full bg-white  text-black  flex justify-center items-center ">
+                        <div onClick={() => setOpenAvatarModal(true)} className="h-24 cursor-pointer w-24 relative lg:h-32 lg:w-32 rounded-full bg-white  text-black  flex justify-center items-center ">
                             {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2 font-semibold text-3xl">{userName?.charAt(0).toUpperCase()}</p>}
                             <div className="absolute bg-white cursor-pointer p-2 rounded-full right-0 bottom-0">
                                 <Camera size={20} />
                             </div>
                         </div>
+
+                        <AvatarModal onSelectProfilePicture={handleSelectProfilePicture} openAvatarModal={openAvatarModal} setOpenAvatarModal={setOpenAvatarModal} />
+
                         <div className="flex flex-col gap-3 lg:w-[80%]">
                             <label htmlFor="username" className=" font-semibold text-2xl">
                                 Username
