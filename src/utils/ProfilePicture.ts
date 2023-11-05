@@ -66,6 +66,24 @@ export const ProfiePicture = {
                 alt: "Skull Night",
             },
         ],
+        "Your Lie In April": [
+            {
+                url: "https://i.pinimg.com/564x/44/84/3c/44843c6b0d42b67a167e3b8603b540d2.jpg",
+                alt: "Kaori",
+            },
+            {
+                url: "https://i.pinimg.com/564x/3a/ba/e7/3abae70af9488c84ec894717ac304aef.jpg",
+                alt: "Kaori with cat",
+            },
+            {
+                url: "https://i.pinimg.com/564x/62/a1/ee/62a1eef9f94c1e8d68c0ec66c05d0ab3.jpg",
+                alt: "Kaori with cat",
+            },
+            {
+                url: "https://i.pinimg.com/originals/e8/83/1b/e8831ba0451dddb2edbe2e5bdb70c293.jpg",
+                alt: "arima",
+            },
+        ],
         "My Dress Up Darling": [
             {
                 url: "https://i.pinimg.com/564x/37/07/36/370736967beee002dadafe7c4d2ed107.jpg",
