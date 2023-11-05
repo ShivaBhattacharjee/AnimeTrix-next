@@ -13,7 +13,7 @@ interface AvatarModalProps {
 const AvatarModal: React.FC<AvatarModalProps> = ({ setOpenAvatarModal, onSelectProfilePicture, openAvatarModal }) => {
     return (
         <>
-            <div className={`absolute p-4 w-full bg-black left-0 right-0 ${openAvatarModal ? "top-0" : "top-[2000px] hidden"} overflow-y-hidden duration-200 min-h-screen`}>
+            <div className={`absolute p-4 w-full bg-black left-0 right-0 bottom-0 ${openAvatarModal ? "top-0" : "top-[2000px] hidden"} duration-200 h-auto`}>
                 <ArrowLeft className="cursor-pointer" onClick={() => setOpenAvatarModal(false)} size={40} />
                 {Object.keys(ProfiePicture.Profiles).map((anime) => (
                     <div key={anime}>
