@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ArrowLeft } from "lucide-react";
 
@@ -12,18 +13,18 @@ interface AvatarModalProps {
 const AvatarModal: React.FC<AvatarModalProps> = ({ setOpenAvatarModal, onSelectProfilePicture, openAvatarModal }) => {
     return (
         <>
-            <div className={`absolute p-4 w-full bg-black left-0 right-0 ${openAvatarModal ? "top-0" : "top-[2000px] hidden"} overflow-y-hidden duration-200 h-screen`}>
+            <div className={`absolute p-4 w-full bg-black left-0 right-0 ${openAvatarModal ? "top-0" : "top-[2000px] hidden"} overflow-y-hidden duration-200 min-h-screen`}>
                 <ArrowLeft className="cursor-pointer" onClick={() => setOpenAvatarModal(false)} size={40} />
-                {ProfiePicture.map((profile) => (
-                    <div key={profile.Bleach[0].alt}>
-                        <h1 className="mt-3 text-3xl font-semibold">{Object.keys(profile)[0]}</h1>
-                        <div className="flex gap-3 mt-7 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:justify-center lg:items-center hiddenscroll">
-                            {profile.Bleach.map((avatar) => (
+                {Object.keys(ProfiePicture.Profiles).map((anime) => (
+                    <div key={anime}>
+                        <h1 className="mt-3 text-2xl lg:text-3xl font-semibold">{anime}</h1>
+                        <div className="flex gap-3 mt-7 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden hiddenscroll">
+                            {ProfiePicture.Profiles[anime as keyof typeof ProfiePicture.Profiles].map((avatar) => (
                                 <img
                                     key={avatar.alt}
                                     src={avatar.url}
                                     alt={avatar.alt}
-                                    className="w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover cursor-pointer"
+                                    className=" w-24 h-24 lg:w-32 lg:h-32 rounded-full object-cover cursor-pointer"
                                     onClick={() => {
                                         onSelectProfilePicture(avatar.url);
                                         setOpenAvatarModal(false);

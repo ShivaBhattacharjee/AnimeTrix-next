@@ -1,5 +1,5 @@
-export const ProfiePicture = [
-    {
+export const ProfiePicture = {
+    Profiles: {
         Bleach: [
             {
                 url: "https://i.pinimg.com/564x/1f/a8/1e/1fa81e5d37cf65432aa539ca14615f53.jpg",
@@ -22,5 +22,93 @@ export const ProfiePicture = [
                 alt: "Urahara",
             },
         ],
+        "Vinland Saga": [
+            {
+                url: "https://i.pinimg.com/736x/38/72/e4/3872e48dcfb77214dce43a1a064e57ea.jpg",
+                alt: "Thorfinn",
+            },
+            {
+                url: "https://i.pinimg.com/564x/d8/60/bb/d860bb9fcbed89fa1c849e74bf52bc0a.jpg",
+                alt: "I have No enemies",
+            },
+            {
+                url: "https://i.pinimg.com/564x/a2/0f/a5/a20fa53dbf56a3dfed97f33e185f974d.jpg",
+                alt: "King Carnute",
+            },
+            {
+                url: "https://i.pinimg.com/564x/92/cf/8e/92cf8e8919d2e05d2aa5d4c8fe46bf04.jpg",
+                alt: "Thorkell ",
+            },
+            {
+                url: "https://i.pinimg.com/564x/16/92/9b/16929b1a9a6524d278f17b636df0d1bb.jpg",
+                alt: "Snake",
+            },
+        ],
+        Berserk: [
+            {
+                url: "https://i.pinimg.com/564x/c1/d3/2e/c1d32e8c79c0eca7d8ce31c26952a19d.jpg",
+                alt: "Casca",
+            },
+            {
+                url: "https://i.pinimg.com/564x/46/3f/eb/463feb09dfb840a1bf8603703a873a2e.jpg",
+                alt: "Griffith",
+            },
+            {
+                url: "https://i.pinimg.com/564x/22/8e/72/228e72720a783d84bd74687689a7fac7.jpg",
+                alt: "Guts Cat",
+            },
+            {
+                url: "https://i.pinimg.com/736x/d2/47/d6/d247d6d1b909f45a6bc7829084aba1ea.jpg",
+                alt: "Guts night ",
+            },
+            {
+                url: "https://i.pinimg.com/564x/b4/b0/a3/b4b0a304075a9bcb3b642faaa2875918.jpg",
+                alt: "Skull Night",
+            },
+        ],
+        "My Dress Up Darling": [
+            {
+                url: "https://i.pinimg.com/564x/37/07/36/370736967beee002dadafe7c4d2ed107.jpg",
+                alt: "Marin Kitagawa",
+            },
+            {
+                url: "https://i.pinimg.com/564x/bc/50/b7/bc50b799ab78931bb37d99416438481a.jpg",
+                alt: "Marin but hmmm",
+            },
+            {
+                url: "https://i.pinimg.com/564x/61/6c/bd/616cbd92858dc8d4dc286272720340e6.jpg",
+                alt: "Juju",
+            },
+            {
+                url: "https://i.pinimg.com/564x/7d/25/bc/7d25bc5d8e745bc06ca9137ee0b6e642.jpg",
+                alt: "Juju but depressed",
+            },
+            {
+                url: "https://i.pinimg.com/564x/11/0c/0d/110c0d7de2ad661a8ab92fbc0dc14859.jpg",
+                alt: "Inui",
+            },
+        ],
+        "Genshin Impact": [
+            {
+                url: "https://i.pinimg.com/564x/dc/70/f9/dc70f9ad519219f2e749897c183e115d.jpg",
+                alt: "Qiqi",
+            },
+            {
+                url: "https://i.pinimg.com/564x/e3/5e/55/e35e55019c87c6dc08297ab9497ef1be.jpg",
+                alt: "Nilou icon",
+            },
+            {
+                url: "https://i.pinimg.com/564x/7b/c8/bd/7bc8bda582412336c8749166273d5d2b.jpg",
+                alt: "HU Tao",
+            },
+            {
+                url: "https://i.pinimg.com/736x/8f/6c/7e/8f6c7ee143167fec227361671d679d06.jpg",
+                alt: "Yae Miko",
+            },
+            {
+                url: "https://i.pinimg.com/736x/8a/ed/ed/8aededb006716c4e1da25f441f303aca.jpg",
+                alt: "Raiden Shougan",
+            },
+        ],
     },
-];
+};
