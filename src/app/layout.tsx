@@ -9,6 +9,7 @@ import "./globals.css";
 
 import Footer from "@/components/shared/Footer";
 import ScrollToTop from "@/components/shared/ScrollToTop";
+import { ProfileProvider } from "@/context/ProfileUpdateContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,16 +24,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={`${inter.className} min-h-screen bg-black text-white w-full  max-w-[2500px] m-auto`}>
-                <Toaster position="top-right" />
-                <TopNavbar />
-                <SideBar />
-                <ScrollToTop />
-                <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
-                    {children}
-                    <Footer />
-                </main>
-            </body>
+            <ProfileProvider>
+                <body className={`${inter.className} min-h-screen bg-black text-white w-full  max-w-[2500px] m-auto`}>
+                    <Toaster position="top-right" />
+                    <TopNavbar />
+                    <SideBar />
+                    <ScrollToTop />
+                    <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
+                        {children}
+                        <Footer />
+                    </main>
+                </body>
+            </ProfileProvider>
         </html>
     );
 }

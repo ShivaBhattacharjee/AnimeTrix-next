@@ -17,13 +17,13 @@ const AvatarModal: React.FC<AvatarModalProps> = ({ setOpenAvatarModal, onSelectP
                 {ProfiePicture.map((profile) => (
                     <div key={profile.Bleach[0].alt}>
                         <h1 className="mt-3 text-3xl font-semibold">{Object.keys(profile)[0]}</h1>
-                        <div className="flex gap-3 mt-7 overflow-x-scroll lg:flex-col hiddenscroll">
+                        <div className="flex gap-3 mt-7 overflow-x-scroll lg:flex-wrap lg:overflow-x-hidden lg:justify-center lg:items-center hiddenscroll">
                             {profile.Bleach.map((avatar) => (
                                 <img
                                     key={avatar.alt}
                                     src={avatar.url}
                                     alt={avatar.alt}
-                                    className="w-32 h-32 rounded-full object-cover cursor-pointer"
+                                    className="w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover cursor-pointer"
                                     onClick={() => {
                                         onSelectProfilePicture(avatar.url);
                                         setOpenAvatarModal(false);

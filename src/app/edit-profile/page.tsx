@@ -7,6 +7,7 @@ import { Camera, Check } from "lucide-react";
 
 import SpinLoading from "@/components/loading/SpinLoading";
 import AvatarModal from "@/components/shared/AvatarModal";
+import { useProfile } from "@/context/ProfileUpdateContext";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -17,7 +18,7 @@ const Page = () => {
     const [profilePicture, setProfilePicture] = useState("");
     const [loading, setLoading] = useState(true);
     const [userDescription, setUserDescription] = useState("");
-    const [isProfileUpdated, setIsProfileUpdated] = useState(false);
+    const { isProfileUpdated, setIsProfileUpdated } = useProfile();
     const [openAvatarModal, setOpenAvatarModal] = useState(false);
     const getUserData = async () => {
         try {
@@ -51,7 +52,6 @@ const Page = () => {
             if (isProfileUpdated) {
                 const res = await axios.put("/api/get-users", userData);
                 setIsProfileUpdated(false);
-                window.location.reload();
                 if (res) {
                     Toast.SuccessshowToast("Profile Updated");
                 } else {

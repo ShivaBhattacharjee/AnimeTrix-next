@@ -5,10 +5,12 @@ import { ClipLoader } from "react-spinners";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
 
+import { useProfile } from "@/context/ProfileUpdateContext";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
 const Logout = () => {
+    const { isProfileUpdated } = useProfile();
     const token = getCookie("token");
     const [profilePicture, setProfilePicture] = useState("");
     const [tokenExistOrNot, setTokenExistOrNot] = useState(false);
@@ -42,10 +44,10 @@ const Logout = () => {
 
     useEffect(() => {
         checkIfTokenExistOrNot();
-        if (token) {
+        if (token || isProfileUpdated) {
             getUserData();
         }
-    }, [token]); // Include 'token' in the dependency array
+    }, [token, isProfileUpdated]);
 
     return (
         <>
