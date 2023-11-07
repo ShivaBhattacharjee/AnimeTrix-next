@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
+import ProfileLoading from "@/components/loading/ProfileLoading";
 
 type HistoryItem = {
     streamId: string;
@@ -124,9 +125,9 @@ const Page = () => {
     return (
         <>
             {loading ? (
-                <div className="flex justify-center items-center min-h-[100dvh]">
-                    <SpinLoading />
-                </div>
+                <>
+                    <ProfileLoading />
+                </>
             ) : (
                 <div className="min-h-[100dvh]">
                     <div className=" p-4 flex flex-col lg:flex-row gap-3 items-center justify-between">

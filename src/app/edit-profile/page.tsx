@@ -73,7 +73,7 @@ const Page = () => {
     return (
         <>
             {loading ? (
-                <div className=" min-h-screen flex justify-center items-center">
+                <div className="min-h-[100dvh] flex justify-center items-center">
                     <SpinLoading />
                 </div>
             ) : (
