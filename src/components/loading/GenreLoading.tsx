@@ -76,13 +76,12 @@ const genres = [
 
 const GenreLoading = () => {
     return (
-        <div className="p-4 pb-40 m-auto">
+        <div className="p-4 pb-40 w-full">
             <h1 className="md:text-5xl text-4xl mb-6 font-semibold">Genres</h1>
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 mt-4">
                 {genres.map((index) => (
                     <div key={index.title} className=" relative duration-200 cursor-pointer hover:scale-105">
-                        <div className=" h-24 w-44 bg-white animate-pulse  bg-cover md:h-44 md:w-64 2xl:w-80 rounded-lg z-20 duration-200 cursor-pointer hover:scale-105" />
-                        <div className="absolute text-white top-0 bg-black/50 w-full h-full"></div>
+                        <div className=" h-24 w-full bg-white animate-pulse  bg-cover md:h-44 md:w-64 2xl:w-80 rounded-lg z-20 duration-200 cursor-pointer hover:scale-105" />
                     </div>
                 ))}
             </div>

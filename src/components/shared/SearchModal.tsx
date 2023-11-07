@@ -72,7 +72,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
             <div className={`bg-black/80 overscroll-none w-screen backdrop-blur-xl h-screen fixed p-4 left-0 top-0 bottom-0 duration-100 right-0 ${openSearch ? "scale-100" : "scale-0"}`}>
                 <div className="flex h-screen items-center right-5 top-5">
                     <div
-                        className={`bg-black  border-2 border-white/40 h-96 overflow-y-scroll  gap-4 flex-col rounded-lg p-4 max-w-3xl m-auto w-screen text-black flex
+                        className={`bg-black  border-2 border-white/40 h-96 lg:h-[500px] 2xl:h-[650px] overflow-y-scroll  gap-4 flex-col rounded-lg p-4 max-w-3xl m-auto w-screen text-black flex
                         }`}
                         ref={modalRef}
                     >
