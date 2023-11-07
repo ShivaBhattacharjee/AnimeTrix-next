@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 import SideBar from "../components/shared/navigation/SideBar";
 import TopNavbar from "../components/shared/navigation/TopNavbar";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ProfileProvider>
                 <body className={`${inter.className} min-h-screen bg-black text-white w-full  max-w-[2500px] m-auto`}>
                     <Toaster position="top-right" />
+                    <NextTopLoader color="#fff" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={true} easing="ease" speed={200} zIndex={1600} showAtBottom={false} />
                     <TopNavbar />
                     <SideBar />
                     <ScrollToTop />

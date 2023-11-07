@@ -33,6 +33,7 @@
     "mocha": "^10.2.0",
     "mongoose": "^7.5.4",
     "next": "^13.5.6",
+    "nextjs-toploader": "^1.6.4",
     "nodemailer": "^6.9.6",
     "npm": "^10.2.0",
     "postcss": "8.4.27",
