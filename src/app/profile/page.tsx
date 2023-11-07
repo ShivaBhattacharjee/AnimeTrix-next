@@ -7,10 +7,10 @@ import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import ProfileLoading from "@/components/loading/ProfileLoading";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
-import ProfileLoading from "@/components/loading/ProfileLoading";
 
 type HistoryItem = {
     streamId: string;

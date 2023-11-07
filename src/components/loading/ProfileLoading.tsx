@@ -1,7 +1,8 @@
-import { LogOut } from "lucide-react";
 import React from "react";
-import LoadingSkeleton from "./LoadingSkeleton";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
+
+import LoadingSkeleton from "./LoadingSkeleton";
 const ProfileLoading = () => {
     return (
         <div className="min-h-screen">
