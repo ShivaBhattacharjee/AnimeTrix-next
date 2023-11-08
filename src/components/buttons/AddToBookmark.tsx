@@ -21,20 +21,16 @@ const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
     const [bookmarkCheckLoading, setBookmarkCheckLoading] = useState(false);
 
     const checkBookmarkStatus = async () => {
-        console.log("Checking bookmark status for animeId:", animeId);
         if (token) {
             setBookmarkCheckLoading(true);
             try {
                 setBookmarkCheckLoading(false);
                 const response = await axios.get("/api/bookmark");
                 const { userBookmarks } = response.data;
-                console.log("User bookmarks:", userBookmarks);
                 const isAnimeBookmarked = userBookmarks.bookmarks.some((bookmark: BookmarkProps) => bookmark.animeId == animeId);
-                console.log("Is anime bookmarked?", isAnimeBookmarked);
                 setIsBookmarked(isAnimeBookmarked);
             } catch (error) {
                 setBookmarkCheckLoading(false);
-                console.error("Error checking bookmark status:", error);
             } finally {
                 setBookmarkCheckLoading(false);
             }
@@ -53,12 +49,10 @@ const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
                     title: title,
                 };
                 const res = await axios.post("/api/bookmark", data);
-                console.log(res);
                 Toast.SuccessshowToast(res.data.message || "Added to bookmark");
                 checkBookmarkStatus();
             } catch (error: unknown) {
                 const Error = error as Error;
-                console.log(Error);
                 Toast.ErrorShowToast(Error?.response?.data?.error || "Something Went Wrong");
             }
         } else {
@@ -66,7 +60,6 @@ const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
         }
     };
     const deleteBookmark = async (animeId: number) => {
-        console.log("Deleting bookmark for animeId:", animeId);
         const parsedAnimeId = parseInt(animeId.toString());
         try {
             const data = {
@@ -78,7 +71,6 @@ const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
         } catch (error: unknown) {
             const Error = error as Error;
             Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong");
-            console.log(error);
         }
     };
 
