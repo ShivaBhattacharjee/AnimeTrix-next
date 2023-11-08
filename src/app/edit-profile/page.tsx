@@ -10,6 +10,7 @@ import AvatarModal from "@/components/shared/AvatarModal";
 import { useProfile } from "@/context/ProfileUpdateContext";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
+import { ClipLoader } from "react-spinners";
 
 const Page = () => {
     const token = getCookie("token");
@@ -20,6 +21,7 @@ const Page = () => {
     const [userDescription, setUserDescription] = useState("");
     const { isProfileUpdated, setIsProfileUpdated } = useProfile();
     const [openAvatarModal, setOpenAvatarModal] = useState(false);
+    const [editLoading, setEditLoading] = useState(false);
     const getUserData = async () => {
         try {
             const userResponse = await fetch("/api/get-users");
@@ -50,6 +52,7 @@ const Page = () => {
 
         try {
             if (isProfileUpdated) {
+                setEditLoading(true);
                 const res = await axios.put("/api/get-users", userData);
                 setIsProfileUpdated(false);
                 if (res) {
@@ -61,9 +64,12 @@ const Page = () => {
                 Toast.ErrorShowToast("Nothing to update");
             }
         } catch (error: unknown) {
+            setEditLoading(false);
             const ErrorMsg = error as Error;
             Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
             console.log(error);
+        } finally {
+            setEditLoading(false);
         }
     };
     const handleSelectProfilePicture = (url: string) => {
@@ -120,9 +126,9 @@ const Page = () => {
                                     setIsProfileUpdated(true);
                                 }}
                             />
-                            <button className={`flex justify-center items-center gap-4 ${isProfileUpdated ? "bg-white text-black" : "bg-white/40 "} p-4 rounded-lg  font-semibold w-full mt-5 lg:w-56`} disabled={!isProfileUpdated}>
-                                <Check />
-                                Update Profile
+                            <button className={`flex justify-center items-center gap-4 ${isProfileUpdated ? "bg-white text-black" : "bg-white/40 "} p-4 rounded-lg  font-semibold w-full mt-5 lg:w-56`} disabled={!isProfileUpdated || editLoading}>
+                                {editLoading ? <ClipLoader size={20} color="#000" /> : <Check size={20} />}
+                                {editLoading ? "Updating..." : "Update"}
                             </button>
                         </div>
                     </div>
