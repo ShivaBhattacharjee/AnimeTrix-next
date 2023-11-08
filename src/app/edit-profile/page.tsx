@@ -5,7 +5,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Camera, Check } from "lucide-react";
 
-import SpinLoading from "@/components/loading/SpinLoading";
+import EditProfileLoading from "@/components/loading/EditProfileLoading";
 import AvatarModal from "@/components/shared/AvatarModal";
 import { useProfile } from "@/context/ProfileUpdateContext";
 import { Error } from "@/types/ErrorTypes";
@@ -73,9 +73,7 @@ const Page = () => {
     return (
         <>
             {loading ? (
-                <div className="min-h-[100dvh] flex justify-center items-center">
-                    <SpinLoading />
-                </div>
+                <EditProfileLoading />
             ) : (
                 <form onSubmit={UpdateProfile} className="flex flex-col gap-4 p-4 overflow-y-hidden min-h-screen">
                     <h1 className="text-3xl font-bold">Profile</h1>
