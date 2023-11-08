@@ -53,6 +53,7 @@ const Page = () => {
     const [bookmarkLoading, setBookmarkLoading] = useState(true);
     const [bookmark, setBookmark] = useState<BookmarkItem[]>([]);
     const [profilePicture, setProfilePicture] = useState("");
+    const [userDescription, setUserDescription] = useState("");
     const router = useRouter();
     const token = getCookie("token");
     const logout = async () => {
@@ -73,6 +74,7 @@ const Page = () => {
             setUserName(user?.userData?.username);
             setEmail(user?.userData?.email);
             setProfilePicture(user?.userData?.profilePicture || "");
+            setUserDescription(user?.userData?.userDescription || "");
             setLoading(false);
         } catch (error: unknown) {
             const Error = error as Error;
@@ -136,6 +138,7 @@ const Page = () => {
                             <div className="flex flex-col items-center lg:items-start">
                                 <h1 className="text-3xl font-semibold">{userName || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>
+                                <p className="truncate w-72 font-semibold opacity-75 text-center lg:text-left">{userDescription || "Unknown"}</p>
                             </div>
                         </div>
                         <div className="flex gap-3">
