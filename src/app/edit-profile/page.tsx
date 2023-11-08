@@ -8,7 +8,7 @@ import { Camera, Check } from "lucide-react";
 
 import EditProfileLoading from "@/components/loading/EditProfileLoading";
 import AvatarModal from "@/components/shared/AvatarModal";
-import { useProfile } from "@/context/ProfileUpdateContext";
+import { useProfile } from "@/hooks/useprofile";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 

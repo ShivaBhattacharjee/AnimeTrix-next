@@ -5,7 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
 
-import { useProfile } from "@/context/ProfileUpdateContext";
+import { useProfile } from "@/hooks/useprofile";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 

@@ -10,7 +10,7 @@ import "./globals.css";
 
 import Footer from "@/components/shared/Footer";
 import ScrollToTop from "@/components/shared/ScrollToTop";
-import { ProfileProvider } from "@/context/ProfileUpdateContext";
+import { ProfileProvider } from "@/hooks/useprofile";
 
 const inter = Inter({ subsets: ["latin"] });
 
