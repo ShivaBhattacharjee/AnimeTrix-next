@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Camera, Check } from "lucide-react";
@@ -10,7 +11,6 @@ import AvatarModal from "@/components/shared/AvatarModal";
 import { useProfile } from "@/context/ProfileUpdateContext";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
-import { ClipLoader } from "react-spinners";
 
 const Page = () => {
     const token = getCookie("token");
