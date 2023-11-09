@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
 import Share from "@/components/buttons/Share";
+import CommentSection from "@/components/CommentSection";
 import ServerError from "@/components/error/ServerError";
 import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
@@ -108,7 +109,8 @@ const Page = async ({
                                         Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
                                     </span>
                                 )}
-                                <div className="flex gap-3 mt-7 w-full">
+
+                                <div className="flex gap-3 w-full mt-5">
                                     <img src={details?.image} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-md md:text-lg flex-col font-semibold">
                                         <h1>
@@ -139,7 +141,6 @@ const Page = async ({
                                         ))}
                                 </div>
                             </div>
-
                             <div className="mt-3">
                                 <Suspense fallback={<EpisodeLoading />}>
                                     <EpisodeLists listData={details.episodes} currentlyPlaying={stream?.info?.episode} animeId={params.animeid} isStream={true} />
@@ -158,6 +159,9 @@ const Page = async ({
                             <CharacterCard characters={details.characters} />
                         </Suspense>
                     </div>
+                    <Suspense>
+                        <CommentSection />
+                    </Suspense>
                     <div className="mt-12">
                         <Suspense fallback={<RecommendedLoading />}>
                             <RecommendedAnime episode={params.animeid} />

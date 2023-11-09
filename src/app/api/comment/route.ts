@@ -5,6 +5,7 @@ import { getDataFromJwt } from "@/helper/jwtData";
 import Comment from "@/model/comment.model";
 import User from "@/model/user.model";
 import { Error } from "@/types/ErrorTypes";
+
 connect();
 
 export async function POST(request: NextRequest) {
