@@ -23,9 +23,19 @@ type Props = {
 // function to generate metadata for details page dynamic og image is in todo
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const id = params.animeId;
-    const anime = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
-    const title = anime.title.romaji || anime.title.english || anime.title.native;
-    const words = title.toLowerCase().split(" ");
+    let anime;
+    try {
+        const response = await fetch(`${AnimeApi}/info/${id}`);
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        anime = await response.json();
+    } catch (error) {
+        <ServerError />;
+    }
+
+    const title = anime?.title?.romaji || anime?.title?.english || anime?.title?.native || "Unknown";
+    const words = title?.toLowerCase()?.split(" ");
     const formattedTitle = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 
     const description = anime?.description;
