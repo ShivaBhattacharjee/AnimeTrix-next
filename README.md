@@ -43,6 +43,7 @@
 * [Issue Template](#raising-an-issue)
 * [Code of conduct](#code-of-conduct)
 * [License](#license)
+* [ScreenShots](#screenshots)
 * [Authors](#authors)
 
 ## About The Project
@@ -143,6 +144,17 @@ Developers are requested to go through our <a href="https://github.com/ShivaBhat
 
 Distributed under the Apache License 2.0 . See [LICENSE](https://github.com/ShivaBhattacharjee/AnimeTrix-next/blob/main/LICENSE) for more information.
 
+## ScreenShots
+### Home Page
+![Screenshot from 2023-11-09 21-53-05](https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/9289e34c-2122-46d6-ba0c-5b31a05cac48)
+
+### Details
+![Screenshot from 2023-11-09 21-53-49](https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/bb8e291c-9ec9-4d2d-9501-9c46e42915da)
+
+### Stream
+![Screenshot from 2023-11-09 21-54-28](https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/ea8de1b1-4895-48e7-a98a-7b46386c14bd)
+
+#### Visit the site for more insites
 ## Authors
 
 * **Shiva Bhattacharjee** - [Shiva Bhattacharjee](https://github.com/ShivaBhattacharjee) - *AnimeTrix*
