@@ -148,7 +148,9 @@ const Page = async ({
                             </div>
                         </div>
                     </div>
-
+                    <Suspense>
+                        <CommentSection streamId={params.streamid} />
+                    </Suspense>
                     <div className="mt-7 flex flex-col gap-5">
                         <Suspense fallback={<RelationLoading />}>
                             <RelationCard id={params.animeid} />
@@ -159,9 +161,6 @@ const Page = async ({
                             <CharacterCard characters={details.characters} />
                         </Suspense>
                     </div>
-                    <Suspense>
-                        <CommentSection />
-                    </Suspense>
                     <div className="mt-12">
                         <Suspense fallback={<RecommendedLoading />}>
                             <RecommendedAnime episode={params.animeid} />

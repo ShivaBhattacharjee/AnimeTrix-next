@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     try {
         const userID = getDataFromJwt(request);
         const reqBody = await request.json();
-        const { animeId, text } = reqBody;
+        const { streamId, text } = reqBody;
         const user = await User.findOne({ _id: userID }).select("-password");
         if (!user) {
             return NextResponse.json(
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
         }
         const newComment = new Comment({
             userId: userID,
-            animeId,
+            streamId,
             text,
         });
         await newComment.save();
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
         const page = parseInt(searchParams.get("page") ?? "1", 10);
-        const anime = searchParams.get("animeId");
+        const anime = searchParams.get("streamId");
         const limit = 12;
 
         if (page < 1) {
@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
 
         const skip = (page - 1) * limit;
 
-        const comments = await Comment.find({ animeId: anime }).skip(skip).limit(limit);
+        const comments = await Comment.find({ streamId: anime }).skip(skip).limit(limit);
         const nextPage = comments.length === limit;
         const paginatedResult = {
             nextPage,

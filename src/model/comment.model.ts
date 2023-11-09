@@ -6,7 +6,7 @@ const commentSchema = new mongoose.Schema({
         ref: "User",
         required: [true, "Please provide a user ID"],
     },
-    animeId: {
+    streamId: {
         type: String,
         required: [true, "Please provide an anime ID"],
     },

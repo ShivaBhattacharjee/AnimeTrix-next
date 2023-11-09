@@ -37,9 +37,7 @@ const AddToHistory = ({ streamId, animeId, coverImage, image, episode, title }: 
         if (token) addHistory();
     }, [token]);
 
-    return (
-        <></>
-    )
+    return <></>;
 };
 
 export default AddToHistory;
