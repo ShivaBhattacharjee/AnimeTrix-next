@@ -1,22 +1,43 @@
 "use client";
 
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Frown } from "lucide-react";
 import Link from "next/link";
 
 import Anime from "@/types/animetypes";
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import EpisodeLoading from "@/components/loading/EpisodeLoading";
 
 interface EpisodeListsProps {
-    listData: Anime[];
     animeId: number;
     isStream?: boolean;
     currentlyPlaying?: number;
 }
 
-const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream, currentlyPlaying }) => {
+const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentlyPlaying }) => {
     const [filterValue, setFilterValue] = useState<string>("");
     const [selectedRange, setSelectedRange] = useState<string>("1-100");
+    const [listData, setListData] = useState<Anime[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [dub, setDub] = useState<boolean>(false);
+    const getEpisodes = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`${AnimeApi}/info/${animeId}?dub=${dub}`);
+            const data = await response.json();
+            setListData(data.episodes);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getEpisodes();
+    }, [dub]);
 
     const episodeRanges = useMemo(() => {
         const numEpisodes = listData.length;
@@ -45,40 +66,49 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ listData, animeId, isStream
 
     return (
         <>
-            <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
-                <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
-                <div className="flex">
-                    <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
-                    {showSelect && (
-                        <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
-                            {episodeRanges.map((range) => (
-                                <option key={range} value={range}>
-                                    {range}
-                                </option>
-                            ))}
-                        </select>
-                    )}
-                </div>
-            </div>
-            {displayedEpisodes.length > 0 ? (
-                <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-5"} `}>
-                    {displayedEpisodes
-                        .sort((animeA, animeB) => animeA.number - animeB.number)
-                        .map((anime, index) => (
-                            <Link href={`/watch/${anime.id}/${animeId}`} className={`duration-200  border-2 hover:scale-90 ${currentlyPlaying == anime.number ? "scale-90 border-2 border-red-600 bg-white/10 " : "border-white/60 "} rounded-lg flex flex-col gap-3`} key={index}>
-                                <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
-                                <div className="flex gap-2 items-center p-2">
-                                    {currentlyPlaying == anime.number && <SyncLoader color="red" size={4} />}
-                                    <h1 className=" p-2 font-semibold">Episode: {anime.number}</h1>
-                                </div>
-                            </Link>
-                        ))}
-                </div>
+            {loading ? (
+                <EpisodeLoading />
             ) : (
-                <div className="flex capitalize items-center justify-center text-3xl font-semibold  gap-3">
-                    <Frown />
-                    <h1>No Episodes Found</h1>
-                </div>
+                <>
+                    <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
+                        <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
+                        <div className="flex flex-wrap gap-3">
+                            <button onClick={() => setDub(!dub)} className=" bg-transparent border h-11  w-24 rounded-lg font-semibold border-white">
+                                {dub ? "Dub" : "Sub"}
+                            </button>
+                            <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
+                            {showSelect && (
+                                <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
+                                    {episodeRanges.map((range) => (
+                                        <option key={range} value={range}>
+                                            {range}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                        </div>
+                    </div>
+                    {displayedEpisodes.length > 0 ? (
+                        <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-5"} `}>
+                            {displayedEpisodes
+                                .sort((animeA, animeB) => animeA.number - animeB.number)
+                                .map((anime, index) => (
+                                    <Link href={`/watch/${anime.id}/${animeId}`} className={`duration-200  border-2 hover:scale-90 ${currentlyPlaying == anime.number ? "scale-90 border-2 border-red-600 bg-white/10 " : "border-white/60 "} rounded-lg flex flex-col gap-3`} key={index}>
+                                        <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
+                                        <div className="flex gap-2 items-center p-2">
+                                            {currentlyPlaying == anime.number && <SyncLoader color="red" size={4} />}
+                                            <h1 className=" p-2 font-semibold">Episode: {anime.number}</h1>
+                                        </div>
+                                    </Link>
+                                ))}
+                        </div>
+                    ) : (
+                        <div className="flex capitalize items-center justify-center text-3xl font-semibold  gap-3">
+                            <Frown />
+                            <h1>No Episodes Found</h1>
+                        </div>
+                    )}
+                </>
             )}
         </>
     );

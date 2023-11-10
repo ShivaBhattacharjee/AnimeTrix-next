@@ -143,7 +143,7 @@ const Page = async ({
                             </div>
                             <div className="mt-3">
                                 <Suspense fallback={<EpisodeLoading />}>
-                                    <EpisodeLists listData={details.episodes} currentlyPlaying={stream?.info?.episode} animeId={params.animeid} isStream={true} />
+                                    <EpisodeLists currentlyPlaying={stream?.info?.episode} animeId={params.animeid} isStream={true} />
                                 </Suspense>
                             </div>
                         </div>

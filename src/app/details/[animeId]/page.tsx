@@ -143,7 +143,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     </span>
                 )}
                 <Suspense fallback={<EpisodeLoading />}>
-                    <EpisodeLists listData={details.episodes} animeId={params.animeId} />
+                    <EpisodeLists animeId={params.animeId} />
                 </Suspense>
             </div>
             <div className="mt-7 flex flex-col gap-5">
