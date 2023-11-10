@@ -24,12 +24,22 @@ export async function POST(request: NextRequest) {
                 },
             );
         }
+
         const newComment = new Comment({
             userId: userID,
             streamId,
             text,
         });
+
+        // Save the new comment
         await newComment.save();
+
+        // Fetch all comments for the streamId
+        const existingComments = await Comment.find({ streamId }).sort({ createdAt: 1 });
+
+        // Add the new comment at the beginning of the array
+        existingComments.unshift(newComment);
+
         return NextResponse.json({
             message: "Comment added",
         });
@@ -60,7 +70,7 @@ export async function GET(request: NextRequest) {
         if (!anime) {
             return NextResponse.json(
                 {
-                    error: "Invalid animeId",
+                    error: "Invalid streamId",
                 },
                 {
                     status: 400,
@@ -70,7 +80,9 @@ export async function GET(request: NextRequest) {
 
         const skip = (page - 1) * limit;
 
-        const comments = await Comment.find({ streamId: anime }).skip(skip).limit(limit);
+        // Change the sorting order to descending ('desc') to get the newly added comment at the top
+        const comments = await Comment.find({ streamId: anime }).sort({ createdAt: "desc" }).skip(skip).limit(limit);
+
         const nextPage = comments.length === limit;
         const paginatedResult = {
             nextPage,
@@ -139,8 +151,6 @@ export async function PUT(request: NextRequest) {
                 },
             );
         }
-
-        // Update the comment text with the new text
         comment.text = newText;
         await comment.save();
 

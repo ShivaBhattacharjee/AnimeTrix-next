@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
@@ -13,6 +13,7 @@ const CommentSection = ({ streamId }: props) => {
     const token = getCookie("token");
     const [comment, setComment] = useState<string>("");
     const [addCommentLoading, setAddCommentLoading] = useState<boolean>(false);
+    const [commentData, setCommentData] = useState([]); // [
     const HandleaddComment = async () => {
         const commentData = {
             streamId: streamId,
@@ -26,6 +27,7 @@ const CommentSection = ({ streamId }: props) => {
                 Toast.SuccessshowToast(response?.data?.message || "Comment Added");
                 setComment("");
                 console.log(response);
+                getComment();
             } catch (error: unknown) {
                 setAddCommentLoading(false);
                 const ErrorMsg = error as Error;
@@ -38,6 +40,24 @@ const CommentSection = ({ streamId }: props) => {
             Toast.ErrorShowToast("Please Login to comment");
         }
     };
+
+    const getComment = async () => {
+        try {
+            const res = await axios.get(`/api/comment?streamId=${streamId}&page=1`);
+            console.log(res);
+            setCommentData(res?.data?.comments?.comments);
+        } catch (error: unknown) {
+            const ErrorMsg = error as Error;
+            console.log(ErrorMsg?.response?.data?.error || "Something went wrong");
+        }
+    };
+    useEffect(() => {
+        getComment();
+    }, []);
+    type comment = {
+        text: string;
+        timestamp: string;
+    };
     return (
         <>
             <div className="flex flex-col gap-3 mt-4">
@@ -47,6 +67,18 @@ const CommentSection = ({ streamId }: props) => {
                     {addCommentLoading && <ClipLoader size={20} color="#000" />}
                     {addCommentLoading ? "Adding" : "Add Comment"}
                 </button>
+
+                {commentData.length < 0 ? (
+                    <h1 className=" text-3xl font-semibold mt-5 ">Be first to comment</h1>
+                ) : (
+                    <div className=" mt-4 border-2 border-white/25 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
+                        {commentData.map((comment: comment) => (
+                            <h1 className=" font-semibold" key={comment?.timestamp}>
+                                {comment?.text}
+                            </h1>
+                        ))}
+                    </div>
+                )}
             </div>
         </>
     );
