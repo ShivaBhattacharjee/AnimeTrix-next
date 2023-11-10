@@ -5,9 +5,9 @@ import { SyncLoader } from "react-spinners";
 import { Frown } from "lucide-react";
 import Link from "next/link";
 
-import Anime from "@/types/animetypes";
-import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
+import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import Anime from "@/types/animetypes";
 
 interface EpisodeListsProps {
     animeId: number;
