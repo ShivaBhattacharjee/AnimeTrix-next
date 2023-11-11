@@ -91,7 +91,15 @@ Server will start at http://localhost:3000/
 
 ### Docker
 
-<i>Docker image will be available soon </i>
+```bash
+docker run -it -p <yourportname>:3000 immashiva/animetrix
+```
+
+### Example
+
+```bash
+docker run -it -p 8080:3000 immashiva/animetrix
+```
 
 ## Host your own
 * ## Vercel
