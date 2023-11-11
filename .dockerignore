@@ -3,3 +3,4 @@
 .github
 node_modules
 bin
+.env.local
