@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 
 import ReloadFunc from "../../error/ReloadFunc";
 
 import Anime from "@/types/animetypes";
-
 interface CardsProps {
     props: Anime[];
 }
@@ -106,13 +106,32 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             containerRef?.current?.removeEventListener("wheel", handleWheel);
         };
     }, []);
+    const container = {
+        hidden: { opacity: 1, scale: 0 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                delayChildren: 0.3,
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    const item = {
+        hidden: { x: -20, opacity: 0 },
+        visible: {
+            x: 0,
+            opacity: 1,
+        },
+    };
 
     return (
-        <section className=" overflow-x-scroll hiddenscroll">
+        <motion.section className=" overflow-x-scroll hiddenscroll" variants={container} initial="hidden" animate="visible">
             <div className="flex gap-3 overflow-x-scroll hiddenscroll duration-200 mt-9" ref={containerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} style={{ userSelect: isDragging.current ? "none" : "auto" }}>
                 {props.length > 0 ? (
                     props.map((anime) => (
-                        <div key={anime.id} className="flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab" onMouseDown={handleMouseDown}>
+                        <motion.div variants={item} key={anime.id} className="flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab" onMouseDown={handleMouseDown}>
                             <Link href={`/details/${anime.id}`} className="content-normal w-full h-full">
                                 <div className="relative lg:w-48 w-40 ">
                                     <img src={anime?.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime?.title?.native}`} className="rounded-lg hover:scale-105 duration-200 h-52 lg:h-64 " draggable={false} loading="lazy" height={400} width={200} />
@@ -123,7 +142,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                                 {anime.status === "Ongoing" && <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500"></div>}
                                 <span className=" font-semibold">Ep: {anime?.totalEpisodes || anime?.episodes || 0}</span>
                             </div>
-                        </div>
+                        </motion.div>
                     ))
                 ) : (
                     <ReloadFunc message="Oops!! Something went wrong" />
@@ -136,7 +155,7 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
                     <MoveRight size={35} onClick={handleMoveRight} className=" cursor-pointer" style={{ opacity: scrollPosition >= maxScroll ? 0.5 : 1 }} />
                 </div>
             )}
-        </section>
+        </motion.section>
     );
 };
 

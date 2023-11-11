@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Autoplay } from "swiper/modules";
@@ -13,7 +14,6 @@ import ReloadFunc from "../error/ReloadFunc";
 import "./SliderStyles.css";
 
 import Anime from "@/types/animetypes";
-
 interface SliderProps {
     Trending: Anime[];
 }
@@ -41,7 +41,15 @@ const Slider: React.FC<SliderProps> = ({ Trending }) => {
     };
 
     return (
-        <>
+        <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+                type: "keyframes",
+                stiffness: 260,
+                damping: 20,
+            }}
+        >
             <div className="flex absolute z-10 gap-4 p-3 items-center">
                 <button className="bg-black/80 backdrop-blur-2xl text-white p-2 lg:p-4 rounded-full flex justify-center" onClick={goPrev} aria-label="go previous slide">
                     <ArrowLeft />
@@ -82,7 +90,7 @@ const Slider: React.FC<SliderProps> = ({ Trending }) => {
                     </SwiperSlide>
                 )}
             </Swiper>
-        </>
+        </motion.section>
     );
 };
 export default Slider;
