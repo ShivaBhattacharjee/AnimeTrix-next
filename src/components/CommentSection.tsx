@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { StickyNote } from "lucide-react";
 
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
@@ -68,14 +69,21 @@ const CommentSection = ({ streamId }: props) => {
                     {addCommentLoading ? "Adding" : "Add Comment"}
                 </button>
 
-                {commentData.length < 0 ? (
-                    <h1 className=" text-3xl font-semibold mt-5 ">Be first to comment</h1>
+                {commentData.length == 0 || comment === undefined ? (
+                    <h1 className=" text-3xl font-semibold items-center mt-5 rounded-lg lg:w-1/2 flex gap-3 ">
+                        <StickyNote />
+                        Be first to comment
+                    </h1>
                 ) : (
-                    <div className=" mt-4 border-2 border-white/25 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
+                    <div className=" mt-4 grid gap-4 border-2 overflow-x-clip border-white/25 w-full lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
                         {commentData.map((comment: comment) => (
-                            <h1 className=" font-semibold" key={comment?.timestamp}>
-                                {comment?.text}
-                            </h1>
+                            <div className="flex gap-4" key={comment?.timestamp}>
+                                <div className=" h-16 w-16 flex text-black items-center justify-center font-semibold bg-white rounded-full">U</div>
+                                <div className="flex flex-col">
+                                    <h1 className=" opacity-70 font-semibold">User</h1>
+                                    <h1 className="max-w-[16rem] lg:w-[40rem] font-semibold">{comment?.text}</h1>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 )}

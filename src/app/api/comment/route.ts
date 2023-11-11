@@ -31,14 +31,10 @@ export async function POST(request: NextRequest) {
             text,
         });
 
-        // Save the new comment
         await newComment.save();
 
-        // Fetch all comments for the streamId
-        const existingComments = await Comment.find({ streamId }).sort({ createdAt: 1 });
-
-        // Add the new comment at the beginning of the array
-        existingComments.unshift(newComment);
+        const existingComments = await Comment.find({ streamId }).sort({ timestamp: 1 }).lean();
+        existingComments.unshift(newComment.toObject());
 
         return NextResponse.json({
             message: "Comment added",
@@ -80,8 +76,7 @@ export async function GET(request: NextRequest) {
 
         const skip = (page - 1) * limit;
 
-        // Change the sorting order to descending ('desc') to get the newly added comment at the top
-        const comments = await Comment.find({ streamId: anime }).sort({ createdAt: "desc" }).skip(skip).limit(limit);
+        const comments = await Comment.find({ streamId: anime }).sort({ timestamp: "desc" }).skip(skip).limit(limit);
 
         const nextPage = comments.length === limit;
         const paginatedResult = {
