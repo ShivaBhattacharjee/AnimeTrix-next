@@ -31,20 +31,26 @@
 
 ## Table Of Contents
 
-* [About the Project](#about-the-project)
-* [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-    * [Local](#local)
-    * [Docker](#docker)
-  * [Hosting](#host-your-own)
-* [Contributing](#contributing)
-* [Issue Template](#raising-an-issue)
-* [Code of conduct](#code-of-conduct)
-* [License](#license)
-* [ScreenShots](#screenshots)
-* [Authors](#authors)
+- [Table Of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Local](#local)
+  - [Docker](#docker)
+  - [Example](#example)
+- [Host your own](#host-your-own)
+- [Contributing](#contributing)
+  - [Creating A Pull Request](#creating-a-pull-request)
+- [Raising an issue](#raising-an-issue)
+- [Code of conduct](#code-of-conduct)
+- [License](#license)
+- [ScreenShots](#screenshots)
+  - [Home Page](#home-page)
+  - [Details](#details)
+  - [Stream](#stream)
+- [Authors](#authors)
 
 ## About The Project
 ![Screenshot (1009)](https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/d872a750-4fa9-4a31-8a13-71f859ab8cf9)
@@ -92,13 +98,29 @@ Server will start at http://localhost:3000/
 ### Docker
 
 ```bash
-docker run -it -p <yourportname>:3000 immashiva/animetrix
+sudo docker run -it -p <your-port-name>:3000 \
+-e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
+-e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
+-e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
+-e NEXT_PUBLIC_EMAIL=youremail \
+-e NEXT_PUBLIC_EMAIL_PASSWORD=yourpassword \
+-e NEXT_PUBLIC_DOMAIN=http:/localhost:3000 \
+immashiva/animetrix
+
 ```
 
 ### Example
 
 ```bash
-docker run -it -p 8080:3000 immashiva/animetrix
+sudo docker run -it -p 8080:3000 \
+-e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
+-e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
+-e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
+-e NEXT_PUBLIC_EMAIL=youremail \
+-e NEXT_PUBLIC_EMAIL_PASSWORD=yourpassword \
+-e NEXT_PUBLIC_DOMAIN=http:/localhost:3000 \
+immashiva/animetrix
+
 ```
 
 ## Host your own
@@ -162,7 +184,7 @@ Distributed under the Apache License 2.0 . See [LICENSE](https://github.com/Shiv
 ### Stream
 ![Screenshot from 2023-11-09 21-54-28](https://github.com/ShivaBhattacharjee/AnimeTrix-next/assets/95211406/ea8de1b1-4895-48e7-a98a-7b46386c14bd)
 
-#### Visit the site for more insites
+#### Visit <a href = "https://animetrix.xyz" target="_blank">Animetrix</a>
 ## Authors
 
 * **Shiva Bhattacharjee** - [Shiva Bhattacharjee](https://github.com/ShivaBhattacharjee) - *AnimeTrix*
