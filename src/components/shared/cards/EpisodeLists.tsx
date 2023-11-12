@@ -114,4 +114,4 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
     );
 };
 
-export default memo(EpisodeLists);
+export default EpisodeLists;

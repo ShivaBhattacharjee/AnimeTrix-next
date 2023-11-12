@@ -79,13 +79,13 @@ export async function GET(request: NextRequest) {
         const comments = await Comment.find({ streamId: anime }).sort({ timestamp: "desc" }).skip(skip).limit(limit);
 
         const nextPage = comments.length === limit;
-        const paginatedResult = {
+        const comment = {
             nextPage,
             comments,
         };
 
         return NextResponse.json({
-            comments: paginatedResult,
+            comment,
             page,
         });
     } catch (error: unknown) {
