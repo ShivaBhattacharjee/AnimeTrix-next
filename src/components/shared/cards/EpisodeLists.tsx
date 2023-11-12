@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { Frown } from "lucide-react";
 import Link from "next/link";

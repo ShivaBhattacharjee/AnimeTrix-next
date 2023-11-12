@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
