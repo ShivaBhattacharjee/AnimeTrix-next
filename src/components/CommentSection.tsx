@@ -78,7 +78,7 @@ const CommentSection = ({ streamId }: props) => {
         }
     }, []);
 
-    const handleDeleteComment = async (commentId: any) => {
+    const handleDeleteComment = async (commentId: number) => {
         try {
             const res = await axios.delete("/api/comment", { data: { commentId: commentId } });
             Toast.SuccessshowToast(res?.data?.message || "Comment Deleted");
