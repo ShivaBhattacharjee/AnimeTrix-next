@@ -12,7 +12,6 @@ RUN npm run build
 
 EXPOSE 3000
 
-# Enforce required environment variables in CMD
 CMD ["sh", "-c", "\
 if [ -z \"$NEXT_PUBLIC_MONGODB_URI\" ] || \
    [ -z \"$NEXT_PUBLIC_JWT_TOKEN\" ] || \
