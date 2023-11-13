@@ -130,7 +130,7 @@ const CommentSection = ({ streamId }: props) => {
                         Be the first to comment
                     </h1>
                 ) : (
-                    <div className=" mt-4 grid gap-4 border-2 overflow-x-clip border-white/25 w-full lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
+                    <div className=" mt-4 relative grid gap-4 border-2 overflow-x-clip border-white/25 w-full lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
                         {commentData.map((comment: comment) => (
                             <div className="flex gap-4" key={comment?.timestamp}>
                                 <div className=" h-16 w-16 flex text-black items-center justify-center font-semibold bg-white rounded-full">{userData[comment.userId] && <img src={userData[comment.userId].profilePicture} alt="Profile" className="w-full h-full rounded-full" />}</div>
