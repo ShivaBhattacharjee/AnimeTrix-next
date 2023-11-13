@@ -69,7 +69,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                 animeForCurrentDay.map((anime: Anime) => (
                                     <div className="flex border-b-2 border-white/20  justify-between items-center" key={anime?.id}>
                                         <Link href={`/details/${anime.id}`}>
-                                            <a className="flex items-center gap-4 mb-2">
+                                            <div className="flex items-center gap-4 mb-2">
                                                 <img height={200} width={400} loading="lazy" src={anime.coverImage} alt={`an image of ${anime?.title?.romaji || anime?.title?.english || anime.title?.native}`} className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg" />
                                                 <div className="flex flex-col">
                                                     <span className="text-white  text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">{anime?.title?.romaji || anime?.title?.english || anime.title?.native}</span>
@@ -78,7 +78,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                                         <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </Link>
                                         <Link href={`/details/${anime.id}`}>
                                             <PlayCircle className="cursor-pointer lg:scale-150" />
