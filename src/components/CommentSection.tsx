@@ -10,6 +10,7 @@ import Toast from "@/utils/toast";
 type props = {
     streamId: string;
 };
+
 const CommentSection = ({ streamId }: props) => {
     const token = getCookie("token");
     const [comment, setComment] = useState<string>("");
@@ -17,13 +18,15 @@ const CommentSection = ({ streamId }: props) => {
     const [commentData, setCommentData] = useState([]);
     const [userId, setUserId] = useState<string>("");
     const [commenterId, setCommenterId] = useState<string[]>([]);
+    const [userData, setUserData] = useState<{ [key: string]: { username: string; profilePicture: string } }>({});
+
     const HandleaddComment = async () => {
         const commentData = {
             streamId: streamId,
             text: comment,
         };
         if (token) {
-            if (comment.length < 1) return Toast.ErrorShowToast("Comment should have atleast 1 character");
+            if (comment.length < 1) return Toast.ErrorShowToast("Comment should have at least 1 character");
             try {
                 setAddCommentLoading(true);
                 const response = await axios.post("/api/comment", commentData);
@@ -47,20 +50,35 @@ const CommentSection = ({ streamId }: props) => {
     const getComment = async () => {
         try {
             const res = await axios.get(`/api/comment?streamId=${streamId}&page=1`);
-            console.log(res);
-            setCommentData(res?.data?.comment?.comments);
-            const userIds = res?.data?.comment?.comments?.map((comment: comment) => comment.userId) || [];
+            const comments = res?.data?.comment?.comments || [];
+            setCommentData(comments);
+            const userIds = comments.map((comment: comment) => comment.userId) || [];
             setCommenterId(userIds);
+
+            // Fetch user information for each user ID
+            const usersData = await Promise.all(
+                userIds.map(async (userId: number) => {
+                    const userResponse = await fetch(`/api/get-users?userId=${userId}`);
+                    if (userResponse.ok) {
+                        const userData = await userResponse.json();
+                        return { [userId]: { username: userData?.userData?.username, profilePicture: userData?.userData?.profilePicture } };
+                    }
+                    return {};
+                }),
+            );
+
+            // Update user data state
+            setUserData(Object.assign({}, ...usersData));
         } catch (error: unknown) {
-            const ErrorMsg = error as Error;
-            console.log(ErrorMsg?.response?.data?.error || "Something went wrong");
+            console.log(error);
         }
     };
+
     const getUserData = async () => {
         try {
             const userResponse = await fetch("/api/get-users");
             if (token && !userResponse.ok) {
-                Toast.ErrorShowToast("There seems to be an issue with network response.");
+                Toast.ErrorShowToast("There seems to be an issue with the network response.");
             }
             const user = await userResponse.json();
             console.log(user);
@@ -88,12 +106,14 @@ const CommentSection = ({ streamId }: props) => {
             Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
         }
     };
+
     type comment = {
         text: string;
         timestamp: string;
         userId: number;
         _id: number;
     };
+
     return (
         <>
             <div className="flex flex-col gap-3 mt-4">
@@ -107,16 +127,16 @@ const CommentSection = ({ streamId }: props) => {
                 {commentData?.length == 0 || comment === undefined ? (
                     <h1 className=" text-3xl font-semibold items-center mt-5 rounded-lg lg:w-1/2 flex gap-3 ">
                         <StickyNote />
-                        Be first to comment
+                        Be the first to comment
                     </h1>
                 ) : (
                     <div className=" mt-4 grid gap-4 border-2 overflow-x-clip border-white/25 w-full lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
                         {commentData.map((comment: comment) => (
                             <div className="flex gap-4" key={comment?.timestamp}>
-                                <div className=" h-16 w-16 flex text-black items-center justify-center font-semibold bg-white rounded-full">U</div>
+                                <div className=" h-16 w-16 flex text-black items-center justify-center font-semibold bg-white rounded-full">{userData[comment.userId] && <img src={userData[comment.userId].profilePicture} alt="Profile" className="w-full h-full rounded-full" />}</div>
                                 <div className="flex flex-col">
                                     <div className="flex justify-between w-full items-center">
-                                        <h1 className="opacity-70 font-semibold">User</h1>
+                                        <h1 className="opacity-70 font-semibold">{userData[comment.userId] ? userData[comment.userId].username : "User"}</h1>
                                         {commenterId?.includes(userId) && (
                                             <h1 className=" font-semibold absolute right-5" onClick={() => handleDeleteComment(comment._id)}>
                                                 Delete

@@ -4,22 +4,54 @@ import { connect } from "@/database/db";
 import { getDataFromJwt } from "@/helper/jwtData";
 import User from "@/model/user.model";
 import { Error } from "@/types/ErrorTypes";
+import mongoose from "mongoose";
 
 connect();
 
 export async function GET(request: NextRequest) {
     try {
-        const userId = getDataFromJwt(request);
+        const { searchParams } = new URL(request.url);
+        const searchUser = searchParams.get("userId");
+
+        let userId: number | string;
+
+        if (searchUser) {
+            userId = searchUser;
+        } else {
+            userId = getDataFromJwt(request);
+        }
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return NextResponse.json(
+                {
+                    error: "Invalid userId format",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+
         const user = await User.findOne({ _id: userId }).select("-password -watchHistory -bookmarks -isAdmin");
+
+        if (!user) {
+            return NextResponse.json(
+                {
+                    message: "User not found",
+                },
+                {
+                    status: 404,
+                },
+            );
+        }
         return NextResponse.json({
             message: "User found",
             userData: user,
         });
     } catch (error: unknown) {
-        const Error = error as Error;
+        const err = error as Error;
         return NextResponse.json(
             {
-                error: Error.message,
+                error: err.message,
             },
             {
                 status: 400,
@@ -27,6 +59,7 @@ export async function GET(request: NextRequest) {
         );
     }
 }
+
 export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json();
