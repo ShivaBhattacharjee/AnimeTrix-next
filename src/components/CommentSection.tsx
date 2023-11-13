@@ -117,7 +117,7 @@ const CommentSection = ({ streamId }: props) => {
                                 <div className="flex flex-col">
                                     <div className="flex justify-between w-full items-center">
                                         <h1 className="opacity-70 font-semibold">User</h1>
-                                        {commenterId.includes(userId) && (
+                                        {commenterId?.includes(userId) && (
                                             <h1 className=" font-semibold absolute right-5" onClick={() => handleDeleteComment(comment._id)}>
                                                 Delete
                                             </h1>
