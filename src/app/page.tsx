@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { ChevronRight } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 
 import Slider from "../components/shared/Slider";
@@ -12,7 +13,6 @@ import Cards from "@/components/shared/cards/Cards";
 import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
 import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
 import { getPopularAnime, getTrendingAnime } from "@/lib/AnimeFetch";
-import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Animetrix - Your Premier Source for Free Anime Downloads and Streaming",
     description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
