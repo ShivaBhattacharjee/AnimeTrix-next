@@ -61,22 +61,24 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                 <div className="flex flex-col gap-3">
                     <div className="p-4">
                         <div className="flex flex-col gap-3 ">
-                            {animeForCurrentDay?.length === 0 || animeForCurrentDay === undefined ? (
+                            {animeForCurrentDay === undefined || !airingData[currentDay] ? (
                                 <div className="flex justify-center items-center text-center">
                                     <h1>Oops! No schedule found for {currentDay}</h1>
                                 </div>
                             ) : (
-                                animeForCurrentDay?.map((anime: Anime) => (
+                                animeForCurrentDay.map((anime: Anime) => (
                                     <div className="flex border-b-2 border-white/20  justify-between items-center" key={anime?.id}>
-                                        <Link href={`/details/${anime.id}`} className="flex items-center gap-4 mb-2">
-                                            <img height={200} width={400} loading="lazy" src={anime.coverImage} alt={`an image of ${anime?.title?.romaji || anime?.title?.english || anime.title?.native}`} className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg" />
-                                            <div className="flex flex-col">
-                                                <span className="text-white  text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">{anime?.title?.romaji || anime?.title?.english || anime.title?.native}</span>
-                                                <div className="flex gap-2 items-center flex-wrap text-sm lg:text-xl">
-                                                    <span>Ep: {anime.airingEpisode} -</span>
-                                                    <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
+                                        <Link href={`/details/${anime.id}`}>
+                                            <a className="flex items-center gap-4 mb-2">
+                                                <img height={200} width={400} loading="lazy" src={anime.coverImage} alt={`an image of ${anime?.title?.romaji || anime?.title?.english || anime.title?.native}`} className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg" />
+                                                <div className="flex flex-col">
+                                                    <span className="text-white  text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">{anime?.title?.romaji || anime?.title?.english || anime.title?.native}</span>
+                                                    <div className="flex gap-2 items-center flex-wrap text-sm lg:text-xl">
+                                                        <span>Ep: {anime.airingEpisode} -</span>
+                                                        <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </Link>
                                         <Link href={`/details/${anime.id}`}>
                                             <PlayCircle className="cursor-pointer lg:scale-150" />
