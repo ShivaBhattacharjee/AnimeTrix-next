@@ -90,19 +90,19 @@ const SideBar = () => {
             {/* mobile bottom bar */}
             <div ref={sidebarRef} className={`text-white fixed bottom-0 md:hidden z-20 bg-black/50 rounded-t-xl border-t-2 border-white/25  backdrop-blur-md w-full p-2 duration-200 transition-all`}>
                 <div className="flex items-center justify-between flex-wrap ">
-                    {NavItems.slice(0, expand ? NavItems.length : 3).map((link) => {
+                    {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
                         const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
                         const shouldRender = !(link.name === "History" || link.name === "Bookmark") || token;
                         if (!shouldRender) return null;
                         return (
                             <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/25 border-2`} w-24 p-2 rounded-lg duration-200 transition-all`}>
-                                <link.icons size={20} className={` text-white  ${isActive && `fill-white`}`} />
+                                <link.icons size={24} className={` text-white  ${isActive && `fill-white`}`} />
                                 <h1 className="text-white text-sm">{link.name}</h1>
                             </Link>
                         );
                     })}
                     <div className="flex flex-col cursor-pointer relative items-center gap-3 text-sm w-24 p-2 rounded-lg duration-200 transition-all text-white " onClick={() => setExpand(!expand)}>
-                        <Diff size={20} />
+                        <Diff size={24} />
                         <h1 className="text-white truncate">{expand ? "Show Less" : "Show More"}</h1>
                     </div>
                 </div>
