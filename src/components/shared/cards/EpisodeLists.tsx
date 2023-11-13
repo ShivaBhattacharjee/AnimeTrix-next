@@ -74,7 +74,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                         <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
                         <div className="flex flex-wrap gap-3">
                             <button onClick={() => setDub(!dub)} className=" bg-transparent border h-11  w-24 rounded-lg font-semibold border-white">
-                                {dub ? "Dub" : "Sub"}
+                                {dub ? "Sub" : "Dub"}
                             </button>
                             <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
                             {showSelect && (
