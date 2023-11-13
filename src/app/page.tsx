@@ -4,10 +4,10 @@ import Link from "next/link";
 
 import Slider from "../components/shared/Slider";
 
-import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
+// import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
 import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
 import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
-import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
+// import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
 import Cards from "@/components/shared/cards/Cards";
 import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
 import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
