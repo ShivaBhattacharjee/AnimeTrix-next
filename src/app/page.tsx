@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { ChevronRight } from "lucide-react";
-import { Metadata } from "next";
 import Link from "next/link";
 
 import Slider from "../components/shared/Slider";
@@ -13,13 +12,16 @@ import Cards from "@/components/shared/cards/Cards";
 import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
 import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
 import { getPopularAnime, getTrendingAnime } from "@/lib/AnimeFetch";
-export const metadata: Metadata = {
-    title: "Animetrix - Your Premier Source for Free Anime Downloads and Streaming",
-    description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
-    openGraph: {
-        images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
-    },
-};
+
+export function generateMetadata() {
+    return {
+        title: "Animetrix - Your Premier Source for Free Anime Downloads and Streaming",
+        description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
+        openGraph: {
+            images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
+        },
+    };
+}
 export default async function page() {
     const Trending = await getTrendingAnime();
     const Popular = await getPopularAnime();
