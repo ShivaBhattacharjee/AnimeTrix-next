@@ -10,6 +10,7 @@ import Link from "next/link";
 import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
+import Forbidden from "@/components/Forbidden";
 
 type BookmarkItem = {
     animeId: string;
@@ -155,12 +156,7 @@ const Page = () => {
                     )}
                 </>
             ) : (
-                <div className="flex flex-col  font-semibold gap-4 justify-center items-center min-h-[80vh]">
-                    <p className="text-2xl">Login to access bookmark</p>
-                    <Link href="/login" className="p-4 bg-white font-bold w-48 text-center text-black rounded-lg">
-                        Login
-                    </Link>
-                </div>
+                <Forbidden />
             )}
         </div>
     );

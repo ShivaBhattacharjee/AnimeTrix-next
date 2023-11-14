@@ -169,8 +169,8 @@ const CommentSection = ({ streamId }: props) => {
                                     <div className="flex flex-col gap-3">
                                         <h1 className="text-sm md:text-lg font-medium">{comment?.text}</h1>
                                         <div className="flex gap-5 items-center">
-                                            <ThumbsUp size={20} />
-                                            <ThumbsDown size={20} />
+                                            <ThumbsUp size={20} onClick={() => Toast.ErrorShowToast("Under development")} />
+                                            <ThumbsDown size={20} onClick={() => Toast.ErrorShowToast("Under Development")} />
                                             {commenterId?.includes(userId) && <Trash size={20} className=" cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
                                         </div>
                                     </div>
