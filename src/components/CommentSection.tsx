@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { StickyNote } from "lucide-react";
+import { StickyNote, ThumbsDown, ThumbsUp, Trash } from "lucide-react";
 
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
@@ -109,9 +109,34 @@ const CommentSection = ({ streamId }: props) => {
 
     type comment = {
         text: string;
-        timestamp: string;
+        timestamp: Date;
         userId: number;
         _id: number;
+    };
+    const formatTimestamp = (timestamp: Date) => {
+        const currentDate = new Date();
+        const commentDate = new Date(timestamp);
+        const timeDifference = currentDate.getTime() - commentDate.getTime();
+
+        // Convert milliseconds to seconds
+        const seconds = Math.floor(timeDifference / 1000);
+
+        if (seconds < 60) {
+            return `${seconds} second${seconds !== 1 ? "s" : ""} ago`;
+        }
+
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) {
+            return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+        }
+
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) {
+            return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+        }
+
+        const days = Math.floor(hours / 24);
+        return `${days} day${days !== 1 ? "s" : ""} ago`;
     };
 
     return (
@@ -132,18 +157,23 @@ const CommentSection = ({ streamId }: props) => {
                 ) : (
                     <div className=" mt-4 relative grid gap-4 border-2 overflow-x-clip border-white/25 w-full lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
                         {commentData.map((comment: comment) => (
-                            <div className="flex gap-4" key={comment?.timestamp}>
-                                <div className=" h-16 w-16 flex text-black items-center justify-center font-semibold bg-white rounded-full">{userData[comment.userId] && <img src={userData[comment.userId].profilePicture} alt="Profile" className="w-full h-full rounded-full" />}</div>
+                            <div className="flex gap-4" key={comment?._id}>
+                                {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 rounded-full font-semibold justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
                                 <div className="flex flex-col">
-                                    <div className="flex justify-between w-full items-center">
-                                        <h1 className="opacity-70 font-semibold">{userData[comment.userId] ? userData[comment.userId].username : "User"}</h1>
-                                        {commenterId?.includes(userId) && (
-                                            <h1 className=" font-semibold absolute right-5" onClick={() => handleDeleteComment(comment._id)}>
-                                                Delete
-                                            </h1>
-                                        )}
+                                    <div className="flex w-full items-center">
+                                        <div className="flex gap-3 items-center">
+                                            <h1 className="opacity-70 font-semibold text-sm">@{userData[comment?.userId] ? userData[comment?.userId]?.username : "User"}</h1>
+                                            <h1 className=" opacity-70 text-xs font-semibold">{formatTimestamp(comment?.timestamp)}</h1>
+                                        </div>
                                     </div>
-                                    <h1 className="max-w-[16rem] lg:w-[40rem] font-semibold">{comment?.text}</h1>
+                                    <div className="flex flex-col gap-3">
+                                        <h1 className="text-sm md:text-lg font-medium">{comment?.text}</h1>
+                                        <div className="flex gap-5 items-center">
+                                            <ThumbsUp size={20} />
+                                            <ThumbsDown size={20} />
+                                            {commenterId?.includes(userId) && <Trash size={20} className=" cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         ))}
