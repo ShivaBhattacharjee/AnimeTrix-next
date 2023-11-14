@@ -66,6 +66,36 @@ export const ProfiePicture = {
                 alt: "Skull Night",
             },
         ],
+        "Bungou Stray Dogs": [
+            {
+                url: "https://i.pinimg.com/564x/75/2c/23/752c23aa435f7f9f45ed692197a74522.jpg",
+                alt: "Dazai Osamu",
+            },
+            {
+                url: "https://i.pinimg.com/564x/65/4d/9e/654d9ee0839d47653a07be4bd23fb38b.jpg",
+                alt: "Dazai Osamu",
+            },
+            {
+                url: "https://i.pinimg.com/564x/ee/88/f9/ee88f9237057f455bf1ed0f0be02888b.jpg",
+                alt: "Dazai Osamu",
+            },
+            {
+                url: "https://i.pinimg.com/564x/4c/e6/e2/4ce6e2dcb008223af9568aaa778f308c.jpg",
+                alt: "Raccoon",
+            },
+            {
+                url: "https://i.pinimg.com/564x/0c/95/4b/0c954b0526c8c9e5bf6d77ff3c0127d4.jpg",
+                alt: "Chuuya",
+            },
+            {
+                url: "https://i.pinimg.com/564x/ae/36/f1/ae36f159edc25d57f2c184eabde3b2d9.jpg",
+                alt: "Chuuya",
+            },
+            {
+                url: "https://i.pinimg.com/564x/cc/2d/f2/cc2df2d1bf0c771922de37ad0f77ffcc.jpg",
+                alt: "Chuuya",
+            },
+        ],
         "Your Lie In April": [
             {
                 url: "https://i.pinimg.com/564x/44/84/3c/44843c6b0d42b67a167e3b8603b540d2.jpg",

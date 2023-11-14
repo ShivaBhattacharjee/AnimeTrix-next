@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
             message: "Login successful",
             success: true,
         });
-        response.cookies.set("token", token, { maxAge: 60 * 60 * 24 * 365 * 2 });
+        response.cookies.set("token", token);
         return response;
     } catch (error: unknown) {
         const Error = error as Error;
