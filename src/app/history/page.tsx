@@ -7,10 +7,10 @@ import { getCookie } from "cookies-next";
 import { AlertTriangle, Trash } from "lucide-react";
 import Link from "next/link";
 
+import Forbidden from "@/components/Forbidden";
 import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
-import Forbidden from "@/components/Forbidden";
 
 type HistoryItem = {
     streamId: string;
