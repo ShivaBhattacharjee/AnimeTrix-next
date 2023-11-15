@@ -101,7 +101,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                             </div>
                             <div className="flex gap-1">
                                 <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
-                                {sortOrder === "asc" ? <ArrowUpNarrowWide size={30} className="mt-2 cursor-pointer" onClick={handleSortToggle} /> : <ArrowDownNarrowWide size={30} className="mt-2 cursor-pointer" onClick={handleSortToggle} />}
+                                <ArrowDownNarrowWide size={30} className={`mt-2 cursor-pointer ${sortOrder === "asc" && "rotate-180"} duration-300`} onClick={handleSortToggle} />
                             </div>
                             {listData.length >= 100 && (
                                 <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
