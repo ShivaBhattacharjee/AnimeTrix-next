@@ -73,20 +73,24 @@ export const getRandomAnime = async () => {
 export const getAiringSchedule = async () => {
     const cacheKey = "airingSchedule";
     try {
+        // Check cache first
         const cachedData = myCache.get(cacheKey);
         if (cachedData) {
-            return cachedData;
+            return cachedData; // Return cached JSON data
         }
+
         const response = await fetch(`${AnifyApi}/schedule`, {
             cache: "no-cache",
         });
-        myCache.set(cacheKey, response.json());
-        return response.json();
+        const data = await response.json(); // Get JSON data from response
+        myCache.set(cacheKey, data); // Cache the JSON data
+        return data; // Return the JSON data
     } catch (error) {
         console.error("Error getting airing list: ", error);
         return [];
     }
 };
+
 // upcoming seasons
 export const getCurrentYear = () => {
     return new Date().getFullYear();
