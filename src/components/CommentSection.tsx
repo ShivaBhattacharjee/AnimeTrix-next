@@ -1,24 +1,78 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { StickyNote, ThumbsDown, ThumbsUp, Trash } from "lucide-react";
+import { Clipboard, ClipboardPaste, StickyNote, ThumbsDown, ThumbsUp, Trash } from "lucide-react";
 
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
-type props = {
+
+type Props = {
     streamId: string;
 };
+type comment = {
+    text: string;
+    timestamp: Date;
+    userId: number;
+    _id: number;
+};
 
-const CommentSection = ({ streamId }: props) => {
+const CommentSection = ({ streamId }: Props) => {
     const token = getCookie("token");
     const [comment, setComment] = useState<string>("");
     const [addCommentLoading, setAddCommentLoading] = useState<boolean>(false);
-    const [commentData, setCommentData] = useState([]);
+    const [commentData, setCommentData] = useState<comment[]>([]);
     const [userId, setUserId] = useState<string>("");
     const [commenterId, setCommenterId] = useState<string[]>([]);
     const [userData, setUserData] = useState<{ [key: string]: { username: string; profilePicture: string } }>({});
+    const [showClipboardIcon, setShowClipboardIcon] = useState(true);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+
+    const getComment = async () => {
+        try {
+            const res = await axios.get(`/api/comment?streamId=${streamId}&page=${page}`);
+            const comments = res?.data?.comment?.comments || [];
+            setCommentData(comments);
+            const userIds = comments.map((comment: comment) => comment.userId) || [];
+            setCommenterId(userIds);
+
+            // Fetch user information for each user ID
+            const usersData = await Promise.all(
+                userIds.map(async (userId: number) => {
+                    const userResponse = await fetch(`/api/get-users?userId=${userId}`);
+                    if (userResponse.ok) {
+                        const userData = await userResponse.json();
+                        return { [userId]: { username: userData?.userData?.username, profilePicture: userData?.userData?.profilePicture } };
+                    }
+                    return {};
+                }),
+            );
+
+            // Update user data state
+            setUserData(Object.assign({}, ...usersData));
+        } catch (error: unknown) {
+            console.log(error);
+        }
+    };
+    const fetchMoreData = async () => {
+        try {
+            const res = await axios.get(`/api/comment?streamId=${streamId}&page=${page + 1}`);
+            const comments: comment[] = res?.data?.comment?.comments || [];
+
+            if (comments.length > 0) {
+                setPage(page + 1);
+                setCommentData((prevComments: comment[]) => [...prevComments, ...comments]);
+            } else {
+                setHasMore(false);
+            }
+        } catch (error) {
+            console.error(error);
+            setHasMore(false);
+        }
+    };
 
     const HandleaddComment = async () => {
         const commentData = {
@@ -47,55 +101,6 @@ const CommentSection = ({ streamId }: props) => {
         }
     };
 
-    const getComment = async () => {
-        try {
-            const res = await axios.get(`/api/comment?streamId=${streamId}&page=1`);
-            const comments = res?.data?.comment?.comments || [];
-            setCommentData(comments);
-            const userIds = comments.map((comment: comment) => comment.userId) || [];
-            setCommenterId(userIds);
-
-            // Fetch user information for each user ID
-            const usersData = await Promise.all(
-                userIds.map(async (userId: number) => {
-                    const userResponse = await fetch(`/api/get-users?userId=${userId}`);
-                    if (userResponse.ok) {
-                        const userData = await userResponse.json();
-                        return { [userId]: { username: userData?.userData?.username, profilePicture: userData?.userData?.profilePicture } };
-                    }
-                    return {};
-                }),
-            );
-
-            // Update user data state
-            setUserData(Object.assign({}, ...usersData));
-        } catch (error: unknown) {
-            console.log(error);
-        }
-    };
-
-    const getUserData = async () => {
-        try {
-            const userResponse = await fetch("/api/get-users");
-            if (token && !userResponse.ok) {
-                Toast.ErrorShowToast("There seems to be an issue with the network response.");
-            }
-            const user = await userResponse.json();
-            console.log(user);
-            setUserId(user?.userData?._id);
-        } catch (error: unknown) {
-            const ErrorMsg = error as Error;
-            Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
-        }
-    };
-
-    useEffect(() => {
-        getComment();
-        if (token) {
-            getUserData();
-        }
-    }, []);
-
     const handleDeleteComment = async (commentId: number) => {
         try {
             const res = await axios.delete("/api/comment", { data: { commentId: commentId } });
@@ -105,13 +110,6 @@ const CommentSection = ({ streamId }: props) => {
             const ErrorMsg = error as Error;
             Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
         }
-    };
-
-    type comment = {
-        text: string;
-        timestamp: Date;
-        userId: number;
-        _id: number;
     };
     const formatTimestamp = (timestamp: Date) => {
         const currentDate = new Date();
@@ -139,6 +137,44 @@ const CommentSection = ({ streamId }: props) => {
         return `${days} day${days !== 1 ? "s" : ""} ago`;
     };
 
+    const handleCopyToClipboard = (text: string) => {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => {
+                Toast.SuccessshowToast("Copied to clipboard");
+                setShowClipboardIcon(false);
+
+                // Reset the clipboard icon visibility after 2 seconds
+                setTimeout(() => {
+                    setShowClipboardIcon(true);
+                }, 2000);
+            })
+            .catch(() => Toast.ErrorShowToast("Failed to copy to clipboard"));
+    };
+
+    const getUserData = async () => {
+        try {
+            const userResponse = await fetch("/api/get-users");
+            if (token && !userResponse.ok) {
+                Toast.ErrorShowToast("There seems to be an issue with the network response.");
+            }
+            const user = await userResponse.json();
+            console.log(user);
+            setUserId(user?.userData?._id);
+        } catch (error: unknown) {
+            const ErrorMsg = error as Error;
+            Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
+        }
+    };
+
+    useEffect(() => {
+        getComment();
+        if (token) {
+            getUserData();
+        }
+    }, []);
+    console.log(commentData.length);
+
     return (
         <>
             <div className="flex flex-col gap-3 mt-4">
@@ -148,36 +184,48 @@ const CommentSection = ({ streamId }: props) => {
                     {addCommentLoading && <ClipLoader size={20} color="#000" />}
                     {addCommentLoading ? "Adding" : "Add Comment"}
                 </button>
-
                 {commentData?.length == 0 || comment === undefined ? (
-                    <h1 className=" text-3xl font-semibold items-center mt-5 rounded-lg lg:w-1/2 flex gap-3 ">
+                    <h1 className="text-3xl font-semibold items-center mt-5 rounded-lg lg:w-1/2 flex gap-3 ">
                         <StickyNote />
                         Be the first to comment
                     </h1>
                 ) : (
-                    <div className=" mt-4 relative grid gap-4 border-2 overflow-x-clip border-white/25 w-full lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll">
-                        {commentData.map((comment: comment) => (
-                            <div className="flex gap-4" key={comment?._id}>
-                                {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 rounded-full font-semibold justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
-                                <div className="flex flex-col">
-                                    <div className="flex w-full items-center">
-                                        <div className="flex gap-3 items-center">
-                                            <h1 className="opacity-70 font-semibold text-sm">@{userData[comment?.userId] ? userData[comment?.userId]?.username : "User"}</h1>
-                                            <h1 className=" opacity-70 text-xs font-semibold">{formatTimestamp(comment?.timestamp)}</h1>
+                    <InfiniteScroll
+                        className="w-full border-2 overflow-x-clip border-white/25  lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll"
+                        dataLength={commentData.length}
+                        next={fetchMoreData}
+                        hasMore={hasMore}
+                        loader={
+                            <div className="flex justify-center mt-5 items-center">
+                                <ClipLoader color="#fff" size={30} />
+                            </div>
+                        }
+                    >
+                        <div className=" mt-4 relative grid gap-4 ">
+                            {commentData.map((comment: comment) => (
+                                <div className="flex gap-4" key={comment?._id}>
+                                    {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 rounded-full font-semibold justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
+                                    <div className="flex flex-col">
+                                        <div className="flex w-full items-center">
+                                            <div className="flex gap-3 items-center">
+                                                <h1 className="opacity-70 font-semibold text-sm">@{userData[comment?.userId] ? userData[comment?.userId]?.username : "User"}</h1>
+                                                <h1 className=" opacity-70 text-xs font-semibold">{formatTimestamp(comment?.timestamp)}</h1>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex flex-col gap-3">
-                                        <h1 className="text-sm md:text-lg font-medium">{comment?.text}</h1>
-                                        <div className="flex gap-5 items-center">
-                                            <ThumbsUp size={20} onClick={() => Toast.ErrorShowToast("Under development")} />
-                                            <ThumbsDown size={20} onClick={() => Toast.ErrorShowToast("Under Development")} />
-                                            {commenterId?.includes(userId) && <Trash size={20} className=" cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
+                                        <div className="flex flex-col gap-3">
+                                            <h1 className="text-sm md:text-lg font-medium">{comment?.text}</h1>
+                                            <div className="flex gap-5 items-center">
+                                                <ThumbsUp size={20} onClick={() => Toast.ErrorShowToast("Under development")} />
+                                                <ThumbsDown size={20} onClick={() => Toast.ErrorShowToast("Under Development")} />
+                                                {showClipboardIcon ? <Clipboard size={20} onClick={() => handleCopyToClipboard(comment?.text)} className="cursor-pointer" /> : <ClipboardPaste size={20} className=" cursor-pointer" />}
+                                                {commenterId?.includes(userId) && <Trash size={20} className=" cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    </InfiniteScroll>
                 )}
             </div>
         </>

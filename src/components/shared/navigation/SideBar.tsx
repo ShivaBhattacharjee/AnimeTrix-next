@@ -56,35 +56,35 @@ const SideBar = () => {
     const token = getCookie("token");
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+            if (sidebarRef?.current && !sidebarRef?.current?.contains(event?.target as Node)) {
                 setExpand(false);
             }
         };
 
-        document.addEventListener("click", handleClickOutside);
+        document?.addEventListener("click", handleClickOutside);
 
         return () => {
-            document.removeEventListener("click", handleClickOutside);
+            document?.removeEventListener("click", handleClickOutside);
         };
     }, []);
     return (
-        <>
+        <nav>
             <div className=" hidden md:flex fixed ">
                 <div className={`w-52 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
-                    <nav className="flex flex-col overflow-scroll h-screen mt-3 p-2 max-lg:mt-10">
+                    <div className="flex flex-col overflow-scroll h-screen mt-3 p-2 max-lg:mt-10">
                         {NavItems.map((link) => {
                             const shouldRender = !(link.name === "History" || link.name === "Bookmark") || token;
                             if (!shouldRender) return null;
 
                             const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
                             return (
-                                <Link href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
+                                <a href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
                                     <link.icons className={`${isActive && `fill-white`}`} />
                                     <li className="font-semibold  max-lg:hidden block">{link.name}</li>
-                                </Link>
+                                </a>
                             );
                         })}
-                    </nav>
+                    </div>
                 </div>
             </div>
             {/* mobile bottom bar */}
@@ -107,7 +107,7 @@ const SideBar = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </nav>
     );
 };
 export default SideBar;

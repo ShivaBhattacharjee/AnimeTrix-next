@@ -6,43 +6,53 @@ import { getCookie } from "cookies-next";
 import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
 
 import ProfileLoading from "@/components/loading/ProfileLoading";
 import SpinLoading from "@/components/loading/SpinLoading";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
-type HistoryItem = {
-    streamId: string;
-    animeId: number;
-    image: string;
-    coverImage: string;
-    episode: string;
-    title: string;
-    _id: string;
-};
-type BookmarkItem = {
-    animeId: number;
-    image: string;
-    title: string;
-    _id: string;
-};
+const HistoryItemSchema = z.object({
+    streamId: z.string(),
+    animeId: z.number(),
+    image: z.string(),
+    coverImage: z.string(),
+    episode: z.string(),
+    title: z.string(),
+    _id: z.string(),
+});
 
-type UserHistoryResponse = {
-    nextPage: boolean;
-    history: HistoryItem[];
-    userHistory: {
-        history: HistoryItem[];
-    };
-};
+const BookmarkItemSchema = z.object({
+    animeId: z.number(),
+    image: z.string(),
+    title: z.string(),
+    _id: z.string(),
+});
 
-type UserBookmarkResponse = {
-    nextPage: boolean;
-    bookmarks: BookmarkItem[];
-    userBookmarks: {
-        bookmarks: BookmarkItem[];
-    };
-};
+const UserHistoryResponseSchema = z.object({
+    nextPage: z.boolean(),
+    history: z.array(HistoryItemSchema),
+    userHistory: z.object({
+        history: z.array(HistoryItemSchema),
+    }),
+});
+
+const UserBookmarkResponseSchema = z.object({
+    nextPage: z.boolean(),
+    bookmarks: z.array(BookmarkItemSchema),
+    userBookmarks: z.object({
+        bookmarks: z.array(BookmarkItemSchema),
+    }),
+});
+
+type HistoryItem = z.infer<typeof HistoryItemSchema>;
+
+type BookmarkItem = z.infer<typeof BookmarkItemSchema>;
+
+type UserHistoryResponse = z.infer<typeof UserHistoryResponseSchema>;
+
+type UserBookmarkResponse = z.infer<typeof UserBookmarkResponseSchema>;
 
 const Page = () => {
     const [userName, setUserName] = useState("");
