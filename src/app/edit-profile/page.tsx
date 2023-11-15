@@ -9,6 +9,8 @@ import { Camera, Check } from "lucide-react";
 import EditProfileLoading from "@/components/loading/EditProfileLoading";
 import AvatarModal from "@/components/shared/AvatarModal";
 import { useProfile } from "@/hooks/useprofile";
+import { myCache } from "@/lib/nodecache";
+import { UserData } from "@/types/animetypes";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -23,7 +25,17 @@ const Page = () => {
     const [openAvatarModal, setOpenAvatarModal] = useState(false);
     const [editLoading, setEditLoading] = useState(false);
     const getUserData = async () => {
+        const cacheKey = "userData";
         try {
+            const cachedData = myCache.get<UserData>(cacheKey);
+            if (cachedData) {
+                setUserName(cachedData.username || "Unknown");
+                setProfilePicture(cachedData.profilePicture || "");
+                setEmail(cachedData.email || "unknown");
+                setUserDescription(cachedData.userDescription || "unknwon");
+                setLoading(false);
+                return;
+            }
             const userResponse = await fetch("/api/get-users");
             const user = await userResponse.json();
             setUserName(user?.userData?.username);

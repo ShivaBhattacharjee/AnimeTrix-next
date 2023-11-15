@@ -43,3 +43,29 @@ export interface ApiResponse {
     error: string;
     result: Anime[];
 }
+export type HistoryItem = {
+    streamId: string;
+    animeId: number;
+    image: string;
+    coverImage: string;
+    episode: string;
+    title: string;
+    _id: string;
+};
+
+export interface UserHistory {
+    history: HistoryItem[];
+}
+
+export interface UserHistoryResponse {
+    nextPage: boolean;
+    history: HistoryItem[];
+    userHistory: UserHistory;
+}
+
+export type UserData = {
+    username: string;
+    profilePicture: string;
+    email: string;
+    userDescription: string;
+};

@@ -9,6 +9,7 @@ import Link from "next/link";
 
 import Forbidden from "@/components/Forbidden";
 import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
+import { myCache } from "@/lib/nodecache";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -48,22 +49,31 @@ const Page = () => {
     }
 
     const getUserHistory = async () => {
+        const cacheKey = "userHistory";
         try {
-            const response = await fetch(`/api/history?page=${currentPage}`);
-            if (token) {
-                if (!response.ok) {
-                    throw new Error("Network response error");
-                }
+            const cachedData = myCache.get<UserHistoryResponse>(cacheKey); // Type-cast cached data
+            if (cachedData) {
+                setHistory(cachedData.userHistory.history || []);
+                setLoading(false);
+                return;
             }
-            const data: UserHistoryResponse = await response.json();
-            setHistory(data?.userHistory?.history || []);
+
+            const response = await fetch(`/api/history?page=${currentPage}`);
+            if (!response.ok) {
+                throw new Error("Network response error");
+            }
+
+            const data = (await response.json()) as UserHistoryResponse; // Type-cast fetched data
+            myCache.set(cacheKey, data); // Cache the fetched data
+            setHistory(data.userHistory.history || []);
             setLoading(false);
             console.dir(data);
-        } catch (error: unknown) {
+        } catch (error) {
             console.error(error);
             setLoading(false);
         }
     };
+
     const fetchNextPage = async (page: number) => {
         try {
             const apiUrl = `/api/history?page=${page}`;

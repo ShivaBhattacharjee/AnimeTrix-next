@@ -6,6 +6,8 @@ import { getCookie } from "cookies-next";
 import Link from "next/link";
 
 import { useProfile } from "@/hooks/useprofile";
+import { myCache } from "@/lib/nodecache";
+import { UserData } from "@/types/animetypes";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -26,12 +28,28 @@ const Logout = () => {
     }
 
     const getUserData = async () => {
+        const cacheKey = "userData";
         try {
+            // Check cache first
+            const cachedData = myCache.get<UserData>(cacheKey);
+            if (cachedData) {
+                setUserName(cachedData.username.charAt(0).toUpperCase());
+                setProfilePicture(cachedData.profilePicture || "");
+                setLoading(false);
+                return;
+            }
+
             const userResponse = await fetch("/api/get-users");
             if (token && !userResponse.ok) {
                 Toast.ErrorShowToast("There seems to be an issue with network response.");
             }
             const user = await userResponse.json();
+
+            // Cache the user data
+            if (user?.userData) {
+                myCache.set(cacheKey, user.userData);
+            }
+
             setUserName(user?.userData?.username?.charAt(0).toUpperCase());
             setProfilePicture(user?.userData?.profilePicture || "");
             setLoading(false);

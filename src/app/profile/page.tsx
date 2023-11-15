@@ -10,6 +10,8 @@ import { z } from "zod";
 
 import ProfileLoading from "@/components/loading/ProfileLoading";
 import SpinLoading from "@/components/loading/SpinLoading";
+import { myCache } from "@/lib/nodecache";
+import { UserData } from "@/types/animetypes";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -78,7 +80,18 @@ const Page = () => {
         }
     };
     const getUserData = async () => {
+        const cacheKey = "userData";
         try {
+            const cachedData = myCache.get<UserData>(cacheKey);
+            if (cachedData) {
+                setUserName(cachedData.username || "Unknown");
+                setProfilePicture(cachedData.profilePicture || "");
+                setEmail(cachedData.email || "unknown");
+                setUserDescription(cachedData.userDescription || "unknwon");
+                setLoading(false);
+                return;
+            }
+
             const userResponse = await fetch("/api/get-users");
             const user = await userResponse.json();
             setUserName(user?.userData?.username);
@@ -92,32 +105,49 @@ const Page = () => {
             Toast.ErrorShowToast(Error?.message || "Something went wrong");
         }
     };
+
     const getUserHistory = async () => {
+        const cacheKey = "userHistory";
         try {
-            const response = await fetch("/api/history");
-            if (token) {
-                if (!response.ok) {
-                    throw new Error("Network response error");
-                }
+            const cachedData = myCache.get<UserHistoryResponse>(cacheKey); // Type-cast cached data
+            if (cachedData) {
+                setHistory(cachedData.userHistory.history || []);
+                setHistoryLoading(false);
+                return;
             }
-            const data: UserHistoryResponse = await response.json();
-            setHistory(data?.userHistory?.history || []);
+
+            const response = await fetch(`/api/history?page=1`);
+            if (!response.ok) {
+                throw new Error("Network response error");
+            }
+
+            const data = (await response.json()) as UserHistoryResponse; // Type-cast fetched data
+            myCache.set(cacheKey, data);
+            setHistory(data.userHistory.history || []);
             setHistoryLoading(false);
             console.dir(data);
-        } catch (error: unknown) {
+        } catch (error) {
             console.error(error);
             setHistoryLoading(false);
         }
     };
     const getUserBookmark = async () => {
+        const cacheKey = "userBookmark";
         try {
-            const response = await fetch("/api/bookmark");
+            const cachedData = myCache.get<UserBookmarkResponse>(cacheKey);
+            if (cachedData) {
+                setBookmark(cachedData.userBookmarks.bookmarks || []);
+                setBookmarkLoading(false);
+                return;
+            }
+            const response = await fetch("/api/bookmark?page=1");
             if (token) {
                 if (!response.ok) {
                     throw new Error("Network response error");
                 }
             }
             const data: UserBookmarkResponse = await response.json();
+            myCache.set(cacheKey, data);
             setBookmark(data?.userBookmarks?.bookmarks || []);
 
             setBookmarkLoading(false);
