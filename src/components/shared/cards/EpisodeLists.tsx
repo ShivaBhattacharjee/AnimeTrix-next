@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
+import { myCache } from "@/lib/nodecache";
 import Anime from "@/types/animetypes";
 
 interface EpisodeListsProps {
@@ -26,10 +27,17 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
     const getEpisodes = async () => {
+        const cachekey = `episodes-${animeId}-${dub}`;
         try {
             setLoading(true);
+            const cachedData = myCache.get<Anime[]>(cachekey);
+            if (cachedData) {
+                setListData(cachedData);
+                return;
+            }
             const response = await fetch(`${AnimeApi}/info/${animeId}?dub=${dub}`);
             const data = await response.json();
+            myCache.set(cachekey, data.episodes);
             setListData(data.episodes);
         } catch (error) {
             setLoading(false);

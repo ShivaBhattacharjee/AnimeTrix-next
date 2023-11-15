@@ -187,9 +187,15 @@ export const getSteamingLink = async (streamid: string) => {
 };
 
 export const getDownloadLink = async (streamid: string) => {
+    const cacheKey = `download${streamid}`;
     try {
+        const cachedData = myCache.get(cacheKey);
+        if (cachedData) {
+            return cachedData;
+        }
         const response = await fetch(`${AnimeApi}/watch/${streamid}`);
         const data = await response.json();
+        myCache.set(cacheKey, data);
         return data;
     } catch (error) {
         console.log("Error getting download links", error);
