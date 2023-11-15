@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { SyncLoader } from "react-spinners";
-import { Frown } from "lucide-react";
+import { ArrowDownNarrowWide, ArrowUpNarrowWide, Frown, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
@@ -15,12 +15,16 @@ interface EpisodeListsProps {
     currentlyPlaying?: number;
 }
 
+// ... (existing imports)
+
 const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentlyPlaying }) => {
     const [filterValue, setFilterValue] = useState<string>("");
     const [selectedRange, setSelectedRange] = useState<string>("1-100");
     const [listData, setListData] = useState<Anime[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [dub, setDub] = useState<boolean>(false);
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
     const getEpisodes = async () => {
         try {
             setLoading(true);
@@ -53,6 +57,10 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
         return ranges;
     }, [listData]);
 
+    const handleSortToggle = () => {
+        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    };
+
     const displayedEpisodes = listData.filter((anime) => {
         if (filterValue === "") {
             const [start, end] = selectedRange.split("-").map(Number);
@@ -61,9 +69,9 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
             return anime.number.toString().includes(filterValue);
         }
     });
-
-    const showSelect = listData.length > 100;
-
+    const handleDubToggle = () => {
+        setDub((prevDub) => !prevDub);
+    };
     return (
         <>
             {loading ? (
@@ -71,13 +79,23 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
             ) : (
                 <>
                     <div className="flex justify-between items-center flex-wrap gap-6" id="episodes">
-                        <h1 className="text-4xl font-semibold lg:pb-5">Episodes</h1>
+                        <div className="flex items-center gap-3">
+                            <h1 className="text-4xl font-semibold">Episodes</h1>
+                            <RefreshCcw onClick={getEpisodes} className={`cursor-pointer`} />
+                        </div>
                         <div className="flex flex-wrap gap-3">
-                            <button onClick={() => setDub(!dub)} className=" bg-transparent border h-11  w-24 rounded-lg font-semibold border-white">
-                                {dub ? "Sub" : "Dub"}
-                            </button>
-                            <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
-                            {showSelect && (
+                            <div className="flex gap-3 items-center">
+                                <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
+                                    <input onChange={!loading && handleDubToggle} checked={dub} type="checkbox" id="check" className=" sr-only peer" />
+                                    <span className=" w-2/5 cursor-pointer h-4/5 bg-black/30 absolute rounded-full left-1 top-1 peer-checked:bg-black peer-checked:left-11 transition-all duration-500"></span>
+                                </label>
+                                <span className=" text-xl font-semibold">Dub</span>
+                            </div>
+                            <div className="flex gap-1">
+                                <input type="number" placeholder="Search Episode No......" className="bg-transparent search border-2 w-52 border-white  p-2 mr-4 rounded-lg focus:outline-none mb-3" value={filterValue} onChange={(e) => setFilterValue(e.target.value)} />
+                                {sortOrder === "asc" ? <ArrowUpNarrowWide size={30} className="mt-2 cursor-pointer" onClick={handleSortToggle} /> : <ArrowDownNarrowWide size={30} className="mt-2 cursor-pointer" onClick={handleSortToggle} />}
+                            </div>
+                            {listData.length >= 100 && (
                                 <select className="p-2 bg-black border-2 h-11 focus:outline-none border-white rounded-lg" value={selectedRange} onChange={(e) => setSelectedRange(e.target.value)}>
                                     {episodeRanges.map((range) => (
                                         <option key={range} value={range}>
@@ -91,7 +109,10 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                     {displayedEpisodes.length > 0 ? (
                         <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-5"} `}>
                             {displayedEpisodes
-                                .sort((animeA, animeB) => animeA.number - animeB.number)
+                                .sort((animeA, animeB) => {
+                                    const orderMultiplier = sortOrder === "asc" ? 1 : -1;
+                                    return orderMultiplier * (animeA.number - animeB.number);
+                                })
                                 .map((anime, index) => (
                                     <Link href={`/watch/${anime.id}/${animeId}`} className={`duration-200  border-2 hover:scale-90 ${currentlyPlaying == anime.number ? "scale-90 border-2 border-white  " : "border-white/60 "} rounded-lg flex flex-col gap-3`} key={index}>
                                         <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />

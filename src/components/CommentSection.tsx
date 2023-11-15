@@ -62,7 +62,7 @@ const CommentSection = ({ streamId }: Props) => {
             const res = await axios.get(`/api/comment?streamId=${streamId}&page=${page + 1}`);
             const comments: comment[] = res?.data?.comment?.comments || [];
 
-            if (comments.length > 0) {
+            if (comments.length > 10) {
                 setPage(page + 1);
                 setCommentData((prevComments: comment[]) => [...prevComments, ...comments]);
             } else {
@@ -191,7 +191,7 @@ const CommentSection = ({ streamId }: Props) => {
                     </h1>
                 ) : (
                     <InfiniteScroll
-                        className="w-full border-2 overflow-x-clip border-white/25  lg:w-1/2 p-3 rounded-lg h-auto max-h-96 overflow-y-scroll"
+                        className="w-full border-2 overflow-x-clip border-white/25  lg:w-1/2 p-3 rounded-lg h-auto max-h-[470px] overflow-y-scroll"
                         dataLength={commentData.length}
                         next={fetchMoreData}
                         hasMore={hasMore}
