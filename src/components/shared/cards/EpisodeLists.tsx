@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { SyncLoader } from "react-spinners";
-import { ArrowDownNarrowWide, ArrowUpNarrowWide, Frown, RefreshCcw } from "lucide-react";
+import { ArrowDownNarrowWide, Frown, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
@@ -15,8 +15,6 @@ interface EpisodeListsProps {
     isStream?: boolean;
     currentlyPlaying?: number;
 }
-
-// ... (existing imports)
 
 const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentlyPlaying }) => {
     const [filterValue, setFilterValue] = useState<string>("");
