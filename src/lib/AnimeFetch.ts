@@ -80,7 +80,7 @@ export const getAiringSchedule = async () => {
         const response = await fetch(`${AnifyApi}/schedule`, {
             cache: "no-cache",
         });
-        myCache.set(cacheKey, response);
+        myCache.set(cacheKey, response.json());
         return response.json();
     } catch (error) {
         console.error("Error getting airing list: ", error);
