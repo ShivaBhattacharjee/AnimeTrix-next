@@ -71,19 +71,11 @@ export const getRandomAnime = async () => {
 
 // get airing schedule
 export const getAiringSchedule = async () => {
-    const cacheKey = "airingSchedule";
     try {
-        // Check cache first
-        const cachedData = myCache.get(cacheKey);
-        if (cachedData) {
-            return cachedData; // Return cached JSON data
-        }
-
         const response = await fetch(`${AnifyApi}/schedule`, {
             cache: "no-cache",
         });
-        const data = await response.json(); // Get JSON data from response
-        myCache.set(cacheKey, data); // Cache the JSON data
+        const data = await response.json();
         return data; // Return the JSON data
     } catch (error) {
         console.error("Error getting airing list: ", error);
