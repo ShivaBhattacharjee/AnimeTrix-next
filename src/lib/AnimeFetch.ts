@@ -129,11 +129,17 @@ export const getGenre = async (genre: string) => {
 };
 // search anime
 export const getSearchResults = async (searchValue: string) => {
+    const cacheKey = `search${searchValue}`;
     try {
+        const cachedData = myCache.get(cacheKey);
+        if (cachedData) {
+            return cachedData;
+        }
         const response = await fetch(`${AnimeApi}/${searchValue}`, {
             cache: "force-cache",
         });
         const data = await response.json();
+        myCache.set(cacheKey, data.results);
         return data.results;
     } catch (error) {
         console.log("Error fetching anime search results", error);
