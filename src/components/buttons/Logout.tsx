@@ -1,72 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { ClipLoader } from "react-spinners";
-import { getCookie } from "cookies-next";
 import Link from "next/link";
 
-import { useProfile } from "@/hooks/useprofile";
-import { myCache } from "@/lib/nodecache";
-import { UserData } from "@/types/animetypes";
-import { Error } from "@/types/ErrorTypes";
-import Toast from "@/utils/toast";
+import UserContext from "@/context/getUserDetails";
 
 const Logout = () => {
-    const { isProfileUpdated } = useProfile();
-    const token = getCookie("token");
-    const [profilePicture, setProfilePicture] = useState("");
-    const [tokenExistOrNot, setTokenExistOrNot] = useState(false);
-    const [username, setUserName] = useState("");
-    const [loading, setLoading] = useState(true);
-
-    function checkIfTokenExistOrNot() {
-        if (token === undefined || token === null || token.length === 0) {
-            setTokenExistOrNot(false);
-        } else {
-            setTokenExistOrNot(true);
-        }
-    }
-
-    const getUserData = async () => {
-        const cacheKey = "userData";
-        try {
-            // Check cache first
-            const cachedData = myCache.get<UserData>(cacheKey);
-            if (cachedData) {
-                setUserName(cachedData.username.charAt(0).toUpperCase());
-                setProfilePicture(cachedData.profilePicture || "");
-                setLoading(false);
-                return;
-            }
-
-            const userResponse = await fetch("/api/get-users");
-            if (token && !userResponse.ok) {
-                Toast.ErrorShowToast("There seems to be an issue with network response.");
-            }
-            const user = await userResponse.json();
-
-            // Cache the user data
-            if (user?.userData) {
-                myCache.set(cacheKey, user.userData);
-            }
-
-            setUserName(user?.userData?.username?.charAt(0).toUpperCase());
-            setProfilePicture(user?.userData?.profilePicture || "");
-            setLoading(false);
-        } catch (error: unknown) {
-            const ErrorMsg = error as Error;
-            Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        checkIfTokenExistOrNot();
-        if (token || isProfileUpdated) {
-            getUserData();
-        }
-    }, [token, isProfileUpdated]);
-
+    const { loading, tokenExistOrNot, username, profilePicture } = useContext(UserContext);
     return (
         <>
             {tokenExistOrNot ? (

@@ -73,11 +73,11 @@ export const ProfiePicture = {
             },
             {
                 url: "https://i.pinimg.com/564x/65/4d/9e/654d9ee0839d47653a07be4bd23fb38b.jpg",
-                alt: "Dazai Osamu",
+                alt: "Dazai Osamu 2",
             },
             {
                 url: "https://i.pinimg.com/564x/ee/88/f9/ee88f9237057f455bf1ed0f0be02888b.jpg",
-                alt: "Dazai Osamu",
+                alt: "Dazai Osamu 3",
             },
             {
                 url: "https://i.pinimg.com/564x/4c/e6/e2/4ce6e2dcb008223af9568aaa778f308c.jpg",
@@ -89,11 +89,11 @@ export const ProfiePicture = {
             },
             {
                 url: "https://i.pinimg.com/564x/ae/36/f1/ae36f159edc25d57f2c184eabde3b2d9.jpg",
-                alt: "Chuuya",
+                alt: "Chuuya 2",
             },
             {
                 url: "https://i.pinimg.com/564x/cc/2d/f2/cc2df2d1bf0c771922de37ad0f77ffcc.jpg",
-                alt: "Chuuya",
+                alt: "Chuuya 3",
             },
         ],
         "Your Lie In April": [
@@ -107,7 +107,7 @@ export const ProfiePicture = {
             },
             {
                 url: "https://i.pinimg.com/564x/62/a1/ee/62a1eef9f94c1e8d68c0ec66c05d0ab3.jpg",
-                alt: "Kaori with cat",
+                alt: "Kaori with cat 2",
             },
             {
                 url: "https://i.pinimg.com/originals/e8/83/1b/e8831ba0451dddb2edbe2e5bdb70c293.jpg",

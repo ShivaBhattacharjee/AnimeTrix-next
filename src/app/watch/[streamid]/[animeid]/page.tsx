@@ -16,7 +16,6 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import AddToHistory from "@/lib/addToHistory";
-import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
 
 type Props = {
@@ -26,17 +25,31 @@ type Props = {
     };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const id = params.animeid;
-    const anime = await fetch(`${AnimeApi}/info/${id}`).then((res) => res.json());
-    const description = anime?.description;
-    const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
-    return {
-        title: `Watching ${params.streamid} on AnimeTrix`,
-        description: formattedDescription || "Opps!! No Description Found",
-        openGraph: {
-            images: anime?.cover || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
-        },
-    };
+    try {
+        const anime = await getAnimeDetails(params.animeid);
+        if (anime) {
+            const description = anime.description;
+            const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
+            return {
+                title: `${`Watching ${params.streamid} on AnimeTrix` || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
+                description: formattedDescription || "Opps!! No Description Found",
+                openGraph: {
+                    images: anime?.cover || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
+                },
+            };
+        } else {
+            throw new Error("Anime details are missing or incomplete");
+        }
+    } catch (error) {
+        console.error("Error fetching anime details:", error);
+        return {
+            title: "Error",
+            description: "Oops! An error occurred while fetching anime details.",
+            openGraph: {
+                images: "https://images.unsplash.com/photo-1455849318743-b2233052fcff?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            },
+        };
+    }
 }
 const Page = async ({
     params,

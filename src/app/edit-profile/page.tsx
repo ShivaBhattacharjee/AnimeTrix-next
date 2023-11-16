@@ -1,63 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
-import { getCookie } from "cookies-next";
 import { Camera, Check } from "lucide-react";
 
 import EditProfileLoading from "@/components/loading/EditProfileLoading";
 import AvatarModal from "@/components/shared/AvatarModal";
+import UserContext from "@/context/getUserDetails";
 import { useProfile } from "@/hooks/useprofile";
-import { myCache } from "@/lib/nodecache";
-import { UserData } from "@/types/animetypes";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
 const Page = () => {
-    const token = getCookie("token");
-    const [userName, setUserName] = useState("");
-    const [email, setEmail] = useState("");
-    const [profilePicture, setProfilePicture] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [userDescription, setUserDescription] = useState("");
     const { isProfileUpdated, setIsProfileUpdated } = useProfile();
     const [openAvatarModal, setOpenAvatarModal] = useState(false);
     const [editLoading, setEditLoading] = useState(false);
-    const getUserData = async () => {
-        const cacheKey = "userData";
-        try {
-            const cachedData = myCache.get<UserData>(cacheKey);
-            if (cachedData) {
-                setUserName(cachedData.username || "Unknown");
-                setProfilePicture(cachedData.profilePicture || "");
-                setEmail(cachedData.email || "unknown");
-                setUserDescription(cachedData.userDescription || "unknwon");
-                setLoading(false);
-                return;
-            }
-            const userResponse = await fetch("/api/get-users");
-            const user = await userResponse.json();
-            setUserName(user?.userData?.username);
-            setEmail(user?.userData?.email);
-            setProfilePicture(user?.userData?.profilePicture || "");
-            setUserDescription(user?.userData?.userDescription || "");
-            setLoading(false);
-            setIsProfileUpdated(false);
-        } catch (error: unknown) {
-            const Error = error as Error;
-            setLoading(false);
-            Toast.ErrorShowToast(Error?.message || "Something went wrong");
-        }
-    };
-    useEffect(() => {
-        if (token) getUserData();
-    }, [token]);
+    const { username, email, profilePicture, userDescription, loading, setUsername, setUserDescription, setProfilePicture } = useContext(UserContext);
 
     const UpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const userData = {
-            username: userName,
+            username: username,
             profilePicture: profilePicture,
             userDescription: userDescription,
         };
@@ -84,9 +48,20 @@ const Page = () => {
             setEditLoading(false);
         }
     };
-    const handleSelectProfilePicture = (url: string) => {
+    const handleSelectProfilePicture = async (url: string) => {
         setProfilePicture(url);
-        setIsProfileUpdated(true);
+        try {
+            const userData = {
+                profilePicture: url,
+            };
+            const res = await axios.put("/api/get-users", userData);
+            Toast.SuccessshowToast("Profile Picture Updated");
+            console.log(res);
+        } catch (error: unknown) {
+            const ErrorMsg = error as Error;
+            Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
+            console.log(error);
+        }
     };
     return (
         <>
@@ -98,7 +73,7 @@ const Page = () => {
                     <span className=" w-full h-[1px] bg-white/20"></span>
                     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5">
                         <div onClick={() => setOpenAvatarModal(true)} className="h-24 cursor-pointer w-24 relative lg:h-32 lg:w-32 rounded-full bg-white  text-black  flex justify-center items-center ">
-                            {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2 font-semibold text-3xl">{userName?.charAt(0).toUpperCase()}</p>}
+                            {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2 font-semibold text-3xl">{username?.charAt(0).toUpperCase()}</p>}
                             <div className="absolute bg-white cursor-pointer p-2 rounded-full right-0 bottom-0">
                                 <Camera size={20} />
                             </div>
@@ -114,9 +89,9 @@ const Page = () => {
                                 type="text"
                                 placeholder="Username"
                                 className=" p-3 bg-transparent border-[1px] rounded-lg border-white/20 focus:outline-none"
-                                value={userName}
+                                value={username}
                                 onChange={(e) => {
-                                    setUserName(e.target.value);
+                                    setUsername(e.target.value);
                                     setIsProfileUpdated(true);
                                 }}
                             />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";
@@ -10,8 +10,8 @@ import { z } from "zod";
 
 import ProfileLoading from "@/components/loading/ProfileLoading";
 import SpinLoading from "@/components/loading/SpinLoading";
+import UserContext from "@/context/getUserDetails";
 import { myCache } from "@/lib/nodecache";
-import { UserData } from "@/types/animetypes";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -57,15 +57,12 @@ type UserHistoryResponse = z.infer<typeof UserHistoryResponseSchema>;
 type UserBookmarkResponse = z.infer<typeof UserBookmarkResponseSchema>;
 
 const Page = () => {
-    const [userName, setUserName] = useState("");
-    const [email, setEmail] = useState("");
-    const [loading, setLoading] = useState(true);
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [historyLoading, setHistoryLoading] = useState(true);
     const [bookmarkLoading, setBookmarkLoading] = useState(true);
     const [bookmark, setBookmark] = useState<BookmarkItem[]>([]);
-    const [profilePicture, setProfilePicture] = useState("");
-    const [userDescription, setUserDescription] = useState("");
+
+    const { loading, username, profilePicture, email, userDescription } = useContext(UserContext);
     const router = useRouter();
     const token = getCookie("token");
     const logout = async () => {
@@ -77,32 +74,6 @@ const Page = () => {
         } catch (error: unknown) {
             const Error = error as Error;
             Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong");
-        }
-    };
-    const getUserData = async () => {
-        const cacheKey = "userData";
-        try {
-            const cachedData = myCache.get<UserData>(cacheKey);
-            if (cachedData) {
-                setUserName(cachedData.username || "Unknown");
-                setProfilePicture(cachedData.profilePicture || "");
-                setEmail(cachedData.email || "unknown");
-                setUserDescription(cachedData.userDescription || "unknwon");
-                setLoading(false);
-                return;
-            }
-
-            const userResponse = await fetch("/api/get-users");
-            const user = await userResponse.json();
-            setUserName(user?.userData?.username);
-            setEmail(user?.userData?.email);
-            setProfilePicture(user?.userData?.profilePicture || "");
-            setUserDescription(user?.userData?.userDescription || "");
-            setLoading(false);
-        } catch (error: unknown) {
-            const Error = error as Error;
-            setLoading(false);
-            Toast.ErrorShowToast(Error?.message || "Something went wrong");
         }
     };
 
@@ -158,7 +129,6 @@ const Page = () => {
         }
     };
     useEffect(() => {
-        getUserData();
         if (token) {
             getUserHistory();
             getUserBookmark();
@@ -174,9 +144,9 @@ const Page = () => {
                 <div className="min-h-[100dvh]">
                     <div className=" p-4 flex flex-col lg:flex-row gap-3 items-center justify-between">
                         <div className="flex flex-col lg:flex-row items-center gap-5">
-                            <div className=" h-24 w-24 lg:h-32 relative lg:w-32 rounded-full bg-white text-black flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${userName}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{userName?.charAt(0).toUpperCase() || "?"}</h1>}</div>
+                            <div className=" h-24 w-24 lg:h-32 relative lg:w-32 rounded-full bg-white text-black flex justify-center items-center ">{profilePicture ? <img src={profilePicture} alt={`profile picture of ${username}`} className="rounded-full" /> : <h1 className=" font-bold text-4xl">{username?.charAt(0).toUpperCase() || "?"}</h1>}</div>
                             <div className="flex flex-col items-center lg:items-start">
-                                <h1 className="text-3xl font-semibold">{userName || "Unknown"}</h1>
+                                <h1 className="text-3xl font-semibold">{username || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>
                                 <p className="truncate w-72 font-semibold opacity-75 text-center lg:text-left">{userDescription || "Unknown"}</p>
                             </div>
