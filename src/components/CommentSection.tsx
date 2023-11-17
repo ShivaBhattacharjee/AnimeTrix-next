@@ -1,11 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Clipboard, ClipboardPaste, StickyNote, ThumbsDown, ThumbsUp, Trash } from "lucide-react";
 
+import UserContext from "@/context/getUserDetails";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -24,7 +25,7 @@ const CommentSection = ({ streamId }: Props) => {
     const [comment, setComment] = useState<string>("");
     const [addCommentLoading, setAddCommentLoading] = useState<boolean>(false);
     const [commentData, setCommentData] = useState<comment[]>([]);
-    const [userId, setUserId] = useState<string>("");
+    const { userId } = useContext(UserContext);
     const [commenterId, setCommenterId] = useState<string[]>([]);
     const [userData, setUserData] = useState<{ [key: string]: { username: string; profilePicture: string } }>({});
     const [showClipboardIcon, setShowClipboardIcon] = useState(true);
@@ -152,26 +153,8 @@ const CommentSection = ({ streamId }: Props) => {
             .catch(() => Toast.ErrorShowToast("Failed to copy to clipboard"));
     };
 
-    const getUserData = async () => {
-        try {
-            const userResponse = await fetch("/api/get-users");
-            if (token && !userResponse.ok) {
-                Toast.ErrorShowToast("There seems to be an issue with the network response.");
-            }
-            const user = await userResponse.json();
-            console.log(user);
-            setUserId(user?.userData?._id);
-        } catch (error: unknown) {
-            const ErrorMsg = error as Error;
-            Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
-        }
-    };
-
     useEffect(() => {
         getComment();
-        if (token) {
-            getUserData();
-        }
     }, []);
     console.log(commentData.length);
 

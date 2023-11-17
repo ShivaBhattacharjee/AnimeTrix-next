@@ -1,6 +1,5 @@
-// context/UserContext.tsx
 "use client";
-import React, { createContext, ReactNode, useCallback, useEffect,useState } from "react";
+import React, { createContext, ReactNode, useCallback, useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
 
 import { useProfile } from "@/hooks/useprofile";
@@ -12,6 +11,7 @@ import Toast from "@/utils/toast";
 const defaultContextState: UserContextState = {
     username: "",
     email: "",
+    userId: "",
     profilePicture: "",
     userDescription: "",
     loading: true,
@@ -33,6 +33,7 @@ interface ProfileProviderProps {
 export const UserProvider: React.FC<ProfileProviderProps> = ({ children }) => {
     const token = getCookie("token");
     const [username, setUsername] = useState("");
+    const [userId, setUserId] = useState("");
     const [email, setEmail] = useState("");
     const [profilePicture, setProfilePicture] = useState("");
     const [loading, setLoading] = useState(true);
@@ -51,6 +52,7 @@ export const UserProvider: React.FC<ProfileProviderProps> = ({ children }) => {
         try {
             const cachedData = myCache.get<UserData>(cacheKey);
             if (cachedData) {
+                console.log("Getting data from cache");
                 setUsername(cachedData.username || "?");
                 setProfilePicture(cachedData.profilePicture || "");
                 setEmail(cachedData.email || "unknown");
@@ -64,6 +66,7 @@ export const UserProvider: React.FC<ProfileProviderProps> = ({ children }) => {
             setEmail(user?.userData?.email || "unknown");
             setProfilePicture(user?.userData?.profilePicture || "");
             setUserDescription(user?.userData?.userDescription || "unknown");
+            setUserId(user?.userData?._id || "");
             setLoading(false);
         } catch (error: unknown) {
             const Error = error as Error;
@@ -91,6 +94,7 @@ export const UserProvider: React.FC<ProfileProviderProps> = ({ children }) => {
                 isProfileUpdated,
                 getUserData,
                 setUsername,
+                userId,
                 setUserDescription,
                 setProfilePicture,
                 setProfileUpdated: setIsProfileUpdated,
