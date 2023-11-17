@@ -50,6 +50,7 @@
   - [Home Page](#home-page)
   - [Details](#details)
   - [Stream](#stream)
+    - [Visit Animetrix](#visit-animetrix)
 - [Authors](#authors)
 
 ## About The Project
@@ -77,7 +78,7 @@ AnimeTrix is built using ReactJs and vanilla Css
 
 <a href="https://nodejs.org/en/download/">NodeJs</a> is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to execute JavaScript code outside of a web browser, making it possible to create server-side applications with JavaScript. Node.js is fast, lightweight, and scalable, making it popular for building modern web applications.
 
-### ```Rename .env.example to .env.local and fill the required fields```
+```Rename .env.example to .env.local and fill the required fields```
 ### Installation
 
 ### Local
@@ -98,7 +99,7 @@ Server will start at http://localhost:3000/
 ### Docker
 
 ```bash
-sudo docker run -it -p <your-port-number>:3000 \
+sudo docker run -d <your-port-number>:3000 \
 -e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
 -e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
 -e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
@@ -112,7 +113,7 @@ immashiva/animetrix
 ### Example
 
 ```bash
-sudo docker run -it -p 8080:3000 \
+sudo docker run -d -p 8080:3000 \
 -e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
 -e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
 -e NEXT_PUBLIC_EMAIL_SERVICE=gmail \

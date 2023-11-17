@@ -16,7 +16,7 @@ const Logout = () => {
                         <ClipLoader color="#fff" size={30} />
                     ) : (
                         <Link href={"/profile"} className="bg-white rounded-full text-black font-bold w-10 h-10 text-center flex items-center justify-center">
-                            {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2">{username}</p>}
+                            {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2">{username?.charAt(0)?.toUpperCase() || "?"}</p>}
                         </Link>
                     )}
                 </>
