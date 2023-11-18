@@ -39,6 +39,7 @@
   - [Installation](#installation)
   - [Local](#local)
   - [Docker](#docker)
+    - [Vist DockerHub Image](#vist-dockerhub-image)
   - [Example](#example)
 - [Host your own](#host-your-own)
 - [Contributing](#contributing)
@@ -97,6 +98,8 @@ npm run dev
 Server will start at http://localhost:3000/
 
 ### Docker
+
+#### Vist <a href="https://hub.docker.com/repository/docker/immashiva/animetrix/general" target="_blank">DockerHub</a> Image
 
 ```bash
 sudo docker run -p <your-port-number>:3000 \
