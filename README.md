@@ -99,7 +99,7 @@ Server will start at http://localhost:3000/
 ### Docker
 
 ```bash
-sudo docker run -d <your-port-number>:3000 \
+sudo docker run -p <your-port-number>:3000 \
 -e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
 -e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
 -e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
@@ -113,7 +113,7 @@ immashiva/animetrix
 ### Example
 
 ```bash
-sudo docker run -d -p 8080:3000 \
+sudo docker run -p 8080:3000 \
 -e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
 -e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
 -e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
