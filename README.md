@@ -107,7 +107,6 @@ sudo docker run -p <your-port-number>:3000 \
 -e NEXT_PUBLIC_EMAIL_PASSWORD=yourpassword \
 -e NEXT_PUBLIC_DOMAIN=http:/localhost:3000 \
 immashiva/animetrix
-
 ```
 
 ### Example
@@ -121,7 +120,6 @@ sudo docker run -p 8080:3000 \
 -e NEXT_PUBLIC_EMAIL_PASSWORD=yourpassword \
 -e NEXT_PUBLIC_DOMAIN=http:/localhost:3000 \
 immashiva/animetrix
-
 ```
 
 ## Host your own
