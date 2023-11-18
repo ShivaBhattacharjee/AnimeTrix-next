@@ -148,7 +148,7 @@ const Page = () => {
                             <div className="flex flex-col items-center lg:items-start">
                                 <h1 className="text-3xl font-semibold">{username || "Unknown"}</h1>
                                 <span className=" opacity-70 tracking-wide">{email || "Unknown"}</span>
-                                <p className="truncate w-72 font-semibold opacity-75 text-center lg:text-left">{userDescription || "Unknown"}</p>
+                                <p className="truncate w-72 font-medium tracking-wide  text-center  lg:text-left">{userDescription || ""}</p>
                             </div>
                         </div>
                         <div className="flex gap-3">
