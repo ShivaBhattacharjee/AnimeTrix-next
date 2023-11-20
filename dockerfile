@@ -1,4 +1,5 @@
-FROM node:18-alpine
+# Base stage
+FROM node:18.4-alpine AS base
 
 WORKDIR /app
 
@@ -6,13 +7,29 @@ COPY package*.json ./
 
 RUN npm install
 
+# Development stage
+FROM base AS development
+
 COPY . .
 
-RUN npm run build
+CMD sh -c "\
+if [ -z \"$NEXT_PUBLIC_MONGODB_URI\" ] || \
+   [ -z \"$NEXT_PUBLIC_JWT_TOKEN\" ] || \
+   [ -z \"$NEXT_PUBLIC_EMAIL\" ] || \
+   [ -z \"$NEXT_PUBLIC_EMAIL_PASSWORD\" ]; then \
+  echo \"Error: Required environment variables not set.\"; \
+  echo \"Please provide values for NEXT_PUBLIC_MONGODB_URI, NEXT_PUBLIC_JWT_TOKEN, NEXT_PUBLIC_EMAIL, and NEXT_PUBLIC_EMAIL_PASSWORD.\"; \
+  exit 1; \
+fi; \ npm start"
+
+# Production stage
+FROM base AS production
+
+COPY . .
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "\
+CMD sh -c "\
 if [ -z \"$NEXT_PUBLIC_MONGODB_URI\" ] || \
    [ -z \"$NEXT_PUBLIC_JWT_TOKEN\" ] || \
    [ -z \"$NEXT_PUBLIC_EMAIL\" ] || \
@@ -21,4 +38,4 @@ if [ -z \"$NEXT_PUBLIC_MONGODB_URI\" ] || \
   echo \"Please provide values for NEXT_PUBLIC_MONGODB_URI, NEXT_PUBLIC_JWT_TOKEN, NEXT_PUBLIC_EMAIL, and NEXT_PUBLIC_EMAIL_PASSWORD.\"; \
   exit 1; \
 fi; \
-npm start"]
+npm run build && npm start"
