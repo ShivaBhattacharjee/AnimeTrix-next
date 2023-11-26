@@ -119,11 +119,8 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
     };
 
     const item = {
-        hidden: { x: -20, opacity: 0 },
-        visible: {
-            x: 0,
-            opacity: 1,
-        },
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 },
     };
 
     return (
@@ -131,7 +128,20 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
             <div className="flex gap-3 overflow-x-scroll hiddenscroll duration-200 mt-9" ref={containerRef} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} style={{ userSelect: isDragging.current ? "none" : "auto" }}>
                 {props.length > 0 ? (
                     props.map((anime) => (
-                        <motion.div variants={item} key={anime.id} className="flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab" onMouseDown={handleMouseDown}>
+                        <motion.div
+                            variants={item}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{
+                                delay: 0.2,
+                                ease: "easeInOut",
+                                duration: 0.5,
+                            }}
+                            viewport={{ amount: 0 }}
+                            key={anime.id}
+                            className="flex flex-col relative lg:m-3 m-1 duration-200 rounded-lg cursor-grab"
+                            onMouseDown={handleMouseDown}
+                        >
                             <Link href={`/details/${anime.id}`} className="content-normal w-full h-full">
                                 <div className="relative lg:w-48 w-40 ">
                                     <img src={anime?.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${anime?.title?.userPreferred || anime?.title?.english || anime?.title?.romaji || anime?.title?.native}`} className="rounded-lg hover:scale-105 duration-200 h-52 lg:h-64 " draggable={false} loading="lazy" height={400} width={200} />
