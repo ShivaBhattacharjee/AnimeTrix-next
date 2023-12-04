@@ -217,7 +217,7 @@ const Page = () => {
                                                 .slice(-8)
                                                 .reverse()
                                                 ?.map((item) => (
-                                                    <div key={item._id} className="border-2 border-black/20 dark:border-white/30 card-img rounded-lg">
+                                                    <div key={item._id} className="border-2 border-white/30 card-img rounded-lg">
                                                         <Link href={`/details/${item.animeId}`} className="content-normal overflow-hidden w-full h-full">
                                                             <div className="md:w-48 h-60  relative overflow-hidden">
                                                                 <img src={item.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} alt={`an image of ${item?.animeId}`} className=" rounded-t-lg hover:scale-105 duration-200 h-60 lg:h-64 w-full " draggable="false" loading="lazy" height={400} width={200} />
