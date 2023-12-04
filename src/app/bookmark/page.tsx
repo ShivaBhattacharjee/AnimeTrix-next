@@ -139,7 +139,7 @@ const Page = () => {
                                                         <span className="truncate font-semibold w-32 lg:w-44 text-sm md:text-xl lg:text-lg capitalize mb-4">{item.title || "Unknown Title"}</span>
                                                     </div>
                                                     <h1 className=" bg-black rounded-full absolute right-3 top-2 p-2 cursor-pointer">
-                                                        <BookmarkMinus onClick={() => deleteBookmark(item.animeId || "Unknown")} />
+                                                        <BookmarkMinus size={30} className=" duration-200 hover:text-red-500" onClick={() => deleteBookmark(item.animeId || "Unknown")} />
                                                     </h1>
                                                 </div>
                                             </div>

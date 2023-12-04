@@ -148,7 +148,7 @@ const Page = () => {
                                                     )}
                                                 </div>
                                                 <h1 className=" bg-black rounded-full absolute right-3 top-2 p-2 cursor-pointer">
-                                                    <Trash onClick={() => deleteHistory(item?.streamId || "Unknown")} />
+                                                    <Trash size={30} className=" duration-200 hover:text-red-500" onClick={() => deleteHistory(item?.streamId || "Unknown")} />
                                                 </h1>
                                             </div>
                                         </div>
