@@ -50,10 +50,20 @@ const NavItems = [
 const SideBar = () => {
     console.log("Hentai onichan!! Why you looking at my source");
     useRouter();
+    const [isLogged, setIsLogged] = useState(false);
     const pathname = usePathname();
     const [expand, setExpand] = useState(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
     const token = getCookie("token");
+
+    useEffect(() => {
+        if (token !== undefined) {
+            setIsLogged(!isLogged);
+        } else {
+            setIsLogged(false);
+        }
+    }, [token]);
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (sidebarRef?.current && !sidebarRef?.current?.contains(event?.target as Node)) {
@@ -69,30 +79,35 @@ const SideBar = () => {
     }, []);
     return (
         <nav>
+            {/* desktop sidebar */}
             <div className=" hidden md:flex fixed ">
                 <div className={`w-52 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
                     <div className="flex flex-col overflow-scroll h-screen mt-3 p-2 max-lg:mt-10">
                         {NavItems.map((link) => {
-                            const shouldRender = !(link.name === "History" || link.name === "Bookmark") || token;
-                            if (!shouldRender) return null;
-
                             const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
+                            const shouldRender = !(link?.name === "History" || link?.name === "Bookmark") || isLogged;
+                            if (!shouldRender) {
+                                return null;
+                            }
                             return (
-                                <a href={link.route} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
-                                    <link.icons className={`${isActive && `fill-white`}`} />
-                                    <li className="font-semibold  max-lg:hidden block">{link.name}</li>
-                                </a>
+                                <>
+                                    <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
+                                        <link.icons className={`${isActive && `fill-white`}`} />
+                                        <h1 className="font-semibold  max-lg:hidden block">{link.name}</h1>
+                                    </Link>
+                                </>
                             );
                         })}
                     </div>
                 </div>
             </div>
+
             {/* mobile bottom bar */}
             <div ref={sidebarRef} className={`text-white fixed bottom-0 md:hidden z-20 bg-black/50 rounded-t-xl border-t-2 border-white/25  backdrop-blur-md w-full p-2 duration-200 transition-all`}>
                 <div className="flex items-center justify-between flex-wrap ">
                     {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
                         const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
-                        const shouldRender = !(link.name === "History" || link.name === "Bookmark") || token;
+                        const shouldRender = !(link.name === "History" || link.name === "Bookmark") || isLogged;
                         if (!shouldRender) return null;
                         return (
                             <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/25 border-2`} w-24 p-2 rounded-lg duration-200 transition-all`}>

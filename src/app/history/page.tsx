@@ -9,7 +9,6 @@ import Link from "next/link";
 
 import Forbidden from "@/components/Forbidden";
 import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
-import { myCache } from "@/lib/nodecache";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -49,22 +48,13 @@ const Page = () => {
     }
 
     const getUserHistory = async () => {
-        const cacheKey = "userHistory";
         try {
-            const cachedData = myCache.get<UserHistoryResponse>(cacheKey); // Type-cast cached data
-            if (cachedData) {
-                setHistory(cachedData.userHistory.history || []);
-                setLoading(false);
-                return;
-            }
-
             const response = await fetch(`/api/history?page=${currentPage}`);
             if (!response.ok) {
                 throw new Error("Network response error");
             }
 
-            const data = (await response.json()) as UserHistoryResponse; // Type-cast fetched data
-            myCache.set(cacheKey, data); // Cache the fetched data
+            const data = (await response.json()) as UserHistoryResponse;
             setHistory(data.userHistory.history || []);
             setLoading(false);
             console.dir(data);

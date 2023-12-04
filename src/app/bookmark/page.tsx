@@ -9,7 +9,6 @@ import Link from "next/link";
 
 import Forbidden from "@/components/Forbidden";
 import LoadingSkeleton from "@/components/loading/LoadingSkeleton";
-import { myCache } from "@/lib/nodecache";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -46,14 +45,7 @@ const Page = () => {
     }
 
     const getUserBookmark = async () => {
-        const cacheKey = "userBookmark";
         try {
-            const cachedData = myCache.get<UserBookmarkResponse>(cacheKey);
-            if (cachedData) {
-                setBookmark(cachedData.userBookmarks.bookmarks || []);
-                setLoading(false);
-                return;
-            }
             const response = await fetch(`/api/bookmark?page=${currentPage}`);
             if (token) {
                 if (!response.ok) {
@@ -61,7 +53,6 @@ const Page = () => {
                 }
             }
             const data: UserBookmarkResponse = await response.json();
-            myCache.set(cacheKey, data);
             setBookmark(data?.userBookmarks?.bookmarks || []);
             setLoading(false);
             console.dir(data);

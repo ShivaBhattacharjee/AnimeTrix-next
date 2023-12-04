@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema({
     },
     userDescription: {
         type: String,
-        default: "",
+        default: "Hello there! I'm using AnimeTrix.",
     },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: String,

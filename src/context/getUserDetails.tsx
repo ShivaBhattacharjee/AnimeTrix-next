@@ -56,7 +56,7 @@ export const UserProvider: React.FC<ProfileProviderProps> = ({ children }) => {
                 setUsername(cachedData.username || "?");
                 setProfilePicture(cachedData.profilePicture || "");
                 setEmail(cachedData.email || "unknown");
-                setUserDescription(cachedData.userDescription || "unknown");
+                setUserDescription(cachedData.userDescription || "");
                 setLoading(false);
                 return;
             }
@@ -65,7 +65,7 @@ export const UserProvider: React.FC<ProfileProviderProps> = ({ children }) => {
             setUsername(user?.userData?.username || "?");
             setEmail(user?.userData?.email || "unknown");
             setProfilePicture(user?.userData?.profilePicture || "");
-            setUserDescription(user?.userData?.userDescription || "unknown");
+            setUserDescription(user?.userData?.userDescription || "");
             setUserId(user?.userData?._id || "");
             setLoading(false);
         } catch (error: unknown) {

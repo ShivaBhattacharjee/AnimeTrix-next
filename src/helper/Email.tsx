@@ -3,8 +3,8 @@ import bcryptjs from "bcryptjs";
 import nodemailer from "nodemailer";
 
 import User from "@/model/user.model";
-import { Error } from "@/types/ErrorTypes"
-import RegisterEmail from '@/utils/EmailTemplate/RegisterEmail';
+import { Error } from "@/types/ErrorTypes";
+import RegisterEmail from "@/utils/EmailTemplate/RegisterEmail";
 
 type EmailProps = {
     email: string;

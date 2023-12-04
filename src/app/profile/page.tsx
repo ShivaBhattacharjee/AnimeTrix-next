@@ -11,7 +11,6 @@ import { z } from "zod";
 import ProfileLoading from "@/components/loading/ProfileLoading";
 import SpinLoading from "@/components/loading/SpinLoading";
 import UserContext from "@/context/getUserDetails";
-import { myCache } from "@/lib/nodecache";
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
 
@@ -78,22 +77,13 @@ const Page = () => {
     };
 
     const getUserHistory = async () => {
-        const cacheKey = "userHistory";
         try {
-            const cachedData = myCache.get<UserHistoryResponse>(cacheKey); // Type-cast cached data
-            if (cachedData) {
-                setHistory(cachedData.userHistory.history || []);
-                setHistoryLoading(false);
-                return;
-            }
-
             const response = await fetch(`/api/history?page=1`);
             if (!response.ok) {
                 throw new Error("Network response error");
             }
 
             const data = (await response.json()) as UserHistoryResponse; // Type-cast fetched data
-            myCache.set(cacheKey, data);
             setHistory(data.userHistory.history || []);
             setHistoryLoading(false);
             console.dir(data);
@@ -103,14 +93,7 @@ const Page = () => {
         }
     };
     const getUserBookmark = async () => {
-        const cacheKey = "userBookmark";
         try {
-            const cachedData = myCache.get<UserBookmarkResponse>(cacheKey);
-            if (cachedData) {
-                setBookmark(cachedData.userBookmarks.bookmarks || []);
-                setBookmarkLoading(false);
-                return;
-            }
             const response = await fetch("/api/bookmark?page=1");
             if (token) {
                 if (!response.ok) {
@@ -118,7 +101,6 @@ const Page = () => {
                 }
             }
             const data: UserBookmarkResponse = await response.json();
-            myCache.set(cacheKey, data);
             setBookmark(data?.userBookmarks?.bookmarks || []);
 
             setBookmarkLoading(false);
