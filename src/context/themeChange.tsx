@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, ReactNode,useContext, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 type ThemeOptions = "light" | "dark";
 
@@ -26,7 +26,7 @@ const ThemeProvider: React.FC<ProfileProviderProps> = ({ children }) => {
     const [theme, setTheme] = useState<ThemeOptions>(getInitialTheme);
 
     function getInitialTheme(): ThemeOptions {
-        const savedTheme = localStorage.getItem("theme") as ThemeOptions | null;
+        const savedTheme = localStorage?.getItem("theme") as ThemeOptions | null;
         if (savedTheme && (savedTheme === "light" || savedTheme === "dark")) {
             return savedTheme;
         }
@@ -38,7 +38,7 @@ const ThemeProvider: React.FC<ProfileProviderProps> = ({ children }) => {
     };
 
     useEffect(() => {
-        localStorage.setItem("theme", theme);
+        localStorage?.setItem("theme", theme);
     }, [theme]);
 
     const contextValue: ThemeContextProps = {
