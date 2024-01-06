@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { ArrowLeftToLine, ArrowRightToLine, PlayCircle } from "lucide-react";
 import Link from "next/link";
 
+import { useTheme } from "@/context/themeChange";
+
 type DayOfWeek = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
 
 interface Anime {
@@ -29,6 +31,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
     const daysOfWeek: DayOfWeek[] = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const [currentDay, setCurrentDay] = useState<DayOfWeek>(daysOfWeek[new Date().getDay()]);
     const [animeForCurrentDay, setAnimeForCurrentDay] = useState<Anime[] | undefined>(undefined);
+    const { theme } = useTheme();
 
     useEffect(() => {
         setAnimeForCurrentDay(airingData[currentDay]);
@@ -57,7 +60,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
 
     return (
         <div className="flex gap-2">
-            <div className=" border-2 border-white/20 h-auto max-h-[400px] md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto">
+            <div className={`border-2 ${theme === "light" ? "border-black/20" : "border-white/20"} h-auto max-h-[400px] md:max-h-[600px] w-full rounded-lg mt-5 overflow-y-auto`}>
                 <div className="flex flex-col gap-3">
                     <div className="p-4">
                         <div className="flex flex-col gap-3 ">
@@ -67,15 +70,15 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                                 </div>
                             ) : (
                                 animeForCurrentDay.map((anime: Anime) => (
-                                    <div className="flex border-b-2 border-white/20  justify-between items-center" key={anime?.id}>
+                                    <div className={`flex border-b-2 ${theme === "light" ? "border-black/20" : "border-white/20 "} justify-between items-center`} key={anime?.id}>
                                         <Link href={`/details/${anime.id}`}>
                                             <div className="flex items-center gap-4 mb-2">
                                                 <img height={200} width={400} loading="lazy" src={anime.coverImage} alt={`an image of ${anime?.title?.romaji || anime?.title?.english || anime.title?.native}`} className="w-24 text-sm object-cover hover:scale-90 duration-200  rounded-lg" />
                                                 <div className="flex flex-col">
-                                                    <span className="text-white  text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">{anime?.title?.romaji || anime?.title?.english || anime.title?.native}</span>
+                                                    <span className="text-sm w-24 truncate mb-3 md:text-2xl md:w-[400px] lg:w-full ">{anime?.title?.romaji || anime?.title?.english || anime.title?.native}</span>
                                                     <div className="flex gap-2 items-center flex-wrap text-sm lg:text-xl">
                                                         <span>Ep: {anime.airingEpisode} -</span>
-                                                        <span className="text-gray-300">{formatTime(anime.airingAt)}</span>
+                                                        <span className={`${theme === "light" ? "text-black" : "text-gray-300"}`}>{formatTime(anime.airingAt)}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,7 +92,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                         </div>
                     </div>
                 </div>
-                <div className="sticky bottom-0 bg-white/5 bg-gradient-to-r from-black to-black/30 backdrop-blur-xl overflow-hidden p-3 ">
+                <div className={`sticky bottom-0 ${theme === "light" ? "bg-black/5" : "bg-white/5"} bg-gradient-to-r ${theme === "light" ? "from-white" : "from-black"} ${theme === "light" ? "to-white/30" : "to-black/30"} backdrop-blur-xl overflow-hidden p-3`}>
                     <div className="flex justify-between items-center  md:max-w-[400px] m-auto">
                         <button onClick={handlePreviousDay}>
                             <ArrowLeftToLine className="scale-125" />
