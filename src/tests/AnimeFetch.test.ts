@@ -1,4 +1,4 @@
-import { getAiringSchedule, getAnimeDetails, getAnimeMovies, getDownloadLink,getGenre, getPopularAnime, getRandomAnime, getSearchResults, getSteamingLink, getTrendingAnime, getUpcomingData } from "../src/lib/AnimeFetch";
+import { getAiringSchedule, getAnimeDetails, getAnimeMovies, getDownloadLink, getGenre, getPopularAnime, getRandomAnime, getSearchResults, getSteamingLink, getTrendingAnime, getUpcomingData } from "../lib/AnimeFetch";
 
 describe("AnimeFetch functions", () => {
     test("getTrendingAnime should return an array of anime", async () => {
@@ -19,24 +19,27 @@ describe("AnimeFetch functions", () => {
     test("getRandomAnime should return an object with anime details", async () => {
         const anime = await getRandomAnime();
         expect(typeof anime).toBe("object");
-        expect(anime).toHaveProperty("id");
-        expect(anime).toHaveProperty("title");
-        expect(anime).toHaveProperty("description");
+        expect(anime.id).toBeDefined();
+        expect(anime.title).toBeDefined();
+        expect(anime.description).toBeDefined();
     });
 
     test("getAiringSchedule should return an array of anime airing schedule", async () => {
         const anime = await getAiringSchedule();
         expect(Array.isArray(anime)).toBe(true);
+        expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getUpcomingData should return an array of upcoming anime data", async () => {
         const anime = await getUpcomingData("summer");
         expect(Array.isArray(anime)).toBe(true);
+        expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getGenre should return an array of anime with the specified genre", async () => {
         const anime = await getGenre("action");
         expect(Array.isArray(anime)).toBe(true);
+        expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getSearchResults should return an array of anime search results", async () => {
@@ -55,16 +58,21 @@ describe("AnimeFetch functions", () => {
     test("getSteamingLink should return an object with streaming links", async () => {
         const stream = await getSteamingLink("one-piece-episode-1");
         expect(typeof stream).toBe("object");
-        expect(stream).toHaveProperty("id");
-        expect(stream).toHaveProperty("title");
+        expect(stream).toHaveProperty("info");
+        expect(stream.info).toHaveProperty("title");
         expect(stream).toHaveProperty("links");
     });
 
     test("getDownloadLink should return an object with download links", async () => {
         const download = await getDownloadLink("one-piece-episode-1");
         expect(typeof download).toBe("object");
-        expect(download).toHaveProperty("id");
-        expect(download).toHaveProperty("title");
-        expect(download).toHaveProperty("links");
+        expect(download).toHaveProperty("download");
+        expect(download).toHaveProperty("sources");
+        expect(Array.isArray(download.sources)).toBe(true);
+        expect(download.sources.length).toBeGreaterThan(0);
+
+        download.sources.forEach((source: unknown) => {
+            expect(source).toHaveProperty("url");
+        });
     });
 });
