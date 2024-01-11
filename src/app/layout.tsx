@@ -30,8 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={inter.className}>
                 <ThemeProvider>
-                    <ThemeChildren>
-                        <section>
+                    <section>
+                        <ThemeChildren>
                             <ProfileProvider>
                                 <UserProvider>
                                     <Toaster position="top-right" />
@@ -45,8 +45,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                     </main>
                                 </UserProvider>
                             </ProfileProvider>
-                        </section>
-                    </ThemeChildren>
+                        </ThemeChildren>
+                    </section>
                 </ThemeProvider>
             </body>
         </html>
