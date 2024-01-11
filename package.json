@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
+    "test": "jest",
     "fix-imports": "import-sort --write './src/**/*.ts' './src/**/*.tsx'"
   },
   "dependencies": {
@@ -54,13 +55,14 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.4",
-    "@types/jest": "^29.5.5",
+    "@types/jest": "^29.5.11",
     "@types/nodemailer": "^6.4.11",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "husky": "^8.0.0",
     "import-sort-cli": "^6.0.0",
-    "prettier": "3.0.2"
+    "prettier": "3.0.2",
+    "ts-jest": "^29.1.1"
   }
 }
