@@ -43,11 +43,13 @@ describe("AnimeFetch functions", () => {
 
     test("getUpcomingData should return an array of upcoming anime data", async () => {
         const anime = await getUpcomingData("SUMMER");
+        expect(Array.isArray(anime)).toBe(true);
         expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getGenre should return an array of anime with the specified genre", async () => {
         const anime = await getGenre("Action");
+        expect(Array.isArray(anime)).toBe(true);
         expect(anime.length).toBeGreaterThan(0);
     });
 
