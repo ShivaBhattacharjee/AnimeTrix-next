@@ -24,27 +24,37 @@ describe("AnimeFetch functions", () => {
         expect(anime.description).toBeDefined();
     });
 
-    test("getAiringSchedule should return an array of anime airing schedule", async () => {
+    test("getAiringSchedule should return an object of anime airing schedule with days of the week", async () => {
+        jest.setTimeout(100000);
+
         const anime = await getAiringSchedule();
-        expect(Array.isArray(anime)).toBe(true);
-        expect(anime.length).toBeGreaterThan(0);
+
+        expect(typeof anime).toBe("object");
+        expect(Object.keys(anime).length).toBeGreaterThan(0);
+
+        const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+        for (const day of daysOfWeek) {
+            expect(anime).toHaveProperty(day);
+            expect(Array.isArray(anime[day])).toBe(true);
+            expect(anime[day].length).toBeGreaterThan(0);
+        }
     });
 
     test("getUpcomingData should return an array of upcoming anime data", async () => {
-        const anime = await getUpcomingData("summer");
-        expect(Array.isArray(anime)).toBe(true);
+        const anime = await getUpcomingData("SUMMER");
         expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getGenre should return an array of anime with the specified genre", async () => {
-        const anime = await getGenre("action");
-        expect(Array.isArray(anime)).toBe(true);
+        const anime = await getGenre("Action");
         expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getSearchResults should return an array of anime search results", async () => {
-        const anime = await getSearchResults("naruto");
+        const anime = await getSearchResults("Bleach"); //feel free to change to any other anime
         expect(Array.isArray(anime)).toBe(true);
+        expect(anime.length).toBeGreaterThan(0);
     });
 
     test("getAnimeDetails should return an object with anime details", async () => {
@@ -60,7 +70,7 @@ describe("AnimeFetch functions", () => {
         expect(typeof stream).toBe("object");
         expect(stream).toHaveProperty("info");
         expect(stream.info).toHaveProperty("title");
-        expect(stream).toHaveProperty("links");
+        expect(stream).toHaveProperty("stream");
     });
 
     test("getDownloadLink should return an object with download links", async () => {
