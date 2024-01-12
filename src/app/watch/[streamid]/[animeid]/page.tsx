@@ -146,7 +146,8 @@ const Page = async ({
                                 </div>
 
                                 <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
-                                    {Object?.keys(details?.genres).length > 0 &&
+                                    {details?.genres &&
+                                        Object?.keys(details?.genres).length > 0 &&
                                         details.genres.map((genre: string, index: number) => (
                                             <Link href={`/genres/${genre}`} className="border-2 text-sm lg:text-lg border-white  border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>
                                                 {genre}

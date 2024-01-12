@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { Clipboard, ClipboardPaste, StickyNote, ThumbsDown, ThumbsUp, Trash } from "lucide-react";
+import { Clipboard, ClipboardPaste, StickyNote, Trash } from "lucide-react";
 
 import UserContext from "@/context/getUserDetails";
 import { Error } from "@/types/ErrorTypes";
@@ -13,6 +13,7 @@ import Toast from "@/utils/toast";
 type Props = {
     streamId: string;
 };
+
 type comment = {
     text: string;
     timestamp: Date;
@@ -26,7 +27,6 @@ const CommentSection = ({ streamId }: Props) => {
     const [addCommentLoading, setAddCommentLoading] = useState<boolean>(false);
     const [commentData, setCommentData] = useState<comment[]>([]);
     const { userId } = useContext(UserContext);
-    const [commenterId, setCommenterId] = useState<string[]>([]);
     const [userData, setUserData] = useState<{ [key: string]: { username: string; profilePicture: string } }>({});
     const [showClipboardIcon, setShowClipboardIcon] = useState(true);
     const [page, setPage] = useState(1);
@@ -38,7 +38,6 @@ const CommentSection = ({ streamId }: Props) => {
             const comments = res?.data?.comment?.comments || [];
             setCommentData(comments);
             const userIds = comments.map((comment: comment) => comment.userId) || [];
-            setCommenterId(userIds);
 
             const usersData = await Promise.all(
                 userIds.map(async (userId: number) => {
@@ -69,6 +68,7 @@ const CommentSection = ({ streamId }: Props) => {
     };
 
     const HandleaddComment = async () => {
+        userId;
         const commentData = {
             streamId: streamId,
             text: comment,
@@ -147,6 +147,7 @@ const CommentSection = ({ streamId }: Props) => {
     useEffect(() => {
         getComment();
     }, []);
+
     return (
         <>
             <div className="flex flex-col gap-3 mt-4">
@@ -187,10 +188,8 @@ const CommentSection = ({ streamId }: Props) => {
                                         <div className="flex flex-col gap-3">
                                             <h1 className="text-sm md:text-lg font-medium">{comment?.text}</h1>
                                             <div className="flex gap-5 items-center">
-                                                <ThumbsUp size={20} onClick={() => Toast.ErrorShowToast("Under development")} />
-                                                <ThumbsDown size={20} onClick={() => Toast.ErrorShowToast("Under Development")} />
                                                 {showClipboardIcon ? <Clipboard size={20} onClick={() => handleCopyToClipboard(comment?.text)} className="cursor-pointer" /> : <ClipboardPaste size={20} className=" cursor-pointer" />}
-                                                {commenterId?.includes(userId) && <Trash size={20} className=" cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
+                                                {userId && comment.userId !== undefined && ((typeof comment.userId === "number" && userId !== null) || (typeof comment.userId === "string" && comment.userId === userId.toString())) && <Trash size={20} className="cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
                                             </div>
                                         </div>
                                     </div>
