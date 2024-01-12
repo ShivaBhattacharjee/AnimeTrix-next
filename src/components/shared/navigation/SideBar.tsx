@@ -81,7 +81,7 @@ const SideBar = () => {
         <nav>
             {/* desktop sidebar */}
             <div className=" hidden md:flex fixed ">
-                <div className={`w-52 max-lg:w-20 h-screen bg-white/5 backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
+                <div className={`w-52 max-lg:w-20 h-screen bg-transparent backdrop-blur-xl text-white sticky left-0 top-0 duration-300 border-r-2 border-white/25`}>
                     <div className="flex flex-col overflow-scroll h-screen mt-3 p-2 max-lg:mt-10">
                         {NavItems.map((link) => {
                             const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;

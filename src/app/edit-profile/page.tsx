@@ -68,10 +68,10 @@ const Page = () => {
             {loading ? (
                 <EditProfileLoading />
             ) : (
-                <form onSubmit={UpdateProfile} className="flex flex-col gap-4 p-4 overflow-y-hidden min-h-screen">
+                <form onSubmit={UpdateProfile} className="flex lg:w-[70%] flex-col gap-4 p-4 overflow-y-hidden min-h-screen">
                     <h1 className="text-3xl font-bold">Profile</h1>
-                    <span className=" w-full h-[1px] bg-white/20"></span>
-                    <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5">
+                    <span className=" w-full lg:w-[80%] h-[1px] bg-white/20"></span>
+                    <div className="flex flex-col gap-5">
                         <div onClick={() => setOpenAvatarModal(true)} className="h-24 cursor-pointer w-24 relative lg:h-32 lg:w-32 rounded-full bg-white  text-black  flex justify-center items-center ">
                             {profilePicture ? <img src={profilePicture} alt="profile" className="rounded-full" /> : <p className=" p-2 font-semibold text-3xl">{username?.charAt(0).toUpperCase()}</p>}
                             <div className="absolute bg-white cursor-pointer p-2 rounded-full right-0 bottom-0">

@@ -8,7 +8,6 @@ import SpinLoading from "../loading/SpinLoading";
 import SearchCards from "./cards/SearchCards";
 import { SearchResults } from "./SearchResults";
 
-import { useTheme } from "@/context/themeChange";
 import useDebounce from "@/hooks/debounce";
 import Anime from "@/types/animetypes";
 
@@ -16,7 +15,6 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>("");
-    const { theme } = useTheme();
 
     const closeSearchModal = () => {
         setOpenSearch(false);
@@ -72,7 +70,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
 
     return (
         <AnimatePresence>
-            <Search className={`cursor-pointer ${theme === "light" ? "text-black" : "text-white"}`} onClick={() => setOpenSearch(!openSearch)} />
+            <Search className={`cursor-pointer text-white`} onClick={() => setOpenSearch(!openSearch)} />
             {openSearch && (
                 <motion.div
                     initial={{ scale: 0 }}
