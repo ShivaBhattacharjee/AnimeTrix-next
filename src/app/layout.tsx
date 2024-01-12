@@ -10,9 +10,7 @@ import "./globals.css";
 
 import Footer from "@/components/shared/Footer";
 import ScrollToTop from "@/components/shared/ScrollToTop";
-import { ThemeChildren } from "@/components/ThemeChildren";
 import { UserProvider } from "@/context/getUserDetails";
-import { ThemeProvider } from "@/context/themeChange";
 import { ProfileProvider } from "@/hooks/useprofile";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,25 +27,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body className={inter.className}>
-                <ThemeProvider>
-                    <section>
-                        <ThemeChildren>
-                            <ProfileProvider>
-                                <UserProvider>
-                                    <Toaster position="top-right" />
-                                    <NextTopLoader color="#fff" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={true} easing="ease" speed={200} zIndex={1600} showAtBottom={false} />
-                                    <TopNavbar />
-                                    <SideBar />
-                                    <ScrollToTop />
-                                    <main className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
-                                        {children}
-                                        <Footer />
-                                    </main>
-                                </UserProvider>
-                            </ProfileProvider>
-                        </ThemeChildren>
-                    </section>
-                </ThemeProvider>
+                <section>
+                    <ProfileProvider>
+                        <UserProvider>
+                            <Toaster position="top-right" />
+                            <NextTopLoader color="#fff" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={true} easing="ease" speed={200} zIndex={1600} showAtBottom={false} />
+                            <main className="min-h-screen w-full text-white bg-black">
+                                <TopNavbar />
+                                <SideBar />
+                                <ScrollToTop />
+                                <section className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
+                                    {children}
+                                    <Footer />
+                                </section>
+                            </main>
+                        </UserProvider>
+                    </ProfileProvider>
+                </section>
             </body>
         </html>
     );
