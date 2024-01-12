@@ -39,6 +39,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Local](#local)
+  - [API test](#api-test)
   - [Docker](#docker)
     - [Vist DockerHub Image](#vist-dockerhub-image)
   - [Example](#example)
@@ -97,6 +98,11 @@ npm install
 npm run dev
 ```
 Server will start at http://localhost:3000/
+
+### API test
+```
+npm run test
+```
 
 ### Docker
 
