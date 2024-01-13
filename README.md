@@ -13,6 +13,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Deno](https://github.com/ShivaBhattacharjee/AnimeTrix-next/actions/workflows/deno.yml/badge.svg)](https://github.com/ShivaBhattacharjee/AnimeTrix-next/actions/workflows/deno.yml)
 ![GitHub repo size](https://img.shields.io/github/repo-size/shivabhattacharjee/animetrix-next)
+[![Animetrix Docker image](https://github.com/ShivaBhattacharjee/AnimeTrix-next/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/ShivaBhattacharjee/AnimeTrix-next/actions/workflows/main.yml)
 
 
   </div>
