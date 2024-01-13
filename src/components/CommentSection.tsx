@@ -177,7 +177,7 @@ const CommentSection = ({ streamId }: Props) => {
                         >
                             {commentData.map((comment: comment) => (
                                 <div className="flex gap-4" key={comment?._id}>
-                                    {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 rounded-full font-semibold justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
+                                    {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 bg-white text-black font-bold text-lg rounded-full justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
                                     <div className="flex flex-col">
                                         <div className="flex w-full items-center">
                                             <div className="flex gap-3 items-center">
