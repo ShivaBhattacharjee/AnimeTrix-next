@@ -12,6 +12,11 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
       
+      - name: Debug Docker Hub credentials
+        run: |
+          echo "DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}"
+          echo "DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD }}"
+
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -24,6 +29,11 @@ jobs:
         with:
           images: thetips4you/testjodejsapp
       
+      - name: Debug metadata
+        run: |
+          echo "Tags: ${{ steps.meta.outputs.tags }}"
+          echo "Labels: ${{ steps.meta.outputs.labels }}"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
