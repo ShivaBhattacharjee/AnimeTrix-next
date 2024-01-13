@@ -1,6 +1,6 @@
-).vscode
-.next
-.github
-node_modules
-bin
-.env.local
+/.vscode
+/.next
+/.github
+/node_modules
+/bin
+.env*.local
