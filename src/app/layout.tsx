@@ -1,4 +1,5 @@
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                 <ScrollToTop />
                                 <section className="flex relative flex-col ml-0 md:ml-20 lg:ml-52 ">
                                     {children}
+                                    <Analytics />
                                     <Footer />
                                 </section>
                             </main>
