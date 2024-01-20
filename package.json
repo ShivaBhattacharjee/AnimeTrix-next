@@ -1,8 +1,8 @@
 {
-  "name": "animetrix-next",
+  "name": "animetrix",
   "version": "3.0.0",
   "private": false,
-  "description": "animetrix but with next js 13",
+  "description": "Animetrix is a project that utilizes the Anilist platform to obtain information on various anime titles, and it combines this data with the Gogoanime API to provide ad-free streaming of anime content.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
