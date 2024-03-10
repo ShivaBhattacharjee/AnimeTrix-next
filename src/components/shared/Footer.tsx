@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Github, Instagram } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const socialMediaLinks = [
     {
@@ -15,6 +16,12 @@ const socialMediaLinks = [
 ];
 
 const Footer = () => {
+    const location = usePathname();
+
+    // Conditionally render Footer based on the current page route
+    if (location.includes("/waifu")) {
+        return null; // Don't render Footer for the /waifu route
+    }
     return (
         <div className={`mb-20 md:mb-0 p-4 mt-12 md:mt-0 border-t border-white/20`}>
             <div className="flex flex-col gap-7 justify-between items-center">

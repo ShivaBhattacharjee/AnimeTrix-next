@@ -112,11 +112,15 @@ const CommentSection = ({ streamId }: Props) => {
     const handleUpdateComment = async (commentId: number) => {
         try {
             setCommentEditLoading(true);
-            const res = await axios.put("/api/comment", { commentId: commentId, newText: newComment });
-            Toast.SuccessshowToast(res?.data?.message || "Comment Updated");
-            setIsEditWindow(false);
-            getComment();
-            setEditingCommentId(null);
+            if (newComment.length === comment.length) {
+                Toast.ErrorShowToast("Comment is same as previous");
+            } else {
+                const res = await axios.put("/api/comment", { commentId: commentId, newText: newComment });
+                Toast.SuccessshowToast(res?.data?.message || "Comment Updated");
+                setIsEditWindow(false);
+                getComment();
+                setEditingCommentId(null);
+            }
         } catch (error: unknown) {
             setCommentEditLoading(false);
             const ErrorMsg = error as Error;
