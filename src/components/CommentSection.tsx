@@ -33,6 +33,7 @@ const CommentSection = ({ streamId }: Props) => {
     const [hasMore, setHasMore] = useState(true);
     const [isEditWindow, setIsEditWindow] = useState<boolean>(false);
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+    const [commentEditLoading, setCommentEditLoading] = useState<boolean>(false);
 
     const getComment = async () => {
         try {
@@ -110,14 +111,18 @@ const CommentSection = ({ streamId }: Props) => {
 
     const handleUpdateComment = async (commentId: number) => {
         try {
+            setCommentEditLoading(true);
             const res = await axios.put("/api/comment", { commentId: commentId, newText: newComment });
             Toast.SuccessshowToast(res?.data?.message || "Comment Updated");
             setIsEditWindow(false);
             getComment();
             setEditingCommentId(null);
         } catch (error: unknown) {
+            setCommentEditLoading(false);
             const ErrorMsg = error as Error;
             Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
+        } finally {
+            setCommentEditLoading(false);
         }
     };
 
@@ -198,7 +203,7 @@ const CommentSection = ({ streamId }: Props) => {
                                             <div className="flex gap-5 items-center">
                                                 {isEditWindow && editingCommentId === comment._id && (
                                                     <button className="bg-blue-500 p-2 rounded-sm text-xs font-bold text-white" onClick={() => handleUpdateComment(comment?._id)}>
-                                                        Update
+                                                        {commentEditLoading && <ClipLoader color="#fff" size={10} />} Update
                                                     </button>
                                                 )}
                                                 {userId && comment.userId !== undefined && ((typeof comment.userId === "number" && userId !== null) || (typeof comment.userId === "string" && comment.userId === userId.toString())) && (
