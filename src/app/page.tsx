@@ -9,7 +9,6 @@ import RandomAnimeLoading from "@/components/loading/RandomAnimeLoading";
 import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
 import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
 import Cards from "@/components/shared/cards/Cards";
-import { RandomAnimeCard } from "@/components/shared/cards/RandomAnimeCard";
 import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
 import { getPopularAnime, getTrendingAnime } from "@/lib/AnimeFetch";
 
@@ -56,14 +55,6 @@ export default async function page() {
                 </div>
             </div>
 
-            <Suspense fallback={<RandomAnimeLoading />}>
-                <div className="flex flex-col mt-9">
-                    <h1 className="text-3xl lg:text-5xl font-bold">Random Anime</h1>
-                    <div className="flex gap-2">
-                        <RandomAnimeCard />
-                    </div>
-                </div>
-            </Suspense>
             <Suspense fallback={<UpcomingSeasonLoading />}>
                 <UpcomingSeason />
             </Suspense>
