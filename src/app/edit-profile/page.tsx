@@ -68,7 +68,7 @@ const Page = () => {
             {loading ? (
                 <EditProfileLoading />
             ) : (
-                <form onSubmit={UpdateProfile} className="flex lg:w-[70%] flex-col gap-4 p-4 overflow-y-hidden min-h-screen">
+                <form onSubmit={UpdateProfile} className="flex lg:w-[70%] lg:m-auto flex-col gap-4 p-4 overflow-y-hidden min-h-screen">
                     <h1 className="text-3xl font-bold">Profile</h1>
                     <span className=" w-full lg:w-[80%] h-[1px] bg-white/20"></span>
                     <div className="flex flex-col gap-5">

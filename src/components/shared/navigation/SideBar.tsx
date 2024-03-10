@@ -91,7 +91,7 @@ const SideBar = () => {
                             }
                             return (
                                 <>
-                                    <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
+                                    <Link href={link.route} onClick={() => setExpand(false)} key={link.route} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
                                         <link.icons className={`${isActive && `fill-white`}`} />
                                         <h1 className="font-semibold  max-lg:hidden block">{link.name}</h1>
                                     </Link>
@@ -103,14 +103,14 @@ const SideBar = () => {
             </div>
 
             {/* mobile bottom bar */}
-            <div ref={sidebarRef} className={`text-white fixed bottom-0 md:hidden z-20 bg-black/50 rounded-t-xl border-t-2 border-white/25  backdrop-blur-md w-full p-2 duration-200 transition-all`}>
+            <div ref={sidebarRef} className={`text-white fixed bottom-0 md:hidden z-20 bg-black/50 rounded-t-xl border-t-2 border-white/10  backdrop-blur-md w-full p-2 duration-200 transition-all`}>
                 <div className="flex items-center justify-between flex-wrap ">
                     {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
                         const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
                         const shouldRender = !(link.name === "History" || link.name === "Bookmark") || isLogged;
                         if (!shouldRender) return null;
                         return (
-                            <Link href={link.route} onClick={() => setExpand(false)} key={link.name} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/25 border-2`} w-24 p-2 rounded-lg duration-200 transition-all`}>
+                            <Link href={link.route} onClick={() => setExpand(false)} key={link.route} className={`flex flex-col items-center gap-3 text-sm ${isActive && ` border-white/10 border-2`} w-24 p-2 rounded-lg duration-200 transition-all`}>
                                 <link.icons size={24} className={` text-white  ${isActive && `fill-white`}`} />
                                 <h1 className="text-white text-sm">{link.name}</h1>
                             </Link>

@@ -72,9 +72,7 @@ export const getRandomAnime = async () => {
 // get airing schedule
 export const getAiringSchedule = async () => {
     try {
-        const response = await fetch(`${AnifyApi}/schedule`, {
-            cache: "no-cache",
-        });
+        const response = await fetch(`${AnifyApi}/schedule`);
         const data = await response.json();
         return data; // Return the JSON data
     } catch (error) {

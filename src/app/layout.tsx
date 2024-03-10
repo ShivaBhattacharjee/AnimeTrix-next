@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Animetrix - Your Premier Source for Free Anime Downloads and Streaming",
     description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
     openGraph: {
-        images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
+        images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=65fab246&is=65e83d46&hm=d46161c205f22c2734bb14b700ddcf47261876c756c55f82f2ffc44062b58607&",
     },
 };
 

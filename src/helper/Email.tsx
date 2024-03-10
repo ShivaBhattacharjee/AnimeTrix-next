@@ -3,7 +3,6 @@ import bcryptjs from "bcryptjs";
 import nodemailer from "nodemailer";
 
 import User from "@/model/user.model";
-import { Error } from "@/types/ErrorTypes";
 import RegisterEmail from "@/utils/EmailTemplate/RegisterEmail";
 
 type EmailProps = {
@@ -28,9 +27,10 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
                 pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
             },
         });
+
         const registerEmail = render(<RegisterEmail username={email} type={emailType} VerifyLink={`${process.env.NEXT_PUBLIC_DOMAIN}/${emailType == "VERIFY_USER" ? "verifyToken" : "verifyResetPassword"}?token=${cleanedHashedToken}`} />);
         const mailOptions = {
-            from: "animetrixservices@gmail.com",
+            from: `${process.env.NEXT_PUBLIC_EMAIL!}`,
             to: email,
             subject: emailType === "VERIFY_USER" ? "Verify your email" : "Reset Your Password and Keep it a Secret! 🤐",
             html: registerEmail,
@@ -39,7 +39,6 @@ export const sendEmail = async ({ email, emailType, userId }: EmailProps) => {
         const mailresponse = await transport.sendMail(mailOptions);
         return mailresponse;
     } catch (error: unknown) {
-        const ErrorMsg = error as Error;
-        return ErrorMsg.message;
+        console.log("Error sending email", error);
     }
 };

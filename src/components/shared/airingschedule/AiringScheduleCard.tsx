@@ -1,5 +1,7 @@
 "use client";
 
+// AiringScheduleCard.tsx
+
 import React, { useEffect, useState } from "react";
 import { ArrowLeftToLine, ArrowRightToLine, PlayCircle } from "lucide-react";
 import Link from "next/link";
@@ -28,10 +30,19 @@ interface AiringScheduleCardProps {
 const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) => {
     const daysOfWeek: DayOfWeek[] = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const [currentDay, setCurrentDay] = useState<DayOfWeek>(daysOfWeek[new Date().getDay()]);
-    const [animeForCurrentDay, setAnimeForCurrentDay] = useState<Anime[] | undefined>(undefined);
-
+    const [animeForCurrentDay, setAnimeForCurrentDay] = useState<Anime[] | undefined>(airingData[currentDay]);
+    console.log(airingData);
     useEffect(() => {
-        setAnimeForCurrentDay(airingData[currentDay]);
+        console.log("Current Day:", currentDay);
+
+        const currentDayData = airingData[currentDay];
+
+        if (currentDayData && currentDayData.length > 0) {
+            setAnimeForCurrentDay(currentDayData);
+        } else {
+            console.log(`No anime found for ${currentDay}`);
+            setAnimeForCurrentDay([]);
+        }
     }, [airingData, currentDay]);
 
     const handlePreviousDay = () => {
@@ -47,7 +58,7 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
     };
 
     const formatTime = (timestamp: number) => {
-        const date = new Date(timestamp);
+        const date = new Date(timestamp * 1000); // Convert to milliseconds
         const hours = date.getHours();
         const minutes = date.getMinutes();
         const amPM = hours >= 12 ? "PM" : "AM";
@@ -61,12 +72,11 @@ const AiringScheduleCard: React.FC<AiringScheduleCardProps> = ({ airingData }) =
                 <div className="flex flex-col gap-3">
                     <div className="p-4">
                         <div className="flex flex-col gap-3 ">
-                            {!animeForCurrentDay || animeForCurrentDay.length < 0 || !airingData || !airingData[currentDay] ? (
+                            {!animeForCurrentDay || animeForCurrentDay.length === 0 ? (
                                 <div className="flex justify-center items-center text-center">
                                     <h1>Oops! No schedule found for {currentDay}</h1>
                                 </div>
                             ) : (
-                                airingData &&
                                 animeForCurrentDay &&
                                 animeForCurrentDay.map((anime: Anime) => (
                                     <div className={`flex border-b-2 border-white/20 justify-between items-center`} key={anime?.id}>
