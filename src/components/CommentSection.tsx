@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Pencil, StickyNote, Trash } from "lucide-react";
+import Link from "next/link";
 
 import UserContext from "@/context/getUserDetails";
 import { Error } from "@/types/ErrorTypes";
@@ -188,7 +189,9 @@ const CommentSection = ({ streamId }: Props) => {
                         >
                             {commentData.map((comment: comment) => (
                                 <div className="flex w-full gap-4" key={comment?._id}>
-                                    {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 bg-white text-black font-bold text-lg rounded-full justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
+                                    <Link href={`/${comment?.userId}`} className=" w-14">
+                                        {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 bg-white text-black font-bold text-lg rounded-full justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
+                                    </Link>
                                     <div className="flex flex-col w-full">
                                         <div className="flex w-full items-center">
                                             <div className="flex gap-3 items-center">
