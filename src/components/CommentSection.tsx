@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { Clipboard, ClipboardPaste, StickyNote, Trash } from "lucide-react";
+import { Pencil, StickyNote, Trash } from "lucide-react";
 
 import UserContext from "@/context/getUserDetails";
 import { Error } from "@/types/ErrorTypes";
@@ -28,9 +28,11 @@ const CommentSection = ({ streamId }: Props) => {
     const [commentData, setCommentData] = useState<comment[]>([]);
     const { userId } = useContext(UserContext);
     const [userData, setUserData] = useState<{ [key: string]: { username: string; profilePicture: string } }>({});
-    const [showClipboardIcon, setShowClipboardIcon] = useState(true);
+    const [newComment, setNewComment] = useState<string>("");
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+    const [isEditWindow, setIsEditWindow] = useState<boolean>(false);
+    const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
 
     const getComment = async () => {
         try {
@@ -105,6 +107,20 @@ const CommentSection = ({ streamId }: Props) => {
             Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
         }
     };
+
+    const handleUpdateComment = async (commentId: number) => {
+        try {
+            const res = await axios.put("/api/comment", { commentId: commentId, newText: newComment });
+            Toast.SuccessshowToast(res?.data?.message || "Comment Updated");
+            setIsEditWindow(false);
+            getComment();
+            setEditingCommentId(null);
+        } catch (error: unknown) {
+            const ErrorMsg = error as Error;
+            Toast.ErrorShowToast(ErrorMsg?.response?.data?.error || "Something went wrong");
+        }
+    };
+
     const formatTimestamp = (timestamp: Date) => {
         const currentDate = new Date();
         const commentDate = new Date(timestamp);
@@ -130,20 +146,6 @@ const CommentSection = ({ streamId }: Props) => {
         return `${days} day${days !== 1 ? "s" : ""} ago`;
     };
 
-    const handleCopyToClipboard = (text: string) => {
-        navigator.clipboard
-            .writeText(text)
-            .then(() => {
-                Toast.SuccessshowToast("Copied to clipboard");
-                setShowClipboardIcon(false);
-
-                setTimeout(() => {
-                    setShowClipboardIcon(true);
-                }, 3500);
-            })
-            .catch(() => Toast.ErrorShowToast("Failed to copy to clipboard"));
-    };
-
     useEffect(() => {
         getComment();
     }, []);
@@ -163,7 +165,7 @@ const CommentSection = ({ streamId }: Props) => {
                         Be the first to comment
                     </h1>
                 ) : (
-                    <div className=" mt-4 relative grid gap-4 ">
+                    <div className=" mt-4 relative flex w-full flex-col gap-4 ">
                         <InfiniteScroll
                             className="w-full border-2 flex flex-col gap-4 overflow-x-clip border-white/25  lg:w-1/2 p-3 rounded-lg h-auto max-h-[470px] overflow-y-scroll"
                             dataLength={commentData.length}
@@ -176,19 +178,41 @@ const CommentSection = ({ streamId }: Props) => {
                             }
                         >
                             {commentData.map((comment: comment) => (
-                                <div className="flex gap-4" key={comment?._id}>
+                                <div className="flex w-full gap-4" key={comment?._id}>
                                     {userData[comment.userId]?.profilePicture === "" ? <div className="h-12 w-12 bg-white text-black font-bold text-lg rounded-full justify-center flex items-center">{userData[comment.userId]?.username[0]?.toUpperCase()}</div> : <img src={userData[comment?.userId]?.profilePicture} className="h-12 w-12 rounded-full font-semibold justify-center flex items-center" />}
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col w-full">
                                         <div className="flex w-full items-center">
                                             <div className="flex gap-3 items-center">
                                                 <h1 className="opacity-70 font-semibold text-sm">@{userData[comment?.userId] ? userData[comment?.userId]?.username : "User"}</h1>
                                                 <h1 className=" opacity-70 text-xs font-semibold">{formatTimestamp(comment?.timestamp)}</h1>
                                             </div>
                                         </div>
-                                        <div className="flex flex-col gap-3">
-                                            <h1 className="text-sm md:text-lg font-medium">{comment?.text}</h1>
+                                        <div className="flex flex-col w-full gap-3">
+                                            {isEditWindow && editingCommentId === comment._id ? (
+                                                <div className="flex gap-4 items-center flex-wrap">
+                                                    <input type="text" value={newComment} className=" bg-transparent text-sm border-2 border-white/40 p-2 rounded-lg w-full" onChange={(e) => setNewComment(e.target.value)} />
+                                                </div>
+                                            ) : (
+                                                <p className="text-sm">{comment?.text}</p>
+                                            )}
                                             <div className="flex gap-5 items-center">
-                                                {showClipboardIcon ? <Clipboard size={20} onClick={() => handleCopyToClipboard(comment?.text)} className="cursor-pointer" /> : <ClipboardPaste size={20} className=" cursor-pointer" />}
+                                                {isEditWindow && editingCommentId === comment._id && (
+                                                    <button className="bg-blue-500 p-2 rounded-sm text-xs font-bold text-white" onClick={() => handleUpdateComment(comment?._id)}>
+                                                        Update
+                                                    </button>
+                                                )}
+                                                {userId && comment.userId !== undefined && ((typeof comment.userId === "number" && userId !== null) || (typeof comment.userId === "string" && comment.userId === userId.toString())) && (
+                                                    <Pencil
+                                                        size={20}
+                                                        className="cursor-pointer"
+                                                        onClick={() => {
+                                                            setEditingCommentId(comment._id);
+                                                            setIsEditWindow(!isEditWindow);
+                                                            setNewComment(comment.text);
+                                                        }}
+                                                    />
+                                                )}
+
                                                 {userId && comment.userId !== undefined && ((typeof comment.userId === "number" && userId !== null) || (typeof comment.userId === "string" && comment.userId === userId.toString())) && <Trash size={20} className="cursor-pointer" onClick={() => handleDeleteComment(comment?._id)} />}
                                             </div>
                                         </div>
