@@ -32,7 +32,7 @@ const page = () => {
         <section className="min-h-screen p-4 flex flex-col gap-2 ">
             <h1 className=" font-bold text-3xl">Select Your Waifu</h1>
             <p className=" opacity-70 font-medium text-lg">More coming soon...</p>
-            <div className="flex gap-8 mt-4 flex-wrap">
+            <div className="flex justify-center items-center gap-8 mt-4 flex-wrap">
                 {waifus.map((value, index) => (
                     <Link href={`/waifu/${value?.name || ""}/${value.anime || " "}`} key={index} className="flex justify-center items-center flex-col group duration-200">
                         <img src={value.picture} alt={value?.name || "Unknown"} className="lg:w-32 border-2 group-hover:scale-75 duration-100 lg:h-32 w-24 h-24 rounded-full" />
