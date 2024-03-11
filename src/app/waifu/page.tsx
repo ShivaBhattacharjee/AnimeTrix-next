@@ -7,9 +7,24 @@ const waifus = [
         anime: "Naruto",
     },
     {
+        name: "Tsunade",
+        picture: "https://i.pinimg.com/564x/60/5f/47/605f4721f7885c19addaa310e215cd78.jpg",
+        anime: "Naruto",
+    },
+    {
         name: "Maki",
         picture: "https://i.pinimg.com/564x/4b/96/dc/4b96dcc46a995c565a5157ca04f1e377.jpg",
         anime: "Jujutsu Kaisen",
+    },
+    {
+        name: "Makima",
+        picture: "https://i.pinimg.com/564x/6c/ff/d5/6cffd5f0ce7a4b7550fe03ce74afe349.jpg",
+        anime: "Chainsaw Man",
+    },
+    {
+        name: "Yor Forger",
+        picture: "https://i.pinimg.com/736x/ec/e9/d9/ece9d9960070002127226f88d3c51930.jpg",
+        anime: "Spy X Family",
     },
 ];
 const page = () => {
