@@ -95,12 +95,10 @@ const SideBar = () => {
                                 return null;
                             }
                             return (
-                                <>
-                                    <Link href={link.route} onClick={() => setExpand(false)} key={link.route} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
-                                        <link.icons className={`${isActive && `fill-white`}`} />
-                                        <h1 className="font-semibold  max-lg:hidden block">{link.name}</h1>
-                                    </Link>
-                                </>
+                                <Link href={link.route} onClick={() => setExpand(false)} key={link.route} className={`${isActive && `bg-[#3f3f46]`} mb-5 duration-200  transition-all hover:scale-90 p-4 rounded-lg flex gap-3 text-lg items-center cursor-pointer text-white `}>
+                                    <link.icons className={`${isActive && `fill-white`}`} />
+                                    <h1 className="font-semibold  max-lg:hidden block">{link.name}</h1>
+                                </Link>
                             );
                         })}
                     </div>
