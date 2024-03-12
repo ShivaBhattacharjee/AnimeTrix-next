@@ -100,7 +100,7 @@ npm run dev
 ```
 Server will start at http://localhost:3000/
 
-### API test
+### Anime API Health test
 ```
 npm run test
 ```
