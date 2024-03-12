@@ -66,7 +66,7 @@ const page = async ({
                     </label>
                     <div className="flex items-center gap-2 relative">
                         <Quote className=" rotate-180  absolute top-0 " size={20} />
-                        <span className="w-full flex justify-center items-center mb-1 text-center">{user?.userDescription || "Unknown"}</span>
+                        <span className="w-full flex justify-center items-center mb-1 ml-3 md:ml-0 text-center">{user?.userDescription || "Unknown"}</span>
                         <Quote className=" absolute bottom-0 right-0" size={20} />
                     </div>
                 </div>
