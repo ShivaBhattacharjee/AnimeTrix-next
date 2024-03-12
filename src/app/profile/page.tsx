@@ -80,7 +80,7 @@ const Page = () => {
         try {
             const response = await fetch(`/api/history?page=1`);
             if (!response.ok) {
-                throw new Error("Network response error");
+                Toast.ErrorShowToast("Network response error");
             }
 
             const data = (await response.json()) as UserHistoryResponse; // Type-cast fetched data
@@ -97,7 +97,7 @@ const Page = () => {
             const response = await fetch("/api/bookmark?page=1");
             if (token) {
                 if (!response.ok) {
-                    throw new Error("Network response error");
+                    Toast.ErrorShowToast("Network response error");
                 }
             }
             const data: UserBookmarkResponse = await response.json();

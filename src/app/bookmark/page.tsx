@@ -49,13 +49,12 @@ const Page = () => {
             const response = await fetch(`/api/bookmark?page=${currentPage}`);
             if (token) {
                 if (!response.ok) {
-                    throw new Error("Network response error");
+                    Toast.ErrorShowToast("Network response was not ok");
                 }
             }
             const data: UserBookmarkResponse = await response.json();
             setBookmark(data?.userBookmarks?.bookmarks || []);
             setLoading(false);
-            console.dir(data);
         } catch (error: unknown) {
             console.error(error);
             setLoading(false);

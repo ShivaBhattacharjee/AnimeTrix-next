@@ -51,7 +51,7 @@ const Page = () => {
         try {
             const response = await fetch(`/api/history?page=${currentPage}`);
             if (!response.ok) {
-                throw new Error("Network response error");
+                Toast.ErrorShowToast("Network response error");
             }
 
             const data = (await response.json()) as UserHistoryResponse;
