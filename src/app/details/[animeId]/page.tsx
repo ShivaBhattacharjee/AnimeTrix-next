@@ -9,6 +9,7 @@ import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
+import NextAiringEpisode from "@/components/NextAiringEpisode";
 import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
@@ -138,11 +139,11 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     )}
                 </div>
             </div>
-            <div className=" mt-8 flex flex-col gap-5">
+            <div className=" mt-8 flex flex-col gap-5 ">
                 {details.nextAiringEpisode !== undefined && (
-                    <span className="bg-white text-md md:text-xl lg:w-2/6 text-black md:w-1/2 w-full  font-bold text-center p-3 rounded-lg">
-                        Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
-                    </span>
+                    <div className="md:w-1/2">
+                        <NextAiringEpisode nextAiringEpisode={details?.nextAiringEpisode?.episode} formattedAiringDate={formattedAiringDate} />
+                    </div>
                 )}
                 <Suspense fallback={<EpisodeLoading />}>
                     <EpisodeLists animeId={params.animeId} />
