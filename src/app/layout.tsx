@@ -9,18 +9,21 @@ import TopNavbar from "../components/shared/navigation/TopNavbar";
 
 import "./globals.css";
 
+import banner from "@/assets/animetrixbanner.jpg";
 import Footer from "@/components/shared/Footer";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import { UserProvider } from "@/context/getUserDetails";
 import { ProfileProvider } from "@/hooks/useprofile";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Animetrix - Your Premier Source for Free Anime Downloads and Streaming",
     description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
+    manifest: "/manifest.json",
+    icons: { apple: "/logo.png" },
+    themeColor: "#ffff",
     openGraph: {
-        images: "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=65fab246&is=65e83d46&hm=d46161c205f22c2734bb14b700ddcf47261876c756c55f82f2ffc44062b58607&",
+        images: [{ url: banner.src, alt: "Animetrix Banner" }],
     },
 };
 

@@ -9,8 +9,8 @@ type props = {
 export default function RegisterEmail(props: props) {
     const { username, VerifyLink, type } = props;
     return (
-        <html>
-            <head />
+        <Html lang="en">
+            <Head />
             <Preview>{type == "VERIFY_USER" ? "Welcome to AnimeTrix " : "Lets recover your lost password"}</Preview>
             <Tailwind>
                 <Html lang="en">
@@ -51,6 +51,6 @@ export default function RegisterEmail(props: props) {
                     </Body>
                 </Html>
             </Tailwind>
-        </html>
+        </Html>
     );
 }
