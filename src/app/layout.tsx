@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: "Discover the ultimate anime experience at Animetrix! Enjoy free anime downloads and streaming of the latest series and timeless classics. Dive into our vast collection now!",
     manifest: "/manifest.json",
     icons: { apple: "/logo.png" },
-    themeColor: "#ffff",
+    themeColor: "#000",
     openGraph: {
         images: [{ url: banner.src, alt: "Animetrix Banner" }],
     },
