@@ -11,6 +11,7 @@ import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
+import NextAiringEpisode from "@/components/NextAiringEpisode";
 import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
@@ -117,11 +118,7 @@ const Page = async ({
                                         Report
                                     </a>
                                 </div>
-                                {details.nextAiringEpisode !== undefined && (
-                                    <span className="bg-white  text-md mt-4 text-black md:w-96 w-full  font-bold text-center p-3 rounded-lg">
-                                        Episode {details?.nextAiringEpisode?.episode} expected on {formattedAiringDate}
-                                    </span>
-                                )}
+                                {details.nextAiringEpisode !== undefined && <NextAiringEpisode nextAiringEpisode={details?.nextAiringEpisode?.episode} formattedAiringDate={formattedAiringDate} />}
 
                                 <div className="flex gap-3 w-full mt-5">
                                     <img src={details?.image} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
