@@ -4,13 +4,9 @@ export default function robots(): MetadataRoute.Robots {
     return {
         rules: [
             {
-                userAgent: "Googlebot",
+                userAgent: ["Applebot", "Bingbot", "Googlebot", "Slurp", "DuckDuckBot", "Baiduspider", "Yandex"],
                 allow: ["/"],
-                disallow: "/private/",
-            },
-            {
-                userAgent: ["Applebot", "Bingbot"],
-                disallow: ["/"],
+                disallow: "/api/",
             },
         ],
         sitemap: "https://www.animetrix.xyz/sitemap.xml",
