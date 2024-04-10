@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Play } from "lucide-react";
+import { Play, Star } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -14,7 +14,9 @@ import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
+import { AnifyApi } from "@/lib/animeapi/animetrixapi";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
+import { myCache } from "@/lib/nodecache";
 
 type Props = {
     params: { animeId: number };
@@ -22,8 +24,26 @@ type Props = {
 
 // function to generate metadata for details page dynamic og image is in todo
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const getMetaData = async (animeid: number) => {
+        const cacheKey = `details${animeid}`;
+        try {
+            const cachedData = myCache.get(cacheKey);
+            if (cachedData) {
+                return cachedData;
+            }
+            const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[ title , description,]`, {
+                cache: "no-cache",
+            });
+            const data = await response.json();
+            myCache.set(cacheKey, data);
+            return data;
+        } catch (error) {
+            console.error("Error fetching details:", error);
+            return [];
+        }
+    };
     try {
-        const anime = await getAnimeDetails(params.animeId);
+        const anime = await getMetaData(params.animeId);
         if (anime && anime.title) {
             const title = anime.title.romaji || anime.title.english || anime.title.native || "Unknown";
             const words = title.toLowerCase().split(" ");
@@ -52,20 +72,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
 }
 
-/**
- * Renders the details page for a specific anime.
- * @param params - The parameters for the anime ID.
- * @returns The JSX element for the anime details page.
- */
 export default async function page({ params }: { params: { animeId: number } }) {
-    // Fetch the anime details using the provided ID.
     const details = await getAnimeDetails(params.animeId);
-
-    // If the details are empty or the title is missing, render a server error component.
     if (Object.keys(details)?.length <= 0 || !details.title) {
         return <ServerError />;
     }
-
     /**
      * Returns the abbreviated month name for a given month number.
      * @param month - The month number (0-11).
@@ -101,34 +112,31 @@ export default async function page({ params }: { params: { animeId: number } }) 
         formattedAiringDate = `${day} ${month} ${year} at ${timeString}`;
     }
 
-    // Get the title of the anime and replace any hyphens with spaces.
     const title = details?.title?.romaji || details?.title?.english || details?.title?.native || "Unknown";
     const modifiedTitle = title.replace(/-/g, " ");
-
-    // Render the anime details page.
     return (
         <section className="flex flex-col p-4 mt-4 overflow-hidden">
             <div className="flex md:flex-row flex-col gap-4 items-center flex-wrap">
-                <img height={200} width={400} src={details.image} className=" w-48 lg:w-72 rounded-lg" alt={`an image of ${details.title.romaji || details.title.english || details.title.native}`} />
+                <img height={200} width={400} src={details.coverImage} className=" w-48 lg:w-72 rounded-lg" alt={`an image of ${modifiedTitle}`} />
                 <div className="flex flex-col gap-5 items-center md:items-start">
                     <h1 className="md:text-4xl lg:text-4xl text-2xl font-bold text-center md:text-left">{modifiedTitle}</h1>
                     {details.totalEpisodes !== null && <span className="font-semibold text-sm md:text-xl">Episodes : {details.totalEpisodes}</span>}
                     <div className="flex flex-wrap gap-5 font-semibold">
-                        <span>{details?.startDate?.year}</span>
+                        <span>{details?.year}</span>
                         <span>{details?.type}</span>
                         <span>{details?.status}</span>
-                        <span className="flex items-center gap-3">{details.rating && `${details.rating}%`}</span>
+                        <span className="flex items-center gap-3">
+                            {details.averageRating && `${details.averageRating}`}
+                            <Star size={17} fill="white" />
+                        </span>
                     </div>
                     <div className="flex gap-5 flex-wrap justify-center lg:text-xl">
-                        {details.episodes.length > 0 && (
-                            <Link href={"#episodes"} className="bg-white  p-4 gap-3 rounded-lg  text-black font-semibold flex items-center duration-200 hover:scale-95">
-                                <Play />
-                                Watch Now
-                            </Link>
-                        )}
+                        <Link href={"#episodes"} className="bg-white  p-4 gap-3 rounded-lg  text-black font-semibold flex items-center duration-200 hover:scale-95">
+                            <Play />
+                            Watch Now
+                        </Link>
                         <AddToBookmark animeId={params.animeId} image={details.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} title={modifiedTitle} />
                     </div>
-
                     {details?.description && (
                         <div
                             className="max-w-4xl bg-white/10  border-2 border-white/30
@@ -139,6 +147,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     )}
                 </div>
             </div>
+
             <div className=" mt-8 flex flex-col gap-5 ">
                 {details.nextAiringEpisode !== undefined && (
                     <div className="md:w-1/2">
@@ -149,18 +158,17 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     <EpisodeLists animeId={params.animeId} />
                 </Suspense>
             </div>
+
             <div className="mt-7 flex flex-col gap-5">
                 <Suspense fallback={<RelationLoading />}>
-                    <RelationCard id={params.animeId} />
+                    <RelationCard id={params.animeId} bannerImage={details.coverImage} />
                 </Suspense>
             </div>
-
             <div className="mt-7 flex flex-col gap-5">
                 <Suspense fallback={<CharactersLoading />}>
                     <CharacterCard characters={details.characters} />
                 </Suspense>
             </div>
-
             <div className="mt-7 flex flex-col gap-5">
                 <Suspense fallback={<RecommendedLoading />}>
                     <RecommendedAnime episode={params.animeId} />

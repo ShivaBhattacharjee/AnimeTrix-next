@@ -153,7 +153,7 @@ export const getAnimeDetails = async (animeid: number) => {
         if (cachedData) {
             return cachedData;
         }
-        const response = await fetch(`${AnimeApi}/info/${animeid}`, {
+        const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[coverImage,status , title , characters , relations  , averageRating , description , type , format , year , totalEpisodes]`, {
             cache: "no-cache",
         });
         const data = await response.json();
@@ -161,6 +161,23 @@ export const getAnimeDetails = async (animeid: number) => {
         return data;
     } catch (error) {
         console.error("Error fetching details:", error);
+        return [];
+    }
+};
+
+export const getAnimeRelation = async (animeid: number) => {
+    const cacheKey = `relation${animeid}`;
+    try {
+        const cachedData = myCache.get(cacheKey);
+        if (cachedData) {
+            return cachedData;
+        }
+        const response = await fetch(`${AnifyApi}/relations/${animeid}?fields=[id,coverImage , status , currentEpisode , totalEpisodes , title]`);
+        const data = await response.json();
+        myCache.set(cacheKey, data);
+        return data;
+    } catch (error) {
+        console.log("Error fetching anime relation", error);
         return [];
     }
 };

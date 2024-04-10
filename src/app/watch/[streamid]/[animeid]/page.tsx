@@ -17,7 +17,9 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import AddToHistory from "@/lib/addToHistory";
+import { AnifyApi } from "@/lib/animeapi/animetrixapi";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
+import { myCache } from "@/lib/nodecache";
 
 type Props = {
     params: {
@@ -26,21 +28,35 @@ type Props = {
     };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    try {
-        const anime = await getAnimeDetails(params.animeid);
-        if (anime) {
-            const description = anime.description;
-            const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
-            return {
-                title: `${`Watching ${params.streamid} on AnimeTrix` || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
-                description: formattedDescription || "Opps!! No Description Found",
-                openGraph: {
-                    images: anime?.cover || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
-                },
-            };
-        } else {
-            throw new Error("Anime details are missing or incomplete");
+    const getMetaData = async (animeid: number) => {
+        const cacheKey = `details${animeid}`;
+        try {
+            const cachedData = myCache.get(cacheKey);
+            if (cachedData) {
+                return cachedData;
+            }
+            const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[ title , description,]`, {
+                cache: "no-cache",
+            });
+            const data = await response.json();
+            myCache.set(cacheKey, data);
+            return data;
+        } catch (error) {
+            console.error("Error fetching details:", error);
+            return [];
         }
+    };
+    try {
+        const anime = await getMetaData(params.animeid);
+        const description = anime.description;
+        const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
+        return {
+            title: `${`Watching ${params.streamid} on AnimeTrix` || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
+            description: formattedDescription || "Opps!! No Description Found",
+            openGraph: {
+                images: anime?.cover || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
+            },
+        };
     } catch (error) {
         console.error("Error fetching anime details:", error);
         return {
@@ -121,16 +137,15 @@ const Page = async ({
                                 {details.nextAiringEpisode !== undefined && <NextAiringEpisode nextAiringEpisode={details?.nextAiringEpisode?.episode} formattedAiringDate={formattedAiringDate} />}
 
                                 <div className="flex gap-3 w-full mt-5">
-                                    <img src={details?.image} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
+                                    <img src={details?.coverImage} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
                                     <div className="flex flex-wrap w-full gap-3 text-md md:text-lg flex-col font-semibold">
                                         <h1>
-                                            <span className="text-white/70 ">Status</span> : {details?.status || "Undefined"}
+                                            <span className=" text-white/70">Name: </span>
+                                            {stream?.info?.title || "Unknown"}
                                         </h1>
                                         <h1>
-                                            <span className=" text-white/70 ">Season</span> : {details?.season || "Unknown"}
-                                        </h1>
-                                        <h1>
-                                            <span className=" text-white/70 ">Audio</span> : {details?.subOrDub || "Unknown"}
+                                            <span className=" text-white/70">Episode: </span>
+                                            {stream?.info?.episode || "Unknown"}
                                         </h1>
                                         <h1>
                                             <span className=" text-white/70">Type</span> : {details?.type || "Unknown"}
@@ -164,7 +179,7 @@ const Page = async ({
                     </Suspense>
                     <div className="mt-7 flex flex-col gap-5">
                         <Suspense fallback={<RelationLoading />}>
-                            <RelationCard id={params.animeid} />
+                            <RelationCard bannerImage={details.coverImage} id={params.animeid} />
                         </Suspense>
                     </div>
                     <div className="mt-6">

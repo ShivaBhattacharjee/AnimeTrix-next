@@ -33,10 +33,10 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                 setListData(cachedData);
                 return;
             }
-            const response = await fetch(`${AnimeApi}/info/${animeId}?dub=${dub}`);
+            const response = await fetch(`${AnimeApi}/episodes/${animeId}?dub=${dub}`);
             const data = await response.json();
-            myCache.set(cachekey, data.episodes);
-            setListData(data.episodes);
+            myCache.set(cachekey, data);
+            setListData(data);
         } catch (error) {
             setLoading(false);
             console.log(error);

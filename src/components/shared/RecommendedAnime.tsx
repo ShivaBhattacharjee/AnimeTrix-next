@@ -4,16 +4,17 @@ import ContentNotFound from "../error/Contentnotfound";
 
 import Cards from "./cards/Cards";
 
-import { getAnimeDetails } from "@/lib/AnimeFetch";
+import { getAnimeRelation } from "@/lib/AnimeFetch";
 
 export async function RecommendedAnime({ episode }: { episode: number }) {
-    const details = await getAnimeDetails(episode);
+    const details = await getAnimeRelation(episode);
+    console.log(details);
     return (
         <>
-            {details?.recommendations?.length > 0 ? (
+            {details ? (
                 <>
                     <h1 className=" text-4xl font-semibold">Recommended</h1>
-                    <Cards props={details.recommendations} />
+                    <Cards props={details} />
                 </>
             ) : (
                 <>

@@ -5,9 +5,12 @@ interface AnilistInfo {
 export default interface Anime {
     id: number;
     image: string;
+    coverImage: string;
     cover: string;
     description: string;
     color: string;
+    bannerImage: string;
+    format: string;
     title: {
         userPreferred: string;
         english: string;
@@ -21,11 +24,8 @@ export default interface Anime {
     status: string;
     relationType: string;
     number: number;
-    name: {
-        first: string;
-        last: string;
-        full: string;
-    };
+    name: string;
+
     role: string;
     episodes: number;
     length: number;
