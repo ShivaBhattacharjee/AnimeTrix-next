@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Play, Star } from "lucide-react";
-import { Metadata } from "next";
 import Link from "next/link";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
@@ -14,56 +13,7 @@ import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
-import { AnifyApi } from "@/lib/animeapi/animetrixapi";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
-import { myCache } from "@/lib/nodecache";
-
-type Props = {
-    params: { animeId: number };
-};
-
-// function to generate metadata for details page dynamic og image is in todo
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const getMetaData = async (animeid: number) => {
-        const cacheKey = `details${animeid}`;
-        try {
-            const cachedData = myCache.get(cacheKey);
-            if (cachedData) {
-                return cachedData;
-            }
-            const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[title , description , coverImage]`, {
-                cache: "no-cache",
-            });
-            const data = await response.json();
-            myCache.set(cacheKey, data);
-            return data;
-        } catch (error) {
-            console.error("Error fetching details:", error);
-            return <ServerError />;
-        }
-    };
-    try {
-        const anime = await getMetaData(params.animeId);
-        const title = anime?.title?.romaji || anime?.title?.english || anime?.title?.native || "Unknown";
-        const description = anime?.description || "Unknown Description";
-        const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
-
-        return {
-            title: `${title || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
-            description: formattedDescription || "Opps!! No Description Found",
-            openGraph: {
-                images: anime.coverImage || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
-            },
-        };
-    } catch (error) {
-        // Handle errors here, e.g., return an error response
-        console.error("Error fetching anime details:", error);
-        return {
-            title: "Error",
-            description: "Oops! An error occurred while fetching anime details.",
-        };
-    }
-}
 
 export default async function page({ params }: { params: { animeId: number } }) {
     const details = await getAnimeDetails(params.animeId);
