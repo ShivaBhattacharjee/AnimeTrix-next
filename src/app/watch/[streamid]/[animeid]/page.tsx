@@ -18,6 +18,7 @@ import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import AddToHistory from "@/lib/addToHistory";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
+import { notFound } from "next/navigation";
 
 type Props = {
     params: {
@@ -39,6 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     } catch (error) {
         console.error("Error fetching anime details:", error);
+        <ServerError />;
         return {
             title: "Error",
             description: "Oops! An error occurred while fetching anime details.",
@@ -174,7 +176,7 @@ const Page = async ({
                     </div>
                 </section>
             ) : (
-                <ServerError />
+                notFound()
             )}
         </>
     );

@@ -15,6 +15,7 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
+import { notFound } from "next/navigation";
 
 type Props = {
     params: { animeId: number };
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     } catch (error) {
         // Handle errors here, e.g., return an error response
         console.error("Error fetching anime details:", error);
+        <ServerError />;
         return {
             title: "Error",
             description: "Oops! An error occurred while fetching anime details.",
@@ -48,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function page({ params }: { params: { animeId: number } }) {
     const details = await getAnimeDetails(params.animeId);
     if (Object.keys(details)?.length <= 0 || !details.title) {
-        return <ServerError />;
+        return notFound();
     }
     /**
      * Returns the abbreviated month name for a given month number.
