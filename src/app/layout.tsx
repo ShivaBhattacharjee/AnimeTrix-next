@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <ProfileProvider>
                         <UserProvider>
                             <Toaster position="top-right" />
-                            <NextTopLoader color="#fff" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={true} easing="ease" speed={200} zIndex={1600} showAtBottom={false} />
+                            <NextTopLoader color="#fff" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} easing="ease" speed={200} zIndex={1600} showAtBottom={false} />
                             <main className="min-h-screen w-full text-white bg-black">
                                 <TopNavbar />
                                 <SideBar />
