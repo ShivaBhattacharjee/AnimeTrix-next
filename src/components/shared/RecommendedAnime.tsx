@@ -11,7 +11,7 @@ export async function RecommendedAnime({ episode }: { episode: number }) {
     console.log(details);
     return (
         <>
-            {details ? (
+            {details.length > 0 ? (
                 <>
                     <h1 className=" text-4xl font-semibold">Recommended</h1>
                     <Cards props={details} />

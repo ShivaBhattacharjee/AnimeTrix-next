@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Play, Star } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
@@ -14,6 +15,35 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
+
+type Props = {
+    params: { animeId: number };
+};
+
+// function to generate metadata for details page dynamic og image is in todo
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    try {
+        const details = await getAnimeDetails(params.animeId);
+        const title = details?.title?.romaji || details?.title?.english || details?.title?.native || "Unknown";
+        const description = details?.description || "Unknown Description";
+        const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
+
+        return {
+            title: `${title || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
+            description: formattedDescription || "Opps!! No Description Found",
+            openGraph: {
+                images: details.bannerImage || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
+            },
+        };
+    } catch (error) {
+        // Handle errors here, e.g., return an error response
+        console.error("Error fetching anime details:", error);
+        return {
+            title: "Error",
+            description: "Oops! An error occurred while fetching anime details.",
+        };
+    }
+}
 
 export default async function page({ params }: { params: { animeId: number } }) {
     const details = await getAnimeDetails(params.animeId);
