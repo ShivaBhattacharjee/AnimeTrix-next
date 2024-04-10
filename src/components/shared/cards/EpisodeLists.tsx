@@ -67,7 +67,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
         setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     };
 
-    const displayedEpisodes = listData.filter((anime) => {
+    const displayedEpisodes = listData?.filter((anime) => {
         if (filterValue === "") {
             const [start, end] = selectedRange.split("-").map(Number);
             return anime.number >= start && anime.number <= end;

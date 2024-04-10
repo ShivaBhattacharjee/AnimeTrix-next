@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             if (cachedData) {
                 return cachedData;
             }
-            const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[ title , description,]`, {
+            const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[ title , description,coverImage]`, {
                 cache: "no-cache",
             });
             const data = await response.json();
@@ -48,13 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
     try {
         const anime = await getMetaData(params.animeid);
-        const description = anime.description;
+        const description = anime?.description || "Unknown Description";
         const formattedDescription = description?.replace(/<\/?[^>]+(>|$)/g, "");
         return {
             title: `${`Watching ${params.streamid} on AnimeTrix` || "Opps!! No Title Found"} On AnimeTrix Watch Or Download For Free`,
             description: formattedDescription || "Opps!! No Description Found",
             openGraph: {
-                images: anime?.cover || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
+                images: anime?.coverImage || "https://cdn.discordapp.com/attachments/1079039236302446705/1166676085883285544/animetrixbanner.jpg?ex=654b5ac6&is=6538e5c6&hm=6d9c8c991b0897a33364a58aeea177e53c26216c617b6dff9b5de7607b9bf332&",
             },
         };
     } catch (error) {
