@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { Download, Flag } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
 import Share from "@/components/buttons/Share";
@@ -18,7 +19,6 @@ import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import AddToHistory from "@/lib/addToHistory";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
-import { notFound } from "next/navigation";
 
 type Props = {
     params: {

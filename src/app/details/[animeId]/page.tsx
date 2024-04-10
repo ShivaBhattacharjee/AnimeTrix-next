@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { Play, Star } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
 import ServerError from "@/components/error/ServerError";
@@ -15,7 +16,6 @@ import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import { getAnimeDetails } from "@/lib/AnimeFetch";
-import { notFound } from "next/navigation";
 
 type Props = {
     params: { animeId: number };
