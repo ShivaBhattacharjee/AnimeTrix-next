@@ -67,14 +67,16 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
         setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     };
 
-    const displayedEpisodes = listData?.filter((anime) => {
-        if (filterValue === "") {
-            const [start, end] = selectedRange.split("-").map(Number);
-            return anime.number >= start && anime.number <= end;
-        } else {
-            return anime.number.toString().includes(filterValue);
-        }
-    });
+    const displayedEpisodes =
+        listData.length > 0 &&
+        listData?.filter((anime) => {
+            if (filterValue === "") {
+                const [start, end] = selectedRange.split("-").map(Number);
+                return anime.number >= start && anime.number <= end;
+            } else {
+                return anime.number.toString().includes(filterValue);
+            }
+        });
     const handleDubToggle = () => {
         setDub((prevDub) => !prevDub);
     };
@@ -112,7 +114,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                             )}
                         </div>
                     </div>
-                    {displayedEpisodes.length > 0 ? (
+                    {Array.isArray(displayedEpisodes) && displayedEpisodes.length > 0 ? (
                         <div className={`grid gap-4 max-h-96 overflow-y-scroll hiddenscroll grid-cols-2 md:grid-cols-3 lg:grid-cols-3 ${!isStream && "lg:grid-cols-4 2xl:grid-cols-5"} `}>
                             {displayedEpisodes
                                 .sort((animeA, animeB) => {
