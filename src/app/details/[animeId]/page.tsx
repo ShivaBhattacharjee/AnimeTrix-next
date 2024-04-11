@@ -101,7 +101,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                         <span>{details?.type}</span>
                         <span>{details?.status}</span>
                         <span className="flex items-center gap-3">
-                            {details.averageRating && `${details.averageRating}`}
+                            {details.averageRating ? details.averageRating : "0"}
                             <Star size={17} fill="white" />
                         </span>
                     </div>
