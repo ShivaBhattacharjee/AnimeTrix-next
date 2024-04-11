@@ -8,12 +8,12 @@ import AddToBookmark from "@/components/buttons/AddToBookmark";
 import Share from "@/components/buttons/Share";
 import CommentSection from "@/components/CommentSection";
 import ServerError from "@/components/error/ServerError";
-import CharactersLoading from "@/components/loading/CharactersLoading";
+// import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
 import NextAiringEpisode from "@/components/NextAiringEpisode";
-import CharacterCard from "@/components/shared/cards/characterCard";
+// import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
@@ -164,11 +164,11 @@ const Page = async ({
                             <RelationCard bannerImage={details.coverImage} id={params.animeid} />
                         </Suspense>
                     </div>
-                    <div className="mt-6">
+                    {/* <div className="mt-6">
                         <Suspense fallback={<CharactersLoading />}>
                             <CharacterCard characters={details.characters} />
                         </Suspense>
-                    </div>
+                    </div> */}
                     <div className="mt-12">
                         <Suspense fallback={<RecommendedLoading />}>
                             <RecommendedAnime episode={params.animeid} />

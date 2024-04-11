@@ -153,7 +153,7 @@ export const getAnimeDetails = async (animeid: number) => {
         if (cachedData) {
             return cachedData;
         }
-        const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[coverImage,status , genres,title , characters , relations  , averageRating , description , type , format , year , totalEpisodes]`, {
+        const response = await fetch(`${AnifyApi}/info/${animeid}?fields=[coverImage,status , genres,title  , relations  , averageRating , description , type , format , year , totalEpisodes]`, {
             cache: "no-cache",
         });
         const data = await response.json();

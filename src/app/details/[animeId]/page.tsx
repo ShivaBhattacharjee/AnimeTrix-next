@@ -6,12 +6,12 @@ import { notFound } from "next/navigation";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
 import ServerError from "@/components/error/ServerError";
-import CharactersLoading from "@/components/loading/CharactersLoading";
+// import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
 import NextAiringEpisode from "@/components/NextAiringEpisode";
-import CharacterCard from "@/components/shared/cards/characterCard";
+// import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
@@ -139,11 +139,11 @@ export default async function page({ params }: { params: { animeId: number } }) 
                     <RelationCard id={params.animeId} bannerImage={details.coverImage} />
                 </Suspense>
             </div>
-            <div className="mt-7 flex flex-col gap-5">
+            {/* <div className="mt-7 flex flex-col gap-5">
                 <Suspense fallback={<CharactersLoading />}>
                     <CharacterCard characters={details.characters} />
                 </Suspense>
-            </div>
+            </div> */}
             <div className="mt-7 flex flex-col gap-5">
                 <Suspense fallback={<RecommendedLoading />}>
                     <RecommendedAnime episode={params.animeId} />
