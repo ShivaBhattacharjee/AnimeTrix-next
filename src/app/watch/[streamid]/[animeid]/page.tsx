@@ -94,7 +94,7 @@ const Page = async ({
             {Object.keys(details || stream).length > 0 ? (
                 <section className="p-2 min-h-screen">
                     <Suspense fallback={<></>}>
-                        <AddToHistory streamId={params.streamid} animeId={params.animeid} title={stream?.info?.title || "unknown"} episode={stream?.info?.episode || "unknown"} coverImage={details?.bannerImage || "unknown"} image={details?.coverImage || "Unknown"} />
+                        <AddToHistory streamId={params.streamid} animeId={params.animeid} title={stream?.info?.title || "unknown"} episode={stream?.info?.episode || "unknown"} coverImage={details?.bannerImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} image={details?.coverImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} />
                     </Suspense>
                     <div className=" w-full">
                         <div className=" flex justify-between lg:flex-row flex-col gap-5">
@@ -136,7 +136,7 @@ const Page = async ({
                                             <span className=" text-white/70">Country</span> : {details?.countryOfOrigin || "Earth"}
                                         </h1>
                                     </div>
-                                    <AddToBookmark image={details?.image} animeId={params.animeid} title={stream?.info?.title || "unknown"} isStream={true} />
+                                    <AddToBookmark image={details?.coverImage} animeId={params.animeid} title={stream?.info?.title || "unknown"} isStream={true} />
                                 </div>
 
                                 <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">

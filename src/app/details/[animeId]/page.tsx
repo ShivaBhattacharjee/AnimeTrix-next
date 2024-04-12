@@ -110,7 +110,7 @@ export default async function page({ params }: { params: { animeId: number } }) 
                             <Play />
                             Watch Now
                         </Link>
-                        <AddToBookmark animeId={params.animeId} image={details.image || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} title={modifiedTitle} />
+                        <AddToBookmark animeId={params.animeId} image={details.coverImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} title={modifiedTitle} />
                     </div>
                     {details?.description && (
                         <div
