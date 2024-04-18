@@ -2,7 +2,7 @@ define(['exports'], (function (exports) { 'use strict';
 
     // @ts-ignore
     try {
-      self['workbox:core:6.5.4'] && _();
+      self['workbox:core:6.6.0'] && _();
     } catch (e) {}
 
     /*
@@ -455,7 +455,7 @@ define(['exports'], (function (exports) { 'use strict';
 
     // @ts-ignore
     try {
-      self['workbox:routing:6.5.4'] && _();
+      self['workbox:routing:6.6.0'] && _();
     } catch (e) {}
 
     /*
@@ -1184,7 +1184,7 @@ define(['exports'], (function (exports) { 'use strict';
 
     // @ts-ignore
     try {
-      self['workbox:strategies:6.5.4'] && _();
+      self['workbox:strategies:6.6.0'] && _();
     } catch (e) {}
 
     /*
@@ -2453,4 +2453,4 @@ define(['exports'], (function (exports) { 'use strict';
     exports.registerRoute = registerRoute;
 
 }));
-//# sourceMappingURL=workbox-e43f5367.js.map
+//# sourceMappingURL=workbox-bd7e3b9b.js.map

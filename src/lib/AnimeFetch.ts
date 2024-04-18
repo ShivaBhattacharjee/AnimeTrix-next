@@ -72,9 +72,9 @@ export const getRandomAnime = async () => {
 // get airing schedule
 export const getAiringSchedule = async () => {
     try {
-        const response = await fetch(`${AnifyApi}/schedule`);
+        const response = await fetch(`${AnifyApi}/schedule?type=anime&fields=[title,id,coverImage,airingEpisode,airingAt]`);
         const data = await response.json();
-        return data; // Return the JSON data
+        return data;
     } catch (error) {
         console.error("Error getting airing list: ", error);
         return [];
