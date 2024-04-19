@@ -7,15 +7,21 @@ export async function GET() {
     connect();
     try {
         const unverifiedUsers = await User.find({ isVerified: false });
-        const res = await User.deleteMany({ isVerified: false });
+
+        const expiredUsers = unverifiedUsers.filter((user) => {
+            return user.verifyTokenExpiry < new Date();
+        });
+
+        const res = await User.deleteMany({ _id: { $in: expiredUsers.map((user) => user._id) } });
+
         return NextResponse.json({
-            message: "Unverified users deleted successfully",
+            message: "Expired unverified users deleted successfully",
             data: res,
-            affectedUsers: unverifiedUsers.length,
+            affectedUsers: res.deletedCount,
         });
     } catch (error) {
         return NextResponse.json({
-            message: "Error fetching users" + error,
+            message: "Error fetching or deleting users: " + error,
         });
     }
 }

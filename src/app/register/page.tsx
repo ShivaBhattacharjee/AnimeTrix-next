@@ -62,7 +62,7 @@ const Page = () => {
             } else {
                 Toast.ErrorShowToast("Something went wrong");
             }
-            router.push("/login");
+            router.push("/register/verify-email");
         } catch (error: unknown) {
             const Error = error as Error;
             Toast.ErrorShowToast(Error?.response?.data?.error || "Something went wrong");
