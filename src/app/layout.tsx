@@ -9,7 +9,6 @@ import TopNavbar from "../components/shared/navigation/TopNavbar";
 
 import "./globals.css";
 
-import banner from "@/assets/animetrixbanner.jpg";
 import Footer from "@/components/shared/Footer";
 import ScrollToTop from "@/components/shared/ScrollToTop";
 import { UserProvider } from "@/context/getUserDetails";
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
     icons: { apple: "/logo.png" },
     themeColor: "#000",
     openGraph: {
-        images: [{ url: banner.src, alt: "Animetrix Banner" }],
+        images: [{ url: "https://i.pinimg.com/736x/60/63/da/6063da107454d50c1d7786cc2c2bac75.jpg", alt: "Animetrix Banner" }],
     },
 };
 

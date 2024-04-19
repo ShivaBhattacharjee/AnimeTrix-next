@@ -6,6 +6,7 @@ type props = {
     VerifyLink: string;
     type?: string;
 };
+
 export default function RegisterEmail(props: props) {
     const { username, VerifyLink, type } = props;
     return (
@@ -28,7 +29,7 @@ export default function RegisterEmail(props: props) {
                     <Body className="dark:bg-black dark:text-white text-black bg-white my-auto mx-auto font-sans">
                         <Container className="border border-solid dark:border-[#eaeaea] border-black/50 rounded my-[40px] mx-auto p-[20px] w-[465px]">
                             <Section className="mt-[32px]">
-                                <Img src={"https://cdn.discordapp.com/attachments/1079039236302446705/1163953174089048184/logo.png?ex=65fa04dd&is=65e78fdd&hm=9456e33a2d256ed774d69aa0678416f28eb11871ed5e3ce949a6e510a3328c35&"} width="100" height="100" alt="AnimeTrix" className="my-0 mx-auto" />
+                                <Img src={"https://github-production-user-asset-6210df.s3.amazonaws.com/95211406/277931164-3984ffef-a0ad-4314-b017-5ffb6213ed9c.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240419%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240419T172410Z&X-Amz-Expires=300&X-Amz-Signature=0754789801dd3ecc587a79cce543d3b22df7abf212cff32b8c5d9c5f7104ac55&X-Amz-SignedHeaders=host&actor_id=95211406&key_id=0&repo_id=674581344"} width="100" height="100" alt="AnimeTrix" className="my-0 mx-auto" />
                             </Section>
                             <Heading className="dark:text-white text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">{type == "VERIFY_USER" ? `Welcome to AnimeTrix` : "Password Recovery"}</Heading>
                             <Text className="dark:text-white text-black text-[14px] leading-[24px]">
