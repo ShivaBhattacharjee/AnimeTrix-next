@@ -100,7 +100,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                             {msg.text !== "" && (
                                 <div className={`break-words max-w-[90%] lg:max-w-[30%] ${msg.isBot ? "self-start" : "self-end"} px-3 py-3`}>
                                     <div className={`${msg.isBot ? "bg-white/20 text-white rounded-lg  " : " bg-white/10 text-white w-auto font-bold rounded-lg break-words"} p-4 rounded-lg whitespace-pre-wrap `}>
-                                        <span>{msg.isBot ? <span>{msg.text}</span> : <span>msg.text</span>}</span>
+                                        <span>{msg.isBot ? <span>{msg.text}</span> : <span>{msg.text}</span>}</span>
                                     </div>
                                     {/* message end */}
                                     <div ref={msgEnd}></div>
