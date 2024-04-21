@@ -12,7 +12,7 @@ export default async function RelationCard({ id, bannerImage }: Props) {
     const details = await getAnimeDetails(id);
     return (
         <>
-            {details && Object.keys(details.relations).length > 0 && (
+            {details && details.relations && Object.keys(details.relations).length > 0 && (
                 <section className=" sticky bottom-0 top-0">
                     <h1 className="text-4xl font-semibold pl-2">Relation & Seasons</h1>
                     <div className=" flex gap-4 hiddenscroll overflow-x-auto duration-200 mt-9">
