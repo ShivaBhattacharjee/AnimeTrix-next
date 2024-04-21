@@ -88,7 +88,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
     };
     return (
         <section className="min-h-[92vh] lg:p-8 p-2 hiddenscroll mb-32 w-full relative text-white overflow-y-scroll flex flex-col justify-between align-middle">
-            <h1 className="text-xl  bg-black w-full font-bold text-center">Chatting with {params.waifuid}</h1>
+            <h1 className="text-xl  bg-black w-full font-bold text-center">Chatting with {params.waifuid.replace("%20", " ")}</h1>
             {/* chatbody */}
             <div className=" overflow-y-scroll mb-14 overflow-x-hidden h-[90%] w-full max-w-full">
                 <div className="flex flex-col mb-9 mt-9 relative">
