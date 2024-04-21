@@ -32,7 +32,7 @@ const ScrollToTop = () => {
     return (
         <>
             {isVisible && (
-                <div className={`fixed flex items-center duration-200 scale-100 bg-white/30 backdrop-blur-md z-10 right-5 md:bottom-20 bottom-44 rounded-full p-5 dark:shadow-black shadow-black/30 shadow-lg`}>
+                <div className={`fixed flex items-center duration-200 scale-100 bg-white/30 backdrop-blur-md z-10 right-5 md:bottom-20 bottom-52 rounded-full p-5 dark:shadow-black shadow-black/30 shadow-lg`}>
                     <ChevronUp onClick={goToBtn} className="cursor-pointer" />
                 </div>
             )}
