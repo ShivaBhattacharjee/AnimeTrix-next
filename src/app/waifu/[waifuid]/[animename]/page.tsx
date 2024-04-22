@@ -2,7 +2,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { SyncLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
-import { Send } from "lucide-react";
+import { SendHorizonal } from "lucide-react";
 
 import Toast from "@/utils/toast";
 
@@ -110,9 +110,9 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                     ))}
                     {loading && (
                         <div className="flex flex-col gap-2 p-2">
-                            <div className={`break-words w-[60%] h-10 md:w-[50%] lg:w-[30%] bg-white/40 animate-pulse text-sm flex gap-7 self-start p-3 rounded-lg`}></div>
-                            <div className={`break-words w-[60%] h-10 md:w-[50%] lg:w-[30%] bg-white/40 animate-pulse text-sm flex gap-7 self-start p-3 rounded-lg`}></div>
-                            <div className={`break-words w-[60%] h-10 md:w-[50%] lg:w-[30%] bg-white/40 animate-pulse text-sm flex gap-7 self-start p-3 rounded-lg`}></div>
+                            <div className={`break-words w-[90%] h-10 md:w-[50%] lg:w-[40%] bg-white/40 animate-pulse text-sm flex gap-7 self-start p-3 rounded-lg`}></div>
+                            <div className={`break-words w-[90%] h-10 md:w-[50%] lg:w-[40%] bg-white/40 animate-pulse text-sm flex gap-7 self-start p-3 rounded-lg`}></div>
+                            <div className={`break-words w-[90%] h-10 md:w-[50%] lg:w-[40%] bg-white/40 animate-pulse text-sm flex gap-7 self-start p-3 rounded-lg`}></div>
                         </div>
                     )}
                 </div>
@@ -129,8 +129,8 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                             <>
                                 <textarea onKeyDown={handleTextareaKeyDown} placeholder="Enter a message" rows={1} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)} className="border-0 font-medium bg-transparent  outline-none overflow-hidden w-[96%] " typeof="text" />
                                 {!loading && (
-                                    <button className="absolute duration-200 hover:bg-transparent hover:border-2 hover:border-white hover:text-white cursor-pointer right-3 p-2 top-4 bg-white text-black rounded-full">
-                                        <Send />
+                                    <button className="absolute duration-200 hover:bg-transparent hover:border-2 hover:border-white hover:text-white cursor-pointer right-3 p-2 top-4 bg-white/10 text-white rounded-full">
+                                        <SendHorizonal />
                                     </button>
                                 )}
                             </>
