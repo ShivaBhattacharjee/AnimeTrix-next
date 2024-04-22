@@ -71,19 +71,17 @@ const Slider: React.FC<SliderProps> = ({ Trending }) => {
             >
                 {Trending.length > 0 ? (
                     Trending.map((popular: Anime) => (
-                        <>
-                            <SwiperSlide key={popular.id}>
-                                <img src={popular.cover} alt={`Slider of ${popular.title.userPreferred || popular.title.romaji}`} loading="lazy" className="relative aspect-auto" />
-                                <div className="absolute text-white bg-black/50 w-full h-full">
-                                    <div className="absolute text-left flex gap-3 flex-col bottom-3 pb-4 md:text-4xl p-4 w-[90%]">
-                                        <h1 className="z-50 truncate 2xl:w-full w-[90%] lg:text-5xl lg:font-bold overflow-hidden">{popular?.title.userPreferred || popular?.title?.romaji}</h1>
-                                        <Link href={`/details/${popular.id}`} className="bg-white text-center shadow-lg font-semibold text-black lg:w-44 lg:p-3 2xl:w-52 2xl:p-4 lg:text-2xl lg:mt-8  p-3 w-32 text-sm rounded-lg">
-                                            Watch Now
-                                        </Link>
-                                    </div>
+                        <SwiperSlide key={popular.id}>
+                            <img src={popular.cover} alt={`Slider of ${popular.title.userPreferred || popular.title.romaji}`} loading="lazy" className="relative aspect-auto" />
+                            <div className="absolute text-white bg-black/50 w-full h-full">
+                                <div className="absolute text-left flex gap-3 flex-col bottom-3 pb-4 md:text-4xl p-4 w-[90%]">
+                                    <h1 className="z-50 truncate 2xl:w-full w-[90%] lg:text-5xl lg:font-bold overflow-hidden">{popular?.title.userPreferred || popular?.title?.romaji}</h1>
+                                    <Link href={`/details/${popular.id}`} className="bg-white text-center shadow-lg font-semibold text-black lg:w-44 lg:p-3 2xl:w-52 2xl:p-4 lg:text-2xl lg:mt-8  p-3 w-32 text-sm rounded-lg">
+                                        Watch Now
+                                    </Link>
                                 </div>
-                            </SwiperSlide>
-                        </>
+                            </div>
+                        </SwiperSlide>
                     ))
                 ) : (
                     <SwiperSlide>
