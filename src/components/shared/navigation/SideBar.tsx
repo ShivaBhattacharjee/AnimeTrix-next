@@ -106,7 +106,7 @@ const SideBar = () => {
             </div>
 
             {/* mobile bottom bar */}
-            <div ref={sidebarRef} className={`text-white fixed bottom-0 md:hidden z-20 bg-black/50 rounded-t-xl border-t-2 border-white/10  backdrop-blur-md w-full p-2 duration-200 transition-all`}>
+            <div ref={sidebarRef} className={`text-white fixed bottom-0 md:hidden z-30 bg-black/50 rounded-t-xl border-t-2 border-white/10  backdrop-blur-md w-full p-2 duration-200 transition-all`}>
                 <div className="flex items-center justify-between flex-wrap ">
                     {NavItems.slice(0, expand ? NavItems.length : 2).map((link) => {
                         const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;

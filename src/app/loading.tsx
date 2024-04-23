@@ -33,10 +33,7 @@ const loading = () => {
                 <div className="flex gap-2">
                     <CardSkeleton />
                 </div>
-                <div className="flex flex-col mt-9">
-                    <h1 className="text-3xl lg:text-5xl font-bold">Airing Schedule</h1>
-                    <AiringScheduleLoading />
-                </div>
+                <AiringScheduleLoading />
             </div>
         </div>
     );

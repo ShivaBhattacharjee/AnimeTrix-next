@@ -119,7 +119,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
             </div>
 
             <div className="flex w-full flex-col hiddenscroll m-auto gap-3 justify-center items-center">
-                <form onSubmit={handleSubmit} className=" border-2 fixed z-50 lg:w-[60%] w-[95%] md:w-[80%] md:bottom-10  bottom-[7.5rem]  m-auto left-0 right-0 md:left-20 lg:left-48 border-white/10 flex gap-7 flex-wrap justify-between bg-black/80  max-h-20 rounded-lg p-6 overflow-auto hiddenscroll ">
+                <form onSubmit={handleSubmit} className=" border-2 fixed z-20 lg:w-[60%] w-[95%] md:w-[80%] md:bottom-10  bottom-[7.5rem]  m-auto left-0 right-0 md:left-20 lg:left-48 border-white/10 flex gap-7 flex-wrap justify-between bg-black/80  max-h-20 rounded-lg p-6 overflow-auto hiddenscroll ">
                     <div className="w-full">
                         {loading ? (
                             <div className="flex font-semibold tracking-wide gap-4 w-full text-center justify-center items-center">
