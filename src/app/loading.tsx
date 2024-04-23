@@ -1,6 +1,8 @@
 import React from "react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
+import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
 import CardSkeleton from "@/components/loading/CardSkeleton";
 
 const loading = () => {
@@ -10,8 +12,9 @@ const loading = () => {
             <div className="flex flex-col mt-9">
                 <div className="flex justify-between items-center">
                     <h1 className="text-3xl lg:text-5xl font-bold">Popular</h1>
-                    <Link href={"/popular"} className="text-sm lg:text-lg">
+                    <Link href={"/popular"} className=" flex gap-2 items-center font-extrabold text-sm md:text-xl">
                         Load more
+                        <ChevronRight size={30} />
                     </Link>
                 </div>
                 <div className="flex gap-2">
@@ -22,12 +25,17 @@ const loading = () => {
             <div className="flex flex-col mt-9">
                 <div className="flex justify-between items-center">
                     <h1 className="text-3xl lg:text-5xl font-bold">Trending</h1>
-                    <Link href={"/trending"} className="text-sm lg:text-lg">
+                    <Link href={"/trending"} className=" flex gap-2 items-center font-extrabold text-sm md:text-xl">
                         Load more
+                        <ChevronRight size={30} />
                     </Link>
                 </div>
                 <div className="flex gap-2">
                     <CardSkeleton />
+                </div>
+                <div className="flex flex-col mt-9">
+                    <h1 className="text-3xl lg:text-5xl font-bold">Airing Schedule</h1>
+                    <AiringScheduleLoading />
                 </div>
             </div>
         </div>

@@ -91,7 +91,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
 
     return (
         <section className="min-h-[92vh] lg:p-8 p-2 hiddenscroll mb-32 w-full relative text-white overflow-y-scroll flex flex-col justify-between align-middle">
-            <h1 className="text-xl  bg-black w-full font-bold text-center">Chatting with {params.waifuid.replace("%20", " ")}</h1>
+            <h1 className="text-xl  bg-black w-full font-bold text-center">{params.waifuid.replace("%20", " ")}</h1>
             {/* chatbody */}
             <div className=" overflow-y-scroll mb-14 overflow-x-hidden h-[90%] w-full max-w-full">
                 <div className="flex flex-col mb-9 mt-9 relative">
@@ -122,8 +122,8 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                 <form onSubmit={handleSubmit} className=" border-2 fixed z-50 lg:w-[60%] w-[95%] md:w-[80%] md:bottom-10  bottom-[7.5rem]  m-auto left-0 right-0 md:left-20 lg:left-48 border-white/10 flex gap-7 flex-wrap justify-between bg-black/80  max-h-20 rounded-lg p-6 overflow-auto hiddenscroll ">
                     <div className="w-full">
                         {loading ? (
-                            <div className="flex font-semibold tracking-widest gap-4 w-full text-center justify-center items-center">
-                                Thinking <SyncLoader color="#fff" size={3} />
+                            <div className="flex font-semibold tracking-wide gap-4 w-full text-center justify-center items-center">
+                                Typing <SyncLoader color="#fff" size={3} />
                             </div>
                         ) : (
                             <>
