@@ -1,5 +1,6 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { SyncLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import { SendHorizonal } from "lucide-react";
@@ -93,15 +94,16 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
         <section className="min-h-[92vh] lg:p-8 p-2 hiddenscroll mb-32 w-full relative text-white overflow-y-scroll flex flex-col justify-between align-middle">
             <h1 className="text-xl  bg-black w-full font-bold text-center">{params.waifuid.replace("%20", " ")}</h1>
             {/* chatbody */}
-            <div className=" overflow-y-scroll mb-14 overflow-x-hidden h-[90%] w-full max-w-full">
+            <div className=" overflow-y-scroll mb-14 hiddenscroll h-[90%] w-full max-w-full">
                 <div className="flex flex-col mb-9 mt-9 relative">
                     {message.map((msg, index) => (
                         <React.Fragment key={index}>
                             {msg.text !== "" && (
-                                <div className={`break-words max-w-[90%] lg:max-w-[30%] ${msg.isBot ? "self-start" : "self-end"} px-3 py-3`}>
-                                    <div className={`${msg.isBot ? "bg-white/20 text-white rounded-lg  " : " bg-white/10 text-white w-auto font-bold rounded-lg break-words"} p-4 rounded-lg whitespace-pre-wrap `}>
-                                        <span>{msg.isBot ? <span>{msg.text}</span> : <span>{msg.text}</span>}</span>
+                                <div className={`break-words max-w-auto min-w-[100%] lg:max-w-auto lg:min-w-[60%] ${msg.isBot ? "self-start break-words" : "self-end"} px-3 py-3`}>
+                                    <div className={`${msg.isBot ? "bg-white/20   text-white rounded-lg  " : " bg-white/10 text-white w-auto font-bold rounded-lg break-words"} p-4 rounded-lg whitespace-pre-wrap`} style={{ wordBreak: "break-all" }}>
+                                        <ReactMarkdown>{msg.text}</ReactMarkdown>
                                     </div>
+
                                     {/* message end */}
                                     <div ref={msgEnd}></div>
                                 </div>
