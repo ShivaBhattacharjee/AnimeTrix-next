@@ -99,7 +99,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                     {message.map((msg, index) => (
                         <React.Fragment key={index}>
                             {msg.text !== "" && (
-                                <div className={`break-words max-w-auto min-w-[100%] lg:max-w-auto lg:min-w-[60%] ${msg.isBot ? "self-start break-words" : "self-end"} px-3 py-3`}>
+                                <div className={`break-words ${msg.isBot ? "self-start break-words" : "self-end"} px-3 py-3`}>
                                     <div className={`${msg.isBot ? "bg-white/20   text-white rounded-lg  " : " bg-white/10 text-white w-auto font-bold rounded-lg break-words"} p-4 rounded-lg whitespace-pre-wrap`} style={{ wordBreak: "break-all" }}>
                                         <ReactMarkdown>{msg.text}</ReactMarkdown>
                                     </div>
@@ -129,7 +129,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                             </div>
                         ) : (
                             <>
-                                <textarea onKeyDown={handleTextareaKeyDown} placeholder="Enter a message" rows={1} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)} className="border-0 font-medium bg-transparent  outline-none overflow-hidden w-[96%] " typeof="text" />
+                                <textarea autoFocus={true} onKeyDown={handleTextareaKeyDown} placeholder="Enter a message" rows={1} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)} className="border-0 font-medium bg-transparent  outline-none overflow-hidden w-[96%] " typeof="text" />
                                 {!loading && (
                                     <button className="absolute duration-200 hover:bg-transparent hover:border-2 hover:border-white hover:text-white cursor-pointer right-3 p-2 top-4 bg-white/10 text-white rounded-full">
                                         <SendHorizonal />
