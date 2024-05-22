@@ -49,14 +49,14 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                 setLoading(true);
 
                 let botResponse = "";
-                if (token && savedChats.length > 1) {
+                if (token && savedChats.length > 10) {
                     const chatHistory = [];
                     savedChats.forEach((chat) => {
                         chatHistory.push({ role: "user", parts: chat.userMessage });
                         chatHistory.push({ role: "model", parts: chat.waifuResponse });
                     });
                     chatHistory.push({ role: "user", parts: prompt });
-                    const chat = model.startChat({ history: chatHistory, generationConfig: { maxOutputTokens: 600 } });
+                    const chat = model.startChat({ history: chatHistory, generationConfig: { maxOutputTokens: 200 } });
                     const result = await chat.sendMessage(prompt);
                     botResponse = result.response.text() || "";
                 } else {
@@ -96,7 +96,6 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
             setLoading(false);
         }
     };
-
     const GetAllAiChat = async () => {
         try {
             const req = await axios.get(`/api/waifu?waifuname=${waifuid}`);
@@ -112,9 +111,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
     };
 
     useEffect(() => {
-        if (token) {
-            GetAllAiChat();
-        }
+        if (token) GetAllAiChat();
     }, []);
 
     useEffect(() => {

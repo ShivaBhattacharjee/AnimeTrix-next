@@ -40,7 +40,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Local](#local)
-  - [API test](#api-test)
+  - [Anime API Health test](#anime-api-health-test)
   - [Docker](#docker)
     - [Vist DockerHub Image](#vist-dockerhub-image)
   - [Example](#example)
@@ -103,7 +103,7 @@ Server will start at http://localhost:3000/
 
 ### Anime API Health test
 ```
-npm run test
+bun test
 ```
 
 ### Docker
