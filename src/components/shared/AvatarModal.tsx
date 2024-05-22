@@ -3,6 +3,7 @@ import React from "react";
 import { ArrowLeft, UserRoundCog } from "lucide-react";
 
 import { ProfiePicture } from "@/utils/ProfilePicture";
+import Toast from "@/utils/toast";
 
 interface AvatarModalProps {
     setOpenAvatarModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +15,16 @@ const AvatarModal: React.FC<AvatarModalProps> = ({ setOpenAvatarModal, onSelectP
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
+            const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+
+            if (!validTypes.includes(file.type)) {
+                Toast.ErrorShowToast("Invalid file type. Only JPG, PNG, and JPEG are allowed.");
+                return;
+            }
+            if (file.size > 3 * 1024 * 1024) {
+                Toast.ErrorShowToast("File size should be less than 3MB");
+                return;
+            }
             const reader = new FileReader();
             reader.onloadend = () => {
                 const base64String = reader.result as string;
