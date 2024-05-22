@@ -90,7 +90,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
         }
     };
     const sanitizeString = (str: string) => {
-        return str.replace(/%20/g, " ").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+        return str.replace(/&/g, "&amp;").replace(/%20/g, " ").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     };
 
     const waifuid = sanitizeString(params.waifuid);
