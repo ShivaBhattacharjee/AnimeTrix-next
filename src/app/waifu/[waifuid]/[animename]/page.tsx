@@ -56,7 +56,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                         chatHistory.push({ role: "model", parts: chat.waifuResponse });
                     });
                     chatHistory.push({ role: "user", parts: prompt });
-                    const chat = model.startChat({ history: chatHistory, generationConfig: { maxOutputTokens: 200 } });
+                    const chat = model.startChat({ history: chatHistory, generationConfig: { maxOutputTokens: 600 } });
                     const result = await chat.sendMessage(prompt);
                     botResponse = result.response.text() || "";
                 } else {
