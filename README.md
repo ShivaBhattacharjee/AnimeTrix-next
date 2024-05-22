@@ -69,6 +69,7 @@ AnimeTrix is built using NextJs
 * [NextJS](https://nextjs.org)
 * [TailwindCss](https://tailwindcss.com/)
 * [Mongo DB](https://www.mongodb.com/)
+* [BunJS](https://bun.sh/)
 
 
 ## Getting Started
@@ -80,7 +81,7 @@ AnimeTrix is built using NextJs
 
 
 
-<a href="https://nodejs.org/en/download/">NodeJs</a> is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to execute JavaScript code outside of a web browser, making it possible to create server-side applications with JavaScript. Node.js is fast, lightweight, and scalable, making it popular for building modern web applications.
+<a href="https://bun.sh/">BunJS</a> is a JavaScript runtime, package manager, test runner and bundler built from scratch using the Zig programming language. It was designed by Jarred Sumner as a drop-in replacement for Node.js. Bun uses WebKit's JavaScriptCore as the JavaScript engine, unlike Node.js and Deno, which both use V8.
 
 
 ### Installation
@@ -93,10 +94,10 @@ git clone https://github.com/ShivaBhattacharjee/AnimeTrix-next
 cd AnimeTrix-next
 ```
 ```
-npm install
+bun install
 ```
 ```
-npm run dev
+bun dev
 ```
 Server will start at http://localhost:3000/
 
