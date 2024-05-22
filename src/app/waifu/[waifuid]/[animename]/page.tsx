@@ -89,10 +89,15 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
             handleSubmit(fakeSubmitEvent);
         }
     };
+    const sanitizeString = (str: string) => {
+        return str.replace(/%20/g, " ").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    };
+
+    const waifuid = sanitizeString(params.waifuid);
 
     return (
         <section className="min-h-[92vh] lg:p-8 p-2 hiddenscroll mb-32 w-full relative text-white overflow-y-scroll flex flex-col justify-between align-middle">
-            <h1 className="text-xl  bg-black w-full font-bold text-center">{params.waifuid.replace("%20", " ")}</h1>
+            <h1 className="text-xl  bg-black w-full font-bold text-center">{waifuid}</h1>
             {/* chatbody */}
             <div className=" overflow-y-scroll mb-14 hiddenscroll h-[90%] w-full max-w-full">
                 <div className="flex flex-col mb-9 mt-9 relative">
