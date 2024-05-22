@@ -105,7 +105,7 @@ const Page = () => {
                                 <span>Registering...</span>
                             </button>
                         ) : (
-                            <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-black cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password && "hover:bg-white"} hover:text-black`} disabled={userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password ? false : true}>
+                            <button className={` p-3 ${userName && email && password && confirmPassword != "" && password === confirmPassword ? "bg-blue-600 cursor-pointer" : "bg-white/30 text-black cursor-not-allowed"} rounded-lg mt-3 font-semibold duration-200 ${userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 && password && "hover:bg-white"} hover:text-black`} disabled={userName && email && password && confirmPassword != "" && password && confirmPassword.length > 8 ? true : false}>
                                 Register
                             </button>
                         )}

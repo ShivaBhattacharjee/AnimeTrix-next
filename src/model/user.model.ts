@@ -33,6 +33,18 @@ const bookmarkSchema = new mongoose.Schema({
         unique: true,
     },
 });
+const waifuChat = new mongoose.Schema({
+    waifuName: {
+        type: String,
+    },
+    userMessage: {
+        type: String,
+    },
+    waifuResponse: {
+        type: String,
+    },
+    timestamp: { type: Date, default: Date.now },
+});
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -63,6 +75,10 @@ const userSchema = new mongoose.Schema({
     userDescription: {
         type: String,
         default: "Hello there! I'm using AnimeTrix.",
+    },
+    waifuChat: {
+        type: [waifuChat],
+        default: [],
     },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: String,
