@@ -5,7 +5,7 @@ import { SyncLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { SendHorizonal } from "lucide-react";
+import { Bomb, SendHorizonal } from "lucide-react";
 
 import { Error } from "@/types/ErrorTypes";
 import Toast from "@/utils/toast";
@@ -49,15 +49,17 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                 setLoading(true);
 
                 let botResponse = "";
-                if (token && savedChats.length > 10) {
+                if (token && savedChats.length > 1) {
                     const chatHistory = [];
                     savedChats.forEach((chat) => {
                         chatHistory.push({ role: "user", parts: chat.userMessage });
                         chatHistory.push({ role: "model", parts: chat.waifuResponse });
                     });
                     chatHistory.push({ role: "user", parts: prompt });
-                    const chat = model.startChat({ history: chatHistory, generationConfig: { maxOutputTokens: 200 } });
+                    const chat = model.startChat({ history: chatHistory, generationConfig: { maxOutputTokens: 100 } });
+                    // console.log(chat);
                     const result = await chat.sendMessage(prompt);
+                    console.log(result);
                     botResponse = result.response.text() || "";
                 } else {
                     const result = await model.generateContentStream(`
@@ -118,6 +120,20 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
         msgEnd.current?.scrollIntoView({ behavior: "smooth" });
     }, [message]);
 
+    const handleChatRMRf = async () => {
+        try {
+            const req = await axios.delete(`/api/waifu?waifuname=${waifuid}`);
+            const res = req.data;
+            Toast.SuccessshowToast("Wiped all your chat history comrade");
+            console.log(res);
+            GetAllAiChat();
+        } catch (error) {
+            console.log(error);
+            const ERRORMSG = error as Error;
+            Toast.ErrorShowToast(ERRORMSG.message || "Failed to delete conversation");
+        }
+    };
+
     const handleTextareaKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -139,8 +155,16 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                     </div>
                 </section>
             ) : (
-                <section className="min-h-[92vh] lg:p-8 p-2 mb-32 w-full relative text-white overflow-y-scroll flex flex-col justify-between align-middle">
-                    <h1 className="text-xl bg-black w-full font-bold text-center">{waifuid}</h1>
+                <section className="min-h-[92vh] lg:p-8 p-2 mb-32 w-full relative text-white overflow-y-scroll flex flex-col justify-between">
+                    <div className="flex justify-between items-center">
+                        <h1 className={`text-xl bg-black w-full font-bold ${!token && "text-center"}`}>{waifuid}</h1>
+                        {token && savedChats.length > 1 && (
+                            <button onClick={handleChatRMRf} className="flex text-sm gap-2 w-56 text-center font-normal items-center p-3 rounded-lg bg-red-500">
+                                <Bomb size={20} />
+                                Delete Convo
+                            </button>
+                        )}
+                    </div>
                     {/* Chat body */}
                     <div className="overflow-y-scroll mb-14 h-[90%] w-full max-w-full">
                         <div className="flex flex-col mb-9 mt-9 relative">

@@ -6,6 +6,10 @@ import User from "@/model/user.model";
 import { Error } from "@/types/ErrorTypes";
 
 connect();
+type WaifuChatParams = {
+    _id: number;
+    waifuName: string;
+};
 
 export const POST = async (req: NextRequest) => {
     try {
@@ -54,10 +58,6 @@ export const POST = async (req: NextRequest) => {
 };
 
 export const GET = async (req: NextRequest) => {
-    type WaifuChatParams = {
-        waifuName: string;
-    };
-
     const { searchParams } = new URL(req.url);
     const waifuName = searchParams.get("waifuname");
 
@@ -89,8 +89,6 @@ export const GET = async (req: NextRequest) => {
 
         const filteredChats = user.waifuChat.filter((chat: WaifuChatParams) => chat.waifuName === waifuName);
 
-        console.log("Filtered Chats:", filteredChats);
-
         return NextResponse.json(
             {
                 chats: filteredChats,
@@ -105,6 +103,59 @@ export const GET = async (req: NextRequest) => {
         return NextResponse.json(
             {
                 message: ErrorMsg.message || "Internal server error: " + JSON.stringify(error),
+            },
+            {
+                status: 500,
+            },
+        );
+    }
+};
+
+export const DELETE = async (req: NextRequest) => {
+    try {
+        const { searchParams } = new URL(req.url);
+        const waifuName = searchParams.get("waifuname");
+        if (!waifuName) {
+            return NextResponse.json(
+                {
+                    message: "waifuName parameter is required",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+        const userId = getDataFromJwt(req);
+        const user = await User.findOne({ _id: userId }).select("-password");
+        if (!user) {
+            return NextResponse.json(
+                {
+                    message: "User not found",
+                },
+                {
+                    status: 400,
+                },
+            );
+        }
+        const originalChatCount = user.waifuChat.length;
+        user.waifuChat = user.waifuChat.filter((chat: WaifuChatParams) => chat.waifuName !== waifuName);
+        const deletedChatCount = originalChatCount - user.waifuChat.length;
+
+        await user.save();
+
+        return NextResponse.json(
+            {
+                message: `${deletedChatCount} chat(s) deleted successfully`,
+            },
+            {
+                status: 200,
+            },
+        );
+    } catch (error) {
+        const ErrorMsg = error as Error;
+        return NextResponse.json(
+            {
+                message: ErrorMsg.message || "Internal server error " + JSON.stringify(error),
             },
             {
                 status: 500,
