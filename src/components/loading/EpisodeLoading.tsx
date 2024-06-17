@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowUpNarrowWide, RefreshCcw } from "lucide-react";
 
 const EpisodeLoading = () => {

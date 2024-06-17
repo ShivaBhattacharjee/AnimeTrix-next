@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import { BadgeCheck, Quote, Share2 } from "lucide-react";
 import { notFound } from "next/navigation";
 

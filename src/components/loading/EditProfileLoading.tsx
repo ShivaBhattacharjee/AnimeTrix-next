@@ -1,4 +1,3 @@
-import React from "react";
 import { Camera, Check } from "lucide-react";
 
 const EditProfileLoading = () => {

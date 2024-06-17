@@ -1,5 +1,3 @@
-import React from "react";
-
 import CardSkeleton from "./CardSkeleton";
 
 const RecommendedLoading = () => {

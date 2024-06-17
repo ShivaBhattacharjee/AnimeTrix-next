@@ -12,7 +12,6 @@ declare global {
     const globalThis: CustomGlobalThis;
 }
 
-import React from "react";
 import { Share2 } from "lucide-react";
 
 import Toast from "@/utils/toast";

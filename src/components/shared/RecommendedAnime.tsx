@@ -1,5 +1,3 @@
-import React from "react";
-
 import ContentNotFound from "../error/Contentnotfound";
 
 import Cards from "./cards/Cards";

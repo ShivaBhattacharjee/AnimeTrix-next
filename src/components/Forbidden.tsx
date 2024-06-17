@@ -1,4 +1,3 @@
-import React from "react";
 import { Ghost, KeyRound, Lock } from "lucide-react";
 
 const Forbidden = () => {

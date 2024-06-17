@@ -1,4 +1,3 @@
-import React from "react";
 import { Frown } from "lucide-react";
 
 interface ContentNotFoundProps {

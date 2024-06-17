@@ -1,5 +1,3 @@
-import React from "react";
-
 import SearchCards from "./cards/SearchCards";
 
 import { getSearchResults } from "@/lib/AnimeFetch";

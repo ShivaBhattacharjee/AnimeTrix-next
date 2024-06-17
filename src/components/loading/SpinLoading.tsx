@@ -1,6 +1,3 @@
-"use client";
-import React from "react";
-
 const SpinLoading = () => {
     return (
         <div role="status">

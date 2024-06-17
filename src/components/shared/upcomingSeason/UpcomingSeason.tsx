@@ -1,5 +1,3 @@
-import React from "react";
-
 import UpcomingSeasonCard from "./UpcomingSeasonCard";
 
 import { getCurrentYear, getUpcomingData } from "@/lib/AnimeFetch";

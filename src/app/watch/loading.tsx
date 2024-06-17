@@ -1,4 +1,3 @@
-import React from "react";
 import { Download, Flag, Share2 } from "lucide-react";
 
 import CharactersLoading from "@/components/loading/CharactersLoading";

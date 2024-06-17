@@ -1,4 +1,3 @@
-import React from "react";
 import { ServerCrash } from "lucide-react";
 const ServerError = () => {
     return (

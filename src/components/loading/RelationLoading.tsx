@@ -1,5 +1,3 @@
-import React from "react";
-
 const RelationLoading = () => {
     return (
         <section className=" sticky bottom-0 top-0">

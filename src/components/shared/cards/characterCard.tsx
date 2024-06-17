@@ -1,5 +1,3 @@
-import React from "react";
-
 import ContentNotFound from "@/components/error/Contentnotfound";
 import Anime from "@/types/animetypes";
 

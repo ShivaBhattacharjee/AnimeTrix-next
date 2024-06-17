@@ -1,5 +1,3 @@
-import React from "react";
-
 const RandomAnimeLoading = () => {
     return (
         <div className="flex flex-col mt-9">

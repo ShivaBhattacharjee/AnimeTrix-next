@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import { ArrowLeft, UserRoundCog } from "lucide-react";
 
 import { ProfiePicture } from "@/utils/ProfilePicture";
