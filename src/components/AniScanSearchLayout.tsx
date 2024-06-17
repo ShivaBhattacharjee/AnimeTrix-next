@@ -8,6 +8,7 @@ import ServerError from "./error/ServerError";
 
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import Anime, { ApiResponse } from "@/types/animetypes";
+import Toast from "@/utils/toast";
 
 interface AniScanSearchLayoutProps {
     searchResult: ApiResponse | null;
@@ -31,7 +32,8 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult 
             prevAnilist.current = searchResult?.result[number].anilist.id || null;
             setLoading(false);
         } catch (error) {
-            alert("Can't find image!");
+            console.log(error);
+            Toast.ErrorShowToast("Can't find image!");
             setLoading(false);
         }
     };

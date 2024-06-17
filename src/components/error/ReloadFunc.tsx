@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from "react";
+import { FC } from "react";
 
 const ReloadFunc: FC<{ message: string }> = ({ message }) => {
     return (

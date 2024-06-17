@@ -2,7 +2,7 @@
 
 // AiringScheduleCard.tsx
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeftToLine, ArrowRightToLine, PlayCircle } from "lucide-react";
 import Link from "next/link";
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AxiosError } from "axios"; // Import AxiosError type
 
 import AiringScheduleCard from "./AiringScheduleCard";
