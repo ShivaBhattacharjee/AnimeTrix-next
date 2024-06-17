@@ -30,6 +30,7 @@ const AddToBookmark = ({ animeId, image, title, isStream }: BookmarkProps) => {
                 const isAnimeBookmarked = userBookmarks.bookmarks.some((bookmark: BookmarkProps) => bookmark.animeId == animeId);
                 setIsBookmarked(isAnimeBookmarked);
             } catch (error) {
+                console.log("error checkBookmarkStatus", error);
                 setBookmarkCheckLoading(false);
             } finally {
                 setBookmarkCheckLoading(false);

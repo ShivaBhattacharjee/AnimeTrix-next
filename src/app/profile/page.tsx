@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { AlertTriangle, ChevronRight, LogOut } from "lucide-react";

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Download, Flag } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";

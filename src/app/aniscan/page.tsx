@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import axios, { AxiosResponse } from "axios";
 import { Search, Trash2 } from "lucide-react";

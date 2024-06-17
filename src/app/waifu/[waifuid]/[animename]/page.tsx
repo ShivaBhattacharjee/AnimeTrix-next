@@ -91,6 +91,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                 Toast.ErrorShowToast("Message cannot be empty");
             }
         } catch (error) {
+            console.error(error);
             setLoading(false);
             setMessage((prevMessages) => [...prevMessages, { text: "Request failed", isBot: true }]);
             Toast.ErrorShowToast("Something went wrong");
