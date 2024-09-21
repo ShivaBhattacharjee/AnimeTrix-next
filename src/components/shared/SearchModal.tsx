@@ -15,14 +15,18 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
     const modalRef = useRef<HTMLDivElement>(null);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>("");
+    const [isMac, setIsMac] = useState(false);
 
+    useEffect(() => {
+        setIsMac(navigator.platform.toUpperCase().indexOf("MAC") >= 0);
+    }, []);
     const closeSearchModal = () => {
         setOpenSearch(false);
     };
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.ctrlKey && (event.key === "k" || event.key === "K")) {
+            if ((event.ctrlKey || event.metaKey) && (event.key === "k" || event.key === "K")) {
                 event.preventDefault();
                 setOpenSearch((prevState) => !prevState);
             }
@@ -90,7 +94,7 @@ const SearchModal = ({ trending }: { trending: Anime[] }) => {
                             ref={modalRef}
                         >
                             <h1 className="font-bold md:flex hidden text-white text-lg  gap-3 items-center ">
-                                Open/Close : <span className=" bg-white  text-black  p-2 rounded-lg text-sm">Ctrl</span> + <span className=" bg-white text-black text-sm p-2 rounded-lg">K</span>
+                                Open/Close : <span className=" bg-white  text-black  p-2 rounded-lg text-sm">{isMac ? "CMD" : "Ctrl"}</span> + <span className=" bg-white text-black text-sm p-2 rounded-lg">K</span>
                             </h1>
                             <div className="flex p-4 items-center border-2 z-50 border-white/40   sticky top-0 bg-black w-full rounded-lg">
                                 <input type="text" placeholder="I am looking for ....." className=" bg-transparent border-none duration-200 sticky top-0 outline-none w-[95%] focus:outline-none text-white" onChange={(e: React.ChangeEvent<HTMLInputElement>) => debouncedSetSearchValue(e.target.value)} />
