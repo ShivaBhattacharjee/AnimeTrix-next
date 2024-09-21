@@ -35,13 +35,13 @@ export async function POST(request: NextRequest) {
             email: user.email,
         };
 
-        const token = jwt.sign(tokenData, process.env.NEXT_PUBLIC_JWT_TOKEN!, { expiresIn: "2y" });
+        const token = jwt.sign(tokenData, process.env.JWT_TOKEN!, { expiresIn: "2y" });
 
         const response = NextResponse.json({
             message: "Login successful",
             success: true,
         });
-        response.cookies.set("token", token ,{
+        response.cookies.set("token", token, {
             maxAge: 60 * 60 * 24 * 365 * 2,
         });
         return response;
