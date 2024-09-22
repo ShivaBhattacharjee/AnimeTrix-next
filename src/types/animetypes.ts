@@ -2,6 +2,16 @@
 interface AnilistInfo {
     id: number;
 }
+
+export interface EpisodeList {
+    id: string;
+    title: string;
+    number: number;
+    url: string;
+    description: string;
+    image: string;
+}
+
 export default interface Anime {
     id: number;
     image: string;
@@ -25,7 +35,6 @@ export default interface Anime {
     relationType: string;
     number: number;
     name: string;
-
     role: string;
     episodes: number;
     length: number;

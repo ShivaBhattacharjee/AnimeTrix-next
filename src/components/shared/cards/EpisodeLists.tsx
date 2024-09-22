@@ -8,7 +8,7 @@ import Link from "next/link";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import { myCache } from "@/lib/nodecache";
-import Anime from "@/types/animetypes";
+import { EpisodeList } from "@/types/animetypes";
 
 interface EpisodeListsProps {
     animeId: number;
@@ -20,7 +20,7 @@ interface EpisodeListsProps {
 const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentlyPlaying, animeName }) => {
     const [filterValue, setFilterValue] = useState<string>("");
     const [selectedRange, setSelectedRange] = useState<string>("1-100");
-    const [listData, setListData] = useState<Anime[]>([]);
+    const [listData, setListData] = useState<EpisodeList[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [dub, setDub] = useState<boolean>(false);
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -31,7 +31,7 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
         const cachekey = `episodes-${animeId}-${dub}`;
         try {
             setLoading(true);
-            const cachedData = myCache.get<Anime[]>(cachekey);
+            const cachedData = myCache.get<EpisodeList[]>(cachekey);
             if (cachedData) {
                 setListData(cachedData);
                 return;
@@ -180,12 +180,18 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                                                 rounded-lg flex flex-col gap-3`}
                                             key={index}
                                         >
-                                            <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
+                                            <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-40 md:h-40" height={200} width={400} />
                                             <div className="flex flex-col items-center">
                                                 {currentlyPlaying == anime.number && <SyncLoader color="#fff" size={4} />}
-                                                <h1 className=" p-2 font-semibold py-3">
-                                                    {isFiller ? "Filler Episode" : "Episode"}: {anime.number}
-                                                </h1>
+                                                {anime.title ? (
+                                                    <h1 className=" p-3 truncate md:w-60 w-40 text-xs md:text-lg">
+                                                        {anime.number} . {anime?.title} {isFiller && "(🤓Fillter)"}
+                                                    </h1>
+                                                ) : (
+                                                    <h1 className=" p-2 font-semibold py-3">
+                                                        {isFiller ? "Filler Episode" : "Episode"}: {anime.number}
+                                                    </h1>
+                                                )}
                                                 {isFiller && <p className=" text-orange-500 text-xs opacity-80">🤓 You can skip this</p>}
                                             </div>
                                         </Link>
