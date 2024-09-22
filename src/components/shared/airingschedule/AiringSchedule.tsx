@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
-import { getAiringSchedule } from "@/lib/AnimeFetch";
-import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
+
 import AiringScheduleCard from "./AiringScheduleCard";
+
+import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
+import { getAiringSchedule } from "@/lib/AnimeFetch";
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second

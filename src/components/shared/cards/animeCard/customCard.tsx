@@ -1,13 +1,15 @@
 "use client";
 
 import React from "react";
+import { PlayIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+
+import AnimeCardSkeleton from "./skeleton";
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
-import { PlayIcon } from "lucide-react";
 import { Anilist } from "@/types/animetypes";
-import AnimeCardSkeleton from "./skeleton";
-import Link from "next/link";
 
 type AnimeCardProps = {
     anime: Anilist;

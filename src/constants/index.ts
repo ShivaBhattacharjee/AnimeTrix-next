@@ -1,5 +1,4 @@
-import { Icons } from "@/components/ui/icons";
-import { Camera, TrendingUp, VideoIcon, CarIcon, Scale } from "lucide-react";
+import { Camera, CarIcon, Scale, VideoIcon } from "lucide-react";
 
 export const navItems = [
     { label: "Home", url: "/" },

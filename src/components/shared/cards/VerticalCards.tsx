@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Link from "next/link";
+
+import AnimeCard from "./animeCard/customCard";
+import AnimeCardSkeleton from "./animeCard/skeleton";
 
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import { Anilist } from "@/types/animetypes";
-import AnimeCard from "./animeCard/customCard"; // Import the AnimeCard component
-import AnimeCardSkeleton from "./animeCard/skeleton"; // Import the AnimeCardSkeleton component
 
 interface VerticalCardsProps {
     title: string;

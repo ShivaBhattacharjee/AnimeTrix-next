@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+
+import ReloadFunc from "@/components/error/ReloadFunc";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
 import Anime from "@/types/animetypes";
-import ReloadFunc from "@/components/error/ReloadFunc";
 
 interface UpcomingSeasonCardProps {
     animeList: Anime[];

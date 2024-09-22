@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon, PlayCircleIcon } from "lucide-react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 type DayOfWeek = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";

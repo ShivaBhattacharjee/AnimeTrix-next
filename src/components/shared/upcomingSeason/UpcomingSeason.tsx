@@ -1,5 +1,6 @@
-import { getCurrentYear, getUpcomingData } from "@/lib/AnimeFetch";
 import UpcomingSeasonCard from "./UpcomingSeasonCard";
+
+import { getCurrentYear, getUpcomingData } from "@/lib/AnimeFetch";
 
 export default async function UpcomingSeason() {
     const seasons = ["FALL", "SUMMER", "WINTER", "SPRING"];

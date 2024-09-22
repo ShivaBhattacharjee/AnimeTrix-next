@@ -1,19 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { ChevronDownCircle, ChevronRight, MenuIcon, Search, SearchIcon } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import { Icons } from "@/components/ui/icons";
-import { menuContent, navItems } from "@/constants";
-import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { getCookie } from "cookies-next";
+import { ChevronRight, MenuIcon, Search, SearchIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 import Logout from "@/components/buttons/Logout";
+import { Button } from "@/components/ui/button";
+import { Icons } from "@/components/ui/icons";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { menuContent, navItems } from "@/constants";
 
 const Header = () => {
     console.log("Hentai onichan!! Why you looking at my source");
@@ -37,6 +37,7 @@ const Header = () => {
         const handleClickOutside = (event: MouseEvent) => {
             if (sidebarRef?.current && !sidebarRef?.current?.contains(event?.target as Node)) {
                 setExpand(false);
+                console.log(expand);
             }
         };
 

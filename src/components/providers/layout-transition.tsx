@@ -1,10 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useSelectedLayoutSegment } from "next/navigation";
-import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
-
 import { useContext, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 function usePreviousValue<T>(value: T): T | undefined {
 	const prevValue = useRef<T>();

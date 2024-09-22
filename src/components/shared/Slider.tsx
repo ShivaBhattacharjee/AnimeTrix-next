@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
+import { motion } from "framer-motion";
+import { Calendar, ChevronLeft, ChevronRight, Clock, InfoIcon, List, Play, PlayCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
-import Slider from "react-slick";
-import { Calendar, ChevronLeft, ChevronRight, Clock, InfoIcon, List, Play, PlayCircle } from "lucide-react";
-import { motion } from "framer-motion";
 import { getTrendingAnime } from "@/lib/AnimeFetch";
-import { cn } from "@/lib/utils";
 import { Anilist } from "@/types/animetypes";
 
 const Hero = () => {

@@ -4,9 +4,10 @@ import { useContext } from "react";
 import { ClipLoader } from "react-spinners";
 import Link from "next/link";
 
-import UserContext from "@/context/getUserDetails";
 import { Button } from "../ui/button";
 import { Icons } from "../ui/icons";
+
+import UserContext from "@/context/getUserDetails";
 
 const Logout = () => {
     const { loading, tokenExistOrNot, username, profilePicture } = useContext(UserContext);

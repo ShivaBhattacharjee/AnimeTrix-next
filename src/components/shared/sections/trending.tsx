@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Anilist } from "@/types/animetypes";
-import { getTrendingAnime } from "@/lib/AnimeFetch";
+
 import AnimeCard from "../cards/animeCard/customCard";
+
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { getTrendingAnime } from "@/lib/AnimeFetch";
+import { Anilist } from "@/types/animetypes";
 
 const Trending = () => {
     const [animeList, setAnimeList] = useState<Anilist[]>([]);

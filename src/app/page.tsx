@@ -1,17 +1,13 @@
 import { Suspense } from "react";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 
 import Hero from "../components/shared/Slider";
 
 import AiringScheduleLoading from "@/components/loading/AiringScheduleLoading";
 import { UpcomingSeasonLoading } from "@/components/loading/UpcomingSeasonLoading";
 import AiringSchedule from "@/components/shared/airingschedule/AiringSchedule";
-import Cards from "@/components/shared/cards/Cards";
-import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
-import { getPopularAnime, getTrendingAnime } from "@/lib/AnimeFetch";
-import Trending from "@/components/shared/sections/trending";
 import Popular from "@/components/shared/sections/popular";
+import Trending from "@/components/shared/sections/trending";
+import UpcomingSeason from "@/components/shared/upcomingSeason/UpcomingSeason";
 
 export function generateMetadata() {
     return {
