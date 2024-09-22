@@ -141,8 +141,8 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                             )}
 
                             <div className="flex gap-3 items-center">
-                                <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
-                                    <input onChange={!loading && handleDubToggle} checked={dub} type="checkbox" id="check" className=" sr-only peer" />
+                                <label htmlFor="dub" className=" bg-gray-100 relative w-16 h-8 rounded-full">
+                                    <input onChange={!loading && handleDubToggle} checked={dub} type="checkbox" id="dub" className=" sr-only peer" />
                                     <span className=" w-2/5 cursor-pointer h-4/5 bg-black/30 absolute rounded-full left-1 top-1 peer-checked:bg-black peer-checked:left-8 transition-all duration-500"></span>
                                 </label>
                                 <span className=" text-xl font-semibold">Dub</span>
