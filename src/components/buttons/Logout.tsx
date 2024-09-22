@@ -4,6 +4,9 @@ import { useContext } from "react";
 import { ClipLoader } from "react-spinners";
 import Link from "next/link";
 
+import { Button } from "../ui/button";
+import { Icons } from "../ui/icons";
+
 import UserContext from "@/context/getUserDetails";
 
 const Logout = () => {
@@ -21,8 +24,11 @@ const Logout = () => {
                     )}
                 </>
             ) : (
-                <Link href="/login" className="bg-white text-black   hover:text-white hover:bg-transparent duration-150 border-white hover:border text-center p-2 text-sm md:text-xl rounded-lg font-semibold w-16 md:w-32">
-                    Login
+                <Link href="/login">
+                    <Button>
+                        Login
+                        <Icons.login className="ml-1 h-3.5 w-3.5" />
+                    </Button>
                 </Link>
             )}
         </>
