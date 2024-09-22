@@ -14,16 +14,17 @@ interface EpisodeListsProps {
     animeId: number;
     isStream?: boolean;
     currentlyPlaying?: number;
+    animeName: string;
 }
 
-const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentlyPlaying }) => {
+const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentlyPlaying, animeName }) => {
     const [filterValue, setFilterValue] = useState<string>("");
     const [selectedRange, setSelectedRange] = useState<string>("1-100");
     const [listData, setListData] = useState<Anime[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [dub, setDub] = useState<boolean>(false);
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-
+    const [fillerEpisodes, setFillerEpisodes] = useState<number[]>([]);
     const getEpisodes = async () => {
         const cachekey = `episodes-${animeId}-${dub}`;
         try {
@@ -48,6 +49,30 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
     useEffect(() => {
         getEpisodes();
     }, [dub]);
+
+    const getFillerEpisodes = async () => {
+        const cachekey = `filler-episodes-${animeId}`;
+        try {
+            const cachedData = myCache.get<number[]>(cachekey);
+            if (cachedData) {
+                setFillerEpisodes(cachedData);
+                return;
+            }
+            animeName = animeName.replace(/ /g, "-");
+            const response = await fetch(`https://filler-list.chaiwala-anime.workers.dev/${animeName}`);
+            const data = await response.json();
+            console.log("Filler episodes are ", data?.fillerEpisodes);
+            const fillerEpisodesNumbers = data?.fillerEpisodes.map(Number);
+            myCache.set(cachekey, fillerEpisodesNumbers);
+            setFillerEpisodes(fillerEpisodesNumbers);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getFillerEpisodes();
+    }, [currentlyPlaying, animeName]);
 
     const episodeRanges = useMemo(() => {
         const numEpisodes = listData.length;
@@ -121,15 +146,28 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                                     const orderMultiplier = sortOrder === "asc" ? 1 : -1;
                                     return orderMultiplier * (animeA.number - animeB.number);
                                 })
-                                .map((anime, index) => (
-                                    <Link href={`/watch/${anime.id}/${animeId}`} className={`duration-200  border-2 hover:scale-90 ${currentlyPlaying == anime.number ? "scale-90 border-2 border-white  " : "border-white/60 "} rounded-lg flex flex-col gap-3`} key={index}>
-                                        <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
-                                        <div className="flex gap-2 items-center p-2">
-                                            {currentlyPlaying == anime.number && <SyncLoader color="#fff" size={4} />}
-                                            <h1 className=" p-2 font-semibold">Episode: {anime.number}</h1>
-                                        </div>
-                                    </Link>
-                                ))}
+                                .map((anime, index) => {
+                                    const isFiller = fillerEpisodes.includes(anime.number);
+                                    // console.log("isFiller", isFiller);
+                                    return (
+                                        <Link
+                                            href={`/watch/${anime.id}/${animeId}`}
+                                            className={`duration-200 border-2 hover:scale-90 
+                                                ${currentlyPlaying == anime.number ? "scale-90 border-2 border-white" : isFiller ? "border-orange-500" : "border-white/60"} 
+                                                rounded-lg flex flex-col gap-3`}
+                                            key={index}
+                                        >
+                                            <img src={anime?.image} alt={`an image of ${anime?.title}`} loading="lazy" className="rounded-t-lg border-b-2 border-white/30  cursor-pointer bg-cover h-28 md:h-40" height={200} width={400} />
+                                            <div className="flex flex-col items-center">
+                                                {currentlyPlaying == anime.number && <SyncLoader color="#fff" size={4} />}
+                                                <h1 className=" p-2 font-semibold py-3">
+                                                    {isFiller ? "Filler Episode" : "Episode"}: {anime.number}
+                                                </h1>
+                                                {isFiller && <p className=" text-orange-500 text-xs opacity-80">🤓 You can skip this</p>}
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                         </div>
                     ) : (
                         <div className="flex capitalize items-center justify-center text-3xl font-semibold  gap-3">

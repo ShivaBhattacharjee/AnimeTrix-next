@@ -6,7 +6,7 @@ export async function connect() {
             dbName: "Animetrix",
         });
         const connection = mongoose.connection;
-
+        connection.setMaxListeners(20);
         connection.on("connected", () => {
             console.log("MongoDB connected successfully");
         });
