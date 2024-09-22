@@ -45,6 +45,21 @@ const waifus = [
         picture: "https://i.pinimg.com/564x/62/50/e1/6250e18e9b9ba2440cc8c06dd027d77a.jpg",
         anime: "Bleach",
     },
+    {
+        name: "Sanji",
+        picture: "https://i.pinimg.com/564x/d6/88/d6/d688d6432ffacca0cfafc6979318eca7.jpg",
+        anime: "One Piece",
+    },
+    {
+        name: "Issei Hyoudou",
+        picture: "https://i.pinimg.com/564x/a0/d6/b7/a0d6b722a2d573266e103da9409e849c.jpg",
+        anime: "High School DxD",
+    },
+    {
+        name: "Jiraya",
+        picture: "https://i.pinimg.com/564x/33/29/9f/33299fa56af8052a8d8ec22ce5cd6805.jpg",
+        anime: "Naruto",
+    },
 ];
 const page = () => {
     return (
