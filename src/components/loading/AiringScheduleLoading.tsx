@@ -1,18 +1,25 @@
-"use client";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
-import SpinLoading from "./SpinLoading";
-
-const AiringScheduleLoading = () => {
+export default function AiringScheduleLoading() {
     return (
-        <div className="flex flex-col mt-9">
-            <h1 className="text-3xl lg:text-5xl font-bold">Airing Schedule</h1>
-            <div className="flex gap-2">
-                <div className={`border-white/25 border-2 flex justify-center items-center animate-pulse h-52 w-full p-4 rounded-lg mt-5 lg:h-96 overflow-y-auto`}>
-                    <SpinLoading />
-                </div>
-            </div>
-        </div>
+        <Card className="w-full">
+            <CardContent className="p-6">
+                {[...Array(5)].map((_, index) => (
+                    <div key={index} className="flex items-center space-x-4 mb-4">
+                        <Skeleton className="h-16 w-16 rounded-md" />
+                        <div className="space-y-2 flex-1">
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-3/4" />
+                        </div>
+                    </div>
+                ))}
+            </CardContent>
+            <CardFooter className="flex justify-between items-center p-4 bg-muted">
+                <Skeleton className="h-8 w-8 rounded-full" />
+                <Skeleton className="h-6 w-24" />
+                <Skeleton className="h-8 w-8 rounded-full" />
+            </CardFooter>
+        </Card>
     );
-};
-
-export default AiringScheduleLoading;
+}

@@ -1,6 +1,5 @@
-import UpcomingSeasonCard from "./UpcomingSeasonCard";
-
 import { getCurrentYear, getUpcomingData } from "@/lib/AnimeFetch";
+import UpcomingSeasonCard from "./UpcomingSeasonCard";
 
 export default async function UpcomingSeason() {
     const seasons = ["FALL", "SUMMER", "WINTER", "SPRING"];
@@ -8,12 +7,12 @@ export default async function UpcomingSeason() {
     const animeDataResults = await Promise.all(animeDataPromises);
 
     return (
-        <div className="mt-6">
-            <h1 className="lg:text-3xl opacity-60">{getCurrentYear()}</h1>
-            <h1 className="text-3xl lg:text-5xl pb-6">Upcoming</h1>
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="container mx-auto px-4 py-8">
+            <h2 className="text-2xl font-semibold text-muted-foreground mb-2">{getCurrentYear()}</h2>
+            <h1 className="text-4xl font-bold text-primary mb-8">Upcoming Seasons</h1>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                 {seasons.map((season, index) => (
-                    <UpcomingSeasonCard props={animeDataResults[index]} title={season.toLowerCase()} key={season} />
+                    <UpcomingSeasonCard key={season} animeList={animeDataResults[index]} title={season.toLowerCase()} />
                 ))}
             </div>
         </div>
