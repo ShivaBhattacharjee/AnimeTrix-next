@@ -25,6 +25,8 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
     const [dub, setDub] = useState<boolean>(false);
     const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
     const [fillerEpisodes, setFillerEpisodes] = useState<number[]>([]);
+    const [hideFiller, setHideFiller] = useState<boolean>(true);
+
     const getEpisodes = async () => {
         const cachekey = `episodes-${animeId}-${dub}`;
         try {
@@ -91,19 +93,30 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
     const handleSortToggle = () => {
         setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     };
+    const displayedEpisodes = useMemo(() => {
+        if (listData.length === 0) return [];
 
-    const displayedEpisodes =
-        listData.length > 0 &&
-        listData?.filter((anime) => {
-            if (filterValue === "") {
-                const [start, end] = selectedRange.split("-").map(Number);
-                return anime.number >= start && anime.number <= end;
-            } else {
+        return listData.filter((anime) => {
+            if (filterValue !== "") {
                 return anime.number.toString().includes(filterValue);
             }
+
+            const [start, end] = selectedRange.split("-").map(Number);
+            const isInRange = anime.number >= start && anime.number <= end;
+
+            if (hideFiller) {
+                return isInRange && !fillerEpisodes.includes(anime.number);
+            }
+
+            return isInRange;
         });
+    }, [listData, filterValue, selectedRange, hideFiller, fillerEpisodes]);
+
     const handleDubToggle = () => {
         setDub((prevDub) => !prevDub);
+    };
+    const handleHideFillerToggle = () => {
+        setHideFiller((prevHideFiller) => !prevHideFiller);
     };
     return (
         <>
@@ -117,6 +130,14 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                             <RefreshCcw onClick={getEpisodes} className={`cursor-pointer`} />
                         </div>
                         <div className="flex flex-wrap gap-3">
+                            <div className="flex gap-3 items-center">
+                                <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
+                                    <input type="checkbox" checked={hideFiller} onChange={handleHideFillerToggle} id="check" className=" sr-only peer" />
+                                    <span className=" w-2/5 cursor-pointer h-4/5 bg-black/30 absolute rounded-full left-1 top-1 peer-checked:bg-black peer-checked:left-8 transition-all duration-500"></span>
+                                </label>
+                                <span className=" text-xl font-semibold">Hide Filler</span>
+                            </div>
+
                             <div className="flex gap-3 items-center">
                                 <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
                                     <input onChange={!loading && handleDubToggle} checked={dub} type="checkbox" id="check" className=" sr-only peer" />
