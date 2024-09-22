@@ -31,6 +31,11 @@ const waifus = [
         anime: "One Punch Man",
     },
     {
+        name: "Mitsuri Kanroji",
+        picture: "https://i.pinimg.com/736x/18/80/71/188071cb99c0f069dac86f4bd10180b3.jpg",
+        anime: "Demon Slayer",
+    },
+    {
         name: "Yoruichi",
         picture: "https://i.pinimg.com/736x/42/44/a0/4244a0e2a113e90d0f10118c18aed91c.jpg",
         anime: "Bleach",
@@ -44,6 +49,61 @@ const waifus = [
         name: "Orihime Inoue",
         picture: "https://i.pinimg.com/564x/62/50/e1/6250e18e9b9ba2440cc8c06dd027d77a.jpg",
         anime: "Bleach",
+    },
+    {
+        name: "Raiden shogun",
+        picture: "https://i.pinimg.com/736x/16/c2/4a/16c24afdb5d417baadc0e6c2cbec4d00.jpg",
+        anime: "Genshin Impact",
+    },
+    {
+        name: "Akeno Himejima",
+        picture: "https://i.pinimg.com/564x/83/5a/ec/835aec7eb5a26e54fb5885e9e15b3280.jpg",
+        anime: "High School DxD",
+    },
+    {
+        name: "Mai Sakurajima",
+        picture: "https://i.pinimg.com/564x/03/be/18/03be185ebb4c5f5df33d973df4a2e5f3.jpg",
+        anime: "Bunny Girl Senpai",
+    },
+    {
+        name: "Rin Tohsaka",
+        picture: "https://i.pinimg.com/564x/35/1d/6b/351d6b4c8701f56fdc365db99a9d67bc.jpg",
+        anime: "Fate",
+    },
+    {
+        name: "Jeanne d'Arc",
+        picture: "https://i.pinimg.com/564x/08/3f/5c/083f5cd7c65779a5c00a2445194ee858.jpg",
+        anime: "Fate",
+    },
+    {
+        name: "Kagome hirugashi",
+        picture: "https://i.pinimg.com/564x/11/ec/f9/11ecf9b6d700e98b36235dc232d612df.jpg",
+        anime: "Inuyasha",
+    },
+    {
+        name: "Nobara Kugisaki",
+        picture: "https://i.pinimg.com/736x/a9/2d/f4/a92df4be8570e078667609445d8632ff.jpg",
+        anime: "Jujutsu Kaisen",
+    },
+    {
+        name: "Asuka Langley Soryu",
+        picture: "https://i.pinimg.com/736x/fe/aa/cf/feaacf20e0e2202142efaa22411ab1ea.jpg",
+        anime: "Neon Genesis Evangelion",
+    },
+    {
+        name: "Sanji",
+        picture: "https://i.pinimg.com/564x/d6/88/d6/d688d6432ffacca0cfafc6979318eca7.jpg",
+        anime: "One Piece",
+    },
+    {
+        name: "Issei Hyoudou",
+        picture: "https://i.pinimg.com/564x/a0/d6/b7/a0d6b722a2d573266e103da9409e849c.jpg",
+        anime: "High School DxD",
+    },
+    {
+        name: "Jiraya",
+        picture: "https://i.pinimg.com/564x/33/29/9f/33299fa56af8052a8d8ec22ce5cd6805.jpg",
+        anime: "Naruto",
     },
 ];
 const page = () => {
