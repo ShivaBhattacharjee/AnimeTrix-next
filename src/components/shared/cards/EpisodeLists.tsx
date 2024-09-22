@@ -130,13 +130,15 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                             <RefreshCcw onClick={getEpisodes} className={`cursor-pointer`} />
                         </div>
                         <div className="flex flex-wrap gap-3">
-                            <div className="flex gap-3 items-center">
-                                <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
-                                    <input type="checkbox" checked={hideFiller} onChange={handleHideFillerToggle} id="check" className=" sr-only peer" />
-                                    <span className=" w-2/5 cursor-pointer h-4/5 bg-black/30 absolute rounded-full left-1 top-1 peer-checked:bg-black peer-checked:left-8 transition-all duration-500"></span>
-                                </label>
-                                <span className=" text-xl font-semibold">Hide Filler</span>
-                            </div>
+                            {fillerEpisodes.length > 0 && (
+                                <div className="flex gap-3 items-center">
+                                    <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
+                                        <input type="checkbox" checked={hideFiller} onChange={handleHideFillerToggle} id="check" className=" sr-only peer" />
+                                        <span className=" w-2/5 cursor-pointer h-4/5 bg-black/30 absolute rounded-full left-1 top-1 peer-checked:bg-black peer-checked:left-8 transition-all duration-500"></span>
+                                    </label>
+                                    <span className=" text-xl font-semibold">Hide Filler</span>
+                                </div>
+                            )}
 
                             <div className="flex gap-3 items-center">
                                 <label htmlFor="check" className=" bg-gray-100 relative w-16 h-8 rounded-full">
