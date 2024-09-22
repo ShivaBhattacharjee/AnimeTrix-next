@@ -31,6 +31,11 @@ const waifus = [
         anime: "One Punch Man",
     },
     {
+        name: "Mitsuri Kanroji",
+        picture: "https://i.pinimg.com/736x/18/80/71/188071cb99c0f069dac86f4bd10180b3.jpg",
+        anime: "Demon Slayer",
+    },
+    {
         name: "Yoruichi",
         picture: "https://i.pinimg.com/736x/42/44/a0/4244a0e2a113e90d0f10118c18aed91c.jpg",
         anime: "Bleach",
