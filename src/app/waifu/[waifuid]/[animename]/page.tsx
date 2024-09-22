@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { SyncLoader } from "react-spinners";
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
@@ -38,7 +38,34 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
     const model = genAI.getGenerativeModel({ model: "gemini-pro", safetySettings });
     const sanitizeString = (str: string) => str.replace(/&/g, "&amp;").replace(/%20/g, " ").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     const waifuid = sanitizeString(params.waifuid);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const focusTextarea = useCallback(() => {
+        if (textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    }, []);
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // Ignore key presses if the active element is an input or textarea
+            if (document.activeElement instanceof HTMLInputElement || document.activeElement instanceof HTMLTextAreaElement) {
+                return;
+            }
 
+            // Ignore key presses for common modifier keys
+            const ignoredKeys = ["Control", "Alt", "Shift", "Meta", "CapsLock", "Tab"];
+            if (ignoredKeys.includes(e.key)) {
+                return;
+            }
+
+            focusTextarea();
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [focusTextarea]);
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -97,6 +124,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
             Toast.ErrorShowToast("Something went wrong");
         } finally {
             setLoading(false);
+            focusTextarea();
         }
     };
     const GetAllAiChat = async () => {
@@ -217,7 +245,7 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
                                     </div>
                                 ) : (
                                     <>
-                                        <textarea onKeyDown={handleTextareaKeyDown} placeholder="Enter a message" rows={1} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)} className="border-0 font-medium bg-transparent outline-none overflow-hidden w-[96%]" />
+                                        <textarea ref={textareaRef} onKeyDown={handleTextareaKeyDown} placeholder="Enter a message" rows={1} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPrompt(e.target.value)} className="border-0 font-medium bg-transparent outline-none overflow-hidden w-[96%]" />
                                         {!loading && (
                                             <button className="absolute duration-200 hover:bg-transparent hover:border-2 hover:border-white hover:text-white cursor-pointer right-3 p-2 top-4 bg-white/10 text-white rounded-full">
                                                 <SendHorizonal />
