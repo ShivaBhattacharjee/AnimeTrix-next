@@ -1,0 +1,260 @@
+[33mcommit 8ca293b7adc406adedef63523a65e4439ac3748a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sun Sep 22 16:02:34 2024 +0530
+
+    [Add]: episode name
+
+[33mcommit 8695d4b093eb18ef18af42e6bcde1426d037ca4d[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sun Sep 22 15:09:59 2024 +0530
+
+    [Update]: conditionally render filler episode filter
+
+[33mcommit 5a75da3b3efbfe9acaf708ca51ae0c678c571364[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sun Sep 22 15:01:36 2024 +0530
+
+    [Update]: conditionally render filler episode filter
+
+[33mcommit fbdc37ee7235ef818b29385a26123dc3448253c9[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sun Sep 22 14:59:57 2024 +0530
+
+    [ADD]: filler episode filter
+
+[33mcommit 6a60f6b3256f5076e76ce7830113e4fc823113dc[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sun Sep 22 14:51:14 2024 +0530
+
+    [ADD]: filler episode filter
+
+[33mcommit 465489237205bfb01876aad567365cfbf0652c02[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sat Sep 21 23:52:20 2024 +0530
+
+    [UPDATE]: search modal support for macos
+
+[33mcommit cf2c70e0101db97efc0ec9fd6dece3e924458c83[m
+Author: shivabhattacharjee <itsshivahere@outlook.com>
+Date:   Sat Sep 21 23:08:09 2024 +0530
+
+    [Update]: anime info api
+
+[33mcommit e3214ee066cdf4c1c9d751a133b4af0b58028eeb[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Jun 17 13:03:04 2024 +0530
+
+    fix: deno error
+
+[33mcommit e0e976621e1249e4170ff87e7c355d7eb32e329e[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Jun 17 12:57:38 2024 +0530
+
+    fix: deno error
+
+[33mcommit 4a779c42d39998b5bfa9344333dbd72276dfe741[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Jun 17 12:53:09 2024 +0530
+
+    fix: deno error
+
+[33mcommit 31678648e991a78af8a3d9f04b630acb5bceec35[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Jun 17 12:45:15 2024 +0530
+
+    fix: broken streaming
+
+[33mcommit 454fe6fb5e8ba02a2ae4ed81e521802b7d131104[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu May 23 13:25:15 2024 +0530
+
+    add: delete all convos
+
+[33mcommit f7aba2cf27623c8c8902103228e2395761ba2fee[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu May 23 04:33:24 2024 +0530
+
+    fixed textarea overflow
+
+[33mcommit 7f92d978c18eaf9f73e7e294338176cdcbb2bcef[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu May 23 04:05:29 2024 +0530
+
+    fix some stuff
+
+[33mcommit 96e4d335b34c3772f131db3495eacb8fc886e92c[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu May 23 03:40:51 2024 +0530
+
+    increased token range
+
+[33mcommit 05c828bd30d5f1e80dd671369c851afcc41b5941[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu May 23 03:39:09 2024 +0530
+
+    add: multiturn conversation(model can now chat based on context)
+
+[33mcommit 6254c529116f9b773d18add1380d2a6aa87a3a12[m
+Merge: 5f7539c 1e5b546
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed May 22 13:44:01 2024 +0530
+
+    Merge branch 'main' of github.com:ShivaBhattacharjee/AnimeTrix-next
+
+[33mcommit 5f7539cd76e96ace4b31786fe8ae4deaa21542b3[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed May 22 13:43:30 2024 +0530
+
+    add: sanitisation in waifu chat
+
+[33mcommit 1e5b5466a53b800384ac2ec30936f2cc7674523d[m
+Author: Shiva <shivaxwarrior@gmail.com>
+Date:   Wed May 22 13:39:10 2024 +0530
+
+    Update README.md
+
+[33mcommit 643c4aa27b786a24ba65ccb9605dc4ca969e9a31[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed May 22 13:34:24 2024 +0530
+
+    add: sanitisation in waifu chat
+
+[33mcommit 9ee31787734137e86b89ac2065ae9f4f0f36f950[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed May 22 12:27:45 2024 +0530
+
+    add: file upload validation on frontend
+
+[33mcommit eea7c778d1951602b50ccfcd2d1f3e40de3695b0[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed May 22 12:21:01 2024 +0530
+
+    update: dependencies
+
+[33mcommit 1342b24e131d8a80022f09a97749633d2b04836c[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed May 22 12:19:52 2024 +0530
+
+    add: choose custom profile picture
+
+[33mcommit 9dc2b4aa5c3f31b613169bca704f048bcdcc8cc9[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Sun May 12 13:15:20 2024 +0530
+
+    add: autofocus on text area and width issue fixed in waifu chat
+
+[33mcommit 19a352346c160e117b9842e76113e24cb1512d4c[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Fri Apr 26 22:54:32 2024 +0530
+
+    add: markdown support
+
+[33mcommit 06251df25213138b4ce04636f35d8fc318b4f6bb[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed Apr 24 00:55:20 2024 +0530
+
+    fix z-index and airing schedulue loading typo
+
+[33mcommit f3beab15860fc9d1a324470f3d123aaf115819ed[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Wed Apr 24 00:50:38 2024 +0530
+
+    main page loading animation change and changed thinking to typing waifu chat
+
+[33mcommit 872948292acd9d8aba581c6fa3a3f9f1f91e60e4[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 16:04:00 2024 +0530
+
+    fix send btn horizontal
+
+[33mcommit 0423ec180edeecee9524b3bb051b0e9c60673a8b[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 14:44:30 2024 +0530
+
+    test cases updated
+
+[33mcommit e194fbfe26c3d3bbdbbdad8f9ecc5749391a63e1[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 14:09:01 2024 +0530
+
+    test cases updated
+
+[33mcommit dc5f4988d8d1afd050f7925e2420e79bbbd52be7[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 13:53:44 2024 +0530
+
+    fix unique key prop
+
+[33mcommit 567a0f24e6d492c198eaf90e779a380206ee24c3[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 01:37:48 2024 +0530
+
+    fixed waifu chat ui a bit
+
+[33mcommit 1f5358a3d46e6d862ef1e76a73d93ef76f561a7b[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 01:34:41 2024 +0530
+
+    fixed waifu chat ui a bit
+
+[33mcommit a37c51f7b76bf3ebc31aa2256d60d314eb291040[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Mon Apr 22 00:37:40 2024 +0530
+
+    removed %20 in waifu chat
+
+[33mcommit d5a5378ce1876d803992a2d92dd7c0374bdb4a24[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Sun Apr 21 13:36:14 2024 +0530
+
+    fixed relation card crashing application
+
+[33mcommit 8f05fb55c01624f9e8afe3851c522797dbfb4902[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Fri Apr 19 23:24:12 2024 +0530
+
+    remove desc from slider
+
+[33mcommit 05d99d79dbf67a65547d5a079a56d9d37f9ff27f[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Fri Apr 19 22:56:38 2024 +0530
+
+    fix: banners
+
+[33mcommit 22a117983836aff31a9a5986f76303954f7da596[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Fri Apr 19 22:43:18 2024 +0530
+
+    fix: remove users only expired users add: verify register page
+
+[33mcommit 9133e8897922bcb23171cd6eb8cc832dddf80e21[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Fri Apr 19 00:41:46 2024 +0530
+
+    add: cronjob to delete unverified users
+
+[33mcommit 496a84ef23944bd8cf1b4a954de6e44a53a4d26b[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu Apr 18 23:39:48 2024 +0530
+
+    add: bunjs and fixed airing schedule payload size
+
+[33mcommit 3adc83d8a762e2418c1b8ea353a2aa451889e73e[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Fri Apr 12 12:46:00 2024 +0530
+
+    fix: bookmark no image
+
+[33mcommit ce6bcd95ff748659904c90b788e83cfe5e318473[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu Apr 11 23:15:24 2024 +0530
+
+    fix: add history image undefined issue
+
+[33mcommit 26f3bb26dcd2b104c6f98cc201f2df28550cf313[m
+Author: ShivaBhattacharjee <shivaxwarrior@gmail.com>
+Date:   Thu Apr 11 23:07:54 2024 +0530
+
+    removed character card for better loading
+
+[33mcommit 15
