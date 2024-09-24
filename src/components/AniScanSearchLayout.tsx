@@ -28,6 +28,7 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult 
                 const response = await url.json();
                 const responseArray: Anime[] = [response];
                 setView(responseArray);
+                console.log(responseArray);
             }
             prevAnilist.current = searchResult?.result[number].anilist.id || null;
             setLoading(false);
