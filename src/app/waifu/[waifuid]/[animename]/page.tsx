@@ -68,6 +68,8 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
     }, [focusTextarea]);
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!token) return Toast.ErrorShowToast(`You need to login to chat with ${waifuid}`);
+
         try {
             const text = prompt;
             setPrompt("");
