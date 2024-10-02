@@ -184,11 +184,11 @@ const EpisodeLists: React.FC<EpisodeListsProps> = ({ animeId, isStream, currentl
                                             <div className="flex flex-col items-center">
                                                 {currentlyPlaying == anime.number && <SyncLoader color="#fff" size={4} />}
                                                 {anime.title ? (
-                                                    <h1 className=" p-3 truncate md:w-60 w-40 text-xs md:text-lg">
+                                                    <h1 className=" p-3 truncate md:w-60 w-40 text-xs md:text-lg max-w-full">
                                                         {anime.number} . {anime?.title} {isFiller && "(🤓Fillter)"}
                                                     </h1>
                                                 ) : (
-                                                    <h1 className=" p-2 font-semibold py-3">
+                                                    <h1 className=" p-2 font-semibold py-3 max-w-full">
                                                         {isFiller ? "Filler Episode" : "Episode"}: {anime.number}
                                                     </h1>
                                                 )}
