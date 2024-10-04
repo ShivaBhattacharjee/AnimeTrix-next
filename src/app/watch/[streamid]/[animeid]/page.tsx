@@ -1,24 +1,25 @@
-import { Suspense } from "react";
-import { Download, Flag } from "lucide-react";
+import React, { Suspense } from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Download, Flag, Play, Info, List, MessageSquare, Users } from "lucide-react";
 
 import AddToBookmark from "@/components/buttons/AddToBookmark";
 import Share from "@/components/buttons/Share";
 import CommentSection from "@/components/CommentSection";
 import ServerError from "@/components/error/ServerError";
-// import CharactersLoading from "@/components/loading/CharactersLoading";
 import EpisodeLoading from "@/components/loading/EpisodeLoading";
 import RecommendedLoading from "@/components/loading/RecommendedLoading";
 import RelationLoading from "@/components/loading/RelationLoading";
 import NextAiringEpisode from "@/components/NextAiringEpisode";
-// import CharacterCard from "@/components/shared/cards/characterCard";
 import EpisodeLists from "@/components/shared/cards/EpisodeLists";
 import RelationCard from "@/components/shared/cards/RelationCard";
 import { RecommendedAnime } from "@/components/shared/RecommendedAnime";
 import AddToHistory from "@/lib/addToHistory";
 import { getAnimeDetails, getDownloadLink, getSteamingLink } from "@/lib/AnimeFetch";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Props = {
     params: {
@@ -50,14 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 }
-const Page = async ({
-    params,
-}: {
-    params: {
-        streamid: string;
-        animeid: number;
-    };
-}) => {
+const Page = async ({ params }: Props) => {
     const details = await getAnimeDetails(params.animeid);
     const stream = await getSteamingLink(params.streamid);
     const download = await getDownloadLink(params.streamid);
@@ -90,86 +84,143 @@ const Page = async ({
         formattedAiringDate = `${day} ${month} ${year} at ${timeString}`;
     }
     return (
-        <>
+        <div 
+            // initial={{ opacity: 0 }}
+            // animate={{ opacity: 1 }}
+            // transition={{ duration: 0.5 }}
+            className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white"
+        >
             {Object.keys(details || stream).length > 0 ? (
-                <section className="p-2 min-h-screen">
+                <section className="container mx-auto px-4 py-8 space-y-12">
                     <Suspense fallback={<></>}>
-                        <AddToHistory streamId={params.streamid} animeId={params.animeid} title={stream?.info?.title || "unknown"} episode={stream?.info?.episode || "unknown"} coverImage={details?.bannerImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} image={details?.coverImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} />
+                        <AddToHistory 
+                            streamId={params.streamid} 
+                            animeId={params.animeid} 
+                            title={stream?.info?.title || "unknown"} 
+                            episode={stream?.info?.episode || "unknown"} 
+                            coverImage={details?.bannerImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} 
+                            image={details?.coverImage || "https://s4.anilist.co/file/anilistcdn/character/large/default.jpg"} 
+                        />
                     </Suspense>
-                    <div className=" w-full">
-                        <div className=" flex justify-between lg:flex-row flex-col gap-5">
-                            <div className="flex flex-col w-full 2xl:w-[70vw]">
-                                <iframe src={stream?.plyr?.main || stream?.plyr?.backup} scrolling="no" frameBorder="0" allowFullScreen={true} title={params.streamid} allow="picture-in-picture" className="w-full rounded-lg h-[30vh] lg:h-[50vh] md:h-[30vh]"></iframe>
-                                <div className="mt-2">
-                                    <h1 className="font-semibold text-2xl lg:text-4xl text-white">{stream?.info?.title || "unknown"}</h1>
-                                    <span className="text-lg mt-4 lg:text-2xl font-semibold text-white/70">Episode : {stream?.info?.episode || "unknown"}</span>
-                                </div>
 
-                                <div className="flex gap-3 mt-6 flex-wrap items-center">
-                                    <a href={download?.download || "https://www.youtube.com/watch?v=dQw4w9WgXcQ"} target="_blank" className=" bg-white  p-2 rounded-lg font-semibold text-black  flex items-center gap-3" rel="noopener noreferrer">
-                                        <Download />
+                    <Card className="overflow-hidden bg-gray-800/30 backdrop-blur-lg border-0 shadow-2xl">
+                        <CardContent className="p-0">
+                            <div className="aspect-video w-full relative">
+                                <iframe 
+                                    src={stream?.plyr?.main || stream?.plyr?.backup} 
+                                    scrolling="no" 
+                                    frameBorder="0" 
+                                    allowFullScreen={true} 
+                                    title={params.streamid} 
+                                    allow="picture-in-picture" 
+                                    className="absolute inset-0 w-full h-full"
+                                />
+                            </div>
+                            <div className="p-8">
+                                <h1 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                                    {stream?.info?.title || "Unknown"}
+                                </h1>
+                                <p className="text-xl text-gray-300 mb-6">
+                                    Episode: {stream?.info?.episode || "Unknown"}
+                                </p>
+                                <div className="flex flex-wrap gap-4">
+                                    <Button variant="default" className="bg-blue-600 hover:bg-blue-700 transition-colors duration-300">
+                                        <Play className="mr-2 h-5 w-5" />
+                                        Watch Now
+                                    </Button>
+                                    <Button variant="outline" className="border-gray-600 hover:bg-gray-700 transition-colors duration-300">
+                                        <Download className="mr-2 h-5 w-5" />
                                         Download
-                                    </a>
+                                    </Button>
                                     <Share title={params.streamid} />
-                                    <a href="https://github.com/ShivaBhattacharjee/AnimeTrix-next/issues" target="_blank" className=" bg-white  p-2 rounded-lg font-semibold text-black  flex gap-3 items-center">
-                                        <Flag />
+                                    <AddToBookmark 
+                                        image={details?.coverImage} 
+                                        animeId={params.animeid} 
+                                        title={stream?.info?.title || "unknown"} 
+                                        isStream={true} 
+                                    />
+                                    <Button variant="outline" className="border-gray-600 hover:bg-gray-700 transition-colors duration-300">
+                                        <Flag className="mr-2 h-5 w-5" />
                                         Report
-                                    </a>
+                                    </Button>
                                 </div>
-                                {details.nextAiringEpisode !== undefined && <NextAiringEpisode nextAiringEpisode={details?.nextAiringEpisode?.episode} formattedAiringDate={formattedAiringDate} />}
+                            </div>
+                        </CardContent>
+                    </Card>
 
-                                <div className="flex gap-3 w-full mt-5">
-                                    <img src={details?.coverImage} alt={`an image of ${params?.streamid}`} className=" w-40 md:w-44 rounded-lg" />
-                                    <div className="flex flex-wrap w-full gap-3 text-md md:text-lg flex-col font-semibold">
-                                        <h1>
-                                            <span className=" text-white/70">Name: </span>
-                                            {stream?.info?.title || "Unknown"}
-                                        </h1>
-                                        <h1>
-                                            <span className=" text-white/70">Episode: </span>
-                                            {stream?.info?.episode || "Unknown"}
-                                        </h1>
-                                        <h1>
-                                            <span className=" text-white/70">Type</span> : {details?.type || "Unknown"}
-                                        </h1>
-                                        <h1>
-                                            <span className=" text-white/70">Country</span> : {details?.countryOfOrigin || "Earth"}
-                                        </h1>
+                    {details.nextAiringEpisode && (
+                        <Card className="bg-gray-800/30 backdrop-blur-lg border-0 shadow-xl">
+                            <CardContent className="p-6">
+                                <NextAiringEpisode 
+                                    nextAiringEpisode={details.nextAiringEpisode.episode} 
+                                    formattedAiringDate={formattedAiringDate} 
+                                />
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    <Tabs defaultValue="info" className="w-full">
+                        <TabsList className="grid w-full grid-cols-4 rounded-lg bg-gray-800/30 p-1">
+                            <TabsTrigger value="info"><Info className="mr-2" />Info</TabsTrigger>
+                            <TabsTrigger value="episodes"><List className="mr-2" />Episodes</TabsTrigger>
+                            <TabsTrigger value="related"><Users className="mr-2" />Related</TabsTrigger>
+                            <TabsTrigger value="comments"><MessageSquare className="mr-2" />Comments</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="info">
+                            <Card className="mt-6 bg-gray-800/30 backdrop-blur-lg border-0 shadow-xl">
+                                <CardContent className="p-6">
+                                    <div className="grid gap-6 md:grid-cols-2">
+                                        <div>
+                                            <h3 className="text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">Synopsis</h3>
+                                            <p className="text-gray-300 leading-relaxed">{details.description || "No synopsis available."}</p>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">Details</h3>
+                                            <ul className="space-y-2 text-gray-300">
+                                                <li><span className="font-semibold">Type:</span> {details.type || "Unknown"}</li>
+                                                <li><span className="font-semibold">Episodes:</span> {details.episodes || "Unknown"}</li>
+                                                <li><span className="font-semibold">Status:</span> {details.status || "Unknown"}</li>
+                                                <li><span className="font-semibold">Aired:</span> {details.startDate ? `${details.startDate.year}-${details.startDate.month}-${details.startDate.day}` : "Unknown"}</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <AddToBookmark image={details?.coverImage} animeId={params.animeid} title={stream?.info?.title || "unknown"} isStream={true} />
-                                </div>
+                                    <div className="mt-6">
+                                        <h3 className="text-2xl font-semibold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">Genres</h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {details?.genres && details.genres.map((genre: string, index: number) => (
+                                                <Link href={`/genres/${genre}`} key={index} className="px-3 py-1 bg-gray-700 rounded-full text-sm hover:bg-gray-600 transition-colors duration-300">
+                                                    {genre}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </TabsContent>
+                        <TabsContent value="episodes">
+                            <Suspense fallback={<EpisodeLoading />}>
+                                <EpisodeLists 
+                                    currentlyPlaying={stream?.info?.episode} 
+                                    animeId={params.animeid} 
+                                    isStream={true} 
+                                    animeName={details?.title?.romaji || details?.title?.english || details?.title?.native || "Unknown"} 
+                                />
+                            </Suspense>
+                        </TabsContent>
+                        <TabsContent value="related">
+                            <Suspense fallback={<RelationLoading />}>
+                                <RelationCard bannerImage={details.coverImage} id={params.animeid} />
+                            </Suspense>
+                        </TabsContent>
+                        <TabsContent value="comments">
+                            <Suspense>
+                                <CommentSection streamId={params.streamid} />
+                            </Suspense>
+                        </TabsContent>
+                    </Tabs>
 
-                                <div className="flex flex-wrap gap-4 mt-5 text-lg font-semibold">
-                                    {details?.genres &&
-                                        Object?.keys(details?.genres).length > 0 &&
-                                        details.genres.map((genre: string, index: number) => (
-                                            <Link href={`/genres/${genre}`} className="border-2 text-sm lg:text-lg border-white  border-dotted rounded-lg p-2 duration-200 hover:border-solid" key={index}>
-                                                {genre}
-                                            </Link>
-                                        ))}
-                                </div>
-                            </div>
-                            <div className="mt-3">
-                                <Suspense fallback={<EpisodeLoading />}>
-                                    <EpisodeLists currentlyPlaying={stream?.info?.episode} animeId={params.animeid} isStream={true} animeName={details?.title?.romaji || details?.title?.english || details?.title?.native || "Unknown"} />
-                                </Suspense>
-                            </div>
-                        </div>
-                    </div>
-                    <Suspense>
-                        <CommentSection streamId={params.streamid} />
-                    </Suspense>
-                    <div className="mt-7 flex flex-col gap-5">
-                        <Suspense fallback={<RelationLoading />}>
-                            <RelationCard bannerImage={details.coverImage} id={params.animeid} />
-                        </Suspense>
-                    </div>
-                    {/* <div className="mt-6">
-                        <Suspense fallback={<CharactersLoading />}>
-                            <CharacterCard characters={details.characters} />
-                        </Suspense>
-                    </div> */}
                     <div className="mt-12">
+                        <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">Recommended Anime</h2>
                         <Suspense fallback={<RecommendedLoading />}>
                             <RecommendedAnime episode={params.animeid} />
                         </Suspense>
@@ -178,7 +229,7 @@ const Page = async ({
             ) : (
                 notFound()
             )}
-        </>
+        </div>
     );
 };
 

@@ -1,5 +1,6 @@
 {
   "extends": [
+    "next",
     "next/core-web-vitals",
     "prettier"
   ],
@@ -8,12 +9,14 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "simple-import-sort/imports": "error"
+    "simple-import-sort/imports": "error",
+    "react/no-unescaped-entities": "off"
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "reportUnusedDisableDirectives": "error",
         "simple-import-sort/imports": [
           "error",
           {
