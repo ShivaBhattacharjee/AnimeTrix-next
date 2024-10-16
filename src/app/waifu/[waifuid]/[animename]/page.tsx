@@ -72,10 +72,9 @@ const Page = ({ params }: { params: { waifuid: string; animename: string } }) =>
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (prompt.length <= 1) {
-            Toast.ErrorShowToast("Message cannot be empty");
-            return;
-        }
+
+        if (!token) return Toast.ErrorShowToast(`You need to login to chat with ${waifuid}`);
+
 
         try {
             setMessages((prevMessages) => [...prevMessages, { text: prompt, isBot: false }]);

@@ -112,8 +112,8 @@ bun test
 
 ```bash
 sudo docker run -p <your-port-number>:3000 \
--e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
--e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
+-e MONGODB_URI=yourmongodburi \
+-e JWT_TOKEN=yourjwttoken \
 -e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
 -e NEXT_PUBLIC_EMAIL=youremail \
 -e NEXT_PUBLIC_ANIME_API_URL= self hosted url of https://github.com/consumet/api.consumet.org \
@@ -126,8 +126,8 @@ immashiva/animetrix
 
 ```bash
 sudo docker run -p 8080:3000 \
--e NEXT_PUBLIC_MONGODB_URI=yourmongodburi \
--e NEXT_PUBLIC_JWT_TOKEN=yourjwttoken \
+-e MONGODB_URI=yourmongodburi \
+-e JWT_TOKEN=yourjwttoken \
 -e NEXT_PUBLIC_ANIME_API_URL= self hosted url of https://github.com/consumet/api.consumet.org \
 -e NEXT_PUBLIC_EMAIL_SERVICE=gmail \
 -e NEXT_PUBLIC_EMAIL=youremail \
