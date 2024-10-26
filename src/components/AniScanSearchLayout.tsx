@@ -1,20 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Frown } from "lucide-react";
+import { Frown, Play, Loader2 } from "lucide-react";
 import Link from "next/link";
-
-import ServerError from "./error/ServerError";
-
 import { AnimeApi } from "@/lib/animeapi/animetrixapi";
 import Anime, { ApiResponse } from "@/types/animetypes";
 import Toast from "@/utils/toast";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import ServerError from "./error/ServerError";
 
 interface AniScanSearchLayoutProps {
     searchResult: ApiResponse | null;
 }
 
-const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult }) => {
+export default function AniScanSearchLayout({ searchResult }: AniScanSearchLayoutProps) {
     const [loading, setLoading] = useState<boolean>(true);
     const [view, setView] = useState<Anime[]>([]);
     const [select, setSelect] = useState<number>(0);
@@ -33,7 +35,7 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult 
             prevAnilist.current = searchResult?.result[number].anilist.id || null;
             setLoading(false);
         } catch (error) {
-            console.log(error);
+            console.error(error);
             Toast.ErrorShowToast("Can't find image!");
             setLoading(false);
         }
@@ -41,67 +43,78 @@ const AniScanSearchLayout: React.FC<AniScanSearchLayoutProps> = ({ searchResult 
 
     useEffect(() => {
         getAnime(select);
-    }, [searchResult?.result, select, getAnime]);
+    }, [searchResult?.result, select]);
 
     if (searchResult === null) {
         return <ServerError />;
     }
 
     return (
-        <>
-            {loading ? (
-                <div className="p-4">
-                    <h1 className="text-3xl lg:text-5xl font-bold">Match</h1>
-                    <div className="flex flex-col">
-                        <div className="rounded-lg hover:scale-105 duration-200 md:w-48 md:h-64 h-52 w-40 relative mt-4 bg-white/60 animate-pulse" />
-                    </div>
-                </div>
-            ) : (
-                view.map((imageSearch: Anime, index: number) => (
-                    <div key={index} className="p-3">
-                        <h1 className="text-3xl lg:text-5xl font-bold">Match</h1>
-                        <Link href={`/details/${imageSearch.id}`}>
-                            <img src={imageSearch.image} alt={imageSearch?.title.english || imageSearch?.title?.userPreferred || imageSearch?.title?.romaji || "No title found"} loading="lazy" className=" w-44 rounded-lg duration-200 hover:scale-90 mt-5 md:w-52" />
-                        </Link>
-                        <h1 className=" font-semibold truncate w-44 mt-2 mb-2">{imageSearch.title.userPreferred || imageSearch.title.english || imageSearch.title.romaji}</h1>
-                        <div className="flex gap-5">
-                            {imageSearch.status === "Ongoing" && <div className="w-2 lg:w-3 h-2 lg:h-3 rounded-full bg-green-500"></div>}
-                            <span className=" font-semibold">Ep: {imageSearch.totalEpisodes}</span>
+        <div className="container mx-auto px-4 py-8">
+            <h1 className="text-2xl lg:text-3xl font-bold mb-6">Anime Scene Match Results</h1>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="col-span-1">
+                    <CardHeader>
+                        <CardTitle className="text-lg">Best Match</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        {loading ? (
+                            <Skeleton className="w-full h-48 rounded-lg" />
+                        ) : (
+                            view.map((imageSearch: Anime, index: number) => (
+                                <div key={index} className="space-y-3">
+                                    <Link href={`/details/${imageSearch.id}`}>
+                                        <img src={imageSearch.image} alt={imageSearch?.title.english || imageSearch?.title?.userPreferred || imageSearch?.title?.romaji || "No title found"} className="w-full h-48 object-cover rounded-lg transition-transform duration-200 hover:scale-105" />
+                                    </Link>
+                                    <h2 className="font-semibold text-sm line-clamp-2">{imageSearch.title.userPreferred || imageSearch.title.english || imageSearch.title.romaji}</h2>
+                                    <div className="flex items-center gap-2">
+                                        {imageSearch.status === "Ongoing" && (
+                                            <Badge variant="secondary" className="text-xs px-2 py-1">
+                                                Ongoing
+                                            </Badge>
+                                        )}
+                                        <span className="text-xs font-medium">Ep: {imageSearch.totalEpisodes}</span>
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </CardContent>
+                </Card>
+                <Card className="col-span-1 md:col-span-2">
+                    <CardHeader>
+                        <CardTitle className="text-lg">Similar Scenes</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                            {searchResult?.result.map((anime, index) => (
+                                <Button key={index} variant="outline" className={`p-0 h-auto ${select === index ? "ring-2 ring-primary" : ""}`} onClick={() => setSelect(index)}>
+                                    {/* <img src={anime.coverImage} alt={anime.filename} className="w-full h-24 object-cover rounded-t-lg" /> */}
+                                    <div className="p-2 text-start w-full">
+                                        <p className="font-medium text-xs line-clamp-1">{anime.filename}</p>
+                                        <p className="text-xs">Ep: {anime.episode || "Unknown"}</p>
+                                        <p className="text-xs">Similarity: {Math.round(anime.similarity * 100)}%</p>
+                                    </div>
+                                </Button>
+                            ))}
                         </div>
-                    </div>
-                ))
-            )}
-            <div className="text-white grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 m-auto gap-5 p-4">
-                {searchResult?.result.map((anime, index) => (
-                    <div
-                        key={index}
-                        onClick={() => {
-                            setSelect(index);
-                        }}
-                        className={` ${select === index && ""}`}
-                    >
-                        <img src={anime.image} alt={anime.filename} className="h-auto bg-fill w-auto duration-200 hover:scale- rounded-t-lg " />
-                        <div className=" p-4  flex flex-col font-semibold">
-                            <h1 className=" w-[98%] truncate">{anime.filename}</h1>
-                            <span>Episode: {anime.episode || "Unknown"}</span>
-                            <span>Similarity : {Math.round(anime.similarity * 100)}% </span>
+                    </CardContent>
+                </Card>
+            </div>
+            <Card className="mt-6">
+                <CardHeader>
+                    <CardTitle className="text-lg">Expected Scene</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    {searchResult.result[select].video ? (
+                        <video src={searchResult.result[select].video} autoPlay muted controls playsInline loop className="rounded-lg w-full max-w-2xl mx-auto" />
+                    ) : (
+                        <div className="flex items-center justify-center text-xl font-semibold gap-3 h-48">
+                            <Frown className="w-6 h-6" />
+                            <h2>No Expected Scene Found</h2>
                         </div>
-                    </div>
-                ))}
-            </div>
-            <div className=" p-4  pb-32 md:pb-10">
-                <h1 className=" pb-5 text-3xl lg:text-5xl font-bold">Expected Scene</h1>
-                {searchResult.result[select].video != undefined || null ? (
-                    <video src={searchResult.result[select].video} autoPlay muted controls playsInline loop className="rounded-lg  w-60 md:w-96" />
-                ) : (
-                    <div className="flex capitalize items-center justify-center text-3xl font-semibold  gap-3">
-                        <Frown />
-                        <h1>No Expected Scene Found</h1>
-                    </div>
-                )}
-            </div>
-        </>
+                    )}
+                </CardContent>
+            </Card>
+        </div>
     );
-};
-
-export default AniScanSearchLayout;
+}

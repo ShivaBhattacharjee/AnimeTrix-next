@@ -93,6 +93,19 @@ const Cards: React.FC<CardsProps> = ({ props }) => {
         }
     };
 
+    useEffect(() => {
+        const handleWheel = (event: WheelEvent) => {
+            if (containerRef.current?.contains(event.target as Node)) {
+                event.preventDefault();
+                containerRef.current!.scrollLeft += event.deltaY;
+            }
+        };
+
+        containerRef?.current?.addEventListener("wheel", handleWheel, { passive: false });
+        return () => {
+            containerRef?.current?.removeEventListener("wheel", handleWheel);
+        };
+    }, []);
     const container = {
         hidden: { opacity: 1, scale: 0 },
         visible: {

@@ -1,6 +1,7 @@
 "use client";
+
 import { useEffect, useState } from "react";
-import { AxiosError } from "axios"; // Import AxiosError type
+import { AxiosError } from "axios";
 
 import AiringScheduleCard from "./AiringScheduleCard";
 
@@ -40,15 +41,9 @@ export default function AiringSchedule() {
     }, [retryCount]);
 
     return (
-        <>
-            {loading ? (
-                <AiringScheduleLoading />
-            ) : (
-                <div className="flex flex-col mt-9">
-                    <h1 className="text-3xl lg:text-5xl font-bold">Airing Schedule</h1>
-                    {airingData && <AiringScheduleCard airingData={airingData} />}
-                </div>
-            )}
-        </>
+        <div className="container mx-auto px-4 py-8">
+            <h1 className="text-3xl lg:text-5xl font-bold text-primary mb-6">Airing Schedule</h1>
+            {loading ? <AiringScheduleLoading /> : airingData && <AiringScheduleCard airingData={airingData} />}
+        </div>
     );
 }
